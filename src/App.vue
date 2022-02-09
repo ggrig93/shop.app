@@ -1,32 +1,28 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <MobileMenu/>
+    <TheHeader/>
+    <router-view :key="$route.fullPath"/>
+    <TheFooter/>
+    <BackToTop/>
+    <ProductModal/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+import TheHeader from "@/components/layout/TheHeader";
+import TheFooter from "@/components/layout/TheFooter";
+import BackToTop from "@/components/BackToTop";
+import ProductModal from "@/components/ProductModal";
+import MobileMenu from "@/components/layout/MobileMenu"
+export default {
+  name: "App",
+  components: {
+    ProductModal,
+    BackToTop,
+    TheHeader,
+    TheFooter,
+    MobileMenu
   }
 }
-</style>
+</script>

@@ -1,0 +1,147 @@
+<template>
+  <div v-if="openModal">
+    <div class="mfp-bg mfp-ready"></div>
+    <div class="mfp-wrap mfp-close-btn-in mfp-auto-cursor mfp-ready" tabindex="-1">
+      <div class="mfp-container mfp-s-ready mfp-inline-holder">
+        <div class="mfp-content">
+          <div class="kt-popup-quickview">
+            <div class="details-thumb">
+              <div class="slider-product slider-for slick-initialized slick-slider">
+                <div aria-live="polite" class="slick-list draggable">
+                  <div class="slick-track" role="listbox">
+                    <div class="details-item slick-slide slick-current slick-active">
+                      <img :src="`http://ledthanhdat.vn/html/ysera/assets/images/details-item-${currentImg}.jpg`" alt="img">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <vue-slick-carousel class="slider-product-button nav-center " v-bind="settings">
+                <template #prevArrow>
+                  <span></span>
+                </template>
+                <div :class="['details-item',  currentImg === i ? 'slick-current' : null]" v-for="i in 4" :key="i" @click="currentImg = i">
+                  <img :src="`http://ledthanhdat.vn/html/ysera/assets/images/details-item-${i}.jpg`" alt="img">
+                </div>
+                <template #nextArrow>
+                  <span></span>
+                </template>
+              </vue-slick-carousel>
+            </div>
+            <div class="details-infor">
+              <h1 class="product-title">Splendid Diamond</h1>
+              <div class="stars-rating">
+                <div class="star-rating">
+                  <span class="star-5"></span>
+                </div>
+                <div class="count-star">(7)</div>
+              </div>
+              <div class="availability">availability:<a href="#">in Stock</a></div>
+              <div class="price"><span>€45</span></div>
+              <div class="product-details-description">
+                <ul>
+                  <li>Vestibulum tortor quam</li>
+                  <li>Imported</li>
+                  <li>Art.No. 06-7680</li>
+                </ul>
+              </div>
+              <div class="variations">
+                <div class="attribute attribute_color">
+                  <div class="color-text text-attribute">Color:<span>White/</span><span>Black/</span><span>Teal/</span><span>Brown</span></div>
+                  <div class="list-color list-item">
+                    <a href="#" class="color1"></a>
+                    <a href="#" class="color2"></a>
+                    <a href="#" class="color3 active"></a>
+                    <a href="#" class="color4"></a>
+                  </div>
+                </div>
+                <div class="attribute attribute_size">
+                  <div class="size-text text-attribute">Pots Size:</div>
+                  <div class="list-size list-item">
+                    <a href="#" class="">xs</a>
+                    <a href="#" class="">s</a>
+                    <a href="#" class="active">m</a>
+                    <a href="#" class="">l</a>
+                    <a href="#" class="">xl</a>
+                    <a href="#" class="">xxl</a>
+                  </div>
+                </div>
+              </div>
+              <div class="group-button">
+                <div class="yith-wcwl-add-to-wishlist">
+                  <div class="yith-wcwl-add-button">
+                    <a href="#">Add to Wishlist</a>
+                  </div>
+                </div>
+                <div class="size-chart-wrapp">
+                  <div class="btn-size-chart">
+                    <a id="size_chart" href="@/assets/images/size-chart.jpg" class="fancybox" target="_blank">View Size Chart</a>
+                  </div>
+                </div>
+                <div class="quantity-add-to-cart">
+                  <div class="quantity">
+                    <div class="control">
+                      <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                      <input type="text" data-step="1" data-min="0" value="1" title="Qty" class="input-qty qty" size="4">
+                      <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                    </div>
+                  </div>
+                  <button class="single_add_to_cart_button button">Add to cart</button>
+                </div>
+              </div>
+            </div>
+            <button title="Close (Esc)" type="button" class="mfp-close" @click="closeModal">×</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import {bus} from '@/main'
+import VueSlickCarousel from "vue-slick-carousel";
+export default {
+  name: "ProductModal",
+  components: { VueSlickCarousel },
+  data() {
+    return {
+      openModal: false,
+      currentImg: 1,
+      settings: {
+        "arrows":true,
+        "dots":false,
+        "infinite": false,
+        "speed":1000,
+        "slidesToShow": 3,
+        "slidesToScroll": 1,
+        responsive: [
+          {breakpoint: 2000, settings: {slidesToShow: 3}}
+        ]
+      },
+    }
+  },
+  created() {
+    bus.$on('open-modal', this.setData)
+    bus.$on('close-modal', this.clearData)
+  },
+  destroyed() {
+    bus.$off('open-modal')
+    bus.$off('close-modal')
+  },
+  methods: {
+    setData(data) {
+      this.product = data
+      this.openModal = true
+      window.document.documentElement.style.overflow = 'hidden'
+    },
+    clearData() {
+      this.product = null
+      this.openModal = false
+      window.document.documentElement.style.overflow = 'unset'
+    },
+    closeModal() {
+      bus.$emit('close-modal')
+    }
+  }
+}
+</script>
