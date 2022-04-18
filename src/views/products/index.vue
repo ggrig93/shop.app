@@ -23,7 +23,7 @@
                   <option value="5">6 Products/Page</option>
                 </select>
               </form>
-              <form class="filter-choice select-form">s
+              <form class="filter-choice select-form">
                 <span class="title">Sort by</span>
                 <select title="sort-by" data-placeholder="Price: Low to High" class="chosen-select">
                   <option value="1">Price: Low to High</option>
@@ -63,8 +63,8 @@
                   :class="layoutMode
                   ? 'col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1'
                   : 'col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12 style-list'"
-                  v-for="(prod, idx) in products" :key="idx"
-                  @click="$router.push({name: 'Product', params: {id: idx+1}})"
+                  v-for="prod in products" :key="prod.id"
+                  @click="$router.push({name: 'Product', params: {id: prod.id}})"
               >
                 <ProductCart
                     :layout="layoutMode ? 'grid' : 'list'"
@@ -72,7 +72,13 @@
                 />
               </li>
             </ul>
-            <Pagination class="style3"/>
+            <Pagination
+              class="style3"
+              :totalPages="totalPages"
+              :perPage="10"
+              :currentPage="currentPage"
+              @pagechanged="onPageChange"
+            />
           </div>
         </div>
         <div class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -101,19 +107,40 @@ export default {
   components: {Breadcrumbs, ProductCart, Pagination, Sidebar},
   data() {
     return {
+      currentPage: 1,
       layoutMode: true,
       categories: data.categories,
-      brand: data.brand,
+      // brand: data.brand,
       size: data.size,
       tags: data.tags,
-      color: data.color,
+      // color: data.color,
       price: data.price
     }
   },
   computed: {
-    products() {
-      return data.products.slice(0, 12)
+    totalPages() {
+      return this.$store.state.products?.meta.paginate.total || 1
     },
+    products() {
+      return this.$store.state.products?.data
+    },
+    color() {
+      return this.$store.state.colors
+    },
+    brand() {
+      return this.$store.state.brands
+    }
+  },
+  created() {
+    this.$store.dispatch('getAllProducts')
+    this.$store.dispatch('getColors')
+    this.$store.dispatch('getBrands')
+  },
+  methods: {
+    onPageChange(page) {
+      console.log(page)
+      this.currentPage = page;
+    }
   }
 }
 </script>

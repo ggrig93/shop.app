@@ -16,8 +16,9 @@
               <li
                   :class="['menu-item', item.children.length ? 'menu-item-has-children' : '']"
                   v-for="item in menu" :key="item.id"
+                  @click="openCategories = false"
               >
-                <a href="javascript:void(0)" class="ysera-menu-item-title" :title="item.name">{{item.name}}</a>
+                <router-link :to="{name: 'Categories', params: {category: item.name}}" class="ysera-menu-item-title" :title="item.name">{{item.name}}</router-link>
                 <template v-if="item.children.length">
                   <SubMenu :children="item.children"/>
                 </template>

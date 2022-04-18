@@ -13,7 +13,7 @@
       <div class="product-thumb">
         <div class="thumb-inner">
           <router-link :to="{name: 'Product', params: {id : 1}}">
-            <img :src="`http://ledthanhdat.vn/html/ysera/assets/images/${product.img}`" alt="img">
+            <img :src="product.avatar" alt="img">
           </router-link>
           <div class="thumb-group">
             <div class="yith-wcwl-add-to-wishlist">
@@ -31,7 +31,7 @@
       </div>
       <div class="product-info">
         <h5 class="product-name product_title">
-          <a href="javascript:void(0)">{{product.name}}</a>
+          <a href="javascript:void(0)">{{product.title}}</a>
         </h5>
         <div class="group-info">
           <div class="stars-rating">
@@ -44,10 +44,10 @@
           </div>
           <div class="price">
             <del>
-              ${{product.price}}
+              ${{product.old_price}}
             </del>
             <ins>
-              ${{product.newPrice}}
+              ${{product.price}}
             </ins>
           </div>
         </div>
@@ -67,7 +67,7 @@
         <div class="product-thumb">
           <div class="thumb-inner">
             <a href="javascript:void(0)">
-              <img :src="`http://ledthanhdat.vn/html/ysera/assets/images/${product.img}`" alt="img">
+              <img :src="product.avatar" alt="img">
             </a>
             <a href="javascript:void(0)" class="button quick-wiew-button" @click.stop="openModal(product)">Quick View</a>
           </div>
@@ -79,7 +79,7 @@
             </div>
           </div>
           <h5 class="product-name product_title">
-            <a href="javascript:void(0)">Drop Earrings</a>
+            <a href="javascript:void(0)">{{ product.title }}</a>
           </h5>
           <div class="stars-rating">
             <div class="star-rating">
@@ -116,7 +116,7 @@
         </div>
         <div class="product-info-right">
           <div class="price">
-            ${{product.newPrice}}
+            ${{product.price}}
           </div>
           <div class="product-list-message">
             <i class="icon fa fa-truck" aria-hidden="true"></i>
@@ -164,5 +164,9 @@ export default {
 </script>
 
 <style scoped>
-
+.thumb-inner img{
+  width: 266px;
+  height: 266px;
+  object-fit: cover;
+}
 </style>

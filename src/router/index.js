@@ -42,7 +42,8 @@ const routes = [
   {
     path: '/products/:id',
     name: 'Product',
-    component: () => import('@/views/products/_productId')
+    component: () => import('@/views/products/_productId'),
+    props: true
   },
   {
     path: '/blogs',
@@ -54,7 +55,11 @@ const routes = [
     name: 'Blog',
     component: () => import('@/views/blogs/_blogId')
   },
-
+  {
+    path: '/categories/:category',
+    name: 'Categories',
+    component: () => import('@/views/categories/_category')
+  },
   {
     path: '*',
     component: () => import('@/views/error')

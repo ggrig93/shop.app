@@ -19,6 +19,11 @@
 
 <script>
 export default {
-  name: "Information"
+  name: "Information",
+  props: {
+    info: {
+      type: Object
+    }
+  }
 }
 </script>

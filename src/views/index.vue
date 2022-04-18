@@ -317,7 +317,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .instagram .slick-slide {
   padding: 0;
 }

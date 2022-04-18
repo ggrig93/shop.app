@@ -69,7 +69,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .slide-enter-active, .slide-leave-active {
   transition: transform .5s;
 }

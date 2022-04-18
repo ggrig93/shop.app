@@ -8,13 +8,13 @@
       </div>
       <div class="row">
         <div class="content-area content-details full-width col-lg-9 col-md-8 col-sm-12 col-xs-12">
-          <div class="site-main">
+          <div class="site-main" v-if="product">
             <div class="details-product">
               <div class="details-thumd">
                 <div class="image-preview-container image-thick-box image_preview_container">
                   <inner-image-zoom
-                      :src="`http://ledthanhdat.vn/html/ysera/assets/images/details-item-${activeImg}.jpg`"
-                      :zoom-src="`http://ledthanhdat.vn/html/ysera/assets/images/details-item-${activeImg}.jpg`"
+                      :src="img"
+                      :zoom-src="img"
                       :hide-hint="true"
                       zoom-type="hover"
                   />
@@ -25,21 +25,22 @@
                     :margin="10" :dots="false" class="thumbnails_carousel"
                     :responsive="{'0':{'items':3},'480':{'items':3},'600':{'items':3},'1000':{'items':3}}"
                     :nav-text="[`<i class='fa fa-angle-left' aria-hidden='true'></i>`, `<i class='fa fa-angle-right' aria-hidden='true'></i>`]"
+                    :key="activeBlock"
                   >
                     <a href="javascript:void(0)"
-                       :class="{'active': activeImg === i}"
-                       v-for="i in 4"
-                       :key="i"
-                       @click.prevent="setActiveImg(i)"
+                       :class="{'active': img === i.image}"
+                       v-for="i in coloredProduct.images"
+                       :key="i.id"
+                       @click.prevent="setActiveImg(i.image)"
                     >
-                      <img :src="`http://ledthanhdat.vn/html/ysera/assets/images/details-item-${i}.jpg`" alt="img">
+                      <img :src="i.image" alt="img">
                     </a>
                   </carousel>
                 </div>
               </div>
               <div class="details-infor">
                 <h1 class="product-title">
-                  Splendid Diamond
+                  {{product.title}}
                 </h1>
                 <div class="stars-rating">
                   <div class="star-rating">
@@ -50,11 +51,11 @@
                   </div>
                 </div>
                 <div class="availability">
-                  availability:
-                  <a href="#">in Stock</a>
+                  Availability:
+                  <a href="#">{{product.available_type}}</a>
                 </div>
                 <div class="price">
-                  <span>$45</span>
+                  <span>${{product.price}}</span>
                 </div>
                 <div class="product-details-description">
                   <ul>
@@ -65,27 +66,22 @@
                 </div>
                 <div class="variations">
                   <div class="attribute attribute_color">
-                    <div class="color-text text-attribute">
-                      Color:
-                    </div>
+                    <div class="color-text text-attribute">Color:</div>
                     <div class="list-color list-item">
-                      <a href="#" class="color1"></a>
-                      <a href="#" class="color2"></a>
-                      <a href="#" class="color3 active"></a>
-                      <a href="#" class="color4"></a>
+                      <a href="#" v-for="color in colors"
+                         :key="color.id"
+                         :style="{backgroundColor: color.code}"
+                         :class="{active: color.block === block}"
+                         @click.prevent="setActiveColor(color.block)"
+                      ></a>
                     </div>
                   </div>
                   <div class="attribute attribute_size">
-                    <div class="size-text text-attribute">
-                      Size:
-                    </div>
+                    <div class="size-text text-attribute">Size:</div>
                     <div class="list-size list-item">
-                      <a href="#" class="">xs</a>
-                      <a href="#" class="">s</a>
-                      <a href="#" class="active">m</a>
-                      <a href="#" class="">l</a>
-                      <a href="#" class="">xl</a>
-                      <a href="#" class="">xxl</a>
+                      <a href="#" v-for="size in coloredProduct.sizes"
+                         :key="size.id"
+                      >{{size.name}}</a>
                     </div>
                   </div>
                 </div>
@@ -128,23 +124,26 @@
                 </li>
               </ul>
               <div class="tab-container">
-                <component class="active" :is="tabPanel"></component>
+                <component class="active"
+                 :is="tabPanel"
+                 :description="product.description"
+                ></component>
               </div>
             </div>
             <div style="clear: left;"></div>
             <div class="related products product-grid">
               <h2 class="product-grid-title">You may also like</h2>
-              <vue-slick-carousel class="owl-products nav-center" v-bind="settings">
-                <template #prevArrow>
-                  <span></span>
-                </template>
-                <div class="product-item style-1" v-for="(prod, idx) in products" :key="idx">
-                  <ProductCart :product="prod" />
-                </div>
-                <template #nextArrow>
-                  <span></span>
-                </template>
-              </vue-slick-carousel>
+<!--              <vue-slick-carousel class="owl-products nav-center" v-bind="settings">-->
+<!--                <template #prevArrow>-->
+<!--                  <span></span>-->
+<!--                </template>-->
+<!--                <div class="product-item style-1" v-for="(prod, idx) in products" :key="idx">-->
+<!--                  <ProductCart :product="prod" />-->
+<!--                </div>-->
+<!--                <template #nextArrow>-->
+<!--                  <span></span>-->
+<!--                </template>-->
+<!--              </vue-slick-carousel>-->
             </div>
           </div>
         </div>
@@ -161,16 +160,16 @@ import ProductCart from "@/components/products/ProductCart";
 import Description from "@/components/products/Description";
 import Information from "@/components/products/Information";
 import Reviews from "@/components/products/Reviews";
-import data from '@/customdata/products'
 import Breadcrumbs from "@/components/Breadcrumbs";
+import productMixin from "@/mixins/product.mixin";
 export default {
   name: "Product",
+  props: ['id'],
+  mixins: [productMixin],
   components: {Breadcrumbs, VueSlickCarousel, carousel, InnerImageZoom, ProductCart, Description, Information, Reviews},
   data() {
     return {
-      activeImg: 1,
       tabPanel: 'Description',
-      products: data.products.slice(0, 5),
       settings: {
         "autoplay":false,
         "autoplaySpeed":1000,
@@ -188,20 +187,33 @@ export default {
       }
     }
   },
-  methods: {
-    setActiveImg(id) {
-      this.activeImg = id
-    }
+  computed: {
+    product() {
+      return this.$store.state.product
+    },
+  },
+  mounted() {
+    this.$store.dispatch('getProduct', this.id)
   }
 }
 </script>
 
-<style lang="scss">
+<style>
 .details-thumd .image-preview-container {
   margin-bottom: 0;
   border: none;
 }
 .owl-theme .owl-nav [class*='owl-']:hover {
   color: #c09578!important;
+}
+.product-preview.image-small.product_preview img{
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+}
+picture > img.iiz__img {
+  height: 533px!important;
+  width: 533px!important;
+  object-fit: cover;
 }
 </style>

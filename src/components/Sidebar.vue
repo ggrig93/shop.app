@@ -54,8 +54,8 @@
       <div class="widget widget-brand" v-if="brands">
         <h3 class="widgettitle">Brand</h3>
         <ul class="list-brand">
-          <li v-for="brand in brands" :key="brand">
-            <Checkbox id="brand" :label="brand" :input-value="brand" v-model="selectedBrands"/>
+          <li v-for="brand in brands" :key="brand.id">
+            <Checkbox id="brand" :label="brand.name" :input-value="brand.name" v-model="selectedBrands"/>
           </li>
         </ul>
       </div>
@@ -72,7 +72,10 @@
           Color
         </h4>
         <div class="list-color">
-          <a href="#" v-for="color in colors" :key="color" :class="['active', color]"></a>
+          <a href="#" v-for="color in colors"
+             :key="color.id"
+             :style="{backgroundColor: color.code}"
+          ></a>
         </div>
       </div>
       <div class="widget widget-tags" v-if="tags">
