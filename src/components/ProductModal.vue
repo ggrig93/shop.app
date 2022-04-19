@@ -46,10 +46,13 @@
               <div class="availability">Availability: <a href="#">{{product.available_type}}</a></div>
               <div class="price"><span>€{{product.price}}</span></div>
               <div class="product-details-description">
-                <ul>
-                  <li>Vestibulum tortor quam</li>
-                  <li>Imported</li>
-                  <li>Art.No. 06-7680</li>
+                <ul v-if="product.details.additional">
+                  <li
+                      v-for="(item, i) in product.details.additional"
+                      :key="i"
+                  >
+                    {{item}}
+                  </li>
                 </ul>
               </div>
               <div class="variations">

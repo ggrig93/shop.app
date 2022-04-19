@@ -88,9 +88,14 @@
             <h3 class="custommenu-title-blog">
               Deal of the day
             </h3>
-            <vue-slick-carousel class="owl-products owl-slick" v-bind="productsSettings">
-              <router-link :to="{name: 'Product', params: {id: i+1}}" class="product-item style-5" v-for="(product, i) in products" :key="i" >
-                <ProductCart :product="product"/>
+            <vue-slick-carousel v-if="dealDayProducts" class="owl-products owl-slick" v-bind="productsSettings">
+              <router-link
+                  v-for="(item, i) in dealDayProducts"
+                  :key="i"
+                  :to="{name: 'Product', params: {id: i+1}}"
+                  class="product-item style-5"
+              >
+                <ProductCart :product="item.product" :endDate="item.date_end"/>
               </router-link>
             </vue-slick-carousel>
           </div>
@@ -313,6 +318,14 @@ export default {
       },
       products: data.products.slice(0, 6)
     }
+  },
+  computed: {
+    dealDayProducts() {
+      return this.$store.state.dealDayProducts
+    }
+  },
+  created() {
+    this.$store.dispatch('getDealDayProducts')
   }
 }
 </script>

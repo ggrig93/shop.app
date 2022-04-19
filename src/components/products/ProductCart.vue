@@ -30,6 +30,9 @@
         </div>
       </div>
       <div class="product-info">
+        <div v-if="endDate" class="product-count-down">
+          <Countdown :end="endDate" />
+        </div>
         <h5 class="product-name product_title">
           <a href="javascript:void(0)">{{product.title}}</a>
         </h5>
@@ -143,6 +146,7 @@
 
 <script>
 import {bus} from '@/main'
+import Countdown from 'vuejs-countdown'
 export default {
   name: "ProductCart",
   props: {
@@ -153,8 +157,13 @@ export default {
     product: {
       type: Object,
       default: () => null
+    },
+    endDate:{
+      type: String,
+      default: ""
     }
   },
+  components: {Countdown},
   methods: {
     openModal(data) {
       bus.$emit('open-modal', {...data})
@@ -168,5 +177,48 @@ export default {
   width: 266px;
   height: 266px;
   object-fit: cover;
+}
+</style>
+
+<style>
+.product-count-down {
+  margin-bottom: 7px;
+}
+.vuejs-countdown {
+  text-align: center;
+}
+.vuejs-countdown li {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  padding: 7px 0 7px;
+  min-width: 40px;
+  border-radius: 50%;
+  font-family: 'Raleway';
+  font-weight: 700;
+  margin-bottom: 7px;
+  position: relative;
+  background-color: #c09578;
+  color: #fff;
+}
+.vuejs-countdown li:after {
+  display: none;
+}
+.vuejs-countdown li:last-child {
+  margin-right: 0;
+}
+.vuejs-countdown li p {
+  display: block;
+  text-align: center;
+  line-height: 12px;
+}
+.vuejs-countdown li .digit {
+  font-size: 11px;
+  line-height: 11px;
+  padding-bottom: 3px;
+}
+.vuejs-countdown li .text {
+  font-size: 9px;
+  text-transform: uppercase;
 }
 </style>

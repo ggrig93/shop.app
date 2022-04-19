@@ -58,10 +58,13 @@
                   <span>${{product.price}}</span>
                 </div>
                 <div class="product-details-description">
-                  <ul>
-                    <li>Vestibulum tortor quam</li>
-                    <li>Imported</li>
-                    <li>Art.No. 06-7680</li>
+                  <ul v-if="product.details.additional">
+                    <li
+                        v-for="(item, i) in product.details.additional"
+                        :key="i"
+                    >
+                      {{item}}
+                    </li>
                   </ul>
                 </div>
                 <div class="variations">
@@ -116,17 +119,18 @@
                 <li :class="{active: tabPanel === 'Description'}">
                   <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Description'">Descriptions</a>
                 </li>
-                <li :class="{active: tabPanel === 'Information'}">
+                <li v-if="product.details.information" :class="{active: tabPanel === 'Information'}">
                   <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Information'">Information</a>
                 </li>
-                <li :class="{active: tabPanel === 'Reviews'}">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Reviews'">Reviews</a>
-                </li>
+<!--                <li :class="{active: tabPanel === 'Reviews'}">-->
+<!--                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Reviews'">Reviews</a>-->
+<!--                </li>-->
               </ul>
               <div class="tab-container">
                 <component class="active"
                  :is="tabPanel"
-                 :description="product.description"
+                 :description="product.details.description"
+                 :information="product.details.information"
                 ></component>
               </div>
             </div>

@@ -9,7 +9,8 @@ export default new Vuex.Store({
     product: null,
     products: null,
     colors: null,
-    brands: null
+    brands: null,
+    dealDayProducts: null,
   },
   mutations: {
   },
@@ -32,6 +33,11 @@ export default new Vuex.Store({
     getBrands({state}) {
       http.get('/brand')
           .then(res => state.brands = res.data.data)
+          .catch(err => console.log(err))
+    },
+    getDealDayProducts({state}) {
+      http.get('/deal-day')
+          .then(res => state.dealDayProducts = res.data.data)
           .catch(err => console.log(err))
     }
   },
