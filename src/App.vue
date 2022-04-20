@@ -23,6 +23,9 @@ export default {
     TheHeader,
     TheFooter,
     MobileMenu
-  }
+  },
+  created() {
+    this.$store.dispatch('getCategories')
+  },
 }
 </script>

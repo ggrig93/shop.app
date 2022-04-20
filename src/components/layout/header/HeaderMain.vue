@@ -14,13 +14,14 @@
             <div class="form-content">
               <div class="category">
                 <select title="cate" data-placeholder="All Categories" class="chosen-select"
-                        tabindex="1">
-                  <option value="United States">Accessories</option>
-                  <option value="United Kingdom">Bracelets</option>
-                  <option value="Afghanistan">Tanzanites</option>
-                  <option value="Aland Islands">Sofas</option>
-                  <option value="Albania">New Arrivals</option>
-                  <option value="Algeria">Rings</option>
+                        tabindex="1" v-model="selectedCategory">
+                  <option
+                      v-for="(category, i) in categories"
+                      :value="category.id"
+                      :key="i"
+                  >
+                    {{category.name}}
+                  </option>
                 </select>
               </div>
               <div class="inner">
@@ -166,7 +167,13 @@ export default {
   mixins: [headerMixin],
   data() {
     return {
-      tab: 'login'
+      tab: 'login',
+      selectedCategory: 1,
+    }
+  },
+  computed: {
+    categories() {
+      return this.$store.state.categories
     }
   }
 }

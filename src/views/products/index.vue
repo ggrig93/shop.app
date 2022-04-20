@@ -109,7 +109,7 @@ export default {
     return {
       currentPage: 1,
       layoutMode: true,
-      categories: data.categories,
+      // categories: data.categories,
       // brand: data.brand,
       size: data.size,
       tags: data.tags,
@@ -129,6 +129,9 @@ export default {
     },
     brand() {
       return this.$store.state.brands
+    },
+    categories() {
+      return this.$store.state.categories
     }
   },
   created() {

@@ -13,15 +13,16 @@
           </div>
           <div class="block-content verticalmenu-content" :class="{'show-up': openCategories}">
             <ul class="ysera-nav-vertical vertical-menu ysera-clone-mobile-menu">
+<!--              :class="[item.children.length ? 'menu-item-has-children' : '']"-->
               <li
-                  :class="['menu-item', item.children.length ? 'menu-item-has-children' : '']"
-                  v-for="item in menu" :key="item.id"
+                  v-for="item in categories" :key="item.id"
+                  class="menu-item"
                   @click="openCategories = false"
               >
                 <router-link :to="{name: 'Categories', params: {category: item.name}}" class="ysera-menu-item-title" :title="item.name">{{item.name}}</router-link>
-                <template v-if="item.children.length">
-                  <SubMenu :children="item.children"/>
-                </template>
+<!--                <template v-if="item.children.length">-->
+<!--                  <SubMenu :children="item.children"/>-->
+<!--                </template>-->
               </li>
             </ul>
           </div>
@@ -76,6 +77,11 @@ export default {
     return {
       menu: header.menu,
       nav: header.nav
+    }
+  },
+  computed: {
+    categories() {
+      return this.$store.state.categories
     }
   }
 }

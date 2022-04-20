@@ -17,7 +17,7 @@
         <h3 class="widgettitle">Categories</h3>
         <ul class="list-categories">
           <li v-for="cat in categories" :key="cat">
-            <Checkbox id="category" :label="cat" :input-value="cat" v-model="selectedCategories" />
+            <Checkbox id="category" :label="cat.name" :input-value="cat.id" v-model="selectedCategories" />
           </li>
         </ul>
       </div>

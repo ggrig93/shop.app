@@ -337,7 +337,6 @@ export default {
   created() {
     this.$store.dispatch('getDealDayProducts')
     this.$store.dispatch('getBestsellers')
-    this.$store.dispatch('getCategory')
   }
 }
 </script>

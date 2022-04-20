@@ -47,7 +47,7 @@ export default new Vuex.Store({
           .then(res => state.bestsellerProducts = res.data.data)
           .catch(err => console.log(err))
     },
-    getCategory({state}) {
+    getCategories({state}) {
       http.get('/section')
           .then(res => state.categories = res.data.data)
           .catch(err => console.log(err))
