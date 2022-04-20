@@ -163,7 +163,7 @@
                 <div class="ysera-product">
                   <ul class="row list-products auto-clear equal-container product-grid">
                     <li class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1" v-for="(prod, idx) in topPanel[activeTabPanel]" :key="idx">
-                      <ProductCart :product="prod"/>
+                      <ProductCart :product="prod.product"/>
                     </li>
                   </ul>
                 </div>
@@ -311,21 +311,33 @@ export default {
           {"breakpoint":481, "settings":{"slidesToShow":2}}
         ]
       },
-      topPanel: {
-        bestseller: data.products.slice(0, 8),
-        newArrivals: data.products.slice(0, 6),
-        topRated: data.products.slice(0, 10)
-      },
+      // topPanel: {
+      //   bestseller: data.products.slice(0, 8),
+      //   newArrivals: data.products.slice(0, 6),
+      //   topRated: data.products.slice(0, 10)
+      // },
       products: data.products.slice(0, 6)
     }
   },
   computed: {
     dealDayProducts() {
       return this.$store.state.dealDayProducts
+    },
+    bestsellerProducts() {
+      return this.$store.state.bestsellerProducts
+    },
+    topPanel() {
+      return {
+        bestseller: this.bestsellerProducts,
+        newArrivals: {product: data.products.slice(0, 6)},
+        topRated: {product: data.products.slice(0, 10)},
+      }
     }
   },
   created() {
     this.$store.dispatch('getDealDayProducts')
+    this.$store.dispatch('getBestsellers')
+    this.$store.dispatch('getCategory')
   }
 }
 </script>

@@ -11,6 +11,8 @@ export default new Vuex.Store({
     colors: null,
     brands: null,
     dealDayProducts: null,
+    bestsellerProducts: null,
+    categories: null,
   },
   mutations: {
   },
@@ -38,6 +40,16 @@ export default new Vuex.Store({
     getDealDayProducts({state}) {
       http.get('/deal-day')
           .then(res => state.dealDayProducts = res.data.data)
+          .catch(err => console.log(err))
+    },
+    getBestsellers({state}) {
+      http.get('/product/populars-by/')
+          .then(res => state.bestsellerProducts = res.data.data)
+          .catch(err => console.log(err))
+    },
+    getCategory({state}) {
+      http.get('/section')
+          .then(res => state.categories = res.data.data)
           .catch(err => console.log(err))
     }
   },
