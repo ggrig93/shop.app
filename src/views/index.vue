@@ -323,14 +323,14 @@ export default {
     dealDayProducts() {
       return this.$store.state.dealDayProducts
     },
-    bestsellerProducts() {
-      return this.$store.state.bestsellerProducts
+    popularProducts() {
+      return this.$store.state.popularProducts
     },
     topPanel() {
       return {
-        bestseller: this.bestsellerProducts,
-        newArrivals: {product: data.products.slice(0, 6)},
-        topRated: {product: data.products.slice(0, 10)},
+        bestseller: this.popularProducts?.filter(item => item.best_seller),
+        newArrivals: this.popularProducts?.filter(item => item.new_arrival),
+        topRated: this.popularProducts?.filter(item => item.top_rated),
       }
     }
   },

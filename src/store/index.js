@@ -12,7 +12,7 @@ export default new Vuex.Store({
     brands: null,
     sizes: null,
     dealDayProducts: null,
-    bestsellerProducts: null,
+    popularProducts: null,
     categories: null,
     shopProductIds: [],
   },
@@ -49,7 +49,7 @@ export default new Vuex.Store({
     },
     getBestsellers({state}) {
       http.get('/product/populars-by/')
-          .then(res => state.bestsellerProducts = res.data.data)
+          .then(res => state.popularProducts = res.data.data)
           .catch(err => console.log(err))
     },
     getCategories({state}) {
