@@ -23,7 +23,8 @@
             </div>
             <a href="javascript:void(0)" class="button quick-wiew-button" @click.stop="openModal(product)">Quick View</a>
             <div class="loop-form-add-to-cart">
-              <button class="single_add_to_cart_button button">Add to cart
+              <button class="single_add_to_cart_button button" @click.stop="addToCart(product.id)">
+                Add to cart
               </button>
             </div>
           </div>
@@ -135,7 +136,7 @@
                   <a href="javascript:void(0)" class="btn-number qtyplus quantity-plus">+</a>
                 </div>
               </div>
-              <button class="single_add_to_cart_button button">Add to cart</button>
+              <button class="single_add_to_cart_button button" @click.stop="addToCart(product.id)">Add to cart</button>
             </div>
           </form>
         </div>
@@ -147,6 +148,8 @@
 <script>
 import {bus} from '@/main'
 import Countdown from 'vuejs-countdown'
+import productMixin from "@/mixins/product.mixin";
+
 export default {
   name: "ProductCart",
   props: {
@@ -164,6 +167,7 @@ export default {
     }
   },
   components: {Countdown},
+  mixins: [productMixin],
   methods: {
     openModal(data) {
       bus.$emit('open-modal', {...data})

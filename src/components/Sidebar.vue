@@ -16,7 +16,7 @@
       <div class="widget widget-categories" v-if="categories">
         <h3 class="widgettitle">Categories</h3>
         <ul class="list-categories">
-          <li v-for="cat in categories" :key="cat">
+          <li v-for="cat in categories" :key="cat.id">
             <Checkbox id="category" :label="cat.name" :input-value="cat.id" v-model="selectedCategories" />
           </li>
         </ul>
@@ -55,15 +55,15 @@
         <h3 class="widgettitle">Brand</h3>
         <ul class="list-brand">
           <li v-for="brand in brands" :key="brand.id">
-            <Checkbox id="brand" :label="brand.name" :input-value="brand.name" v-model="selectedBrands"/>
+            <Checkbox id="brand" :label="brand.name" :input-value="brand.id" v-model="selectedBrands"/>
           </li>
         </ul>
       </div>
       <div class="widget widget_filter_size" v-if="sizes">
         <h4 class="widgettitle">Size</h4>
         <ul class="list-brand">
-          <li v-for="size in sizes" :key="size">
-            <Checkbox id="size" :label="size" :input-value="size" v-model="selectedSizes"/>
+          <li v-for="size in sizes" :key="size.id">
+            <Checkbox id="size" :label="size.name" :input-value="size.id" v-model="selectedSizes"/>
           </li>
         </ul>
       </div>

@@ -37,5 +37,15 @@ export default {
             this.activeBlock = block
             this.activeImg = this.product.gallery.find(el => el.block === block).images[0].image
         },
+        addToCart(id) {
+            const shopProductIds =
+              JSON.parse(localStorage.getItem("shopProductIds")) ?
+                JSON.parse(localStorage.getItem("shopProductIds")) : [];
+            if(!shopProductIds.includes(id)) {
+                shopProductIds.push(id)
+                localStorage.setItem('shopProductIds', JSON.stringify(shopProductIds))
+                this.$store.commit("setShopProductIds", JSON.parse(localStorage.getItem("shopProductIds")))
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ export default {
   props: {
     label: String,
     value: Array,
-    inputValue: String
+    inputValue: [String, Number]
   },
   computed: {
     model: {

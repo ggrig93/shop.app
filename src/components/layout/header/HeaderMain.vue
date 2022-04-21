@@ -39,7 +39,7 @@
           <div class="block-minicart ysera-mini-cart block-header ysera-dropdown" :class="{'open': openCart}" v-click-outside="hideCart">
             <a href="javascript:void(0);" class="shopcart-icon" data-ysera="ysera-dropdown" @click="toggleCart">
               Cart
-              <span class="count">0</span>
+              <span class="count">{{shopCartCount}}</span>
             </a>
             <div class="shopcart-description ysera-submenu">
               <div class="content-wrap">
@@ -174,6 +174,12 @@ export default {
   computed: {
     categories() {
       return this.$store.state.categories
+    },
+    shopCartCount() {
+      return this.$store.state.shopProductIds.length ?
+          this.$store.state.shopProductIds.length :
+          JSON.parse(localStorage.getItem("shopProductIds")) ?
+          JSON.parse(localStorage.getItem("shopProductIds")).length : 0
     }
   }
 }

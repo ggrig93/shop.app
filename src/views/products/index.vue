@@ -86,7 +86,7 @@
               class="shop-sidebar"
               :categories="categories"
               :brands="brand"
-              :sizes="size"
+              :sizes="sizes"
               :colors="color"
               :tags="tags"
           />
@@ -111,7 +111,7 @@ export default {
       layoutMode: true,
       // categories: data.categories,
       // brand: data.brand,
-      size: data.size,
+      // size: data.size,
       tags: data.tags,
       // color: data.color,
       price: data.price
@@ -132,12 +132,16 @@ export default {
     },
     categories() {
       return this.$store.state.categories
+    },
+    sizes() {
+      return this.$store.state.sizes
     }
   },
   created() {
     this.$store.dispatch('getAllProducts')
     this.$store.dispatch('getColors')
     this.$store.dispatch('getBrands')
+    this.$store.dispatch('getSizes')
   },
   methods: {
     onPageChange(page) {

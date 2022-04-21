@@ -10,11 +10,16 @@ export default new Vuex.Store({
     products: null,
     colors: null,
     brands: null,
+    sizes: null,
     dealDayProducts: null,
     bestsellerProducts: null,
     categories: null,
+    shopProductIds: [],
   },
   mutations: {
+    setShopProductIds(state, value) {
+      state.shopProductIds = value
+    }
   },
   actions: {
     getProduct({state}, id) {
@@ -50,6 +55,11 @@ export default new Vuex.Store({
     getCategories({state}) {
       http.get('/section')
           .then(res => state.categories = res.data.data)
+          .catch(err => console.log(err))
+    },
+    getSizes({state}) {
+      http.get('/size')
+          .then(res => state.sizes = res.data.data)
           .catch(err => console.log(err))
     }
   },
