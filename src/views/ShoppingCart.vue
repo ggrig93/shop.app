@@ -11,7 +11,7 @@
             <div class="page-main-content">
               <div class="shoppingcart-content">
                 <form action="shoppingcart.html" class="cart-form">
-                  <table class="shop_table">
+                  <table v-if="cartProducts.length" class="shop_table">
                     <thead>
                     <tr>
                       <th class="product-remove"></th>
@@ -23,18 +23,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(prod, idx) in products" :key="idx" class="cart_item">
+                    <tr v-for="(prod, idx) in cartProducts" :key="idx" class="cart_item">
                       <td class="product-remove">
                         <a href="#" class="remove"></a>
                       </td>
                       <td class="product-thumbnail">
                         <a href="#">
-                          <img :src="`http://ledthanhdat.vn/html/ysera/assets/images/${prod.img}`" alt="img"
+                          <img :src="prod.avatar" alt="img"
                                class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
                         </a>
                       </td>
                       <td class="product-name" data-title="Product">
-                        <router-link :to="{name: 'Product', params: {id: idx+1}}" class="title">Mini swing dress</router-link>
+                        <router-link :to="{name: 'Product', params: {id: prod.id}}" class="title">{{prod.title}}</router-link>
                         <span class="attributes-select attributes-color">Black,</span>
                         <span class="attributes-select attributes-size">XXL</span>
                       </td>
@@ -53,7 +53,7 @@
 														<span class="woocommerce-Price-currencySymbol">
 															$
 														</span>
-														{{prod.newPrice}}
+														{{prod.price}}
 													</span>
                       </td>
                     </tr>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="order-total">
                           <span class="title">Total Price:</span>
-                          <span class="total-price">$95</span>
+                          <span class="total-price">${{cartTotalPrice}}</span>
                         </div>
                       </td>
                     </tr>
@@ -100,6 +100,17 @@ export default {
     return {
       products: data.products.slice(0, 3)
     }
+  },
+  computed: {
+    cartProducts() {
+      return this.$store.state.cartProducts
+    },
+    cartTotalPrice() {
+      return this.$store.state.cartTotalPrice
+    },
+  },
+  created() {
+    this.$store.dispatch('getCartProducts')
   }
 }
 </script>

@@ -45,24 +45,24 @@
               <div class="content-wrap">
                 <h3 class="title">Shopping Cart</h3>
                 <ul class="minicart-items">
-                  <li class="product-cart mini_cart_item" v-for="i in 3" :key="i">
+                  <li class="product-cart mini_cart_item" v-for="product in cartProducts" :key="product.id">
                     <a href="#" class="product-media">
-                      <img :src="`http://ledthanhdat.vn/html/ysera/assets/images/item-minicart-${i}.jpg`" alt="img">
+                      <img :src="product.avatar" alt="img">
                     </a>
                     <div class="product-details">
                       <h5 class="product-name">
-                        <a href="#">Earrings Solutions Soap</a>
+                        <router-link :to="{name: 'Product', params: {id: product.id}}" class="title">{{product.title}}</router-link>
                       </h5>
                       <div class="variations">
                         <span class="attribute_color">
                           <a href="#">Black</a>
                         </span>,
-                        <span class="attribute_size"><a href="javascript:void(0)">{{i*100}}ml</a></span>
+                        <span class="attribute_size"><a href="javascript:void(0)">100ml</a></span>
                       </div>
                       <span class="product-price">
-                        <span class="price">${{i*25}}</span>
+                        <span class="price">${{product.price}}</span>
                       </span>
-                      <span class="product-quantity">(x{{i}})</span>
+                      <span class="product-quantity">(x2)</span>
                       <div class="product-remove">
                         <a href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                       </div>
@@ -72,7 +72,7 @@
                 <div class="subtotal">
                   <span class="total-title">Subtotal: </span>
                   <span class="total-price">
-                    <span class="Price-amount">$135</span>
+                    <span class="Price-amount">${{cartTotalPrice}}</span>
                   </span>
                 </div>
                 <div class="actions">
@@ -175,11 +175,24 @@ export default {
     categories() {
       return this.$store.state.categories
     },
+    cartTotalPrice() {
+      return this.$store.state.cartTotalPrice
+    },
+    cartProducts() {
+      return this.$store.state.cartProducts
+    },
     shopCartCount() {
       return this.$store.state.shopProductIds.length ?
           this.$store.state.shopProductIds.length :
           JSON.parse(localStorage.getItem("shopProductIds")) ?
           JSON.parse(localStorage.getItem("shopProductIds")).length : 0
+    }
+  },
+  watch: {
+    openCart(val) {
+      if(val) {
+        this.$store.dispatch('getCartProducts')
+      }
     }
   }
 }
