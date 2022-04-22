@@ -74,21 +74,21 @@ export default {
             name: 'Home',
             view: 'Home',
             children: [
-                {
-                    id: 11,
-                    name: 'Home 1',
-                    children: []
-                },
-                {
-                    id: 12,
-                    name: 'Home 2',
-                    children: []
-                },
-                {
-                    id: 13,
-                    name: 'Home 3',
-                    children: []
-                }
+                // {
+                //     id: 11,
+                //     name: 'Home 1',
+                //     children: []
+                // },
+                // {
+                //     id: 12,
+                //     name: 'Home 2',
+                //     children: []
+                // },
+                // {
+                //     id: 13,
+                //     name: 'Home 3',
+                //     children: []
+                // }
             ]
         },
         {
@@ -96,26 +96,26 @@ export default {
             name: 'Shop',
             view: 'Products',
             children: [
-                {
-                    id: 21,
-                    name: 'Grid Fullwidth',
-                    children: []
-                },
-                {
-                    id: 22,
-                    name: 'Grid Left Sidebar',
-                    children: []
-                },
-                {
-                    id: 23,
-                    name: 'Grid Bannerslider',
-                    children: []
-                },
-                {
-                    id: 24,
-                    name: 'List',
-                    children: []
-                }
+                // {
+                //     id: 21,
+                //     name: 'Grid Fullwidth',
+                //     children: []
+                // },
+                // {
+                //     id: 22,
+                //     name: 'Grid Left Sidebar',
+                //     children: []
+                // },
+                // {
+                //     id: 23,
+                //     name: 'Grid Bannerslider',
+                //     children: []
+                // },
+                // {
+                //     id: 24,
+                //     name: 'List',
+                //     children: []
+                // }
             ]
         },
         {

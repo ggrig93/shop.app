@@ -19,7 +19,13 @@
                   class="menu-item"
                   @click="openCategories = false"
               >
-                <router-link :to="{name: 'Categories', params: {category: item.name}}" class="ysera-menu-item-title" :title="item.name">{{item.name}}</router-link>
+                <router-link
+                    :to="{name: 'Categories', params: {category: item.id}}"
+                    class="ysera-menu-item-title"
+                    :title="item.name"
+                >
+                  {{item.name}}
+                </router-link>
 <!--                <template v-if="item.children.length">-->
 <!--                  <SubMenu :children="item.children"/>-->
 <!--                </template>-->

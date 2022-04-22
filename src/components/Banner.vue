@@ -1,7 +1,7 @@
 <template>
   <div class="banner">
     <div :class="['item-banner', imgClass]" >
-      <div class="inner">
+      <div class="inner" :style="{backgroundImage: `url(${backgroundImage})`}">
         <div class="banner-content">
           <slot></slot>
         </div>
@@ -13,6 +13,6 @@
 <script>
 export default {
   name: "Banner",
-  props: ['imgClass']
+  props: ['imgClass', "backgroundImage"]
 }
 </script>

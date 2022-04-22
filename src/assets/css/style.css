@@ -8591,6 +8591,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 /*banner home 03*/
 .item-banner.style7 .inner {
 	background-image: url(http://ledthanhdat.vn/html/ysera/assets/images/banner-home-5.jpg);
+	background-size: cover;
 }
 .item-banner.style7 .banner-content {
 	padding-top: 58px;

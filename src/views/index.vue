@@ -2,66 +2,35 @@
   <div class="home">
     <div>
       <div class="fullwidth-template">
-        <div class="home-slider-banner">
+        <div v-if="topSlideProducts.length > 2" class="home-slider-banner">
           <div class="container">
             <div class="row10">
               <div class="col-lg-8 silider-wrapp">
                 <div class="home-slider">
                   <vue-slick-carousel class="slider-owl owl-slick" v-bind="settings">
-                    <div class="slider-item style7">
-                      <div class="slider-inner equal-element">
+                    <div
+                        v-for="product in mainProducts.slideItems"
+                        :key="product.id"
+                        class="slider-item style9"
+                    >
+                      <div
+                          class="slider-inner equal-element"
+                          :style="{backgroundImage: `url(${product.avatar})`}"
+                      >
                         <div class="slider-infor">
-                          <h5 class="title-small">
-                            Sale up to 40% off!
-                          </h5>
-                          <h3 class="title-big">
-                            Spring Summer <br/>Collection
+<!--                          <h5 class="title-small">-->
+<!--                            {{product.description}}-->
+<!--                          </h5>-->
+                          <h3 class="title-big custom-title">
+                            {{product.title}}
                           </h3>
                           <div class="price">
                             New Price:
                             <span class="number-price">
-														$270.00
+														${{product.price}}
 													</span>
                           </div>
                           <a href="#" class="button btn-shop-the-look bgroud-style">Shop now</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="slider-item style8">
-                      <div class="slider-inner equal-element">
-                        <div class="slider-infor">
-                          <h5 class="title-small">
-                            Take A jewelry
-                          </h5>
-                          <h3 class="title-big">
-                            Up to 25% Off <br/>order now
-                          </h3>
-                          <div class="price">
-                            Save Price:
-                            <span class="number-price">
-														$170.00
-													</span>
-                          </div>
-                          <a href="#" class="button btn-shop-product">Shop now</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="slider-item style9">
-                      <div class="slider-inner equal-element">
-                        <div class="slider-infor">
-                          <h5 class="title-small">
-                            Ysera Best Collection
-                          </h5>
-                          <h3 class="title-big">
-                            A range of <br/>jewelry
-                          </h3>
-                          <div class="price">
-                            New Price:
-                            <span class="number-price">
-														$250.00
-													</span>
-                          </div>
-                          <a href="#" class="button btn-chekout">Shop now</a>
                         </div>
                       </div>
                     </div>
@@ -69,15 +38,15 @@
                 </div>
               </div>
               <div class="col-lg-4 banner-wrapp">
-                <banner img-class="style7">
-                  <h3 class="title">Happy Ever <br/>After</h3>
-                  <div class="description">Adipiscing elit curabitur senectus sem</div>
+                <banner
+                    v-for="product in mainProducts.bannerItems"
+                    :key="product.id"
+                    img-class="style7"
+                    :backgroundImage="product.avatar"
+                >
+                  <h3 class="title custom-title">{{product.title}}</h3>
+                  <span class="price">${{product.price}}</span>
                   <a href="#" class="button btn-lets-do-it">Shop now</a>
-                </banner>
-                <banner img-class="style8">
-                  <h3 class="title">Wedding <br/>Gift</h3>
-                  <div class="description">Cras pulvinar lorem ipsum dolor conse</div>
-                  <span class="price">$379.00</span>
                 </banner>
               </div>
             </div>
@@ -103,43 +72,38 @@
         <div class="banner-wrapp">
           <div class="container">
             <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-12">
-                <banner img-class="style4">
-                  <h4 class="ysera-subtitle">TOP STAFF PICK</h4>
-                  <h3 class="title">Shop Rings</h3>
-                  <div class="description">Proin interdum magna primis id consequat dictum</div>
-                  <a href="#" class="button btn-shop-now">Shop now</a>
-                </banner>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-12">
-                <banner img-class="style5">
-                  <h3 class="title">Maybe You’ve <br/>Earned it</h3>
-                  <span class="code">
-												Use code:
-												<span>
-													YSERA
-												</span>
-												Get 25% Off for all Accessories items!
-											</span>
+              <div
+                  v-for="product in bottomSlideProducts"
+                  :key="product.id"
+                  class="col-lg-6 col-md-6 col-sm-12">
+                <banner img-class="style4" :backgroundImage="product.avatar">
+<!--                  <h4 class="ysera-subtitle">TOP STAFF PICK</h4>-->
+                  <h3 class="title custom-title">{{product.title}}</h3>
+                  <div class="description">{{product.description}}</div>
                   <a href="#" class="button btn-shop-now">Shop now</a>
                 </banner>
               </div>
             </div>
           </div>
         </div>
-        <div class="banner-wrapp rows-space-65">
+        <div v-if="bottomContainerProducts.length" class="banner-wrapp rows-space-65">
           <div class="container">
-            <banner img-class="style17">
-              <h3 class="title">Collection Arrived</h3>
+            <banner img-class="style17" :backgroundImage="bottomContainerProducts[0].avatar">
+              <h3 class="title">{{bottomContainerProducts[0].title}}</h3>
               <div class="description">
-                You have no jewelry & Are you <br/>ready to wearing? come & shop with us!
+                {{bottomContainerProducts[0].description}}
               </div>
               <div class="banner-price">
                 Price from:
-                <span class="number-price">$45.00</span>
+                <span class="number-price">${{bottomContainerProducts[0].price}}</span>
               </div>
               <a href="#" class="button btn-shop-now">Shop now</a>
-              <a href="#" class="button btn-view-collection">View more</a>
+              <router-link
+                  :to="{name: 'Product', params: {id: bottomContainerProducts[0].id}}"
+                  class="button btn-view-collection"
+              >
+                View more
+              </router-link>
             </banner>
           </div>
         </div>
@@ -320,6 +284,21 @@ export default {
     }
   },
   computed: {
+    topSlideProducts() {
+      return this.$store.state.topSlideProducts
+    },
+    mainProducts() {
+      return {
+        bannerItems: this.topSlideProducts?.slice(0,2),
+        slideItems: this.topSlideProducts?.slice(2, this.topSlideProducts.length)
+      }
+    },
+    bottomSlideProducts() {
+      return this.$store.state.bottomSlideProducts
+    },
+    bottomContainerProducts() {
+      return this.$store.state.bottomContainerProducts
+    },
     dealDayProducts() {
       return this.$store.state.dealDayProducts
     },
@@ -335,6 +314,9 @@ export default {
     }
   },
   created() {
+    this.$store.dispatch('getTopSlideProducts')
+    this.$store.dispatch('getBottomSlideProducts')
+    this.$store.dispatch('getBottomContainerProducts')
     this.$store.dispatch('getDealDayProducts')
     this.$store.dispatch('getBestsellers')
   }
@@ -344,5 +326,14 @@ export default {
 <style>
 .instagram .slick-slide {
   padding: 0;
+}
+.custom-title {
+  min-height: 82px;
+  max-height: 82px;
+  padding-top: 44px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  white-space: nowrap;
 }
 </style>
