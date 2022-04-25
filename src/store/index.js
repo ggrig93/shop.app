@@ -37,6 +37,13 @@ export default new Vuex.Store({
           .then(res => state.products = res.data)
           .catch(err => console.log(err))
     },
+    getPerPageProducts({state}, offset) {
+      http.get(`/product`, {params: {offset}})
+        .then(res => {
+          state.products = res.data
+        })
+        .catch(err => console.log(err))
+    },
     getTopSlideProducts({state}) {
       http.get('/product/by-slide-group/top')
           .then(res => state.topSlideProducts = res.data.data)

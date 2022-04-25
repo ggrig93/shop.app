@@ -121,6 +121,9 @@ export default {
     totalPages() {
       return this.$store.state.products?.meta.paginate.total || 1
     },
+    limit() {
+      return this.$store.state.products?.meta.paginate.limit || 10
+    },
     products() {
       return this.$store.state.products?.data
     },
@@ -138,15 +141,23 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('getAllProducts')
+    const page = this.$route.query.page
+    if(page) {
+      const offset = (parseInt(page) - 1) * this.limit
+      this.$store.dispatch('getPerPageProducts', offset)
+    } else {
+      this.$store.dispatch('getAllProducts')
+    }
     this.$store.dispatch('getColors')
     this.$store.dispatch('getBrands')
     this.$store.dispatch('getSizes')
   },
   methods: {
     onPageChange(page) {
-      console.log(page)
       this.currentPage = page;
+      this.$router.replace({name: this.$route.name, query: {page}})
+      const offset = (page - 1) * this.limit
+      this.$store.dispatch('getPerPageProducts', offset)
     }
   }
 }
