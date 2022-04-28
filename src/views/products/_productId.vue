@@ -71,20 +71,24 @@
                   <div class="attribute attribute_color">
                     <div class="color-text text-attribute">Color:</div>
                     <div class="list-color list-item">
-                      <a href="#" v-for="color in colors"
+                      <a v-for="color in colors"
                          :key="color.id"
                          :style="{backgroundColor: color.code}"
-                         :class="{active: color.block === block}"
-                         @click.prevent="setActiveColor(color.block)"
+                         :class="{active: activeColor(color)}"
+                         @click.prevent="selectColor(color)"
                       ></a>
                     </div>
+                    <p v-if="showColorError" class="error-message color-error">Select color</p>
                   </div>
                   <div class="attribute attribute_size">
                     <div class="size-text text-attribute">Size:</div>
                     <div class="list-size list-item">
-                      <a href="#" v-for="size in coloredProduct.sizes"
-                         :key="size.id"
-                      >{{size.name}}</a>
+                      <a v-for="item in coloredProduct.sizes"
+                         :key="item.id"
+                         :class="{active: size && size.id === item.id}"
+                         @click="size = item"
+                      >{{item.name}}</a>
+                    <p v-if="showSizeError" class="error-message size-error">Select size</p>
                     </div>
                   </div>
                 </div>
@@ -103,14 +107,22 @@
                   <div class="quantity-add-to-cart">
                     <div class="quantity">
                       <div class="control">
-                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                        <input type="text" data-step="1" data-min="0" value="1" title="Qty"
-                               class="input-qty qty" size="4">
-                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                        <a class="btn-number qtychange qtyminus quantity-minus" @click="changeCount(-1)">-</a>
+                        <input
+                            v-model="count"
+                            type="text"
+                            data-step="1"
+                            data-min="0"
+                            title="Qty"
+                            class="input-qty qty"
+                            size="4"
+                        >
+                        <a class="btn-number qtychange qtyplus quantity-plus" @click="changeCount(+1)">+</a>
                       </div>
                     </div>
-                    <button class="single_add_to_cart_button button" @click.stop="addToCart(product.id)">Add to cart</button>
+                    <button class="single_add_to_cart_button button" @click.stop="addToCartHandler">Add to cart</button>
                   </div>
+                  <p v-if="count < 1" class="error-message">Select a valid count</p>
                 </div>
               </div>
             </div>
@@ -188,7 +200,12 @@ export default {
           {"breakpoint":1200,"settings":{"slidesToShow":2}},
           {"breakpoint":480,"settings":{"slidesToShow":1}}
         ]
-      }
+      },
+      count: 1,
+      size: null,
+      color: null,
+      showSizeError: false,
+      showColorError: false,
     }
   },
   computed: {
@@ -196,8 +213,54 @@ export default {
       return this.$store.state.product
     },
   },
+  watch: {
+    size: {
+      deep: true,
+      handler(val) {
+        if(val) {
+          this.showSizeError = false
+        }
+      }
+    },
+    color: {
+      deep: true,
+      handler(val) {
+        if(val) {
+          this.size= null
+        }
+      }
+    }
+  },
   mounted() {
     this.$store.dispatch('getProduct', this.id)
+  },
+  methods: {
+    activeColor(color) {
+      if(color.block === this.block) {
+        this.color = color
+      }
+      return color.block === this.block
+    },
+    changeCount(qty) {
+      if(this.count === 1 && qty === -1) return;
+      this.count = parseInt(this.count) + parseInt(qty)
+    },
+    selectColor(color) {
+      this.color = color
+      this.setActiveColor(color.block)
+    },
+    addToCartHandler() {
+      if(!this.color) this.showColorError = true;
+      if(!this.size) this.showSizeError = true;
+      if(!this.color || !this.size || this.count < 1) return;
+      const product = {
+        ...this.product,
+        color: this.color,
+        size: this.size,
+        count: this.count,
+      }
+      this.addToCart(product)
+    }
   }
 }
 </script>
@@ -219,5 +282,21 @@ picture > img.iiz__img {
   height: 533px!important;
   width: 533px!important;
   object-fit: cover;
+}
+.list-item a {
+  cursor: pointer;
+}
+.qtychange {
+  user-select: none;
+  cursor: pointer;
+}
+.error-message {
+  color: #ce1313;
+}
+.color-error {
+  margin: -20px 0 0 0;
+}
+.size-error {
+  margin: -15px 0 0 0;
 }
 </style>

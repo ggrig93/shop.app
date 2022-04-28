@@ -17,13 +17,12 @@ export default new Vuex.Store({
     topSlideProducts: [],
     bottomSlideProducts: [],
     bottomContainerProducts: [],
-    shopProductIds: [],
-    cartProducts: [],
+    shopProducts: [],
     cartTotalPrice: 0,
   },
   mutations: {
-    setShopProductIds(state, value) {
-      state.shopProductIds = value
+    setShopProducts(state, value) {
+      state.shopProducts = value
     }
   },
   actions: {
@@ -89,16 +88,12 @@ export default new Vuex.Store({
           .then(res => state.sizes = res.data.data)
           .catch(err => console.log(err))
     },
-    getCartProducts({state}) {
-      const productIds = JSON.parse(localStorage.getItem("shopProductIds")) ? JSON.parse(localStorage.getItem("shopProductIds")) : []
-      http.get(`/product/by-ids`, {params: {product_ids: productIds}})
-          .then(res => {
-            state.cartProducts = res.data.data
-            let totalPrice = 0
-            state.cartProducts.forEach(item => totalPrice += +item.price)
-            state.cartTotalPrice = totalPrice
-          })
-          .catch(err => console.log(err))
+    getShopProducts({state}) {
+      state.shopProducts = JSON.parse(localStorage.getItem("shopProducts")) ? JSON.parse(localStorage.getItem("shopProducts")) : []
+
+      let totalPrice = 0
+      state.shopProducts.forEach(item => totalPrice += (+item.price * item.count))
+      state.cartTotalPrice = totalPrice
     }
   },
   modules: {

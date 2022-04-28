@@ -45,26 +45,26 @@
               <div class="content-wrap">
                 <h3 class="title">Shopping Cart</h3>
                 <ul class="minicart-items">
-                  <li class="product-cart mini_cart_item" v-for="product in cartProducts" :key="product.id">
-                    <a href="#" class="product-media">
+                  <li class="product-cart mini_cart_item" v-for="(product, i) in shopProducts" :key="i">
+                    <router-link :to="{name: 'Product', params: {id: product.id}}" class="product-media">
                       <img :src="product.avatar" alt="img">
-                    </a>
+                    </router-link>
                     <div class="product-details">
                       <h5 class="product-name">
                         <router-link :to="{name: 'Product', params: {id: product.id}}" class="title">{{product.title}}</router-link>
                       </h5>
                       <div class="variations">
                         <span class="attribute_color">
-                          <a href="#">Black</a>
+                          <a>{{product.color.name}}</a>
                         </span>,
-                        <span class="attribute_size"><a href="javascript:void(0)">100ml</a></span>
+                        <span class="attribute_size"><a>{{product.size.name}}</a></span>
                       </div>
                       <span class="product-price">
                         <span class="price">${{product.price}}</span>
                       </span>
-                      <span class="product-quantity">(x2)</span>
+                      <span class="product-quantity">(x{{product.count}})</span>
                       <div class="product-remove">
-                        <a href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        <span @click="removeCartItem(i)" style="cursor: pointer"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
                       </div>
                     </div>
                   </li>
@@ -161,10 +161,11 @@
 
 <script>
 import headerMixin from "@/mixins/header.mixin";
+import productMixin from "@/mixins/product.mixin";
 
 export default {
   name: "HeaderMain",
-  mixins: [headerMixin],
+  mixins: [headerMixin, productMixin],
   data() {
     return {
       tab: 'login',
@@ -178,20 +179,20 @@ export default {
     cartTotalPrice() {
       return this.$store.state.cartTotalPrice
     },
-    cartProducts() {
-      return this.$store.state.cartProducts
+    shopProducts() {
+      return this.$store.state.shopProducts
     },
     shopCartCount() {
-      return this.$store.state.shopProductIds.length ?
-          this.$store.state.shopProductIds.length :
-          JSON.parse(localStorage.getItem("shopProductIds")) ?
-          JSON.parse(localStorage.getItem("shopProductIds")).length : 0
+      return this.$store.state.shopProducts?.length ?
+          this.$store.state.shopProducts.length :
+          JSON.parse(localStorage.getItem("shopProducts")) ?
+          JSON.parse(localStorage.getItem("shopProducts")).length : 0
     }
   },
   watch: {
     openCart(val) {
       if(val) {
-        this.$store.dispatch('getCartProducts')
+        this.$store.dispatch('getShopProducts')
       }
     }
   }

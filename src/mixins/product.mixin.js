@@ -37,15 +37,19 @@ export default {
             this.activeBlock = block
             this.activeImg = this.product.gallery.find(el => el.block === block).images[0].image
         },
-        addToCart(id) {
-            const shopProductIds =
-              JSON.parse(localStorage.getItem("shopProductIds")) ?
-                JSON.parse(localStorage.getItem("shopProductIds")) : [];
-            if(!shopProductIds.includes(id)) {
-                shopProductIds.push(id)
-                localStorage.setItem('shopProductIds', JSON.stringify(shopProductIds))
-                this.$store.commit("setShopProductIds", JSON.parse(localStorage.getItem("shopProductIds")))
-            }
+        removeCartItem(idx) {
+            const products = JSON.parse(localStorage.getItem("shopProducts"))
+            products.splice(idx,1)
+            localStorage.setItem('shopProducts', JSON.stringify(products))
+            this.$store.dispatch('getShopProducts')
+        },
+        addToCart(product) {
+            const shopProducts =
+              JSON.parse(localStorage.getItem("shopProducts")) ?
+                JSON.parse(localStorage.getItem("shopProducts")) : [];
+            shopProducts.push(product)
+            localStorage.setItem('shopProducts', JSON.stringify(shopProducts))
+            this.$store.commit("setShopProducts", JSON.parse(localStorage.getItem("shopProducts")))
         }
     }
 }

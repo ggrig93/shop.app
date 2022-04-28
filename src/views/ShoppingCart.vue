@@ -11,7 +11,7 @@
             <div class="page-main-content">
               <div class="shoppingcart-content">
                 <form action="shoppingcart.html" class="cart-form">
-                  <table v-if="cartProducts.length" class="shop_table">
+                  <table v-if="shopProducts.length" class="shop_table">
                     <thead>
                     <tr>
                       <th class="product-remove"></th>
@@ -23,28 +23,27 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(prod, idx) in cartProducts" :key="idx" class="cart_item">
+                    <tr v-for="(prod, idx) in shopProducts" :key="prod.id + idx" class="cart_item">
                       <td class="product-remove">
-                        <a href="#" class="remove"></a>
+                        <a class="remove" @click="removeCartItem(idx)"></a>
                       </td>
                       <td class="product-thumbnail">
-                        <a href="#">
+                        <a>
                           <img :src="prod.avatar" alt="img"
                                class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
                         </a>
                       </td>
                       <td class="product-name" data-title="Product">
                         <router-link :to="{name: 'Product', params: {id: prod.id}}" class="title">{{prod.title}}</router-link>
-                        <span class="attributes-select attributes-color">Black,</span>
-                        <span class="attributes-select attributes-size">XXL</span>
+                        <span class="attributes-select attributes-color">{{prod.color.name}},</span>
+                        <span class="attributes-select attributes-size">{{prod.size.name}}</span>
                       </td>
                       <td class="product-quantity" data-title="Quantity">
                         <div class="quantity">
                           <div class="control">
-                            <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                            <input type="text" data-step="1" data-min="0" value="1" title="Qty"
-                                   class="input-qty qty" size="4">
-                            <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                            <a class="btn-number qtychange qtyminus quantity-minus" @click="changeCount(idx, -1)">-</a>
+                            <input v-model="prod.count" disabled type="text" data-step="1" data-min="0" title="Qty" class="input-qty qty" size="4">
+                            <a class="btn-number qtychange qtyplus quantity-plus" @click="changeCount(idx, +1)">+</a>
                           </div>
                         </div>
                       </td>
@@ -92,25 +91,34 @@
 
 <script>
 import Breadcrumbs from "@/components/Breadcrumbs";
-import data from '@/customdata/products'
+import productMixin from "@/mixins/product.mixin";
 export default {
   name: "ShoppingCart",
+  mixins: [productMixin],
   components: {Breadcrumbs},
-  data() {
-    return {
-      products: data.products.slice(0, 3)
-    }
-  },
   computed: {
-    cartProducts() {
-      return this.$store.state.cartProducts
+    shopProducts() {
+      return this.$store.state.shopProducts
     },
     cartTotalPrice() {
       return this.$store.state.cartTotalPrice
     },
   },
   created() {
-    this.$store.dispatch('getCartProducts')
+    this.$store.dispatch('getShopProducts')
+  },
+  methods: {
+    changeCount(idx, qty) {
+      const products = JSON.parse(localStorage.getItem("shopProducts"))
+      products.map((item, i) => {
+        if(item.count === 1 && qty === -1) return;
+        if(i === idx){
+          item.count = parseInt(item.count) + parseInt(qty)
+        }
+      })
+      localStorage.setItem('shopProducts', JSON.stringify(products))
+      this.$store.dispatch('getShopProducts')
+    },
   }
 }
 </script>

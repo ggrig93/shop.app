@@ -33,28 +33,28 @@
                   <option value="5">Sort by price: low to high</option>
                 </select>
               </form>
-              <div class="grid-view-mode">
-                <div class="inner">
-                  <a href="javascript:void(0)"
-                     class="modes-mode mode-list"
-                     :class="{'active': !layoutMode}"
-                     @click.prevent="layoutMode = false"
-                  >
-                    <span></span>
-                    <span></span>
-                  </a>
-                  <a href="javascript:void(0)"
-                     class="modes-mode mode-grid"
-                     :class="{'active': layoutMode}"
-                     @click.prevent="layoutMode = true"
-                  >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </a>
-                </div>
-              </div>
+<!--              <div class="grid-view-mode">-->
+<!--                <div class="inner">-->
+<!--                  <a href="javascript:void(0)"-->
+<!--                     class="modes-mode mode-list"-->
+<!--                     :class="{'active': !layoutMode}"-->
+<!--                     @click.prevent="layoutMode = false"-->
+<!--                  >-->
+<!--                    <span></span>-->
+<!--                    <span></span>-->
+<!--                  </a>-->
+<!--                  <a href="javascript:void(0)"-->
+<!--                     class="modes-mode mode-grid"-->
+<!--                     :class="{'active': layoutMode}"-->
+<!--                     @click.prevent="layoutMode = true"-->
+<!--                  >-->
+<!--                    <span></span>-->
+<!--                    <span></span>-->
+<!--                    <span></span>-->
+<!--                    <span></span>-->
+<!--                  </a>-->
+<!--                </div>-->
+<!--              </div>-->
             </div>
             <ul class="row list-products auto-clear equal-container"
                 :class="layoutMode ? 'product-grid' : 'product-list'"
