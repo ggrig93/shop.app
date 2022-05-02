@@ -83,8 +83,8 @@
           Popular Tags
         </h3>
         <ul class="tagcloud">
-          <li class="tag-cloud-link active" v-for="tag in tags" :key="tag">
-            <a href="#">{{tag}}</a>
+          <li class="tag-cloud-link active" v-for="tag in tags" :key="tag.id">
+            <a>{{tag.name}}</a>
           </li>
         </ul>
       </div>

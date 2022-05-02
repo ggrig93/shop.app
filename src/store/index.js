@@ -11,6 +11,7 @@ export default new Vuex.Store({
     colors: null,
     brands: null,
     sizes: null,
+    tags: null,
     dealDayProducts: null,
     popularProducts: null,
     categories: null,
@@ -86,6 +87,11 @@ export default new Vuex.Store({
     getSizes({state}) {
       http.get('/size')
           .then(res => state.sizes = res.data.data)
+          .catch(err => console.log(err))
+    },
+    getTags({state}) {
+      http.get('/tag')
+          .then(res => state.tags = res.data.data)
           .catch(err => console.log(err))
     },
     getShopProducts({state}) {

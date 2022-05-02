@@ -112,7 +112,7 @@ export default {
       // categories: data.categories,
       // brand: data.brand,
       // size: data.size,
-      tags: data.tags,
+      // tags: data.tags,
       // color: data.color,
       price: data.price
     }
@@ -138,6 +138,9 @@ export default {
     },
     sizes() {
       return this.$store.state.sizes
+    },
+    tags() {
+      return this.$store.state.tags
     }
   },
   created() {
@@ -151,6 +154,7 @@ export default {
     this.$store.dispatch('getColors')
     this.$store.dispatch('getBrands')
     this.$store.dispatch('getSizes')
+    this.$store.dispatch('getTags')
   },
   methods: {
     onPageChange(page) {
