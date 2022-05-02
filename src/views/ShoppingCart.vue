@@ -25,7 +25,7 @@
                     <tbody>
                     <tr v-for="(prod, idx) in shopProducts" :key="prod.id + idx" class="cart_item">
                       <td class="product-remove">
-                        <a class="remove" @click="removeCartItem(idx)"></a>
+                        <a class="remove" @click="showDeletePopup = idx"></a>
                       </td>
                       <td class="product-thumbnail">
                         <a>
@@ -84,6 +84,11 @@
             </div>
           </div>
         </div>
+        <DeletePopup
+            v-if="showDeletePopup || showDeletePopup === 0"
+            @confirm="removeHandler"
+            @close="closeModal"
+        />
       </div>
     </main>
   </div>
@@ -91,11 +96,17 @@
 
 <script>
 import Breadcrumbs from "@/components/Breadcrumbs";
+import DeletePopup from "@/components/DeletePopup.vue";
 import productMixin from "@/mixins/product.mixin";
 export default {
   name: "ShoppingCart",
   mixins: [productMixin],
-  components: {Breadcrumbs},
+  components: {Breadcrumbs, DeletePopup},
+  data() {
+    return {
+      showDeletePopup: false
+    }
+  },
   computed: {
     shopProducts() {
       return this.$store.state.shopProducts
@@ -118,6 +129,13 @@ export default {
       })
       localStorage.setItem('shopProducts', JSON.stringify(products))
       this.$store.dispatch('getShopProducts')
+    },
+    closeModal() {
+      this.showDeletePopup = false
+    },
+    removeHandler() {
+      this.removeCartItem(this.showDeletePopup)
+      this.closeModal()
     },
   }
 }

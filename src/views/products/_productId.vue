@@ -92,7 +92,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="group-button">
+                <div class="group-button" style="position: relative">
                   <div class="yith-wcwl-add-to-wishlist">
                     <div class="yith-wcwl-add-button">
                       <a href="#">Add to Wishlist</a>
@@ -103,6 +103,10 @@
                       <a id="size_chart" href="@/assets/images/size-chart.jpg" class="fancybox">View
                         Size Chart</a>
                     </div>
+                  </div>
+                  <div v-if="showSuccessNotify" class="success-notify">
+                    <div class="bubble">Product successfully added</div>
+                    <div class="triangle"></div>
                   </div>
                   <div class="quantity-add-to-cart">
                     <div class="quantity">
@@ -206,6 +210,7 @@ export default {
       color: null,
       showSizeError: false,
       showColorError: false,
+      showSuccessNotify: false,
     }
   },
   computed: {
@@ -260,6 +265,8 @@ export default {
         count: this.count,
       }
       this.addToCart(product)
+      this.showSuccessNotify = true
+      setTimeout(() => { this.showSuccessNotify = false }, 1500)
     }
   }
 }
