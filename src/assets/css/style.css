@@ -3827,6 +3827,7 @@ blockquote .author .desc {
 	margin-right: 10px;
 }
 .widget-color .list-color a {
+	border: 1px solid #2b2b2b;
 	display: inline-block;
 	height: 27px;
 	margin-top: 3px;
@@ -3858,7 +3859,7 @@ blockquote .author .desc {
 .widget-color .list-color .color7 {
 	background: #5f8ea9;
 }
-.list-color a.active::before, .list-color a:hover::before {
+.list-color a.active::before {
 	color: #fff;
 	content: "\f00c";
 	display: inline-block;
@@ -3869,10 +3870,13 @@ blockquote .author .desc {
 	width: 100%;
 	line-height: 27px;
 }
+.list-color .black-check.active::before {
+	color: #000!important;
+}
 .list-color .colo1.active::before, .list-color .colo1:hover::before {
 	color: #0a0a0a;
 }
-.tag-cloud-link a:hover, .tag-cloud-link.active a {
+.tag-cloud-link.active a {
 	color: #111111;
 }
 /*sidebar Details page*/
@@ -5534,6 +5538,7 @@ ul.list-products {
 	line-height: 27px;
 	float: left;
 	border-radius: 0;
+	border: 1px solid #2b2b2b;
 }
 .attribute_color .list-color a:last-child {
 	margin-right: 0;
@@ -11116,4 +11121,7 @@ a:hover, a:focus, a:active,
 	left: 45%;
 	bottom: -10px;
 	z-index: -1;
+}
+.pointer {
+	cursor: pointer;
 }

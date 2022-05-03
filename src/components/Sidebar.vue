@@ -17,7 +17,12 @@
         <h3 class="widgettitle">Categories</h3>
         <ul class="list-categories">
           <li v-for="cat in categories" :key="cat.id">
-            <Checkbox id="category" :label="cat.name" :input-value="cat.id" v-model="selectedCategories" />
+            <Checkbox
+                id="category"
+                :label="cat.name"
+                :input-value="cat.id"
+                v-model="filters.selectedCategories"
+            />
           </li>
         </ul>
       </div>
@@ -55,7 +60,12 @@
         <h3 class="widgettitle">Brand</h3>
         <ul class="list-brand">
           <li v-for="brand in brands" :key="brand.id">
-            <Checkbox id="brand" :label="brand.name" :input-value="brand.id" v-model="selectedBrands"/>
+            <Checkbox
+                id="brand"
+                :label="brand.name"
+                :input-value="brand.id"
+                v-model="filters.selectedBrands"
+            />
           </li>
         </ul>
       </div>
@@ -63,7 +73,12 @@
         <h4 class="widgettitle">Size</h4>
         <ul class="list-brand">
           <li v-for="size in sizes" :key="size.id">
-            <Checkbox id="size" :label="size.name" :input-value="size.id" v-model="selectedSizes"/>
+            <Checkbox
+                id="size"
+                :label="size.name"
+                :input-value="size.id"
+                v-model="filters.selectedSizes"
+            />
           </li>
         </ul>
       </div>
@@ -72,9 +87,15 @@
           Color
         </h4>
         <div class="list-color">
-          <a href="#" v-for="color in colors"
+          <a v-for="color in colors"
              :key="color.id"
              :style="{backgroundColor: color.code}"
+             :class="{
+               active: filters.selectedColors.includes(color.id),
+               'black-check': color.name === 'White'
+             }"
+             class="pointer"
+             @click="selectColor(color)"
           ></a>
         </div>
       </div>
@@ -83,8 +104,14 @@
           Popular Tags
         </h3>
         <ul class="tagcloud">
-          <li class="tag-cloud-link active" v-for="tag in tags" :key="tag.id">
-            <a>{{tag.name}}</a>
+          <li
+              class="tag-cloud-link pointer"
+              v-for="tag in tags"
+              :key="tag.id"
+              :class="{active: filters.selectedTags.includes(tag.id) }"
+              @click="selectTag(tag)"
+          >
+            <a class="pointer">{{tag.name}}</a>
           </li>
         </ul>
       </div>
@@ -143,10 +170,44 @@ export default {
   },
   data() {
     return {
-      selectedCategories: [],
-      selectedBrands: [],
-      selectedColors: [],
-      selectedSizes: []
+      filters: {
+        selectedCategories: [],
+        selectedBrands: [],
+        selectedColors: [],
+        selectedSizes: [],
+        selectedTags: []
+      }
+    }
+  },
+  watch: {
+    filters: {
+      deep: true,
+      handler() {
+        const data = {
+          'filter[categories]': this.filters.selectedCategories,
+          'filter[brands]': this.filters.selectedBrands,
+          'filter[colors]': this.filters.selectedColors,
+          'filter[sizes]': this.filters.selectedSizes,
+          'filter[tags]': this.filters.selectedTags,
+        }
+        this.$store.dispatch('getFilteredProducts',  data)
+      }
+    }
+  },
+  methods: {
+    selectColor(color) {
+      if(this.filters.selectedColors.includes(color.id)) {
+        this.filters.selectedColors = this.filters.selectedColors.filter(item => item !== color.id)
+      } else {
+        this.filters.selectedColors.push(color.id)
+      }
+    },
+    selectTag(tag) {
+      if(this.filters.selectedTags.includes(tag.id)) {
+        this.filters.selectedTags = this.filters.selectedTags.filter(item => item !== tag.id)
+      } else {
+        this.filters.selectedTags.push(tag.id)
+      }
     }
   }
 }

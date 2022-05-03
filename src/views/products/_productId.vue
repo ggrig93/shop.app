@@ -74,7 +74,10 @@
                       <a v-for="color in colors"
                          :key="color.id"
                          :style="{backgroundColor: color.code}"
-                         :class="{active: activeColor(color)}"
+                         :class="{
+                           active: activeColor(color),
+                           'black-check': color.name === 'White'
+                         }"
                          @click.prevent="selectColor(color)"
                       ></a>
                     </div>
