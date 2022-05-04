@@ -37,24 +37,24 @@
           <div class="container-wapper">
             <ul class="ysera-clone-mobile-menu ysera-nav main-menu " id="menu-main-menu">
               <li :class="['menu-item', item.children.length ? 'menu-item-has-children' : '']" v-for="item in nav" :key="item.id">
-                <template v-if="item.name === 'Pages'">
-                  <a href="javascript:void(0)" class="ysera-menu-item-title" :title="item.name">{{item.name}}</a>
-                  <div class="submenu mega-menu menu-page container" style="left: -483px">
-                    <div class="row">
-                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 menu-page-item" v-for="child in item.children" :key="child.id">
-                        <div class="ysera-custommenu default">
-                          <h2 class="widgettitle">{{child.name}}</h2>
-                          <ul class="menu">
-                            <li class="menu-item" v-for="i in child.children" :key="i.id">
-                              <a href="javascript:void(0)">{{i.name}}</a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </template>
-                <template v-else>
+<!--                <template v-if="item.name === 'Pages'">-->
+<!--                  <a href="javascript:void(0)" class="ysera-menu-item-title" :title="item.name">{{item.name}}</a>-->
+<!--                  <div class="submenu mega-menu menu-page container" style="left: -483px">-->
+<!--                    <div class="row">-->
+<!--                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 menu-page-item" v-for="child in item.children" :key="child.id">-->
+<!--                        <div class="ysera-custommenu default">-->
+<!--                          <h2 class="widgettitle">{{child.name}}</h2>-->
+<!--                          <ul class="menu">-->
+<!--                            <li class="menu-item" v-for="i in child.children" :key="i.id">-->
+<!--                              <a href="javascript:void(0)">{{i.name}}</a>-->
+<!--                            </li>-->
+<!--                          </ul>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </template>-->
+                <template>
                   <router-link :to="{name: item.view}" class="ysera-menu-item-title" :title="item.name">{{item.name}}</router-link>
                   <template v-if="item.children.length">
                     <span class="toggle-submenu"></span>

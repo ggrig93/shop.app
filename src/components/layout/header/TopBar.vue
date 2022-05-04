@@ -6,39 +6,39 @@
           Welcome to our online store!
         </div>
       </div>
-      <div class="top-bar-right">
-        <div class="header-language">
-          <div class="ysera-language ysera-dropdown"
-               :class="{'open': openLangMenu}"
-               v-click-outside="hideLangMenu"
-          >
-            <a href="javascript:void(0);"
-               class="active language-toggle"
-               data-ysera="ysera-dropdown"
-               @click.prevent="toggleLangMenu"
-            >
-              <span>English (USD)</span>
-            </a>
-            <ul class="ysera-submenu">
-              <li class="switcher-option">
-                <a href="javascript:void(0)">
-                  <span>French (EUR)</span>
-                </a>
-              </li>
-              <li class="switcher-option">
-                <a href="javascript:void(0)">
-                  <span>Japanese (JPY)</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <ul class="header-user-links">
-          <li>
-            <router-link :to="{name: 'Authentication'}">Login or Register</router-link>
-          </li>
-        </ul>
-      </div>
+<!--      <div class="top-bar-right">-->
+<!--        <div class="header-language">-->
+<!--          <div class="ysera-language ysera-dropdown"-->
+<!--               :class="{'open': openLangMenu}"-->
+<!--               v-click-outside="hideLangMenu"-->
+<!--          >-->
+<!--            <a href="javascript:void(0);"-->
+<!--               class="active language-toggle"-->
+<!--               data-ysera="ysera-dropdown"-->
+<!--               @click.prevent="toggleLangMenu"-->
+<!--            >-->
+<!--              <span>English (USD)</span>-->
+<!--            </a>-->
+<!--            <ul class="ysera-submenu">-->
+<!--              <li class="switcher-option">-->
+<!--                <a href="javascript:void(0)">-->
+<!--                  <span>French (EUR)</span>-->
+<!--                </a>-->
+<!--              </li>-->
+<!--              <li class="switcher-option">-->
+<!--                <a href="javascript:void(0)">-->
+<!--                  <span>Japanese (JPY)</span>-->
+<!--                </a>-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <ul class="header-user-links">-->
+<!--          <li>-->
+<!--            <router-link :to="{name: 'Authentication'}">Login or Register</router-link>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
     </div>
   </div>
 </template>

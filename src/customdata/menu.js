@@ -118,103 +118,135 @@ export default {
                 // }
             ]
         },
+        // {
+        //     id: 3,
+        //     name: 'Pages',
+        //     children: [
+        //         {
+        //             id: 31,
+        //             name: 'Shop Pages',
+        //             children: [
+        //                 {
+        //                     id: 311,
+        //                     name: 'Shopping cart',
+        //                     children: []
+        //                 },
+        //                 {
+        //                     id: 312,
+        //                     name: 'Checkout',
+        //                     children: []
+        //                 },
+        //                 {
+        //                     id: 313,
+        //                     name: 'Contuct Us',
+        //                     children: []
+        //                 },
+        //                 {
+        //                     id: 314,
+        //                     name: 'Login/Register',
+        //                     children: []
+        //                 }
+        //             ]
+        //         },
+        //         {
+        //             id: 32,
+        //             name: 'Product',
+        //             children: [
+        //                 {
+        //                     id: 321,
+        //                     name: 'Product Fullwidth',
+        //                     children: []
+        //                 },
+        //                 {
+        //                     id: 322,
+        //                     name: 'Product Left Sidebar',
+        //                     children: []
+        //                 },
+        //                 {
+        //                     id: 323,
+        //                     name: 'Product Right Sidebar',
+        //                     children: []
+        //                 }
+        //             ]
+        //         }
+        //     ]
+        // },
+        //
+        // {
+        //     id: 4,
+        //     name: 'Blogs',
+        //     view: 'Blogs',
+        //     children: [
+        //         {
+        //             id: 41,
+        //             name: 'Blog Style',
+        //             children: [
+        //                 {
+        //                     id: 411,
+        //                     name: 'Grid',
+        //                     children: []
+        //                 },
+        //                 {
+        //                     id: 412,
+        //                     name: 'List',
+        //                     children: []
+        //                 },
+        //                 {
+        //                     id: 413,
+        //                     name: 'List Sidebar',
+        //                     children: []
+        //                 }
+        //             ]
+        //         },
+        //         {
+        //             id: 42,
+        //             name: 'Post Layout',
+        //             children: [
+        //                 {
+        //                     id: 421,
+        //                     name: 'Left Sidebar',
+        //                     children: []
+        //                 },
+        //                 {
+        //                     id: 422,
+        //                     name: 'Right Sidebar',
+        //                     children: []
+        //                 }
+        //             ]
+        //         },
+        //     ]
+        // },
+        {
+            id: 5,
+            name: 'About',
+            view: 'About',
+            children: []
+        },
+    ],
+    mobileMenu: [
+        {
+            id: 1,
+            name: 'Home',
+            view: 'Home',
+            children: []
+        },
+        {
+            id: 2,
+            name: 'Shop',
+            view: 'Products',
+            children: []
+        },
         {
             id: 3,
-            name: 'Pages',
-            children: [
-                {
-                    id: 31,
-                    name: 'Shop Pages',
-                    children: [
-                        {
-                            id: 311,
-                            name: 'Shopping cart',
-                            children: []
-                        },
-                        {
-                            id: 312,
-                            name: 'Checkout',
-                            children: []
-                        },
-                        {
-                            id: 313,
-                            name: 'Contuct Us',
-                            children: []
-                        },
-                        {
-                            id: 314,
-                            name: 'Login/Register',
-                            children: []
-                        }
-                    ]
-                },
-                {
-                    id: 32,
-                    name: 'Product',
-                    children: [
-                        {
-                            id: 321,
-                            name: 'Product Fullwidth',
-                            children: []
-                        },
-                        {
-                            id: 322,
-                            name: 'Product Left Sidebar',
-                            children: []
-                        },
-                        {
-                            id: 323,
-                            name: 'Product Right Sidebar',
-                            children: []
-                        }
-                    ]
-                }
-            ]
+            name: 'Cart',
+            view: 'ShoppingCart',
+            children: []
         },
-
         {
             id: 4,
-            name: 'Blogs',
-            view: 'Blogs',
-            children: [
-                {
-                    id: 41,
-                    name: 'Blog Style',
-                    children: [
-                        {
-                            id: 411,
-                            name: 'Grid',
-                            children: []
-                        },
-                        {
-                            id: 412,
-                            name: 'List',
-                            children: []
-                        },
-                        {
-                            id: 413,
-                            name: 'List Sidebar',
-                            children: []
-                        }
-                    ]
-                },
-                {
-                    id: 42,
-                    name: 'Post Layout',
-                    children: [
-                        {
-                            id: 421,
-                            name: 'Left Sidebar',
-                            children: []
-                        },
-                        {
-                            id: 422,
-                            name: 'Right Sidebar',
-                            children: []
-                        }
-                    ]
-                },
-            ]
+            name: 'Checkout',
+            view: 'Checkout',
+            children: []
         },
         {
             id: 5,

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const http = axios.create({
-    baseURL: 'http://shop.back/api',
+    baseURL: 'http://127.0.0.1:8000/api',
     headers: {
         "Content-type": "application/json"
     }

@@ -12,16 +12,13 @@
             <ul class="depth-01">
               <li
                   :class="['menu-item clone-menu-item', item.children.length ? 'menu-item-has-children' : '']"
-                  v-for="(item, idx) in menu" :key="item.id*Math.random()"
+                  v-for="item in menu" :key="item.id*Math.random()"
               >
                 <a
-                    v-if="item.children.length"
-                    class="ysera-menu-next-panel"
-                    href="javascript:void(0)"
-                    @click="goSubmenu(idx)"></a>
-                <a href="javascript:void(0)"
-                   class="ysera-menu-item-title"
-                   :title="item.name">{{item.name}}</a>
+                    class="ysera-menu-item-title"
+                    :title="item.name"
+                    @click="selectPage(item)"
+                >{{item.name}}</a>
               </li>
             </ul>
           </div>
@@ -41,7 +38,7 @@ export default {
     return {
       open: false,
       key: 1,
-      menu: [...header.menu, ...header.nav],
+      menu: header.mobileMenu,
       historyMenu: [],
       titleMenu: 'Main Menu'
     }
@@ -50,6 +47,10 @@ export default {
     bus.$on('open-menu', this.openMenu)
   },
   methods: {
+    selectPage(item) {
+      this.$router.push({name: item.view})
+      this.open = false
+    },
     openMenu() {
       this.open = true
     },

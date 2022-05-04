@@ -62,7 +62,10 @@
                     <a v-for="color in colors"
                        :key="color.id"
                        :style="{backgroundColor: color.code}"
-                       :class="{active: activeColor(color)}"
+                       :class="{
+                         active: activeColor(color),
+                         'black-check': color.name === 'White'
+                       }"
                        @click.prevent="selectColor(color)"
                     ></a>
                   </div>
@@ -83,7 +86,7 @@
               <div class="group-button">
                 <div class="yith-wcwl-add-to-wishlist">
                   <div class="yith-wcwl-add-button">
-                    <a href="#">Add to Wishlist</a>
+                    <a>Add to Wishlist</a>
                   </div>
                 </div>
                 <div class="size-chart-wrapp">
