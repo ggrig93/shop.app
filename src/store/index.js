@@ -20,10 +20,17 @@ export default new Vuex.Store({
     bottomContainerProducts: [],
     shopProducts: [],
     cartTotalPrice: 0,
+    search: ''
+  },
+  getters: {
+    search: state => state.search
   },
   mutations: {
     setShopProducts(state, value) {
       state.shopProducts = value
+    },
+    setSearch(state, value) {
+      state.search = value
     }
   },
   actions: {
@@ -45,6 +52,7 @@ export default new Vuex.Store({
         .catch(err => console.log(err))
     },
     getFilteredProducts({state}, filter) {
+      state.products = null
       http.get(`/product`, {
         params: {
           ...filter

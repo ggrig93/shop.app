@@ -10,7 +10,7 @@
       </div>
       <div class="col-lg-7 col-sm-8 col-md-6 col-xs-5 col-ts-12">
         <div class="block-search-block">
-          <form class="form-search form-search-width-category">
+          <form action="" class="form-search form-search-width-category" @submit.prevent="searchHandler">
             <div class="form-content">
 <!--              <div class="category">-->
 <!--                <select title="cate" data-placeholder="All Categories" class="chosen-select"-->
@@ -25,7 +25,7 @@
 <!--                </select>-->
 <!--              </div>-->
               <div class="inner">
-                <input type="text" class="input" name="s" value="" placeholder="Search here">
+                <input type="text" class="input" v-model="search" placeholder="Search here">
               </div>
               <button class="btn-search" type="submit">
                 <span class="icon-search"></span>
@@ -162,6 +162,7 @@
 <script>
 import headerMixin from "@/mixins/header.mixin";
 import productMixin from "@/mixins/product.mixin";
+import {mapMutations} from "vuex";
 
 export default {
   name: "HeaderMain",
@@ -170,6 +171,7 @@ export default {
     return {
       tab: 'login',
       selectedCategory: 1,
+      search: "",
     }
   },
   computed: {
@@ -193,6 +195,25 @@ export default {
     openCart(val) {
       if(val) {
         this.$store.dispatch('getShopProducts')
+      }
+    },
+    '$route.query': {
+      immediate: true,
+      handler(val) {
+        if(val?.search) {
+          this.search = val.search
+        } else {
+          this.search = ""
+        }
+      }
+    }
+  },
+  methods: {
+    ...mapMutations(["setSearch"]),
+    searchHandler() {
+      this.setSearch(this.search)
+      if(this.$route.name !== 'Products') {
+        this.$router.replace({name: 'Products', query: {search: this.search}})
       }
     }
   }

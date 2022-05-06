@@ -35,9 +35,12 @@
             </div>
             <div class="post-content">
               <div class="cat">
-                <a href="#">{{article.category}}</a>
+                <a href="#">{{ article.category }}</a>
               </div>
-              <h5 class="post-title"><router-link :to="{name: 'Blog', params: {id: article.id}}">{{ article.title }} <span>[...]</span></router-link></h5>
+              <h5 class="post-title">
+                <router-link :to="{name: 'Blog', params: {id: article.id}}">{{ article.title }} <span>[...]</span>
+                </router-link>
+              </h5>
             </div>
           </li>
         </ul>
@@ -111,7 +114,7 @@
               :class="{active: filters.selectedTags.includes(tag.id) }"
               @click="selectTag(tag)"
           >
-            <a class="pointer">{{tag.name}}</a>
+            <a class="pointer">{{ tag.name }}</a>
           </li>
         </ul>
       </div>
@@ -131,6 +134,8 @@
 
 <script>
 import Checkbox from "@/components/custom-input/Checkbox";
+import {mapGetters, mapMutations} from "vuex";
+
 export default {
   name: "Sidebar",
   components: {Checkbox},
@@ -175,39 +180,83 @@ export default {
         selectedBrands: [],
         selectedColors: [],
         selectedSizes: [],
-        selectedTags: []
+        selectedTags: [],
       }
     }
+  },
+  computed: {
+    ...mapGetters(["search"]),
   },
   watch: {
     filters: {
       deep: true,
       handler() {
-        const data = {
-          'filter[categories]': this.filters.selectedCategories,
-          'filter[brands]': this.filters.selectedBrands,
-          'filter[colors]': this.filters.selectedColors,
-          'filter[sizes]': this.filters.selectedSizes,
-          'filter[tags]': this.filters.selectedTags,
+        this.filterProduct()
+      }
+    },
+    search: {
+      immediate: true,
+      handler() {
+        this.filterProduct()
+      }
+    },
+    '$route.query': {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        if(val['filter[categories]']) {
+          this.filters.selectedCategories = this.queryToArray(val['filter[categories]'])
         }
-        this.$store.dispatch('getFilteredProducts',  data)
+        if(val['filter[brands]']) {
+          this.filters.selectedBrands = this.queryToArray(val['filter[brands]'])
+        }
+        if(val['filter[colors]']) {
+          this.filters.selectedColors = this.queryToArray(val['filter[colors]'])
+        }
+        if(val['filter[sizes]']) {
+          this.filters.selectedSizes = this.queryToArray(val['filter[sizes]'])
+        }
+        if(val['filter[tags]']) {
+          this.filters.selectedTags = this.queryToArray(val['filter[tags]'])
+        }
+        if(val.search) {
+          this.setSearch(val.search.trim())
+        }
       }
     }
   },
   methods: {
+    ...mapMutations(["setSearch"]),
+    queryToArray(val) {
+      return typeof val === 'string' ? val.split(",").map(item => parseInt(item)) : val
+    },
     selectColor(color) {
-      if(this.filters.selectedColors.includes(color.id)) {
+      if (this.filters.selectedColors.includes(color.id)) {
         this.filters.selectedColors = this.filters.selectedColors.filter(item => item !== color.id)
       } else {
         this.filters.selectedColors.push(color.id)
       }
     },
     selectTag(tag) {
-      if(this.filters.selectedTags.includes(tag.id)) {
+      if (this.filters.selectedTags.includes(tag.id)) {
         this.filters.selectedTags = this.filters.selectedTags.filter(item => item !== tag.id)
       } else {
         this.filters.selectedTags.push(tag.id)
       }
+    },
+    filterProduct() {
+      const data = {
+        'filter[categories]': this.filters.selectedCategories,
+        'filter[brands]': this.filters.selectedBrands,
+        'filter[colors]': this.filters.selectedColors,
+        'filter[sizes]': this.filters.selectedSizes,
+        'filter[tags]': this.filters.selectedTags,
+        search: this.search
+      }
+      const queryData = {...data }
+      const params = new URLSearchParams(queryData).toString();
+      window.history.replaceState(null, null, '?' + params);
+      this.$store.dispatch('getFilteredProducts', data)
     }
   }
 }
