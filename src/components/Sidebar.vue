@@ -13,6 +13,7 @@
       </div>
     </div>
     <div class="widget woof_Widget">
+      by_price{{by_price}}
       <div class="widget widget-categories" v-if="categories">
         <h3 class="widgettitle">Categories</h3>
         <ul class="list-categories">
@@ -185,7 +186,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["search"]),
+    ...mapGetters(["search", "by_price"]),
   },
   watch: {
     filters: {
@@ -195,6 +196,12 @@ export default {
       }
     },
     search: {
+      immediate: true,
+      handler() {
+        this.filterProduct()
+      }
+    },
+    by_price: {
       immediate: true,
       handler() {
         this.filterProduct()
@@ -222,11 +229,14 @@ export default {
         if(val.search) {
           this.setSearch(val.search.trim())
         }
+        if(val['filter[tags]']) {
+          this.setSearch(val['filter[tags]'].trim())
+        }
       }
     }
   },
   methods: {
-    ...mapMutations(["setSearch"]),
+    ...mapMutations(["setSearch", "setByPrice"]),
     queryToArray(val) {
       return typeof val === 'string' ? val.split(",").map(item => parseInt(item)) : val
     },
@@ -251,6 +261,7 @@ export default {
         'filter[colors]': this.filters.selectedColors,
         'filter[sizes]': this.filters.selectedSizes,
         'filter[tags]': this.filters.selectedTags,
+        'filter[by_price]': this.by_price,
         search: this.search
       }
       const queryData = {...data }

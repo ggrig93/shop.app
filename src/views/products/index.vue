@@ -25,12 +25,15 @@
               </form>
               <form class="filter-choice select-form">
                 <span class="title">Sort by</span>
-                <select title="sort-by" data-placeholder="Price: Low to High" class="chosen-select">
-                  <option value="1">Price: Low to High</option>
-                  <option value="2">Sort by popularity</option>
-                  <option value="3">Sort by average rating</option>
-                  <option value="4">Sort by newness</option>
-                  <option value="5">Sort by price: low to high</option>
+                <select
+                    title="sort-by"
+                    data-placeholder="Price: "
+                    class="chosen-select"
+                    v-model="by_price"
+                    @change="sortByPrice"
+                >
+                  <option value="asc">Price: Low to High</option>
+                  <option value="desc">Price: High to Low</option>
                 </select>
               </form>
 <!--              <div class="grid-view-mode">-->
@@ -100,8 +103,9 @@
 import Sidebar from "@/components/Sidebar";
 import Pagination from "@/components/Pagination";
 import ProductCart from "@/components/products/ProductCart";
-import data from '@/customdata/products'
+// import data from '@/customdata/products'
 import Breadcrumbs from "@/components/Breadcrumbs";
+import {mapMutations} from "vuex";
 export default {
   name: "GridLeftSidebar",
   components: {Breadcrumbs, ProductCart, Pagination, Sidebar},
@@ -109,12 +113,13 @@ export default {
     return {
       currentPage: 1,
       layoutMode: true,
+      by_price: ''
       // categories: data.categories,
       // brand: data.brand,
       // size: data.size,
       // tags: data.tags,
       // color: data.color,
-      price: data.price
+      // price: data.price
     }
   },
   computed: {
@@ -143,6 +148,18 @@ export default {
       return this.$store.state.tags
     }
   },
+  watch: {
+    '$route.query': {
+      immediate: true,
+      handler(val) {
+        if(val['filter[by_price]']) {
+          this.by_price = val['filter[by_price]']
+        } else {
+          this.by_price = ""
+        }
+      }
+    },
+  },
   created() {
     const page = this.$route.query.page
     if(page) {
@@ -156,7 +173,15 @@ export default {
     this.$store.dispatch('getSizes')
     this.$store.dispatch('getTags')
   },
+  beforeDestroy() {
+    this.setSearch('')
+    this.setByPrice('')
+  },
   methods: {
+    ...mapMutations(["setByPrice", "setSearch"]),
+    sortByPrice() {
+      this.setByPrice(this.by_price)
+    },
     onPageChange(page) {
       this.currentPage = page;
       this.$router.replace({name: this.$route.name, query: {page}})

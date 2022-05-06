@@ -20,10 +20,12 @@ export default new Vuex.Store({
     bottomContainerProducts: [],
     shopProducts: [],
     cartTotalPrice: 0,
-    search: ''
+    search: '',
+    by_price: '',
   },
   getters: {
-    search: state => state.search
+    search: state => state.search,
+    by_price: state => state.by_price,
   },
   mutations: {
     setShopProducts(state, value) {
@@ -31,7 +33,10 @@ export default new Vuex.Store({
     },
     setSearch(state, value) {
       state.search = value
-    }
+    },
+    setByPrice(state, value) {
+      state.by_price = value
+    },
   },
   actions: {
     getProduct({state}, id) {
