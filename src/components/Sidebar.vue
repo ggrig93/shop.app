@@ -186,7 +186,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["search", "by_price"]),
+    ...mapGetters(["search", "by_price", "page"]),
   },
   watch: {
     filters: {
@@ -202,6 +202,12 @@ export default {
       }
     },
     by_price: {
+      immediate: true,
+      handler() {
+        this.filterProduct()
+      }
+    },
+    page: {
       immediate: true,
       handler() {
         this.filterProduct()
@@ -229,14 +235,17 @@ export default {
         if(val.search) {
           this.setSearch(val.search.trim())
         }
-        if(val['filter[tags]']) {
-          this.setSearch(val['filter[tags]'].trim())
+        if(val['filter[by_price]']) {
+          this.setByPrice(val['filter[by_price]'])
+        }
+        if(val['filter[page]']) {
+          this.setPage(val['filter[page]'])
         }
       }
     }
   },
   methods: {
-    ...mapMutations(["setSearch", "setByPrice"]),
+    ...mapMutations(["setSearch", "setByPrice", "setPage"]),
     queryToArray(val) {
       return typeof val === 'string' ? val.split(",").map(item => parseInt(item)) : val
     },
@@ -262,7 +271,8 @@ export default {
         'filter[sizes]': this.filters.selectedSizes,
         'filter[tags]': this.filters.selectedTags,
         'filter[by_price]': this.by_price,
-        search: this.search
+        search: this.search,
+        'filter[page]': this.page,
       }
       const queryData = {...data }
       const params = new URLSearchParams(queryData).toString();

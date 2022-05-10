@@ -77,9 +77,7 @@
             </ul>
             <Pagination
               class="style3"
-              :totalPages="totalPages"
-              :perPage="10"
-              :currentPage="currentPage"
+              :paginate="paginate"
               @pagechanged="onPageChange"
             />
           </div>
@@ -111,7 +109,6 @@ export default {
   components: {Breadcrumbs, ProductCart, Pagination, Sidebar},
   data() {
     return {
-      currentPage: 1,
       layoutMode: true,
       by_price: ''
       // categories: data.categories,
@@ -123,11 +120,8 @@ export default {
     }
   },
   computed: {
-    totalPages() {
-      return this.$store.state.products?.meta.paginate.total || 1
-    },
-    limit() {
-      return this.$store.state.products?.meta.paginate.limit || 10
+    paginate() {
+      return this.$store.state.products?.meta
     },
     products() {
       return this.$store.state.products?.data
@@ -152,6 +146,9 @@ export default {
     '$route.query': {
       immediate: true,
       handler(val) {
+        if(val['filter[page]']) {
+          this.setPage(val['filter[page]'])
+        }
         if(val['filter[by_price]']) {
           this.by_price = val['filter[by_price]']
         } else {
@@ -161,13 +158,12 @@ export default {
     },
   },
   created() {
-    const page = this.$route.query.page
-    if(page) {
-      const offset = (parseInt(page) - 1) * this.limit
-      this.$store.dispatch('getPerPageProducts', offset)
-    } else {
+    // const page = this.$route.query.page
+    // if(page) {
+    //   this.$store.dispatch('getPerPageProducts', page)
+    // } else {
       this.$store.dispatch('getAllProducts')
-    }
+    // }
     this.$store.dispatch('getColors')
     this.$store.dispatch('getBrands')
     this.$store.dispatch('getSizes')
@@ -178,15 +174,15 @@ export default {
     this.setByPrice('')
   },
   methods: {
-    ...mapMutations(["setByPrice", "setSearch"]),
+    ...mapMutations(["setByPrice", "setSearch", "setPage"]),
     sortByPrice() {
       this.setByPrice(this.by_price)
     },
     onPageChange(page) {
-      this.currentPage = page;
-      this.$router.replace({name: this.$route.name, query: {page}})
-      const offset = (page - 1) * this.limit
-      this.$store.dispatch('getPerPageProducts', offset)
+      this.setPage(page)
+      // this.$router.replace({name: this.$route.name, query: {page}})
+      // const offset = (page - 1) * this.limit
+      // this.$store.dispatch('getPerPageProducts', offset)
     }
   }
 }

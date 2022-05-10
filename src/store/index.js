@@ -22,10 +22,12 @@ export default new Vuex.Store({
     cartTotalPrice: 0,
     search: '',
     by_price: '',
+    page: 1,
   },
   getters: {
     search: state => state.search,
     by_price: state => state.by_price,
+    page: state => state.page,
   },
   mutations: {
     setShopProducts(state, value) {
@@ -36,6 +38,9 @@ export default new Vuex.Store({
     },
     setByPrice(state, value) {
       state.by_price = value
+    },
+    setPage(state, value) {
+      state.page = value
     },
   },
   actions: {
@@ -49,8 +54,8 @@ export default new Vuex.Store({
           .then(res => state.products = res.data)
           .catch(err => console.log(err))
     },
-    getPerPageProducts({state}, offset) {
-      http.get(`/product`, {params: {offset}})
+    getPerPageProducts({state}, page) {
+      http.get(`/product`, {params: {page}})
         .then(res => {
           state.products = res.data
         })

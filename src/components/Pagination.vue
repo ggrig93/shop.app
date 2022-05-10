@@ -1,48 +1,52 @@
 <template>
   <div class="pagination clearfix">
     <div class="nav-link">
-      <a href="javascript:void(0)" class="page-numbers">
+      <!--      <a href="javascript:void(0)" class="page-numbers">-->
+      <!--        <button-->
+      <!--          @click="onClickFirstPage"-->
+      <!--          :disabled="isInFirstPage"-->
+      <!--        >-->
+      <!--          <i class="icon fa fa-angle-left" aria-hidden="true"></i>-->
+      <!--          <i class="icon fa fa-angle-left" aria-hidden="true"></i>-->
+      <!--        </button>-->
+      <!--      </a>-->
+      <a
+          v-for="(page, i) in pages"
+          :key="i"
+          class="page-numbers"
+          :class="{
+            current: isPageActive(page.label),
+             'page-arrow': page.label.includes('Prev') || page.label.includes('Next')
+          }">
         <button
-          @click="onClickFirstPage"
-          :disabled="isInFirstPage"
+            v-if="page.label.includes('Prev')"
+            @click.prevent="onClickPreviousPage"
+            :disabled="isInFirstPage"
         >
           <i class="icon fa fa-angle-left" aria-hidden="true"></i>
-          <i class="icon fa fa-angle-left" aria-hidden="true"></i>
         </button>
-      </a>
-      <a href="javascript:void(0)" class="page-numbers">
         <button
-          @click.prevent="onClickPreviousPage"
-          :disabled="isInFirstPage"
-        >
-          <i class="icon fa fa-angle-left" aria-hidden="true"></i>
-        </button>
-      </a>
-      <a href="javascript:void(0)" class="page-numbers" v-for="page in pages" :key="page.name" :class="{ current: isPageActive(page.name) }">
-        <button
-          @click="onClickPage(page.name)"
-          :disabled="page.isDisabled"
-        >
-          {{ page.name }}
-        </button>
-      </a>
-      <a href="javascript:void(0)" class="page-numbers">
-        <button
-          @click.prevent="onClickNextPage"
-          :disabled="isInLastPage"
+            v-else-if="page.label.includes('Next')"
+            @click.prevent="onClickNextPage"
+            :disabled="isInLastPage"
         >
           <i class="icon fa fa-angle-right" aria-hidden="true"></i>
         </button>
-      </a>
-      <a href="javascript:void(0)" class="page-numbers">
-        <button
-          @click="onClickLastPage"
-          :disabled="isInLastPage"
+        <button v-else
+            @click="onClickPage(page.label)"
         >
-          <i class="icon fa fa-angle-right" aria-hidden="true"></i>
-          <i class="icon fa fa-angle-right" aria-hidden="true"></i>
+          {{ page.label }}
         </button>
       </a>
+<!--      <a href="javascript:void(0)" class="page-numbers">-->
+<!--        <button-->
+<!--            @click="onClickLastPage"-->
+<!--            :disabled="isInLastPage"-->
+<!--        >-->
+<!--          <i class="icon fa fa-angle-right" aria-hidden="true"></i>-->
+<!--          <i class="icon fa fa-angle-right" aria-hidden="true"></i>-->
+<!--        </button>-->
+<!--      </a>-->
     </div>
   </div>
 </template>
@@ -51,73 +55,38 @@
 export default {
   name: "Pageination",
   props: {
-    maxVisibleButtons: {
-      type: Number,
-      required: false,
-      default: 3
+    paginate: {
+      type: Object,
+      default: () => {
+      }
     },
     totalPages: {
       type: Number,
-      required: true,
     },
     perPage: {
       type: Number,
-      required: true
     },
-    currentPage: {
-      type: Number,
-      required: true
-    }
   },
   computed: {
-    startPage() {
-      if (this.currentPage === 1) {
-        return 1;
-      }
-      if (this.currentPage === this.totalPages) {
-        return this.totalPages - this.maxVisibleButtons + 1;
-      }
-      return this.currentPage - 1;
+    currentPage() {
+      return this.paginate?.current_page
+    },
+    lastPage() {
+      return this.paginate?.last_page
     },
     pages() {
-      const range = [];
-
-      if (this.totalPages > this.maxVisibleButtons) {
-        for (
-            let i = this.startPage;
-            i <= Math.min(this.startPage + this.maxVisibleButtons - 1, this.totalPages);
-            i++
-        ) {
-          range.push({
-            name: i,
-            isDisabled: i === this.currentPage
-          });
-        }
-      } else {
-        for (
-            let i = 1;
-            i <= this.totalPages;
-            i++
-        ) {
-          range.push({
-            name: i,
-            isDisabled: i === this.currentPage
-          });
-        }
-      }
-
-      return range;
+      return this.paginate?.links
     },
     isInFirstPage() {
-      return this.currentPage === 1;
+      return parseInt(this.currentPage) === 1;
     },
     isInLastPage() {
-      return this.currentPage === this.totalPages;
+      return parseInt(this.currentPage) === parseInt(this.lastPage);
     },
   },
   methods: {
     isPageActive(page) {
-      return this.currentPage === page;
+      return this.currentPage === parseInt(page);
     },
     onClickFirstPage() {
       this.$emit('pagechanged', 1);
@@ -132,18 +101,30 @@ export default {
       this.$emit('pagechanged', this.currentPage + 1);
     },
     onClickLastPage() {
-      this.$emit('pagechanged', this.totalPages);
+      this.$emit('pagechanged', this.currentPage);
     }
   }
 }
 </script>
 
-<style scoped>
-  button {
-    background-color: transparent;
-    padding: 0;
-    height: inherit;
-    width: inherit;
-    color: inherit;
+<style scoped lang="scss">
+button {
+  background-color: transparent;
+  padding: 0;
+  height: inherit;
+  width: inherit;
+  color: inherit;
+}
+.page-arrow {
+  button:disabled,
+  button[disabled]{
+    color: #f1f1f1;
   }
+
+  &:hover {
+    color: unset;
+    border-color: #F1F1F1;
+    background-color: unset;
+  }
+}
 </style>
