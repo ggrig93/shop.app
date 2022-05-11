@@ -17,22 +17,55 @@
                 <h3 class="title-form">
                   Shipping Address
                 </h3>
-                <p class="form-row form-row-first">
-                  <label class="text">Name</label>
-                  <input v-model="name" title="first" type="text" class="input-text">
-                </p>
-                <p class="form-row form-row-last">
-                  <label class="text">Phone</label>
-                  <input v-model="phone" title="phone" type="text" class="input-text">
-                </p>
-                <p class="form-row form-row-last">
-                  <label class="text">Address</label>
-                  <input v-model="address" title="address" type="text" class="input-text">
-                </p>
-                <p class="form-row form-row-first">
-                  <label class="text">Zip code</label>
-                  <input v-model="zipCode" title="zip" type="text" class="input-text">
-                </p>
+                <div class="row-wrap">
+                  <div class="form-row form-row-first">
+                    <label class="text">Name</label>
+                    <input
+                        v-model="form.name"
+                        title="first"
+                        type="text"
+                        class="input-text"
+                        :class="{'input-error': errors.name}"
+                    >
+                    <p class="error-text" v-if="errors.name">Required</p>
+                  </div>
+                  <div class="form-row form-row-last">
+                    <label class="text">Phone</label>
+                    <input
+                        v-model="form.phone"
+                        title="phone"
+                        type="text"
+                        class="input-text"
+                        :class="{'input-error': errors.phone}"
+                    >
+                    <p class="error-text" v-if="errors.phone">Required</p>
+                  </div>
+                </div>
+                <div class="row-wrap">
+                  <div class="form-row form-row-last">
+                    <label class="text">Address</label>
+                    <input
+                        v-model="form.address"
+                        title="address"
+                        type="text"
+                        class="input-text"
+                        :class="{'input-error': errors.address}"
+                    >
+                    <p class="error-text" v-if="errors.address">Required</p>
+                  </div>
+                  <div class="form-row form-row-first">
+                    <label class="text">Zip code</label>
+                    <input
+                        v-model="form.zipCode"
+                        title="zip"
+                        type="text"
+                        class="input-text"
+                        :class="{'input-error': errors.zipCode}"
+                    >
+                    <p class="error-text" v-if="errors.zipCode">Required</p>
+                  </div>
+                </div>
+                <p v-if="errorFromBack" class="error-text">{{errorFromBack}}</p>
               </div>
             </div>
             <div class="row-col-2 row-col">
@@ -229,11 +262,20 @@ export default {
   components: {Breadcrumbs},
   data() {
     return {
+      errorFromBack: "",
       showSuccess: false,
-      name: "",
-      phone: "",
-      address: "",
-      zipCode: "",
+      form: {
+        name: "",
+        phone: "",
+        address: "",
+        zipCode: "",
+      },
+      errors: {
+        name: false,
+        phone: false,
+        address: false,
+        zipCode: false,
+      }
     }
   },
   computed: {
@@ -244,11 +286,31 @@ export default {
       return this.$store.state.cartTotalPrice
     },
   },
+  watch: {
+    'form.name'(){
+      this.errors.name = false
+    },
+    'form.phone'(){
+      this.errors.phone = false
+    },
+    'form.address'(){
+      this.errors.address = false
+    },
+    'form.zipCode'(){
+      this.errors.zipCode = false
+    },
+  },
   created() {
     this.$store.dispatch('getShopProducts')
   },
   methods: {
     orderHandler() {
+      for(let key in this.form) {
+        if(!this.form[key]) {
+          this.errors[key] = true;
+        }
+      }
+      if(Object.values(this.errors).includes(true)) return;
       const orders = []
       this.shopProducts.forEach(item => {
         let product = {
@@ -260,10 +322,7 @@ export default {
         orders.push(product)
       })
       const data = {
-        name: this.name,
-        address: this.address,
-        phone: this.phone,
-        zipCode: this.zipCode,
+        ...this.form,
         orders
       }
       http.post("/order", data)
@@ -272,13 +331,27 @@ export default {
         localStorage.removeItem('shopProducts');
         this.$store.dispatch('getShopProducts');
         this.$store.commit("setShopProducts", JSON.parse(localStorage.getItem("shopProducts")))
+        this.errorFromBack = ""
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        this.errorFromBack = err.response?.data.message
+      })
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.error-text {
+  color: #e80c0c;
+  margin: 0;
+}
+.input-error {
+  border: 1px solid #e80c0c;
+}
+.row-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 </style>

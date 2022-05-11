@@ -5196,6 +5196,7 @@ ul.list-products {
 	display: inline-block;
 	width: calc(50% - 10px);
 	overflow: visible;
+	margin-bottom: 20px;
 }
 .shipping-address .form-row.form-row-last {
 	float: right;
@@ -5309,6 +5310,7 @@ ul.list-products {
 .checkout-wrapp .button-payment {
 	float: right;
 	min-width: 135px;
+	cursor: pointer;
 }
 .checkout-wrapp .button-payment::after {
 	content: "\f061";
@@ -11007,13 +11009,6 @@ iframe {
 	
 }
 .product-item .button:hover,
-input[type="text"]:focus,
-input[type="number"]:focus,
-input[type="search"]:focus,
-input[type="password"]:focus,
-input[type="tel"]:focus,
-input[type="url"]:focus,
-textarea:focus,
 button:focus,
 select:focus, .sevice-box-content .sevice-button:hover, .widget_filter_size li.active, .widget_filter_size li:hover,
 .shoppingcart-content .control-cart .button:hover, .checkout-wrapp .button:hover,
