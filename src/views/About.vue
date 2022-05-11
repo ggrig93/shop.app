@@ -86,35 +86,6 @@
                     </div>
                   </div>
                 </div>
-                <div class="team-member">
-                  <div class="row">
-                    <div class="col-sm-12 border-custom">
-                      <span></span>
-                    </div>
-                  </div>
-                  <h2 class="custom_blog_title center">
-                    ysera’s Important Persons
-                  </h2>
-                  <vue-slick-carousel class="team-member-slider nav-center owl-slick" v-bind="settings">
-                    <template #prevArrow>
-                      <span></span>
-                    </template>
-                    <div class="ysera-team-member" v-for="i in 3" :key="i">
-                      <div class="team-member-item">
-                        <div class="member_avatar">
-                          <img :src="`http://ledthanhdat.vn/html/ysera/assets/images/member${i}.png`" alt="img">
-                        </div>
-                        <h5 class="member_name">Mr Claudio</h5>
-                        <div class="member_position">
-                          CEO & Founder ysera Outfit
-                        </div>
-                      </div>
-                    </div>
-                    <template #nextArrow>
-                      <span></span>
-                    </template>
-                  </vue-slick-carousel>
-                </div>
               </div>
             </div>
           </div>
@@ -125,11 +96,10 @@
 </template>
 
 <script>
-import VueSlickCarousel from 'vue-slick-carousel'
 import Breadcrumbs from "@/components/Breadcrumbs";
 export default {
   name: 'About',
-  components: {Breadcrumbs, VueSlickCarousel},
+  components: {Breadcrumbs},
   data() {
     return {
       settings: {
