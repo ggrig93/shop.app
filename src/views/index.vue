@@ -30,7 +30,12 @@
 														${{product.price}}
 													</span>
                           </div>
-                          <a href="#" class="button btn-shop-the-look bgroud-style">Shop now</a>
+                          <router-link
+                              :to="{name: 'Product', params: {id: product.id}}"
+                              class="button btn-shop-the-look bgroud-style"
+                          >
+                            Shop now
+                          </router-link>
                         </div>
                       </div>
                     </div>
@@ -46,7 +51,12 @@
                 >
                   <h3 class="title custom-title">{{product.title}}</h3>
                   <span class="price">${{product.price}}</span>
-                  <a href="#" class="button btn-lets-do-it">Shop now</a>
+                  <router-link
+                      :to="{name: 'Product', params: {id: product.id}}"
+                      class="button btn-lets-do-it"
+                  >
+                    Shop now
+                  </router-link>
                 </banner>
               </div>
             </div>
@@ -80,7 +90,12 @@
 <!--                  <h4 class="ysera-subtitle">TOP STAFF PICK</h4>-->
                   <h3 class="title custom-title">{{product.title}}</h3>
                   <div class="description">{{product.description}}</div>
-                  <a href="#" class="button btn-shop-now">Shop now</a>
+                  <router-link
+                      :to="{name: 'Product', params: {id: product.id}}"
+                      class="button btn-shop-now"
+                  >
+                    Shop now
+                  </router-link>
                 </banner>
               </div>
             </div>
@@ -97,9 +112,14 @@
                 Price from:
                 <span class="number-price">${{bottomContainerProducts[0].price}}</span>
               </div>
-              <a href="#" class="button btn-shop-now">Shop now</a>
               <router-link
                   :to="{name: 'Product', params: {id: bottomContainerProducts[0].id}}"
+                  class="button btn-shop-now"
+              >
+                Shop now
+              </router-link>
+              <router-link
+                  :to="{name: 'Products'}"
                   class="button btn-view-collection"
               >
                 View more
