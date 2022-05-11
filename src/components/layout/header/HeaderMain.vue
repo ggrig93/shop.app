@@ -64,7 +64,7 @@
                       </span>
                       <span class="product-quantity">(x{{product.count}})</span>
                       <div class="product-remove">
-                        <span @click="removeCartItem(i)" style="cursor: pointer"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                        <span @click="showDeletePopup = i" style="cursor: pointer"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
                       </div>
                     </div>
                   </li>
@@ -156,10 +156,16 @@
         </div>
       </div>
     </div>
+    <DeletePopup
+        v-if="showDeletePopup || showDeletePopup === 0"
+        @confirm="removeHandler"
+        @close="closeModal"
+    />
   </div>
 </template>
 
 <script>
+import DeletePopup from "@/components/DeletePopup.vue";
 import headerMixin from "@/mixins/header.mixin";
 import productMixin from "@/mixins/product.mixin";
 import {mapMutations} from "vuex";
@@ -167,11 +173,13 @@ import {mapMutations} from "vuex";
 export default {
   name: "HeaderMain",
   mixins: [headerMixin, productMixin],
+  components: {DeletePopup},
   data() {
     return {
       tab: 'login',
       selectedCategory: 1,
       search: "",
+      showDeletePopup: false
     }
   },
   computed: {
@@ -215,7 +223,14 @@ export default {
       if(this.$route.name !== 'Products') {
         this.$router.replace({name: 'Products', query: {search: this.search}})
       }
-    }
+    },
+    closeModal() {
+      this.showDeletePopup = false
+    },
+    removeHandler() {
+      this.removeCartItem(this.showDeletePopup)
+      this.closeModal()
+    },
   }
 }
 </script>
