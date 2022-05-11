@@ -20,7 +20,7 @@
                   @click="openCategories = false"
               >
                 <router-link
-                    :to="{name: 'Categories', params: {category: item.id}}"
+                    :to="{name: 'Products', params: {category: item.id}}"
                     class="ysera-menu-item-title"
                     :title="item.name"
                 >

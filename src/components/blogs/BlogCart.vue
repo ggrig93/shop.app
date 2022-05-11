@@ -2,7 +2,7 @@
   <div v-if="blog">
     <template v-if="layout === 'grid'">
       <div class="post-thumb">
-        <router-link :to="{name: 'Blog', params: {id: blog.id}}">
+        <router-link :to="{name: 'Product', params: {id: blog.id}}">
           <img :src="`http://ledthanhdat.vn/html/ysera/assets/images/slider-blog-thumb-${blog.id}.jpg`" alt="img">
         </router-link>
         <div class="category-blog">
@@ -63,7 +63,7 @@
     </template>
     <template v-if="layout === 'list'">
       <div class="post-format">
-        <router-link :to="{name: 'Blog', params: {id: blog.id}}">
+        <router-link :to="{name: 'Product', params: {id: blog.id}}">
           <img :src="`http://ledthanhdat.vn/html/ysera/assets/images/blog-item-list-${blog.id}.jpg`" alt="img">
         </router-link>
       </div>
