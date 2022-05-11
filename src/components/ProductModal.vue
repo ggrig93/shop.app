@@ -89,11 +89,11 @@
                     <a>Add to Wishlist</a>
                   </div>
                 </div>
-                <div class="size-chart-wrapp">
-                  <div class="btn-size-chart">
-                    <a id="size_chart" href="@/assets/images/size-chart.jpg" class="fancybox" target="_blank">View Size Chart</a>
-                  </div>
-                </div>
+<!--                <div class="size-chart-wrapp">-->
+<!--                  <div class="btn-size-chart">-->
+<!--                    <a id="size_chart" href="@/assets/images/size-chart.jpg" class="fancybox" target="_blank">View Size Chart</a>-->
+<!--                  </div>-->
+<!--                </div>-->
                 <div class="quantity-add-to-cart">
                   <div class="quantity">
                     <div class="control">

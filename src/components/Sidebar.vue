@@ -13,7 +13,6 @@
       </div>
     </div>
     <div class="widget woof_Widget">
-      by_price{{by_price}}
       <div class="widget widget-categories" v-if="categories">
         <h3 class="widgettitle">Categories</h3>
         <ul class="list-categories">

@@ -101,12 +101,12 @@
                       <a href="#">Add to Wishlist</a>
                     </div>
                   </div>
-                  <div class="size-chart-wrapp">
-                    <div class="btn-size-chart">
-                      <a id="size_chart" href="@/assets/images/size-chart.jpg" class="fancybox">View
-                        Size Chart</a>
-                    </div>
-                  </div>
+<!--                  <div class="size-chart-wrapp">-->
+<!--                    <div class="btn-size-chart">-->
+<!--                      <a id="size_chart" href="@/assets/images/size-chart.jpg" class="fancybox">View-->
+<!--                        Size Chart</a>-->
+<!--                    </div>-->
+<!--                  </div>-->
                   <div v-if="showSuccessNotify" class="success-notify">
                     <div class="bubble">Product successfully added</div>
                     <div class="triangle"></div>
