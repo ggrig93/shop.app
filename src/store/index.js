@@ -25,6 +25,7 @@ export default new Vuex.Store({
       by_price: '',
       page: 1,
       category: [],
+      per_page: '',
     }
   },
   getters: {
@@ -32,6 +33,7 @@ export default new Vuex.Store({
     by_price: state => state.otherFilters.by_price,
     page: state => state.otherFilters.page,
     category: state => state.otherFilters.category,
+    per_page: state => state.otherFilters.per_page,
     otherFilters: state => state.otherFilters,
   },
   mutations: {
@@ -46,6 +48,9 @@ export default new Vuex.Store({
     },
     setPage(state, value) {
       state.otherFilters.page = value
+    },
+    setPerPage(state, value) {
+      state.otherFilters.per_page = value
     },
     setCategory(state, value) {
       state.otherFilters.category = value

@@ -136,7 +136,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["search", "by_price", "page", "category", "otherFilters"]),
+    ...mapGetters(["search", "by_price", "per_page", "page", "category", "otherFilters"]),
   },
   watch: {
     filters: {
@@ -203,6 +203,9 @@ export default {
         if(val['filter[by_price]']) {
           this.setByPrice(val['filter[by_price]'])
         }
+        if(val['filter[per_page]']) {
+          this.setPerPage(val['filter[per_page]'])
+        }
         if(val['filter[page]']) {
           this.setPage(val['filter[page]'])
         }
@@ -210,7 +213,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["setSearch", "setByPrice", "setPage"]),
+    ...mapMutations(["setSearch", "setByPrice", "setPage", "setPerPage"]),
     queryToArray(val) {
       return typeof val === 'string' ? val.split(",").map(item => parseInt(item)) : val
     },
@@ -236,6 +239,7 @@ export default {
         'filter[sizes]': this.filters.selectedSizes,
         'filter[tags]': this.filters.selectedTags,
         'filter[by_price]': this.by_price,
+        'filter[per_page]': this.per_page,
         search: this.search,
         'filter[page]': this.page,
       }

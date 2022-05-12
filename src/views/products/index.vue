@@ -15,12 +15,16 @@
             <div class="shop-top-control">
               <form class="select-item select-form">
                 <span class="title">Sort</span>
-                <select title="sort" data-placeholder="12 Products/Page" class="chosen-select">
-                  <option value="1">12 Products/Page</option>
-                  <option value="2">9 Products/Page</option>
-                  <option value="3">10 Products/Page</option>
-                  <option value="4">8 Products/Page</option>
-                  <option value="5">6 Products/Page</option>
+                <select
+                    v-model="per_page"
+                    title="sort"
+                    data-placeholder="Products/Page"
+                    class="chosen-select"
+                    @change="sortPerPage"
+                >
+                  <option value="2">2 Products/Page</option>
+                  <option value="6">6 Products/Page</option>
+                  <option value="10">10 Products/Page</option>
                 </select>
               </form>
               <form class="filter-choice select-form">
@@ -110,7 +114,8 @@ export default {
   data() {
     return {
       layoutMode: true,
-      by_price: ''
+      by_price: '',
+      per_page: ''
       // categories: data.categories,
       // brand: data.brand,
       // size: data.size,
@@ -151,6 +156,9 @@ export default {
         }
         if(val['filter[by_price]']) {
           this.by_price = val['filter[by_price]']
+        }
+        if(val['filter[per_page]']) {
+          this.per_page = val['filter[per_page]']
         } else {
           this.by_price = ""
         }
@@ -174,9 +182,10 @@ export default {
     this.setByPrice('')
     this.setCategory([])
     this.setPage(1)
+    this.setPerPage('')
   },
   methods: {
-    ...mapMutations(["setByPrice", "setSearch", "setPage", "setCategory"]),
+    ...mapMutations(["setByPrice", "setSearch", "setPage", "setCategory", "setPerPage"]),
     sortByPrice() {
       this.setByPrice(this.by_price)
     },
@@ -185,6 +194,9 @@ export default {
       // this.$router.replace({name: this.$route.name, query: {page}})
       // const offset = (page - 1) * this.limit
       // this.$store.dispatch('getPerPageProducts', offset)
+    },
+    sortPerPage() {
+      this.setPerPage(this.per_page)
     }
   }
 }
