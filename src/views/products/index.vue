@@ -162,7 +162,7 @@ export default {
     // if(page) {
     //   this.$store.dispatch('getPerPageProducts', page)
     // } else {
-      this.$store.dispatch('getAllProducts')
+    //   this.$store.dispatch('getAllProducts')
     // }
     this.$store.dispatch('getColors')
     this.$store.dispatch('getBrands')
@@ -172,9 +172,11 @@ export default {
   beforeDestroy() {
     this.setSearch('')
     this.setByPrice('')
+    this.setCategory([])
+    this.setPage(1)
   },
   methods: {
-    ...mapMutations(["setByPrice", "setSearch", "setPage"]),
+    ...mapMutations(["setByPrice", "setSearch", "setPage", "setCategory"]),
     sortByPrice() {
       this.setByPrice(this.by_price)
     },

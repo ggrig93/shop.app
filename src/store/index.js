@@ -20,27 +20,35 @@ export default new Vuex.Store({
     bottomContainerProducts: [],
     shopProducts: [],
     cartTotalPrice: 0,
-    search: '',
-    by_price: '',
-    page: 1,
+    otherFilters: {
+      search: '',
+      by_price: '',
+      page: 1,
+      category: [],
+    }
   },
   getters: {
-    search: state => state.search,
-    by_price: state => state.by_price,
-    page: state => state.page,
+    search: state => state.otherFilters.search,
+    by_price: state => state.otherFilters.by_price,
+    page: state => state.otherFilters.page,
+    category: state => state.otherFilters.category,
+    otherFilters: state => state.otherFilters,
   },
   mutations: {
     setShopProducts(state, value) {
       state.shopProducts = value
     },
     setSearch(state, value) {
-      state.search = value
+      state.otherFilters.search = value
     },
     setByPrice(state, value) {
-      state.by_price = value
+      state.otherFilters.by_price = value
     },
     setPage(state, value) {
-      state.page = value
+      state.otherFilters.page = value
+    },
+    setCategory(state, value) {
+      state.otherFilters.category = value
     },
   },
   actions: {

@@ -19,13 +19,13 @@
                   class="menu-item"
                   @click="openCategories = false"
               >
-                <router-link
-                    :to="{name: 'Products', params: {category: item.id}}"
+                <a
                     class="ysera-menu-item-title"
                     :title="item.name"
+                    @click="selectCategory(item.id)"
                 >
                   {{item.name}}
-                </router-link>
+                </a>
 <!--                <template v-if="item.children.length">-->
 <!--                  <SubMenu :children="item.children"/>-->
 <!--                </template>-->
@@ -74,6 +74,7 @@
 import headerMixin from "@/mixins/header.mixin";
 import header from '@/customdata/menu'
 import SubMenu from "@/components/SubMenu";
+import {mapMutations} from "vuex";
 
 export default {
   name: "HeaderNav",
@@ -89,6 +90,21 @@ export default {
     categories() {
       return this.$store.state.categories
     }
+  },
+  methods: {
+    ...mapMutations(["setCategory"]),
+    selectCategory(id) {
+      this.setCategory([id])
+      if(this.$route.name !== 'Products') {
+        this.$router.replace({name: 'Products', query: {'filter[categories]': [id]}})
+      }
+    }
   }
 }
 </script>
+
+<style scoped>
+.ysera-menu-item-title {
+  cursor: pointer;
+}
+</style>

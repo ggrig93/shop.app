@@ -136,7 +136,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["search", "by_price", "page"]),
+    ...mapGetters(["search", "by_price", "page", "category", "otherFilters"]),
   },
   watch: {
     filters: {
@@ -145,24 +145,39 @@ export default {
         this.filterProduct()
       }
     },
-    search: {
+    otherFilters: {
       immediate: true,
+      deep: true,
       handler() {
         this.filterProduct()
       }
     },
-    by_price: {
-      immediate: true,
-      handler() {
-        this.filterProduct()
-      }
-    },
-    page: {
-      immediate: true,
-      handler() {
-        this.filterProduct()
-      }
-    },
+
+    // search: {
+    //   immediate: true,
+    //   handler() {
+    //     this.filterProduct()
+    //   }
+    // },
+    // by_price: {
+    //   immediate: true,
+    //   handler() {
+    //     this.filterProduct()
+    //   }
+    // },
+    // page: {
+    //   immediate: true,
+    //   handler() {
+    //     this.filterProduct()
+    //   }
+    // },
+    // category: {
+    //   immediate: true,
+    //   deep: true,
+    //   handler() {
+    //     this.filterProduct()
+    //   }
+    // },
     '$route.query': {
       immediate: true,
       deep: true,
@@ -215,7 +230,7 @@ export default {
     },
     filterProduct() {
       const data = {
-        'filter[categories]': this.filters.selectedCategories,
+        'filter[categories]': this.category.length ? this.category : this.filters.selectedCategories,
         'filter[brands]': this.filters.selectedBrands,
         'filter[colors]': this.filters.selectedColors,
         'filter[sizes]': this.filters.selectedSizes,
@@ -223,6 +238,9 @@ export default {
         'filter[by_price]': this.by_price,
         search: this.search,
         'filter[page]': this.page,
+      }
+      if(this.category.length) {
+        this.filters.selectedCategories = this.category
       }
       const queryData = {...data }
       const params = new URLSearchParams(queryData).toString();
