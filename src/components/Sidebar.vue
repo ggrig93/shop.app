@@ -143,6 +143,7 @@ export default {
       deep: true,
       handler() {
         this.filterProduct()
+        this.setPage(1)
       }
     },
     otherFilters: {
