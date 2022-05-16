@@ -19,6 +19,7 @@ export default new Vuex.Store({
     bottomSlideProducts: [],
     bottomContainerProducts: [],
     shopProducts: [],
+    wishList: [],
     cartTotalPrice: 0,
     otherFilters: {
       search: '',
@@ -39,6 +40,9 @@ export default new Vuex.Store({
   mutations: {
     setShopProducts(state, value) {
       state.shopProducts = value
+    },
+    setWishList(state, value) {
+      state.wishList = value
     },
     setSearch(state, value) {
       state.otherFilters.search = value
@@ -141,6 +145,11 @@ export default new Vuex.Store({
       let totalPrice = 0
       state.shopProducts.forEach(item => totalPrice += (+item.price * item.count))
       state.cartTotalPrice = totalPrice
+    },
+    getWishList({state}) {
+      state.wishList =
+        JSON.parse(localStorage.getItem("wishList")) ?
+          JSON.parse(localStorage.getItem("wishList")) : []
     }
   },
   modules: {

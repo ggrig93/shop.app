@@ -166,12 +166,6 @@ export default {
     },
   },
   created() {
-    // const page = this.$route.query.page
-    // if(page) {
-    //   this.$store.dispatch('getPerPageProducts', page)
-    // } else {
-    //   this.$store.dispatch('getAllProducts')
-    // }
     this.$store.dispatch('getColors')
     this.$store.dispatch('getBrands')
     this.$store.dispatch('getSizes')

@@ -35,7 +35,13 @@
         </div>
       </div>
       <div class="col-lg-2 col-sm-12 col-md-3 col-xs-12 col-ts-12">
-        <div class="header-control">
+        <div class="header-control heart-wrap">
+          <router-link to="/wishlist">
+            <div class="heart">
+              <div class="heart-count">{{wishListCount}}</div>
+            </div>
+          </router-link>
+
           <div class="block-minicart ysera-mini-cart block-header ysera-dropdown" :class="{'open': openCart}" v-click-outside="hideCart">
             <a href="javascript:void(0);" class="shopcart-icon" data-ysera="ysera-dropdown" @click="toggleCart">
               Cart
@@ -197,7 +203,13 @@ export default {
           this.$store.state.shopProducts.length :
           JSON.parse(localStorage.getItem("shopProducts")) ?
           JSON.parse(localStorage.getItem("shopProducts")).length : 0
-    }
+    },
+    wishListCount() {
+      return this.$store.state.wishList?.length ?
+          this.$store.state.wishList.length :
+          JSON.parse(localStorage.getItem("wishList")) ?
+          JSON.parse(localStorage.getItem("wishList")).length : 0
+    },
   },
   watch: {
     openCart(val) {
@@ -235,8 +247,47 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   select {
     border: none!important;
+  }
+  .heart {
+    height: 43px;
+    position: relative;
+    cursor: pointer;
+
+    &-count {
+      font-family: 'Roboto';
+      font-weight: 600;
+      background-color: #c09578;
+      text-transform: uppercase;
+      top: -11px;
+      right: -9px;
+      font-size: 12px;
+      position: absolute;
+      display: inline-block;
+      text-align: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      color: #ffffff;
+      line-height: 22px;
+    }
+
+    &-wrap {
+      display: flex;
+    }
+
+    &:before {
+      content: "\f08a";
+      font-family: 'FontAwesome';
+      margin-right: 7px;
+      color: #555;
+      font-size: 24px;
+      line-height: normal;
+      vertical-align: middle;
+      display: inline-block;
+      margin-top: -2px;
+    }
   }
 </style>

@@ -3,6 +3,7 @@ export default {
         return {
             activeImg: null,
             activeBlock: null,
+            hasWishListItem: false
         }
     },
     computed: {
@@ -50,6 +51,27 @@ export default {
             shopProducts.push(product)
             localStorage.setItem('shopProducts', JSON.stringify(shopProducts))
             this.$store.commit("setShopProducts", JSON.parse(localStorage.getItem("shopProducts")))
+        },
+        addToWishList(product) {
+            const wishList =
+              JSON.parse(localStorage.getItem("wishList")) ?
+                JSON.parse(localStorage.getItem("wishList")) : [];
+            console.log("find", wishList.find(el => el.id === product.id))
+            if(wishList.find(el => el.id === product.id)) {
+                this.hasWishListItem = true;
+                setTimeout(() => { this.hasWishListItem = false }, 1500)
+                return;
+            }
+            wishList.push(product)
+            localStorage.setItem('wishList', JSON.stringify(wishList))
+            this.$store.commit("setWishList", JSON.parse(localStorage.getItem("wishList")))
+        },
+        removeWishListItem(idx) {
+            const products = JSON.parse(localStorage.getItem("wishList"))
+            products.splice(idx,1)
+            localStorage.setItem('wishList', JSON.stringify(products))
+            this.$store.dispatch('getWishList')
         }
+
     }
 }

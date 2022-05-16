@@ -12,21 +12,28 @@
       </div>
       <div class="product-thumb">
         <div class="thumb-inner">
-          <router-link :to="{name: 'Product', params: {id : 1}}">
+<!--          <router-link :to="{name: 'Product', params: {id : 1}}">-->
             <img :src="product.avatar" alt="img">
-          </router-link>
+<!--          </router-link>-->
           <div class="thumb-group">
             <div class="yith-wcwl-add-to-wishlist">
               <div class="yith-wcwl-add-button">
-                <a href="javascript:void(0)">Add to Wishlist</a>
+                <div
+                    v-if="$route.name === 'WishList'"
+                    class="product-remove"
+                >
+                  <span @click="showDeletePopup = index"  style="cursor: pointer;">
+                    <i aria-hidden="true" class="fa fa-trash-o"></i>
+                  </span>
+                </div>
+                <a
+                    v-else
+                    style="cursor: pointer;"
+                    @click.stop="addToWishList(product)"
+                >Add to Wishlist</a>
               </div>
             </div>
             <a href="javascript:void(0)" class="button quick-wiew-button" @click.stop="openModal(product)">Quick View</a>
-<!--            <div class="loop-form-add-to-cart">-->
-<!--              <button class="single_add_to_cart_button button">-->
-<!--                Add to cart-->
-<!--              </button>-->
-<!--            </div>-->
           </div>
         </div>
       </div>
@@ -35,7 +42,7 @@
           <Countdown :end="endDate" />
         </div>
         <h5 class="product-name product_title">
-          <a href="javascript:void(0)">{{product.title}}</a>
+          <router-link :to="{name: 'Product', params: {id : 1}}">{{product.title}}</router-link>
         </h5>
         <div class="group-info">
           <div class="stars-rating">
@@ -142,10 +149,16 @@
 <!--        </div>-->
 <!--      </div>-->
 <!--    </template>-->
+    <DeletePopup
+        v-if="showDeletePopup || showDeletePopup === 0"
+        @confirm="removeHandler"
+        @close="closeModal"
+    />
   </div>
 </template>
 
 <script>
+import DeletePopup from "@/components/DeletePopup.vue";
 import {bus} from '@/main'
 import Countdown from 'vuejs-countdown'
 import productMixin from "@/mixins/product.mixin";
@@ -157,6 +170,9 @@ export default {
       type: String,
       default: 'grid'
     },
+    index: {
+      type: Number,
+    },
     product: {
       type: Object,
       default: () => null
@@ -166,21 +182,42 @@ export default {
       default: ""
     }
   },
-  components: {Countdown},
+  components: {Countdown, DeletePopup},
   mixins: [productMixin],
+  data() {
+    return {
+      showDeletePopup: false
+    }
+  },
   methods: {
     openModal(data) {
       bus.$emit('open-modal', {...data})
-    }
+    },
+    closeModal() {
+      this.showDeletePopup = false
+    },
+    removeHandler() {
+      this.removeWishListItem(this.showDeletePopup)
+      this.closeModal()
+    },
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .thumb-inner img{
   width: 266px;
   height: 266px;
   object-fit: cover;
+}
+.product-remove {
+  display: inline-block;
+  color: #555;
+  font-size: 22px;
+
+  &:hover {
+    color: #c09578;
+  }
 }
 </style>
 

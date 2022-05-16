@@ -14,6 +14,11 @@ const routes = [
     name: 'About',
     component: () => import('@/views/About')
   },
+  {
+    path: '/wishList',
+    name: 'WishList',
+    component: () => import('@/views/WishList')
+  },
   // {
   //   path: '/authentication',
   //   name: 'Authentication',

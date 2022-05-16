@@ -96,9 +96,13 @@
                   </div>
                 </div>
                 <div class="group-button" style="position: relative">
-                  <div class="yith-wcwl-add-to-wishlist">
+                  <div class="yith-wcwl-add-to-wishlist wishlist-notify-wrap">
+                    <div v-if="hasWishListItem" class="success-notify wishlist-success-notify">
+                      <div class="bubble">Product already exist</div>
+                      <div class="triangle"></div>
+                    </div>
                     <div class="yith-wcwl-add-button">
-                      <a href="#">Add to Wishlist</a>
+                      <a @click="addToWishList(product)" style="cursor: pointer">Add to Wishlist</a>
                     </div>
                   </div>
 <!--                  <div class="size-chart-wrapp">-->
