@@ -158,19 +158,26 @@
               </div>
             </div>
             <div style="clear: left;"></div>
-            <div class="related products product-grid">
+            <div v-if="product.suggested_products && product.suggested_products.length" class="related products product-grid">
               <h2 class="product-grid-title">You may also like</h2>
-<!--              <vue-slick-carousel class="owl-products nav-center" v-bind="settings">-->
-<!--                <template #prevArrow>-->
-<!--                  <span></span>-->
-<!--                </template>-->
-<!--                <div class="product-item style-1" v-for="(prod, idx) in products" :key="idx">-->
-<!--                  <ProductCart :product="prod" />-->
-<!--                </div>-->
-<!--                <template #nextArrow>-->
-<!--                  <span></span>-->
-<!--                </template>-->
-<!--              </vue-slick-carousel>-->
+              <vue-slick-carousel
+                  v-bind="settings"
+                  class="owl-products nav-center suggested-products"
+              >
+                <template #prevArrow>
+                  <span></span>
+                </template>
+                <div
+                    class="product-item style-1"
+                    v-for="(prod, idx) in product.suggested_products"
+                    :key="idx"
+                >
+                  <ProductCart :product="prod" />
+                </div>
+                <template #nextArrow>
+                  <span></span>
+                </template>
+              </vue-slick-carousel>
             </div>
           </div>
         </div>

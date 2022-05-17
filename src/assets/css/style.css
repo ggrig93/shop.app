@@ -11127,3 +11127,6 @@ a:hover, a:focus, a:active,
 	margin: 0;
 	top: -60px;
 }
+.suggested-products .product-item .product-inner img {
+	width: 100%;
+}
