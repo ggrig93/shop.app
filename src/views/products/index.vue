@@ -40,30 +40,9 @@
                   <option value="desc">Price: High to Low</option>
                 </select>
               </form>
-<!--              <div class="grid-view-mode">-->
-<!--                <div class="inner">-->
-<!--                  <a href="javascript:void(0)"-->
-<!--                     class="modes-mode mode-list"-->
-<!--                     :class="{'active': !layoutMode}"-->
-<!--                     @click.prevent="layoutMode = false"-->
-<!--                  >-->
-<!--                    <span></span>-->
-<!--                    <span></span>-->
-<!--                  </a>-->
-<!--                  <a href="javascript:void(0)"-->
-<!--                     class="modes-mode mode-grid"-->
-<!--                     :class="{'active': layoutMode}"-->
-<!--                     @click.prevent="layoutMode = true"-->
-<!--                  >-->
-<!--                    <span></span>-->
-<!--                    <span></span>-->
-<!--                    <span></span>-->
-<!--                    <span></span>-->
-<!--                  </a>-->
-<!--                </div>-->
-<!--              </div>-->
             </div>
-            <ul class="row list-products auto-clear equal-container"
+            <ul v-if="!loading"
+                class="row list-products auto-clear equal-container"
                 :class="layoutMode ? 'product-grid' : 'product-list'"
             >
               <li class="product-item"
@@ -79,6 +58,7 @@
                 />
               </li>
             </ul>
+            <div v-else class="loader"></div>
             <Pagination
               class="style3"
               :paginate="paginate"
@@ -145,6 +125,9 @@ export default {
     },
     tags() {
       return this.$store.state.tags
+    },
+    loading() {
+      return this.$store.state.loading
     }
   },
   watch: {

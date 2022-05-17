@@ -27,7 +27,8 @@ export default new Vuex.Store({
       page: 1,
       category: [],
       per_page: '',
-    }
+    },
+    loading: false
   },
   getters: {
     search: state => state.otherFilters.search,
@@ -59,6 +60,9 @@ export default new Vuex.Store({
     setCategory(state, value) {
       state.otherFilters.category = value
     },
+    setLoading(state, value) {
+      state.loading = value
+    },
   },
   actions: {
     getProduct({state}, id) {
@@ -79,6 +83,7 @@ export default new Vuex.Store({
         .catch(err => console.log(err))
     },
     getFilteredProducts({state}, filter) {
+      state.loading = true
       state.products = null
       http.get(`/product`, {
         params: {
@@ -88,6 +93,9 @@ export default new Vuex.Store({
           state.products = res.data
         })
         .catch(err => console.log(err))
+        .finally(() => {
+          state.loading = false
+        })
     },
     getTopSlideProducts({state}) {
       http.get('/product/by-slide-group/top')
