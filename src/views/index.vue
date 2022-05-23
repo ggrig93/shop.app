@@ -175,20 +175,6 @@
             </div>
           </div>
         </div>
-        <div class="ysera-blog-wraap default">
-          <div class="container">
-            <h3 class="custommenu-title-blog">
-              Our Latest News
-            </h3>
-            <div class="ysera-blog default">
-              <vue-slick-carousel v-bind="newsSettings">
-                <div class="ysera-blog-item equal-element layout1" v-for="i in 4" :key="i">
-                  <BlogCart :blog="{id: i}" />
-                </div>
-              </vue-slick-carousel>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="instagram-wrapp">
@@ -218,13 +204,11 @@
 // @ is an alias to /src
 import VueSlickCarousel from 'vue-slick-carousel'
 import ProductCart from "@/components/products/ProductCart";
-import BlogCart from "@/components/blogs/BlogCart";
 import Banner from '@/components/Banner'
-import data from '@/customdata/products'
 
 export default {
   name: 'Home',
-  components: {ProductCart, BlogCart, VueSlickCarousel, Banner },
+  components: {ProductCart, VueSlickCarousel, Banner },
   data() {
     return {
       activeTabPanel: 'bestseller',
@@ -260,24 +244,6 @@ export default {
           {"breakpoint":480, "settings":{"slidesToShow":1}}
         ]
       },
-      newsSettings: {
-        "autoplay":false,
-        "autoplaySpeed":1000,
-        "arrows":false,
-        "dots":true,
-        "dotsClass": "slick-dots",
-        "infinite":true,
-        "speed":800,
-        "slidesToShow": 3,
-        "slidesToScroll": 1,
-        responsive: [
-          {"breakpoint":2000,"settings":{"slidesToShow":3}},
-          {"breakpoint":1200,"settings":{"slidesToShow":3}},
-          {"breakpoint":992,"settings":{"slidesToShow":2}},
-          {"breakpoint":768,"settings":{"slidesToShow":2}},
-          {"breakpoint":481,"settings":{"slidesToShow":1}}
-        ]
-      },
       instagramSettings: {
         "autoplay":false,
         "autoplaySpeed":1000,
@@ -295,12 +261,6 @@ export default {
           {"breakpoint":481, "settings":{"slidesToShow":2}}
         ]
       },
-      // topPanel: {
-      //   bestseller: data.products.slice(0, 8),
-      //   newArrivals: data.products.slice(0, 6),
-      //   topRated: data.products.slice(0, 10)
-      // },
-      products: data.products.slice(0, 6)
     }
   },
   computed: {

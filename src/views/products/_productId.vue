@@ -18,7 +18,9 @@
                       :hide-hint="true"
                       zoom-type="hover"
                   />
-                  <a href="#" class="btn-zoom open_qv"><i class="fa fa-search" aria-hidden="true"></i></a>
+<!--                  <a class="btn-zoom open_qv">-->
+<!--                    <i class="fa fa-search" aria-hidden="true"></i>-->
+<!--                  </a>-->
                 </div>
                 <div class="product-preview image-small product_preview">
                   <carousel
@@ -145,9 +147,6 @@
                 <li v-if="product.details.information" :class="{active: tabPanel === 'Information'}">
                   <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Information'">Information</a>
                 </li>
-<!--                <li :class="{active: tabPanel === 'Reviews'}">-->
-<!--                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Reviews'">Reviews</a>-->
-<!--                </li>-->
               </ul>
               <div class="tab-container">
                 <component class="active"
@@ -193,14 +192,13 @@ import InnerImageZoom from 'vue-inner-image-zoom';
 import ProductCart from "@/components/products/ProductCart";
 import Description from "@/components/products/Description";
 import Information from "@/components/products/Information";
-import Reviews from "@/components/products/Reviews";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import productMixin from "@/mixins/product.mixin";
 export default {
   name: "Product",
   props: ['id'],
   mixins: [productMixin],
-  components: {Breadcrumbs, VueSlickCarousel, carousel, InnerImageZoom, ProductCart, Description, Information, Reviews},
+  components: {Breadcrumbs, VueSlickCarousel, carousel, InnerImageZoom, ProductCart, Description, Information},
   data() {
     return {
       tabPanel: 'Description',

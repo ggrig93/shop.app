@@ -141,6 +141,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.control-cart {
+  button {
+    margin-bottom: 10px;
+  }
+}
 </style>

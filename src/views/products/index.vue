@@ -6,7 +6,7 @@
           <Breadcrumbs />
         </div>
       </div>
-      <div class="row">
+      <div class="row products-wrapper">
         <div class="content-area shop-grid-content no-banner col-lg-9 col-md-9 col-sm-12 col-xs-12">
           <div class="site-main">
             <h3 class="custom_blog_title">
@@ -74,6 +74,7 @@
               :sizes="sizes"
               :colors="color"
               :tags="tags"
+              :price="price"
           />
         </div>
       </div>
@@ -85,7 +86,6 @@
 import Sidebar from "@/components/Sidebar";
 import Pagination from "@/components/Pagination";
 import ProductCart from "@/components/products/ProductCart";
-// import data from '@/customdata/products'
 import Breadcrumbs from "@/components/Breadcrumbs";
 import {mapMutations} from "vuex";
 export default {
@@ -96,12 +96,6 @@ export default {
       layoutMode: true,
       by_price: '',
       per_page: ''
-      // categories: data.categories,
-      // brand: data.brand,
-      // size: data.size,
-      // tags: data.tags,
-      // color: data.color,
-      // price: data.price
     }
   },
   computed: {
@@ -128,6 +122,10 @@ export default {
     },
     loading() {
       return this.$store.state.loading
+    },
+    /* todo */
+    price() {
+      return {}
     }
   },
   watch: {
@@ -168,9 +166,6 @@ export default {
     },
     onPageChange(page) {
       this.setPage(page)
-      // this.$router.replace({name: this.$route.name, query: {page}})
-      // const offset = (page - 1) * this.limit
-      // this.$store.dispatch('getPerPageProducts', offset)
     },
     sortPerPage() {
       this.setPerPage(this.per_page)

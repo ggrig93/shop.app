@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-sidebar">
-    <div class="widget woof_Widget">
-      <div class="widget widget-categories" v-if="categories">
+    <div class="widget woof_Widget sidebar-filters_wrap">
+      <div class="widget widget-categories sidebar-filter" v-if="categories">
         <h3 class="widgettitle">Categories</h3>
         <ul class="list-categories">
           <li v-for="cat in categories" :key="cat.id">
@@ -14,7 +14,7 @@
           </li>
         </ul>
       </div>
-      <div class="widget widget_filter_price" v-if="price">
+      <div class="widget widget_filter_price sidebar-filter" v-if="price">
         <h4 class="widgettitle">
           Price
         </h4>
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="widget widget-brand" v-if="brands">
+      <div class="widget widget-brand sidebar-filter" v-if="brands">
         <h3 class="widgettitle">Brand</h3>
         <ul class="list-brand">
           <li v-for="brand in brands" :key="brand.id">
@@ -41,7 +41,7 @@
           </li>
         </ul>
       </div>
-      <div class="widget widget_filter_size" v-if="sizes">
+      <div class="widget widget_filter_size sidebar-filter" v-if="sizes">
         <h4 class="widgettitle">Size</h4>
         <ul class="list-brand">
           <li v-for="size in sizes" :key="size.id">
@@ -54,7 +54,7 @@
           </li>
         </ul>
       </div>
-      <div class="widget widget-color" v-if="colors">
+      <div class="widget widget-color sidebar-filter" v-if="colors">
         <h4 class="widgettitle">
           Color
         </h4>
@@ -71,7 +71,7 @@
           ></a>
         </div>
       </div>
-      <div class="widget widget-tags" v-if="tags">
+      <div class="widget widget-tags sidebar-filter" v-if="tags">
         <h3 class="widgettitle">
           Popular Tags
         </h3>
@@ -153,32 +153,6 @@ export default {
         this.filterProduct()
       }
     },
-
-    // search: {
-    //   immediate: true,
-    //   handler() {
-    //     this.filterProduct()
-    //   }
-    // },
-    // by_price: {
-    //   immediate: true,
-    //   handler() {
-    //     this.filterProduct()
-    //   }
-    // },
-    // page: {
-    //   immediate: true,
-    //   handler() {
-    //     this.filterProduct()
-    //   }
-    // },
-    // category: {
-    //   immediate: true,
-    //   deep: true,
-    //   handler() {
-    //     this.filterProduct()
-    //   }
-    // },
     '$route.query': {
       immediate: true,
       deep: true,

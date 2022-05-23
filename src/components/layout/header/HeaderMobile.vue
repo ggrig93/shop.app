@@ -15,59 +15,59 @@
 						</span>
         </a>
         <div class="block-sub">
-          <a href="#" class="close" @click="openSearchBar = false">
+          <a class="close" @click="openSearchBar = false">
             <i class="fa fa-times" aria-hidden="true"></i>
           </a>
           <div class="header-searchform-box">
-            <form class="header-searchform">
+            <form class="header-searchform" @submit.prevent="searchHandler">
               <div class="searchform-wrap">
-                <input type="text" class="search-input" placeholder="Enter keywords to search...">
+                <input v-model="search" type="text" class="search-input" placeholder="Enter keywords to search...">
                 <input type="submit" class="submit button" value="Search">
               </div>
             </form>
           </div>
         </div>
       </div>
-      <div class="item mobile-settings-box has-sub" :class="{'open': openLangMenu}">
-        <a href="javascript:void(0)" @click="openLangMenu = true; openSearchBar = false">
-						<span class="icon">
-							<i class="fa fa-cog" aria-hidden="true"></i>
-						</span>
-        </a>
-        <div class="block-sub">
-          <a href="javascript:void(0)" class="close" @click="openLangMenu = false">
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </a>
-          <div class="block-sub-item">
-            <h5 class="block-item-title">Currency</h5>
-            <form class="currency-form ysera-language">
-              <ul class="ysera-language-wrap">
-                <li class="active">
-                  <a href="#">
-											<span>
-												English (USD)
-											</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-											<span>
-												French (EUR)
-											</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-											<span>
-												Japanese (JPY)
-											</span>
-                  </a>
-                </li>
-              </ul>
-            </form>
-          </div>
-        </div>
-      </div>
+<!--      <div class="item mobile-settings-box has-sub" :class="{'open': openLangMenu}">-->
+<!--        <a href="javascript:void(0)" @click="openLangMenu = true; openSearchBar = false">-->
+<!--						<span class="icon">-->
+<!--							<i class="fa fa-cog" aria-hidden="true"></i>-->
+<!--						</span>-->
+<!--        </a>-->
+<!--        <div class="block-sub">-->
+<!--          <a href="javascript:void(0)" class="close" @click="openLangMenu = false">-->
+<!--            <i class="fa fa-times" aria-hidden="true"></i>-->
+<!--          </a>-->
+<!--          <div class="block-sub-item">-->
+<!--            <h5 class="block-item-title">Currency</h5>-->
+<!--            <form class="currency-form ysera-language">-->
+<!--              <ul class="ysera-language-wrap">-->
+<!--                <li class="active">-->
+<!--                  <a href="#">-->
+<!--											<span>-->
+<!--												English (USD)-->
+<!--											</span>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <a href="#">-->
+<!--											<span>-->
+<!--												French (EUR)-->
+<!--											</span>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                  <a href="#">-->
+<!--											<span>-->
+<!--												Japanese (JPY)-->
+<!--											</span>-->
+<!--                  </a>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </form>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="item menu-bar">
         <a class=" mobile-navigation  menu-toggle" href="javascript:void(0)" @click="openMobileMenu">
           <span></span>
@@ -82,8 +82,35 @@
 <script>
 
 import headerMixin from "@/mixins/header.mixin";
+import {mapMutations} from "vuex";
 export default {
   name: "HeaderMobile",
-  mixins: [headerMixin]
+  mixins: [headerMixin],
+  data() {
+    return {
+      search: "",
+    }
+  },
+  watch: {
+    '$route.query': {
+      immediate: true,
+      handler(val) {
+        if(val?.search) {
+          this.search = val.search
+        } else {
+          this.search = ""
+        }
+      }
+    }
+  },
+  methods: {
+    ...mapMutations(["setSearch"]),
+    searchHandler() {
+      this.setSearch(this.search)
+      if(this.$route.name !== 'Products') {
+        this.$router.replace({name: 'Products', query: {search: this.search}})
+      }
+    },
+  },
 }
 </script>
