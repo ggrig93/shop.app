@@ -19,12 +19,13 @@
           Price
         </h4>
         <div class="price-slider-wrapper">
-          <div data-label-reasult="Range:" :data-min="price.min" :data-max="price.max" data-unit="$"
-               class="slider-range-price " data-value-min="0" data-value-max="1000">
+          <div class="price-input">
+            <label for="min">Min</label><br>
+            <input id="min" :value="filters.minPrice" @change="filters.minPrice = $event.target.value" />
           </div>
-          <div class="price-slider-amount">
-            <span class="from">$45</span>
-            <span class="to">$215</span>
+          <div class="price-input">
+            <label for="max">Max</label><br>
+            <input id="max" :value="filters.maxPrice" @change="filters.maxPrice = $event.target.value" />
           </div>
         </div>
       </div>
@@ -132,7 +133,9 @@ export default {
         selectedColors: [],
         selectedSizes: [],
         selectedTags: [],
-      }
+        minPrice: "",
+        maxPrice: "",
+      },
     }
   },
   computed: {
@@ -184,6 +187,12 @@ export default {
         if(val['filter[page]']) {
           this.setPage(val['filter[page]'])
         }
+        if(val['filter[min_price]']) {
+          this.filters.minPrice =  this.queryToArray(val['filter[min_price]'])
+        }
+        if(val['filter[max_price]']) {
+          this.filters.maxPrice =  this.queryToArray(val['filter[max_price]'])
+        }
       }
     }
   },
@@ -215,6 +224,8 @@ export default {
         'filter[tags]': this.filters.selectedTags,
         'filter[by_price]': this.by_price,
         'filter[per_page]': this.per_page,
+        'filter[min_price]': this.filters.minPrice,
+        'filter[max_price]': this.filters.maxPrice,
         search: this.search,
         'filter[page]': this.page,
       }
@@ -230,6 +241,24 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.widget_filter_price {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
+.price-input {
+  width: 100%;
+  margin-bottom: 10px;
+
+  label {
+    margin: 0;
+    color: #555;
+  }
+  input {
+    color: #555;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+}
 </style>

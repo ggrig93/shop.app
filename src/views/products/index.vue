@@ -125,7 +125,7 @@ export default {
     },
     /* todo */
     price() {
-      return {}
+      return {min: 10, max: 100}
     }
   },
   watch: {

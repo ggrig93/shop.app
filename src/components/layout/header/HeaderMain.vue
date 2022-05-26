@@ -5,6 +5,7 @@
         <div class="logo">
           <router-link :to="{name: 'Home'}">
             <img src="http://ledthanhdat.vn/html/ysera/assets/images/logo.png" alt="img">
+            <img src="@/assets/images/logo.png" alt="img">
           </router-link>
         </div>
       </div>
@@ -12,18 +13,6 @@
         <div class="block-search-block">
           <form action="" class="form-search form-search-width-category" @submit.prevent="searchHandler">
             <div class="form-content">
-<!--              <div class="category">-->
-<!--                <select title="cate" data-placeholder="All Categories" class="chosen-select"-->
-<!--                        tabindex="1" v-model="selectedCategory">-->
-<!--                  <option-->
-<!--                      v-for="(category, i) in categories"-->
-<!--                      :value="category.id"-->
-<!--                      :key="i"-->
-<!--                  >-->
-<!--                    {{category.name}}-->
-<!--                  </option>-->
-<!--                </select>-->
-<!--              </div>-->
               <div class="inner">
                 <input type="text" class="input" v-model="search" placeholder="Search here">
               </div>

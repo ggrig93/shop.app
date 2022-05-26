@@ -220,7 +220,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .slick-slide img{
   width: 100px;
   height: 100px;
@@ -246,5 +246,25 @@ export default {
 }
 .size-error {
   margin: -15px 0 0 0;
+}
+
+@media (max-width: 768px) {
+  .kt-popup-quickview {
+    width: 96%!important;
+  }
+  .kt-popup-quickview .details-infor {
+    padding-left: 0!important;
+    margin-top: 20px;
+  }
+  .kt-popup-quickview .details-thumb {
+    margin-bottom: 20px;
+    width: 100%!important;
+  }
+  .kt-popup-quickview .details-infor {
+    width: 100%!important;
+  }
+  .kt-popup-quickview .mfp-close {
+    right: 0!important;
+  }
 }
 </style>

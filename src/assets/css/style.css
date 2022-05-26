@@ -2429,7 +2429,7 @@ table tr:last-child td, table tr:last-child th {
 /*kt-popup-quickview*/
 .kt-popup-quickview {
 	width: 770px;
-	margin: 0 auto;
+	margin: 20px auto;
 	background-color: #fff;
 	position: relative;
 	padding: 40px 30px;
@@ -2509,6 +2509,19 @@ table tr:last-child td, table tr:last-child th {
 }
 .mfp-bg {
 	opacity: 0.5;
+}
+.mfp-auto-cursor .mfp-content {
+	max-height: 100vh;
+	overflow-y: auto;
+}
+
+.mfp-content::-webkit-scrollbar {
+	display: none;
+}
+
+.mfp-content {
+	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;  /* Firefox */
 }
 /*popup-newsletter*/
 .kt-popup-newsletter {

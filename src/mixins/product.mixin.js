@@ -15,6 +15,7 @@ export default {
         },
         img: {
             get() {
+                // console.log(this.product, "product")
                 return this.activeImg ? this.activeImg : this.product?.gallery[0].images[0].image
             },
             set(val) {

@@ -68,14 +68,13 @@
               Deal of the day
             </h3>
             <vue-slick-carousel v-if="dealDayProducts" class="owl-products owl-slick" v-bind="productsSettings">
-              <router-link
+              <a
                   v-for="(item, i) in dealDayProducts"
                   :key="i"
-                  :to="{name: 'Product', params: {id: i+1}}"
                   class="product-item style-5"
               >
                 <ProductCart :product="item.product" :endDate="item.date_end"/>
-              </router-link>
+              </a>
             </vue-slick-carousel>
           </div>
         </div>

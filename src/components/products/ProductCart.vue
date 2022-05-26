@@ -33,7 +33,7 @@
                 >Add to Wishlist</a>
               </div>
             </div>
-            <a href="javascript:void(0)" class="button quick-wiew-button" @click.stop="openModal(product)">Quick View</a>
+            <a class="button quick-wiew-button" @click.stop="openModal(product)">Quick View</a>
           </div>
         </div>
       </div>
