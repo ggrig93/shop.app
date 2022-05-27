@@ -2,8 +2,11 @@
   <div class="main-content main-content-product left-sidebar">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12 products-header">
           <Breadcrumbs />
+          <div v-if="isMobile" class="filter-btn flex-center" @click="showFilters = !showFilters">
+            <img src="@/assets/images/filter.svg" />
+          </div>
         </div>
       </div>
       <div class="row products-wrapper">
@@ -66,7 +69,7 @@
             />
           </div>
         </div>
-        <div class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <div v-if="showFilters || !isMobile" class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
           <Sidebar
               class="shop-sidebar"
               :categories="categories"
@@ -95,10 +98,15 @@ export default {
     return {
       layoutMode: true,
       by_price: '',
-      per_page: ''
+      per_page: '',
+      showFilters: true,
+      width: 0,
     }
   },
   computed: {
+    isMobile() {
+      return this.width <= 768 && this.width > 0
+    },
     paginate() {
       return this.$store.state.products?.meta
     },
@@ -159,8 +167,23 @@ export default {
     this.setPage(1)
     this.setPerPage('')
   },
+  mounted() {
+    this.addResizeListener()
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.onResizeEvent)
+  },
   methods: {
     ...mapMutations(["setByPrice", "setSearch", "setPage", "setCategory", "setPerPage"]),
+    addResizeListener() {
+      if (window) {
+        window.addEventListener('resize', this.onResizeEvent)
+        window.dispatchEvent(new window.Event('resize'))
+      }
+    },
+    onResizeEvent(e) {
+      this.width = e.target.innerWidth
+    },
     sortByPrice() {
       this.setByPrice(this.by_price)
     },
@@ -175,5 +198,20 @@ export default {
 </script>
 
 <style scoped>
-
+.products-header {
+  position: relative;
+}
+.filter-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 30px;
+  height: 30px;
+  border: 1px solid #c9c9c9;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>

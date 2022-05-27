@@ -3417,7 +3417,7 @@ table tr:last-child td, table tr:last-child th {
 	color: #555555;
 }
 .sidebar .price-slider-wrapper {
-	padding-top: 10px;
+	padding-top: 0;
 }
 .sidebar input[type="checkbox"] {
 	display: none;
