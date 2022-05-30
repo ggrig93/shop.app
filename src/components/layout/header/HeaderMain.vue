@@ -5,7 +5,7 @@
         <div class="logo">
           <router-link :to="{name: 'Home'}">
             <img src="http://ledthanhdat.vn/html/ysera/assets/images/logo.png" alt="img">
-            <img src="@/assets/images/logo.png" alt="img">
+<!--            <img src="@/assets/images/logo.png" alt="img">-->
           </router-link>
         </div>
       </div>
@@ -14,7 +14,7 @@
           <form action="" class="form-search form-search-width-category" @submit.prevent="searchHandler">
             <div class="form-content">
               <div class="inner">
-                <input type="text" class="input" v-model="search" placeholder="Search here">
+                <input type="text" class="input" v-model="search" placeholder="Փնտրել">
               </div>
               <button class="btn-search" type="submit">
                 <span class="icon-search"></span>
