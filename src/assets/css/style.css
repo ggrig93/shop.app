@@ -1588,7 +1588,7 @@ table tr:last-child td, table tr:last-child th {
 	background: transparent;
 	color: #333;
 	border: 1px solid #f1f1f1;
-	padding: 7px 20px;
+	padding: 8px 15px;
 }
 .shopcart-description .actions .button-viewcart:hover {
 	color: #ffffff;
@@ -1840,7 +1840,7 @@ table tr:last-child td, table tr:last-child th {
 	cursor: pointer;
 	text-transform: uppercase;
 	font-weight: 700;
-	font-family: 'Roboto';
+	/*font-family: 'Roboto';*/
 	letter-spacing: 0.05em;
 	color: #000;
 }
@@ -3376,13 +3376,13 @@ table tr:last-child td, table tr:last-child th {
 }
 .widget .widgettitle {
 	font-size: 14px;
-	font-family: 'Roboto';
-	text-transform: uppercase;
+	/*font-family: 'Roboto';*/
+	/*text-transform: uppercase;*/
 	font-weight: 700;
 	padding-bottom: 25px;
 	margin-bottom: 0;
 	position: relative;
-	letter-spacing: 0.1em;
+	/*letter-spacing: 0.1em;*/
 	z-index: 1;
 	padding-left: 40px;
 }
@@ -4634,6 +4634,7 @@ ul.list-products {
 	font-style: normal;
 	font-weight: 700;
 	margin-bottom: 15px;
+	color: #c09578;
 }
 .header-banner .sub-title {
 	font-size: 16px;
@@ -4680,7 +4681,7 @@ ul.list-products {
 	font-size: 15px;
 	text-transform: uppercase;
 	font-weight: 600;
-	font-family: 'Roboto';
+	/*font-family: 'Roboto';*/
 }
 .ysera-iconbox.layout1 .content .title {
 	color: #222;
@@ -5504,6 +5505,7 @@ ul.list-products {
 	color: #c09578;
 	font-weight: 700;
 	position: relative;
+	margin-left: 5px;
 }
 .slider-item .slider-infor .button {
 	padding-top: 7px;
@@ -5524,7 +5526,7 @@ ul.list-products {
 	-webkit-animation-fill-mode: both;
 	animation-name: bounceInUp;
 	-webkit-animation-name: bounceInUp;
-	font-family: 'Roboto';
+	/*font-family: 'Roboto';*/
 }
 .slider-item .slider-infor .button:last-child {
 	margin-right: 0;
@@ -5616,7 +5618,7 @@ ul.list-products {
 }
 .ysera-tabs .tab-link li a {
 	margin: 0 25px;
-	font-family: 'Roboto';
+	/*font-family: 'Roboto';*/
 	font-size: 14px;
 	font-weight: 700;
 	position: relative;
@@ -8294,6 +8296,7 @@ iframe {
 	color: #c09578;
 	font-weight: 700;
 	position: relative;
+	margin-left: 5px;
 }
 /*banner home 10*/
 .item-banner.style10 .inner {

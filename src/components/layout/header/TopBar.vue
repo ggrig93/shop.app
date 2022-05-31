@@ -3,7 +3,7 @@
     <div class="container">
       <div class="top-bar-left">
         <div class="header-message">
-          Welcome to our online store!
+          Բարի գալուստ մեր online խանութ
         </div>
       </div>
 <!--      <div class="top-bar-right">-->

@@ -25,7 +25,7 @@
                             {{product.title}}
                           </h3>
                           <div class="price">
-                            New Price:
+                            Նոր գին՝
                             <span class="number-price">
 														${{product.price}}
 													</span>
@@ -34,7 +34,7 @@
                               :to="{name: 'Product', params: {id: product.id}}"
                               class="button btn-shop-the-look bgroud-style"
                           >
-                            Shop now
+                            Գնել
                           </router-link>
                         </div>
                       </div>
@@ -50,12 +50,12 @@
                     :backgroundImage="product.avatar"
                 >
                   <h3 class="title custom-title">{{product.title}}</h3>
-                  <span class="price">${{product.price}}</span>
+                  <span class="price">${{product.price}}</span> <br>
                   <router-link
                       :to="{name: 'Product', params: {id: product.id}}"
                       class="button btn-lets-do-it"
                   >
-                    Shop now
+                    Գնել
                   </router-link>
                 </banner>
               </div>
@@ -65,7 +65,7 @@
         <div class="ysera-product produc-featured rows-space-65">
           <div class="container">
             <h3 class="custommenu-title-blog">
-              Deal of the day
+              Օրվա առաջարկները
             </h3>
             <vue-slick-carousel v-if="dealDayProducts" class="owl-products owl-slick" v-bind="productsSettings">
               <a
@@ -93,7 +93,7 @@
                       :to="{name: 'Product', params: {id: product.id}}"
                       class="button btn-shop-now"
                   >
-                    Shop now
+                    Գնել
                   </router-link>
                 </banner>
               </div>
@@ -108,20 +108,20 @@
                 {{bottomContainerProducts[0].description}}
               </div>
               <div class="banner-price">
-                Price from:
-                <span class="number-price">${{bottomContainerProducts[0].price}}</span>
+                Գինը սկսած՝
+                <span class="number-price">{{bottomContainerProducts[0].price}} դրամից</span>
               </div>
               <router-link
                   :to="{name: 'Product', params: {id: bottomContainerProducts[0].id}}"
                   class="button btn-shop-now"
               >
-                Shop now
+                Գնել
               </router-link>
               <router-link
                   :to="{name: 'Products'}"
                   class="button btn-view-collection"
               >
-                View more
+                Տեսնել ավելին
               </router-link>
             </banner>
           </div>
@@ -131,13 +131,13 @@
             <div class="tab-head">
               <ul class="tab-link">
                 <li :class="[activeTabPanel === 'bestseller' ? 'active' : '']">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'bestseller'">Bestseller</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'bestseller'">Բեսթսելեր</a>
                 </li>
                 <li :class="activeTabPanel === 'newArrivals' ? 'active' : ''">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'newArrivals'">New Arrivals</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'newArrivals'">Նորույթներ</a>
                 </li>
                 <li :class="activeTabPanel === 'topRated' ? 'active' : ''">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'topRated'">Top Rated</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'topRated'">Լավագույն վաճառք</a>
                 </li>
               </ul>
             </div>
@@ -164,8 +164,8 @@
                       <span class="flaticon-delivery-truck"></span>
                     </div>
                     <div class="content">
-                      <h4 class="title">
-                        Free Delivery On order over $90.00
+                      <h4 class="title free-title">
+                        Անվճար առաքում 5000 դրամ և ավել պատվերի դեպքում
                       </h4>
                     </div>
                   </div>
@@ -314,5 +314,8 @@ export default {
   text-overflow: ellipsis;
   word-break: break-all;
   white-space: nowrap;
+}
+.free-title {
+  text-transform: uppercase!important;
 }
 </style>

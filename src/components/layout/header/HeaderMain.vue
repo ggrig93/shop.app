@@ -38,7 +38,7 @@
             </a>
             <div class="shopcart-description ysera-submenu">
               <div class="content-wrap">
-                <h3 class="title">Shopping Cart</h3>
+                <h3 class="title">Զամբյուղ</h3>
                 <ul class="minicart-items">
                   <li class="product-cart mini_cart_item" v-for="(product, i) in shopProducts" :key="i">
                     <router-link :to="{name: 'Product', params: {id: product.id}}" class="product-media">
@@ -55,9 +55,9 @@
                         <span class="attribute_size"><a>{{product.size.name}}</a></span>
                       </div>
                       <span class="product-price">
-                        <span class="price">${{product.price}}</span>
+                        <span class="price">{{product.price}} դր․ </span>
                       </span>
-                      <span class="product-quantity">(x{{product.count}})</span>
+                      <span class="product-quantity">({{product.count}} հատ)</span>
                       <div class="product-remove">
                         <span @click="showDeletePopup = i" style="cursor: pointer"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
                       </div>
@@ -65,17 +65,17 @@
                   </li>
                 </ul>
                 <div class="subtotal">
-                  <span class="total-title">Subtotal: </span>
+                  <span class="total-title">Ընդհամենը՝ </span>
                   <span class="total-price">
                     <span class="Price-amount">${{cartTotalPrice}}</span>
                   </span>
                 </div>
                 <div class="actions">
                   <router-link class="button button-viewcart" :to="{name: 'ShoppingCart'}" @click.native="hideCart">
-                    <span>View Bag</span>
+                    <span>Գնալ զամբյուղ</span>
                   </router-link>
                   <router-link class="button button-checkout" :to="{name: 'Checkout'}" @click.native="hideCart">
-                    <span>Checkout</span>
+                    <span>Պատվիրել</span>
                   </router-link>
                 </div>
               </div>
@@ -153,6 +153,7 @@
     </div>
     <DeletePopup
         v-if="showDeletePopup || showDeletePopup === 0"
+        :fromCart="true"
         @confirm="removeHandler"
         @close="closeModal"
     />

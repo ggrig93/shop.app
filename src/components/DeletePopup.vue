@@ -2,12 +2,15 @@
   <div class="popup-wrapper">
     <div class="popup">
       <div class="popup-header">
-        <h2>Are you sure about this?</h2>
+        <h2>Համոզվա՞ծ եք</h2>
         <div class="glyph popup-close" @click="closeModal">
           <div class="glyph-icon flaticon-close"></div>
         </div>
       </div>
-      <p class="popup-text">This action will remove this item from your shopping cart.</p>
+      <p class="popup-text">Այս գործողությունը կհեռացնի նշված ապրանքը ձեր
+        <span v-if="fromCart">զամբյուղից</span>
+        <span v-else>նախընտրելիների ցուցակից</span>
+        :</p>
       <div class="popup-footer">
         <button @click="$emit('confirm')" class="btn-ok">OK</button>
         <button class="btn-cancel" @click="closeModal">Cancel</button>
@@ -18,6 +21,12 @@
 
 <script>
 export default {
+  props: {
+    fromCart: {
+      type: Boolean,
+      default: false
+    }
+  },
   methods: {
     closeModal() {
       this.$emit("close")

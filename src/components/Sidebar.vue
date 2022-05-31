@@ -2,7 +2,7 @@
   <div class="wrapper-sidebar">
     <div class="widget woof_Widget sidebar-filters_wrap">
       <div class="widget widget-categories sidebar-filter" v-if="categories">
-        <h3 class="widgettitle">Categories</h3>
+        <h3 class="widgettitle">Ընտրել ըստ տեսակի</h3>
         <ul class="list-categories">
           <li v-for="cat in categories" :key="cat.id">
             <Checkbox
@@ -16,21 +16,21 @@
       </div>
       <div class="widget widget_filter_price sidebar-filter" v-if="price">
         <h4 class="widgettitle">
-          Price
+          Ընտրել ըստ գնի
         </h4>
         <div class="price-slider-wrapper">
           <div class="price-input">
-            <label for="min">Min</label><br>
+            <label for="min">Մինիմում</label><br>
             <input id="min" :value="filters.minPrice" @change="filters.minPrice = $event.target.value" />
           </div>
           <div class="price-input">
-            <label for="max">Max</label><br>
+            <label for="max">Մաքսիմում</label><br>
             <input id="max" :value="filters.maxPrice" @change="filters.maxPrice = $event.target.value" />
           </div>
         </div>
       </div>
       <div class="widget widget-brand sidebar-filter" v-if="brands">
-        <h3 class="widgettitle">Brand</h3>
+        <h3 class="widgettitle">Ընտրել ըստ բրենդի</h3>
         <ul class="list-brand">
           <li v-for="brand in brands" :key="brand.id">
             <Checkbox
@@ -43,7 +43,7 @@
         </ul>
       </div>
       <div class="widget widget_filter_size sidebar-filter" v-if="sizes">
-        <h4 class="widgettitle">Size</h4>
+        <h4 class="widgettitle">Ընտրել ըստ չափի</h4>
         <ul class="list-brand">
           <li v-for="size in sizes" :key="size.id">
             <Checkbox
@@ -57,7 +57,7 @@
       </div>
       <div class="widget widget-color sidebar-filter" v-if="colors">
         <h4 class="widgettitle">
-          Color
+          Ընտրել ըստ գույնի
         </h4>
         <div class="list-color">
           <a v-for="color in colors"

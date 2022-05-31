@@ -12,12 +12,9 @@
       <div class="row products-wrapper">
         <div class="content-area shop-grid-content no-banner col-lg-9 col-md-9 col-sm-12 col-xs-12">
           <div class="site-main">
-            <h3 class="custom_blog_title">
-              Grid Products
-            </h3>
             <div class="shop-top-control">
               <form class="select-item select-form">
-                <span class="title">Sort</span>
+                <span class="title">Դասակարգել ըստ քանակի</span>
                 <select
                     v-model="per_page"
                     title="sort"
@@ -25,13 +22,13 @@
                     class="chosen-select"
                     @change="sortPerPage"
                 >
-                  <option value="2">2 Products/Page</option>
-                  <option value="6">6 Products/Page</option>
-                  <option value="10">10 Products/Page</option>
+                  <option value="2">2 ապրանք/էջ</option>
+                  <option value="6">6 ապրանք/էջ</option>
+                  <option value="10">10 ապրանք/էջ</option>
                 </select>
               </form>
               <form class="filter-choice select-form">
-                <span class="title">Sort by</span>
+                <span class="title">Դասակարգել ըստ գնի</span>
                 <select
                     title="sort-by"
                     data-placeholder="Price: "
@@ -39,8 +36,8 @@
                     v-model="by_price"
                     @change="sortByPrice"
                 >
-                  <option value="asc">Price: Low to High</option>
-                  <option value="desc">Price: High to Low</option>
+                  <option value="asc">աճման</option>
+                  <option value="desc">նվազման</option>
                 </select>
               </form>
             </div>

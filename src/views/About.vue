@@ -10,7 +10,7 @@
         <div class="row">
           <div class="content-area content-about col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="site-main">
-              <h3 class="custom_blog_title">About Us</h3>
+              <h3 class="custom_blog_title">Մեր մասին</h3>
               <div class="page-main-content">
                 <div class="header-banner banner-image">
                   <div class="banner-wrap">
@@ -18,13 +18,13 @@
                       <div class="col-lg-5 col-md-offset-7">
                         <div class="content-inner">
                           <h2 class="title">
-                            New Collection <br/> for you
+                            Նոր տեսականի <br/> հենց քեզ համար
                           </h2>
                           <div class="sub-title">
-                            Shop the latest products right <br/>
-                            We have beard supplies from top brands.
+                            Ինքնատիպ և որակյալ զարդեր,որոնք <br/>
+                            կգոհացնեն նույնիսկ ամենաքմահաճ հաճախորդին
                           </div>
-                          <a href="#" class="ysera-button button">Shop now</a>
+                          <router-link to="/products" class="ysera-button button">Գնել</router-link>
                         </div>
                       </div>
                     </div>
@@ -36,14 +36,14 @@
                       <div class="iconbox-inner">
                         <div class="icon-item">
                           <span class="placeholder-text">01</span>
-                          <span class="icon flaticon-rocket-ship"></span>
+                          <span class="icon flaticon-delivery-truck"></span>
                         </div>
                         <div class="content">
                           <h4 class="title">
-                            EU Free Delivery
+                            ԱՆՎՃԱՐ ԱՌԱՔՈՒՄ
                           </h4>
                           <div class="text">
-                            Free Delivery on all order from EU with price more than $90.00
+                            Անվճար առաքում ՀՀ տարածքում՝ 5000 դրամ և ավել բոլոր պատվերների համար։
                           </div>
                         </div>
                       </div>
@@ -54,14 +54,14 @@
                       <div class="iconbox-inner">
                         <div class="icon-item">
                           <span class="placeholder-text">02</span>
-                          <span class="icon flaticon-return"></span>
+                          <span class="icon flaticon-diamond"></span>
                         </div>
                         <div class="content">
                           <h4 class="title">
-                            Money Guarantee
+                            Նրբաոճ տեսականի
                           </h4>
                           <div class="text">
-                            30 Days money back guarantee no question asked!
+                            Մեր զարդերը նորաձև և յուրօրինակ նվեր են Ձեր սիրելիների համար։
                           </div>
                         </div>
                       </div>
@@ -72,14 +72,14 @@
                       <div class="iconbox-inner">
                         <div class="icon-item">
                           <span class="placeholder-text">03</span>
-                          <span class="icon flaticon-padlock"></span>
+                          <span class="icon flaticon-support"></span>
                         </div>
                         <div class="content">
                           <h4 class="title">
-                            Online Support 24/7
+                            Առցանց սպասարկում
                           </h4>
                           <div class="text">
-                            We’re here to support to you 24/7. Let’s shopping now!
+                            Մենք սիրով աջակցում ենք մեր հաճախորդներին: Եկեք գնումներ կատարենք միասին:
                           </div>
                         </div>
                       </div>

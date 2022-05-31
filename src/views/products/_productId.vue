@@ -54,10 +54,10 @@
                 </div>
                 <div class="availability">
                   Availability:
-                  <a href="#">{{product.available_type}}</a>
+                  <a>{{product.available_type}}</a>
                 </div>
                 <div class="price">
-                  <span>${{product.price}}</span>
+                  <span>{{product.price}} դրամ</span>
                 </div>
                 <div class="product-details-description">
                   <ul v-if="product.details.additional">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="variations">
                   <div class="attribute attribute_color">
-                    <div class="color-text text-attribute">Color:</div>
+                    <div class="color-text text-attribute">Գույն</div>
                     <div class="list-color list-item">
                       <a v-for="color in colors"
                          :key="color.id"
@@ -83,17 +83,17 @@
                          @click.prevent="selectColor(color)"
                       ></a>
                     </div>
-                    <p v-if="showColorError" class="error-message color-error">Select color</p>
+                    <p v-if="showColorError" class="error-message color-error">Ընտրեք գույնը</p>
                   </div>
                   <div class="attribute attribute_size">
-                    <div class="size-text text-attribute">Size:</div>
+                    <div class="size-text text-attribute">Չափս</div>
                     <div class="list-size list-item">
                       <a v-for="item in coloredProduct.sizes"
                          :key="item.id"
                          :class="{active: size && size.id === item.id}"
                          @click="size = item"
                       >{{item.name}}</a>
-                    <p v-if="showSizeError" class="error-message size-error">Select size</p>
+                    <p v-if="showSizeError" class="error-message size-error">Ընտրեք չափսը</p>
                     </div>
                   </div>
                 </div>
@@ -104,17 +104,11 @@
                       <div class="triangle"></div>
                     </div>
                     <div class="yith-wcwl-add-button">
-                      <a @click="addToWishList(product)" style="cursor: pointer">Add to Wishlist</a>
+                      <a @click="addToWishList(product)" style="cursor: pointer">Հավանել</a>
                     </div>
                   </div>
-<!--                  <div class="size-chart-wrapp">-->
-<!--                    <div class="btn-size-chart">-->
-<!--                      <a id="size_chart" href="@/assets/images/size-chart.jpg" class="fancybox">View-->
-<!--                        Size Chart</a>-->
-<!--                    </div>-->
-<!--                  </div>-->
                   <div v-if="showSuccessNotify" class="success-notify">
-                    <div class="bubble">Product successfully added</div>
+                    <div class="bubble">Ապրանքը զամբյուղում է</div>
                     <div class="triangle"></div>
                   </div>
                   <div class="quantity-add-to-cart">
@@ -133,19 +127,19 @@
                         <a class="btn-number qtychange qtyplus quantity-plus" @click="changeCount(+1)">+</a>
                       </div>
                     </div>
-                    <button class="single_add_to_cart_button button" @click.stop="addToCartHandler">Add to cart</button>
+                    <button class="single_add_to_cart_button button" @click.stop="addToCartHandler">Ավելացնել զամբյուղ</button>
                   </div>
-                  <p v-if="count < 1" class="error-message">Select a valid count</p>
+                  <p v-if="count < 1" class="error-message">Ընտրեք քանակը</p>
                 </div>
               </div>
             </div>
             <div class="tab-details-product">
               <ul class="tab-link">
                 <li :class="{active: tabPanel === 'Description'}">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Description'">Descriptions</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Description'">Նկարագրություն</a>
                 </li>
                 <li v-if="product.details.information" :class="{active: tabPanel === 'Information'}">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Information'">Information</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Information'">Բնութագիր</a>
                 </li>
               </ul>
               <div class="tab-container">
@@ -158,7 +152,7 @@
             </div>
             <div style="clear: left;"></div>
             <div v-if="product.suggested_products && product.suggested_products.length" class="related products product-grid">
-              <h2 class="product-grid-title">You may also like</h2>
+              <h2 class="product-grid-title">Նմանատիպ ապրանքներ</h2>
               <vue-slick-carousel
                   v-bind="settings"
                   class="owl-products nav-center suggested-products"

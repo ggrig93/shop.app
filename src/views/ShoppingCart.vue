@@ -6,7 +6,7 @@
         <div class="row">
           <div class="main-content-cart main-content col-sm-12">
             <h3 class="custom_blog_title">
-              Shopping Cart
+              Զամբյուղ
             </h3>
             <div class="page-main-content">
               <div class="shoppingcart-content">
@@ -49,10 +49,10 @@
                       </td>
                       <td class="product-price" data-title="Price">
 													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">
-															$
-														</span>
 														{{prod.price}}
+                            <span class="woocommerce-Price-currencySymbol">
+															դրամ
+														</span>
 													</span>
                       </td>
                     </tr>
@@ -64,8 +64,8 @@
 <!--                          <a href="#" class="button"></a>-->
 <!--                        </div>-->
                         <div class="order-total">
-                          <span class="title">Total Price:</span>
-                          <span class="total-price">${{cartTotalPrice}}</span>
+                          <span class="title">Ընդհանուր արժեքը՝ </span>
+                          <span class="total-price">{{cartTotalPrice}} դրամ</span>
                         </div>
                       </td>
                     </tr>
@@ -74,10 +74,10 @@
                 </form>
                 <div class="control-cart">
                   <button class="button btn-continue-shopping" @click="$router.push({name: 'Products'})">
-                    Continue Shopping
+                    Շարունակել Shopping-ը
                   </button>
                   <button class="button btn-cart-to-checkout" @click="$router.push({name: 'Checkout'})">
-                    Checkout
+                    Գնել հիմա
                   </button>
                 </div>
               </div>
@@ -86,6 +86,7 @@
         </div>
         <DeletePopup
             v-if="showDeletePopup || showDeletePopup === 0"
+            :fromCart="true"
             @confirm="removeHandler"
             @close="closeModal"
         />
