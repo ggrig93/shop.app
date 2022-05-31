@@ -22,7 +22,7 @@
                 </div>
                 <div class="coppyright">
                   Copyright © {{new Date().getFullYear()}}
-                  <router-link to="/">Ysera</router-link>
+                  <router-link to="/">BeMine</router-link>
                   . All rights reserved
                 </div>
               </div>
