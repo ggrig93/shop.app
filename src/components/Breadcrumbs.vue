@@ -5,7 +5,7 @@
         <router-link :to="{name: 'Home'}">Գլխավոր էջ</router-link>
       </li>
       <li class="trail-item trail-end active">
-        {{$route.name}}
+        {{currentRouteName}}
       </li>
     </ul>
   </div>
@@ -14,6 +14,22 @@
 <script>
 export default {
   name: "Breadcrumbs",
+  computed: {
+    currentRouteName() {
+      switch (this.$route.name) {
+        case 'About':
+          return 'Մեր մասին';
+        case 'Checkout':
+          return 'Պատվերի էջ';
+        case 'WishList':
+          return 'Հավանումներ';
+        case 'ShoppingCart':
+          return 'Իմ զամբյուղը';
+        default:
+          return this.$route.name
+      }
+    }
+  }
 }
 </script>
 

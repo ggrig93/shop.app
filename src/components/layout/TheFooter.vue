@@ -14,7 +14,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="#" class="social-item" target="_blank">
+                      <a href="https://www.instagram.com/jewelleryshop_bemine/" class="social-item" target="_blank">
                         <i class="icon fa fa-instagram"></i>
                       </a>
                     </li>

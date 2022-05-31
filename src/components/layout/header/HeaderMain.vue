@@ -280,4 +280,7 @@ export default {
       margin-top: -2px;
     }
   }
+  .heart:hover:before {
+    color: #c09578;
+  }
 </style>

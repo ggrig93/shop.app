@@ -11,7 +11,8 @@
       </div>
       <div class="row products-wrapper">
         <div class="content-area shop-grid-content no-banner col-lg-9 col-md-9 col-sm-12 col-xs-12">
-          <div class="site-main">
+          <div v-if="products && !products.length">Հարցման արդյունքում ոչինչ չի գտնվել</div>
+          <div v-else class="site-main">
             <div class="shop-top-control">
               <form class="select-item select-form">
                 <span class="title">Դասակարգել ըստ քանակի</span>

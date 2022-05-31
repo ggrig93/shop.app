@@ -1613,7 +1613,7 @@ table tr:last-child td, table tr:last-child th {
 .block-minicart .shopcart-icon {
 	font-size: 14px;
 	font-family: 'Roboto';
-	color: #555555;
+	/*color: #555555;*/
 	position: relative;
 	text-transform: uppercase;
 	font-weight: 600;
@@ -4714,7 +4714,7 @@ ul.list-products {
 	font-size: 15px;
 	text-transform: uppercase;
 	font-weight: 600;
-	font-family: 'Roboto';
+	/*font-family: 'Roboto';*/
 	color: #222;
 	margin-top: 20px;
 	margin-bottom: 3px;
@@ -5459,7 +5459,7 @@ ul.list-products {
 	padding: 0;
 	text-transform: uppercase;
 	margin-bottom: 12px;
-	font-family: 'Roboto';
+	/*font-family: 'Roboto';*/
 }
 .slider-item.slick-active .title-small {
 	animation-duration: 2s;
@@ -5664,7 +5664,7 @@ ul.list-products {
 	display: table;
 	margin-left: auto;
 	margin-right: auto;
-	font-family: 'Roboto';
+	/*font-family: 'Roboto';*/
 	padding-bottom: 15px;
 }
 .custommenu-title-blog::before {
@@ -7608,7 +7608,7 @@ body.vertical-menu-open .vertical-menu-overlay {
 	padding: 0 0 5px;
 	margin-bottom: 0;
 	text-transform: uppercase;
-	font-family: 'Roboto';
+	/*font-family: 'Roboto';*/
 }
 .item-banner.style1 .ysera-subtitle {
 	margin-bottom: 9px;
@@ -8373,7 +8373,7 @@ iframe {
 	position: relative;
 	margin-top: 10px;
 	text-transform: uppercase;
-	font-family: 'Roboto';
+	/*font-family: 'Roboto';*/
 }
 .footer {
 	text-align: center;
@@ -10079,7 +10079,7 @@ a:hover, a:focus, a:active,
 	border-radius: 10px;
 	text-align: center;
 	font-size: 14px;
-	font-family: 'Roboto', sans-serif;
+	/*font-family: 'Roboto', sans-serif;*/
 	line-height: 24px;
 	color: #FFFFFF;
 }
