@@ -8,7 +8,7 @@ export default {
         },
         {
             id: 2,
-            name: 'Shop',
+            name: 'Բոլորը',
             view: 'Products',
             children: []
         },
@@ -28,7 +28,7 @@ export default {
         },
         {
             id: 2,
-            name: 'Shop',
+            name: 'Բոլորը',
             view: 'Products',
             children: []
         },
@@ -40,7 +40,7 @@ export default {
         },
         {
             id: 4,
-            name: 'Checkout',
+            name: 'Պատվերի էջ',
             view: 'Checkout',
             children: []
         },

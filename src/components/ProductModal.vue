@@ -179,6 +179,7 @@ export default {
     clearData() {
       this.product = null
       this.openModal = false
+      this.setActiveImg(null)
       window.document.documentElement.style.overflow = 'unset'
     },
     closeModal() {

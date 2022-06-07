@@ -74,7 +74,8 @@
       </div>
       <div class="widget widget-tags sidebar-filter" v-if="tags">
         <h3 class="widgettitle">
-          Popular Tags
+<!--          Popular Tags-->
+          Հաճախ հարցվողները
         </h3>
         <ul class="tagcloud">
           <li

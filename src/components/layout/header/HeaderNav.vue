@@ -75,8 +75,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .ysera-menu-item-title {
   cursor: pointer;
+  &:hover {
+    color: #c09578;
+  }
 }
 </style>

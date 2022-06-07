@@ -40,7 +40,7 @@ export default {
       key: 1,
       menu: header.mobileMenu,
       historyMenu: [],
-      titleMenu: 'Main Menu'
+      titleMenu: 'BeMine'
     }
   },
   mounted() {
@@ -54,16 +54,10 @@ export default {
     openMenu() {
       this.open = true
     },
-    goSubmenu(idx) {
-      this.historyMenu.push({title: this.titleMenu, child: this.menu})
-      this.titleMenu = this.menu[idx].name
-      this.menu = this.menu[idx].children
-      this.key = !this.key
-    },
     goBack() {
       const obj = this.historyMenu.pop()
       this.titleMenu = obj.title
-      this.menu = obj.child
+      // this.menu = obj.child
       this.key = !this.key
     }
   }
