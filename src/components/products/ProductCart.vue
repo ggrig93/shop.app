@@ -13,7 +13,7 @@
       <div class="product-thumb">
         <div class="thumb-inner">
 <!--          <router-link :to="{name: 'Product', params: {id : 1}}">-->
-            <img :src="product.avatar" alt="img" style="border: 3px solid red">
+            <img :src="product.avatar" alt="img">
 <!--          </router-link>-->
           <div class="thumb-group">
             <div class="yith-wcwl-add-to-wishlist">
