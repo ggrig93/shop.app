@@ -43,7 +43,7 @@
                 </div>
                 <div class="count-star">(7)</div>
               </div>
-              <div class="availability">Availability: <a>{{product.available_type}}</a></div>
+              <div class="availability"><a>{{product.available_type === 'is_available' ? 'Հասանելի է' : 'Հասանելի չէ'}}</a></div>
               <div class="price"><span>{{product.price}} դրամ</span></div>
               <div class="product-details-description">
                 <ul v-if="product.details.additional">

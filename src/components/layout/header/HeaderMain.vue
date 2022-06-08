@@ -4,7 +4,7 @@
       <div class="col-lg-3 col-sm-4 col-md-3 col-xs-7 col-ts-12 header-element">
         <div class="logo">
           <router-link :to="{name: 'Home'}">
-            <img src="http://ledthanhdat.vn/html/ysera/assets/images/logo.png" alt="img">
+<!--            <img src="http://ledthanhdat.vn/html/ysera/assets/images/logo.png" alt="img">-->
 <!--            <img src="@/assets/images/logo.png" alt="img">-->
           </router-link>
         </div>

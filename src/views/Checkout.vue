@@ -7,7 +7,7 @@
         </div>
       </div>
       <h3 class="custom_blog_title">
-        Checkout
+        Պատվերի էջ
       </h3>
       <div class="checkout-wrapp">
         <div v-if="!showSuccess" class="shipping-address-form-wrapp">
@@ -113,16 +113,15 @@
         <div v-if="showSuccess" class="end-checkout-wrapp">
           <div class="end-checkout checkout-form">
             <div class="icon">
+              <span class="flaticon-checked"></span>
             </div>
             <h3 class="title-checkend">
-              Congratulation! Your order has been processed.
+              Շնորհավորում ենք Ձեր պատվերը գրանցվել է:
             </h3>
             <div class="sub-title">
-              Aenean dui mi, tempus non volutpat eget, molestie a orci.
-              Nullam eget sem et eros laoreet rutrum.
-              Quisque sem ante, feugiat quis lorem in.
+              Շատ կարճ ժամանակահատվածում մենք ձեզ հետ կապ կհաստատենք:
             </div>
-            <router-link to="/products" class="button btn-return">Return to Store</router-link>
+            <router-link to="/products" class="button btn-return">Վերադառնալ ցանկին</router-link>
           </div>
         </div>
       </div>

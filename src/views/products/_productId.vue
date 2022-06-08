@@ -53,8 +53,7 @@
                   </div>
                 </div>
                 <div class="availability">
-                  Availability:
-                  <a>{{product.available_type}}</a>
+                  <a>{{product.available_type === 'is_available' ? 'Հասանելի է' : 'Հասանելի չէ'}}</a>
                 </div>
                 <div class="price">
                   <span>{{product.price}} դրամ</span>

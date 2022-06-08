@@ -25,6 +25,10 @@ export default {
           return 'Հավանումներ';
         case 'ShoppingCart':
           return 'Իմ զամբյուղը';
+        case 'Products':
+          return 'Բոլորը';
+        case 'Product':
+          return 'Ապրանք';
         default:
           return this.$route.name
       }
