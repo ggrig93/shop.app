@@ -23,9 +23,9 @@
                     class="chosen-select"
                     @change="sortPerPage"
                 >
-                  <option value="2">2 ապրանք/էջ</option>
                   <option value="6">6 ապրանք/էջ</option>
-                  <option value="10">10 ապրանք/էջ</option>
+                  <option value="9">9 ապրանք/էջ</option>
+                  <option value="12">12 ապրանք/էջ</option>
                 </select>
               </form>
               <form class="filter-choice select-form">

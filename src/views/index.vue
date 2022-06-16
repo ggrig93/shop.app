@@ -27,7 +27,7 @@
                           <div class="price">
                             Նոր գին՝
                             <span class="number-price">
-														${{product.price}}
+														{{product.price}} դրամ
 													</span>
                           </div>
                           <router-link
@@ -50,7 +50,7 @@
                     :backgroundImage="product.avatar"
                 >
                   <h3 class="title custom-title">{{product.title}}</h3>
-                  <span class="price">${{product.price}}</span> <br>
+                  <span class="price">{{product.price}} դրամ</span> <br>
                   <router-link
                       :to="{name: 'Product', params: {id: product.id}}"
                       class="button btn-lets-do-it"

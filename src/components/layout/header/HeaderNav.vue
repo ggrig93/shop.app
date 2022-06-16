@@ -9,7 +9,7 @@
                   <span></span>
                   <span></span>
                 </span>
-            <span class="text">Բոլոր տեսակները</span>
+            <span class="text">Տեսականի</span>
           </div>
           <div class="block-content verticalmenu-content" :class="{'show-up': openCategories}">
             <ul class="ysera-nav-vertical vertical-menu ysera-clone-mobile-menu">
