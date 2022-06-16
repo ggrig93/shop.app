@@ -27,7 +27,7 @@
                     :margin="10" :dots="false" class="thumbnails_carousel"
                     :responsive="{'0':{'items':3},'480':{'items':3},'600':{'items':3},'1000':{'items':3}}"
                     :nav-text="[`<i class='fa fa-angle-left' aria-hidden='true'></i>`, `<i class='fa fa-angle-right' aria-hidden='true'></i>`]"
-                    :key="activeBlock"
+                    :key="activeBlock+img"
                   >
                     <a href="javascript:void(0)"
                        :class="{'active': img === i.image}"
