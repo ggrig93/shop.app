@@ -65,6 +65,7 @@
                     <p class="error-text" v-if="errors.zipCode">Պարտադիր է</p>
                   </div>
                 </div>
+                <CaptchaComponent :form="form" />
                 <p v-if="errorFromBack" class="error-text">{{errorFromBack}}</p>
               </div>
             </div>
@@ -132,10 +133,11 @@
 <script>
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { http } from '@/api/http-common';
+import CaptchaComponent from "../components/Captcha";
 
 export default {
   name: "Checkout",
-  components: {Breadcrumbs},
+  components: {CaptchaComponent, Breadcrumbs},
   data() {
     return {
       errorFromBack: "",
@@ -145,6 +147,7 @@ export default {
         phone: "",
         address: "",
         zipCode: "",
+        token: ""
       },
       errors: {
         name: false,
