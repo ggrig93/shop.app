@@ -152,9 +152,10 @@
 </template>
 
 <script>
-import Breadcrumbs from "@/components/Breadcrumbs";
 export default {
   name: "ContactUs",
-  components: {Breadcrumbs}
+  components: {
+    Breadcrumbs: () => import("@/components/Breadcrumbs")
+  }
 }
 </script>

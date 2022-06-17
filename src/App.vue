@@ -10,19 +10,14 @@
 </template>
 
 <script>
-import TheHeader from "@/components/layout/TheHeader";
-import TheFooter from "@/components/layout/TheFooter";
-import BackToTop from "@/components/BackToTop";
-import ProductModal from "@/components/ProductModal";
-import MobileMenu from "@/components/layout/MobileMenu"
 export default {
   name: "App",
   components: {
-    ProductModal,
-    BackToTop,
-    TheHeader,
-    TheFooter,
-    MobileMenu
+    ProductModal: () => import("@/components/ProductModal"),
+    BackToTop: () => import("@/components/BackToTop"),
+    TheHeader: () => import("@/components/layout/TheHeader"),
+    TheFooter: () => import("@/components/layout/TheFooter"),
+    MobileMenu: () => import("@/components/layout/MobileMenu")
   },
   created() {
     this.$store.dispatch('getCategories')

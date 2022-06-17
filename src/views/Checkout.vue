@@ -131,13 +131,14 @@
 </template>
 
 <script>
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { http } from '@/api/http-common';
-import CaptchaComponent from "../components/Captcha";
 
 export default {
   name: "Checkout",
-  components: {CaptchaComponent, Breadcrumbs},
+  components: {
+    CaptchaComponent: () => import("../components/Captcha"),
+    Breadcrumbs: () => import("@/components/Breadcrumbs")
+  },
   data() {
     return {
       errorFromBack: "",

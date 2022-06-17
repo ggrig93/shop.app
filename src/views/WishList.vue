@@ -24,12 +24,13 @@
 </template>
 
 <script>
-import Breadcrumbs from "@/components/Breadcrumbs";
-import ProductCart from "@/components/products/ProductCart";
 
 export default {
   name: "WishList",
-  components: {Breadcrumbs, ProductCart},
+  components: {
+    Breadcrumbs: () => import("@/components/Breadcrumbs"),
+    ProductCart: () => import("@/components/products/ProductCart")
+  },
   computed: {
     products() {
       return this.$store.state.wishList;

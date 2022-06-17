@@ -179,19 +179,20 @@
 </template>
 
 <script>
-import VueSlickCarousel from "vue-slick-carousel";
-import carousel from 'vue-owl-carousel'
-import InnerImageZoom from 'vue-inner-image-zoom';
-import ProductCart from "@/components/products/ProductCart";
-import Description from "@/components/products/Description";
-import Information from "@/components/products/Information";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import productMixin from "@/mixins/product.mixin";
 export default {
   name: "Product",
   props: ['id'],
   mixins: [productMixin],
-  components: {Breadcrumbs, VueSlickCarousel, carousel, InnerImageZoom, ProductCart, Description, Information},
+  components: {
+    Breadcrumbs: () => import("@/components/Breadcrumbs"),
+    VueSlickCarousel: () => import("vue-slick-carousel"),
+    carousel: () => import('vue-owl-carousel'),
+    InnerImageZoom: () => import('vue-inner-image-zoom'),
+    ProductCart: () => import("@/components/products/ProductCart"),
+    Description: () => import("@/components/products/Description"),
+    Information: () => import("@/components/products/Information")
+  },
   data() {
     return {
       tabPanel: 'Description',

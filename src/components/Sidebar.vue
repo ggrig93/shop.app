@@ -94,12 +94,13 @@
 </template>
 
 <script>
-import Checkbox from "@/components/custom-input/Checkbox";
 import {mapGetters, mapMutations} from "vuex";
 
 export default {
   name: "Sidebar",
-  components: {Checkbox},
+  components: {
+    Checkbox: () => import("@/components/custom-input/Checkbox")
+  },
   props: {
     categories: {
       type: Array,

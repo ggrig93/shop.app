@@ -84,14 +84,15 @@
 </template>
 
 <script>
-import Sidebar from "@/components/Sidebar";
-import Pagination from "@/components/Pagination";
-import ProductCart from "@/components/products/ProductCart";
-import Breadcrumbs from "@/components/Breadcrumbs";
 import {mapMutations} from "vuex";
 export default {
   name: "GridLeftSidebar",
-  components: {Breadcrumbs, ProductCart, Pagination, Sidebar},
+  components: {
+    Breadcrumbs: () => import("@/components/Breadcrumbs"),
+    ProductCart: () => import("@/components/products/ProductCart"),
+    Pagination: () => import("@/components/Pagination"),
+    Sidebar: () => import("@/components/Sidebar")
+  },
   data() {
     return {
       layoutMode: true,

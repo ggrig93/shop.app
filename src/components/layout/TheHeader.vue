@@ -12,12 +12,13 @@
 </template>
 
 <script>
-import HeaderMobile from "@/components/layout/header/HeaderMobile";
-import TopBar from "@/components/layout/header/TopBar";
-import HeaderMain from "@/components/layout/header/HeaderMain";
-import HeaderNav from "@/components/layout/header/HeaderNav";
 export default {
   name: "TheHeader",
-  components: {HeaderNav, HeaderMain, TopBar, HeaderMobile},
+  components: {
+    HeaderNav: () => import("@/components/layout/header/HeaderNav"),
+    HeaderMain: () => import("@/components/layout/header/HeaderMain"),
+    TopBar: () => import("@/components/layout/header/TopBar"),
+    HeaderMobile: () => import("@/components/layout/header/HeaderMobile")
+  },
 }
 </script>

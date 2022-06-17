@@ -7,11 +7,10 @@
 </template>
 
 <script>
-import { VueRecaptcha } from 'vue-recaptcha'
 export default {
   name: 'captcha-component',
   components: {
-    VueRecaptcha
+    VueRecaptcha: () => import('vue-recaptcha')
   },
   props: ['form'],
   data: () => ({
