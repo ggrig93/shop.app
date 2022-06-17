@@ -73,7 +73,9 @@
 </template>
 
 <script>
+import DeletePopup from "@/components/DeletePopup.vue";
 import {bus} from '@/main'
+import Countdown from 'vuejs-countdown'
 import productMixin from "@/mixins/product.mixin";
 
 export default {
@@ -95,10 +97,7 @@ export default {
       default: ""
     }
   },
-  components: {
-    Countdown: () => import('vuejs-countdown'),
-    DeletePopup: () => import("@/components/DeletePopup.vue")
-  },
+  components: {Countdown, DeletePopup},
   mixins: [productMixin],
   data() {
     return {

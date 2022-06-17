@@ -96,11 +96,10 @@
 </template>
 
 <script>
+import Breadcrumbs from "@/components/Breadcrumbs";
 export default {
   name: 'About',
-  components: {
-    Breadcrumbs: () => import("@/components/Breadcrumbs")
-  },
+  components: {Breadcrumbs},
   data() {
     return {
       settings: {

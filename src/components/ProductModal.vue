@@ -116,12 +116,11 @@
 
 <script>
 import {bus} from '@/main'
+import VueSlickCarousel from "vue-slick-carousel";
 import productMixin from "@/mixins/product.mixin";
 export default {
   name: "ProductModal",
-  components: {
-    VueSlickCarousel: () => import("vue-slick-carousel")
-  },
+  components: { VueSlickCarousel },
   mixins: [productMixin],
   data() {
     return {

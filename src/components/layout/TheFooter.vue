@@ -36,10 +36,9 @@
 </template>
 
 <script>
+import FooterMobile from "@/components/layout/footer/FooterMobile";
 export default {
   name: "TheFooter",
-  components: {
-    FooterMobile: () => import("@/components/layout/footer/FooterMobile")
-  }
+  components: {FooterMobile}
 }
 </script>

@@ -96,14 +96,13 @@
 </template>
 
 <script>
+import Breadcrumbs from "@/components/Breadcrumbs";
+import DeletePopup from "@/components/DeletePopup.vue";
 import productMixin from "@/mixins/product.mixin";
 export default {
   name: "ShoppingCart",
   mixins: [productMixin],
-  components: {
-    Breadcrumbs: () => import("@/components/Breadcrumbs"),
-    DeletePopup: () => import("@/components/DeletePopup.vue")
-  },
+  components: {Breadcrumbs, DeletePopup},
   data() {
     return {
       showDeletePopup: false

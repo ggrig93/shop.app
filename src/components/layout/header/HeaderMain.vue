@@ -170,6 +170,7 @@
 </template>
 
 <script>
+import DeletePopup from "@/components/DeletePopup.vue";
 import headerMixin from "@/mixins/header.mixin";
 import productMixin from "@/mixins/product.mixin";
 import {mapMutations} from "vuex";
@@ -177,9 +178,7 @@ import {mapMutations} from "vuex";
 export default {
   name: "HeaderMain",
   mixins: [headerMixin, productMixin],
-  components: {
-    DeletePopup: () => import("@/components/DeletePopup.vue")
-  },
+  components: {DeletePopup},
   data() {
     return {
       tab: 'login',

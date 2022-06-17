@@ -201,14 +201,13 @@
 
 <script>
 // @ is an alias to /src
+import VueSlickCarousel from 'vue-slick-carousel'
+import ProductCart from "@/components/products/ProductCart";
+import Banner from '@/components/Banner'
 
 export default {
   name: 'Home',
-  components: {
-    ProductCart: () => import("@/components/products/ProductCart"),
-    VueSlickCarousel: () => import('vue-slick-carousel'),
-    Banner: () => import('@/components/Banner')
-  },
+  components: {ProductCart, VueSlickCarousel, Banner },
   data() {
     return {
       activeTabPanel: 'bestseller',
