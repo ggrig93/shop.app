@@ -4630,7 +4630,7 @@ ul.list-products {
 /*about page*/
 /*banner about*/
 .header-banner.banner-image .banner-wrap {
-	background-image: url(http://ledthanhdat.vn/html/ysera/assets/images/about-background.jpg) !important;
+	background-image: url(../images/about-background.jpg) !important;
 	background-position: center !important;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
