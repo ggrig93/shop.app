@@ -15,7 +15,7 @@
           <div v-else class="site-main">
             <div class="shop-top-control">
               <form class="select-item select-form">
-                <span class="title">Դասակարգել ըստ քանակի</span>
+                <div class="title">Ըստ քանակի</div>
                 <select
                     v-model="per_page"
                     title="sort"
@@ -28,8 +28,8 @@
                   <option value="12">12 ապրանք/էջ</option>
                 </select>
               </form>
-              <form class="filter-choice select-form">
-                <span class="title">Դասակարգել ըստ գնի</span>
+              <form class="select-item select-form">
+                <div class="title">Ըստ գնի</div>
                 <select
                     title="sort-by"
                     data-placeholder="Price: "
@@ -97,7 +97,7 @@ export default {
       layoutMode: true,
       by_price: '',
       per_page: '',
-      showFilters: true,
+      showFilters: false,
       width: 0,
     }
   },

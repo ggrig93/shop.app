@@ -12,8 +12,8 @@
         <span v-else>նախընտրելիների ցուցակից</span>
         :</p>
       <div class="popup-footer">
-        <button @click="$emit('confirm')" class="btn-ok">OK</button>
-        <button class="btn-cancel" @click="closeModal">Cancel</button>
+        <button @click="$emit('confirm')" class="btn-ok">Այո</button>
+        <button class="btn-cancel" @click="closeModal">Ոչ</button>
       </div>
     </div>
   </div>

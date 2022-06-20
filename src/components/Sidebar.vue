@@ -20,12 +20,13 @@
         </h4>
         <div class="price-slider-wrapper">
           <div class="price-input">
-            <label for="min">Մինիմում</label><br>
-            <input id="min" :value="filters.minPrice" @change="filters.minPrice = $event.target.value" />
+<!--            <label for="min">Մինիմալ գին</label><br>-->
+            <input id="min" placeholder="Մինիմալ գին" :value="filters.minPrice" @change="filters.minPrice = $event.target.value" />
           </div>
+          <div class="line">-</div>
           <div class="price-input">
-            <label for="max">Մաքսիմում</label><br>
-            <input id="max" :value="filters.maxPrice" @change="filters.maxPrice = $event.target.value" />
+<!--            <label for="max">Մաքսիմալ գին</label><br>-->
+            <input id="max" placeholder="Մաքսիմալ գին" :value="filters.maxPrice" @change="filters.maxPrice = $event.target.value" />
           </div>
         </div>
       </div>
@@ -72,7 +73,7 @@
           ></a>
         </div>
       </div>
-      <div class="widget widget-tags sidebar-filter" v-if="tags">
+      <div class="widget widget-tags sidebar-filter" v-if="tags && tags.length">
         <h3 class="widgettitle">
 <!--          Popular Tags-->
           Հաճախ հարցվողները
@@ -246,20 +247,32 @@ export default {
 .widget_filter_price {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
-.price-input {
+.price-slider-wrapper {
+  display: flex;
+  align-items: center;
   width: 100%;
-  margin-bottom: 10px;
 
-  label {
-    margin: 0;
-    color: #555;
+  .line {
+    margin: 0 8px;
   }
-  input {
-    color: #555;
-    border: 1px solid #c9c9c9;
-    border-radius: 5px;
-    padding: 5px 10px;
+
+  .price-input {
+    width: 50%;
+
+    label {
+      margin: 0;
+      color: #555;
+    }
+    input {
+      width: 100%;
+      color: #555;
+      border: 1px solid #c9c9c9;
+      border-radius: 10px;
+      padding: 5px;
+    }
+    input::placeholder {
+      color: #c9c9c9;
+    }
   }
 }
 </style>
