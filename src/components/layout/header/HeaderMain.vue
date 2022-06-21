@@ -90,68 +90,6 @@
               </div>
             </div>
           </div>
-<!--          <div class="block-account block-header ysera-dropdown"-->
-<!--               :class="{'open': openLoginRegister}"-->
-<!--               v-click-outside="hideLoginRegister"-->
-<!--          >-->
-<!--            <a href="javascript:void(0);"-->
-<!--               data-ysera="ysera-dropdown"-->
-<!--               @click="toggleLoginRegister"-->
-<!--            >-->
-<!--              <span class="flaticon-user"></span>-->
-<!--            </a>-->
-<!--            <div class="header-account ysera-submenu">-->
-<!--              <div class="header-user-form-tabs">-->
-<!--                <ul class="tab-link">-->
-<!--                  <li :class="{'active': tab === 'login'}">-->
-<!--                    <a href="javascript:void(0)" @click="tab = 'login'">Login</a>-->
-<!--                  </li>-->
-<!--                  <li :class="{'active': tab === 'register'}">-->
-<!--                    <a href="javascript:void(0)" @click="tab = 'register'">Register</a>-->
-<!--                  </li>-->
-<!--                </ul>-->
-<!--                <div class="tab-container">-->
-<!--                  <template v-if="tab === 'login'">-->
-<!--                    <div id="header-tab-login" class="tab-panel" :class="{'active': tab === 'login'}" key="login">-->
-<!--                      <form method="post" class="login form-login">-->
-<!--                        <p class="form-row form-row-wide">-->
-<!--                          <input type="email" placeholder="Email" class="input-text">-->
-<!--                        </p>-->
-<!--                        <p class="form-row form-row-wide">-->
-<!--                          <input type="password" class="input-text" placeholder="Password">-->
-<!--                        </p>-->
-<!--                        <p class="form-row">-->
-<!--                          <label class="form-checkbox">-->
-<!--                            <input type="checkbox" class="input-checkbox">-->
-<!--                            <span>Remember me</span>-->
-<!--                          </label>-->
-<!--                          <input type="submit" class="button" value="Login">-->
-<!--                        </p>-->
-<!--                        <p class="lost_password">-->
-<!--                          <a href="javascript:void(0)">Lost your password?</a>-->
-<!--                        </p>-->
-<!--                      </form>-->
-<!--                    </div>-->
-<!--                  </template>-->
-<!--                  <template v-if="tab === 'register'">-->
-<!--                    <div id="header-tab-rigister" class="tab-panel" :class="{'active': tab === 'register'}" key="register">-->
-<!--                      <form method="post" class="register form-register">-->
-<!--                        <p class="form-row form-row-wide">-->
-<!--                          <input type="email" placeholder="Email" class="input-text">-->
-<!--                        </p>-->
-<!--                        <p class="form-row form-row-wide">-->
-<!--                          <input type="password" class="input-text" placeholder="Password">-->
-<!--                        </p>-->
-<!--                        <p class="form-row">-->
-<!--                          <input type="submit" class="button" value="Register">-->
-<!--                        </p>-->
-<!--                      </form>-->
-<!--                    </div>-->
-<!--                  </template>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
           <a class="menu-bar mobile-navigation menu-toggle" href="javascript:void(0)" @click="openMobileMenu">
             <span></span>
             <span></span>
