@@ -18,9 +18,6 @@
                       :hide-hint="true"
                       zoom-type="hover"
                   />
-<!--                  <a class="btn-zoom open_qv">-->
-<!--                    <i class="fa fa-search" aria-hidden="true"></i>-->
-<!--                  </a>-->
                 </div>
                 <div class="product-preview image-small product_preview">
                   <carousel
