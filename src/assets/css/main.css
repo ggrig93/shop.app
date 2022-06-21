@@ -4,6 +4,7 @@
 @import '~owl.carousel/dist/assets/owl.carousel.min.css';
 /*@import '~vue-slick-carousel/dist/vue-slick-carousel.css';*/
 @import '~vue-inner-image-zoom/lib/vue-inner-image-zoom.css';
+@import './magnific-popup.min.css';
 @import './slick.css';
 @import '../fonts/flaticon/flaticon.css';
 @import './mobile-menu.css';
