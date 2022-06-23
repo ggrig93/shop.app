@@ -67,7 +67,7 @@
             />
           </div>
         </div>
-        <div v-if="showFilters || !isMobile" class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <div v-show="showFilters || !isMobile" class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
           <Sidebar
               class="shop-sidebar"
               :categories="categories"
