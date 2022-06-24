@@ -5774,6 +5774,6 @@ a:hover, a:focus, a:active,
 	100% { transform: rotate(360deg); }
 }
 
-/*.grecaptcha-badge {*/
-/*	display: none;*/
-/*}*/
+.grecaptcha-badge {
+	display: none;
+}
