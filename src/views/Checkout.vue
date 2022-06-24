@@ -66,7 +66,7 @@
                   </div>
                 </div>
                 <CaptchaComponent :form="form" @verify="verifyHandler" />
-                <p class="error-text" v-if="errors.token">Պարտադիր է</p>
+                <p class="error-text" v-if="errors.token">Պարտադիր է</p> {{errors.token}}
 
                 <p v-if="errorFromBack" class="error-text">{{errorFromBack}}</p>
               </div>
@@ -156,6 +156,7 @@ export default {
         phone: false,
         address: false,
         zipCode: false,
+        token: false,
       }
     }
   },
