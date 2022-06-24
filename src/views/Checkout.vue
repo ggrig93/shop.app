@@ -180,7 +180,8 @@ export default {
     'form.zipCode'(){
       this.errors.zipCode = false
     },
-    'form.token'(){
+    'form.token'(val){
+      console.log("watch", val)
       this.errors.token = false
     },
   },
@@ -189,6 +190,7 @@ export default {
   },
   methods: {
     verifyHandler(token) {
+      console.log("handler", token)
       this.form.token = token;
     },
     orderHandler() {

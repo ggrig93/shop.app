@@ -23,6 +23,7 @@ export default {
 
   methods: {
     onCaptchaVerify(token) {
+      console.log("token", token)
       this.$emit('verify', token)
     },
   }
