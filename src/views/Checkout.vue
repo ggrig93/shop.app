@@ -65,7 +65,7 @@
                     <p class="error-text" v-if="errors.zipCode">Պարտադիր է</p>
                   </div>
                 </div>
-                <CaptchaComponent :form="form" />
+                <CaptchaComponent :form="form" @verify="verifyHandler" />
                 <p v-if="errorFromBack" class="error-text">{{errorFromBack}}</p>
               </div>
             </div>
@@ -183,6 +183,9 @@ export default {
     this.$store.dispatch('getShopProducts')
   },
   methods: {
+    verifyHandler(token) {
+      this.form.token = token;
+    },
     orderHandler() {
       console.log(this.form, "form")
       for(let key in this.form) {
