@@ -66,7 +66,7 @@
                   </div>
                 </div>
                 <CaptchaComponent :form="form" @verify="verifyHandler" />
-                <p class="error-text" v-if="errors.token">Պարտադիր է</p> {{errors.token}}
+                <p class="error-text" v-if="errors.token">Պարտադիր է</p>
 
                 <p v-if="errorFromBack" class="error-text">{{errorFromBack}}</p>
               </div>
@@ -182,7 +182,6 @@ export default {
       this.errors.zipCode = false
     },
     'form.token'(val){
-      console.log("watch", val)
       this.errors.token = false
     },
   },
@@ -191,7 +190,6 @@ export default {
   },
   methods: {
     verifyHandler(token) {
-      console.log("handler", token)
       this.form.token = token;
     },
     orderHandler() {
