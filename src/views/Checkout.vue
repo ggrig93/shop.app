@@ -184,6 +184,7 @@ export default {
   },
   methods: {
     orderHandler() {
+      console.log(this.form, "form")
       for(let key in this.form) {
         if(!this.form[key]) {
           this.errors[key] = true;
