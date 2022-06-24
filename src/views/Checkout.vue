@@ -66,6 +66,8 @@
                   </div>
                 </div>
                 <CaptchaComponent :form="form" @verify="verifyHandler" />
+                <p class="error-text" v-if="errors.token">Պարտադիր է</p>
+
                 <p v-if="errorFromBack" class="error-text">{{errorFromBack}}</p>
               </div>
             </div>
@@ -178,6 +180,9 @@ export default {
     'form.zipCode'(){
       this.errors.zipCode = false
     },
+    'form.token'(){
+      this.errors.token = false
+    },
   },
   created() {
     this.$store.dispatch('getShopProducts')
@@ -187,12 +192,9 @@ export default {
       this.form.token = token;
     },
     orderHandler() {
-      console.log(this.form, "form")
       for(let key in this.form) {
           this.errors[key] = !this.form[key];
       }
-      console.log("errors", this.errors)
-      console.log("Object.values(this.errors).includes(true)", Object.values(this.errors).includes(true))
       if(Object.values(this.errors).includes(true)) return;
       const orders = []
       this.shopProducts.forEach(item => {
@@ -208,7 +210,6 @@ export default {
         ...this.form,
         orders
       }
-      console.log("data", data)
       http.post("/order", data)
       .then(() => {
         this.showSuccess = true;
