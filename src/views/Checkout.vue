@@ -190,6 +190,8 @@ export default {
           this.errors[key] = true;
         }
       }
+      console.log("errors", this.errors)
+      console.log("Object.values(this.errors).includes(true)", Object.values(this.errors).includes(true))
       if(Object.values(this.errors).includes(true)) return;
       const orders = []
       this.shopProducts.forEach(item => {
@@ -205,6 +207,7 @@ export default {
         ...this.form,
         orders
       }
+      console.log("data", data)
       http.post("/order", data)
       .then(() => {
         this.showSuccess = true;
