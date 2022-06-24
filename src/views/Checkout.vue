@@ -38,7 +38,8 @@
                         class="input-text"
                         :class="{'input-error': errors.phone}"
                     >
-                    <p class="error-text" v-if="errors.phone">Պարտադիր է</p>
+                    <p class="error-text" v-if="phoneInvalid">Սխալ ֆորմատ</p>
+                    <p class="error-text" v-else-if="errors.phone">Պարտադիր է</p>
                   </div>
                 </div>
                 <div class="row-wrap">
@@ -157,7 +158,8 @@ export default {
         address: false,
         zipCode: false,
         token: false,
-      }
+      },
+      phoneInvalid: false
     }
   },
   computed: {
@@ -172,7 +174,12 @@ export default {
     'form.name'(){
       this.errors.name = false
     },
-    'form.phone'(){
+    'form.phone'(val){
+      // const regex =  /^([0-9]{2,3})?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+      const regex =  /^[0-9-+() ]*$/
+      console.log(val.match(regex), "val.match(regex)", val.length);
+      this.phoneInvalid = val.match(regex) === null && val.length || val.length > 20
+
       this.errors.phone = false
     },
     'form.address'(){

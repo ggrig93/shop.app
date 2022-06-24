@@ -18,7 +18,7 @@
             </li>
           </ul>
           <div v-else class="empty-wishlist">
-             <div class="empty-wishlist_text">Հավանումների ցուցակը դատարկ է</div>
+             <div class="empty-wishlist_text">Դեռևս հավանած ապրանքներ չկան</div>
             <router-link to="/products" class="button view-all">Դիտել բոլորը</router-link>
           </div>
         </div>
