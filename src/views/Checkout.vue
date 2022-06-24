@@ -189,9 +189,7 @@ export default {
     orderHandler() {
       console.log(this.form, "form")
       for(let key in this.form) {
-        if(!this.form[key]) {
-          this.errors[key] = true;
-        }
+          this.errors[key] = !this.form[key];
       }
       console.log("errors", this.errors)
       console.log("Object.values(this.errors).includes(true)", Object.values(this.errors).includes(true))
