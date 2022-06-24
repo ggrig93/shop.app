@@ -181,7 +181,7 @@ export default {
     'form.zipCode'(){
       this.errors.zipCode = false
     },
-    'form.token'(val){
+    'form.token'(){
       this.errors.token = false
     },
   },
