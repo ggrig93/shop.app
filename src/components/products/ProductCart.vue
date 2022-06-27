@@ -12,9 +12,7 @@
       </div>
       <div class="product-thumb">
         <div class="thumb-inner">
-<!--          <router-link :to="{name: 'Product', params: {id : 1}}">-->
-            <img :src="product.avatar" alt="img">
-<!--          </router-link>-->
+          <img :src="product.avatar" alt="img">
           <div class="thumb-group">
             <div class="yith-wcwl-add-to-wishlist">
               <div class="yith-wcwl-add-button">
@@ -22,13 +20,14 @@
                     v-if="$route.name === 'WishList'"
                     class="product-remove"
                 >
-                  <span @click="showDeletePopup = index"  style="cursor: pointer;">
+                  <span @click="showDeletePopup = product.id"  style="cursor: pointer;">
                     <i aria-hidden="true" class="fa fa-trash-o"></i>
                   </span>
                 </div>
                 <a
                     v-else
                     style="cursor: pointer;"
+                    :class="{ 'active-heart': hasInWishlist(product.id) }"
                     @click.stop="addToWishList(product)"
                 >Հավանել</a>
               </div>
@@ -42,7 +41,7 @@
           <Countdown :end="endDate" />
         </div>
         <h5 class="product-name product_title">
-          <router-link :to="{name: 'Product', params: {id : 1}}">{{product.title}}</router-link>
+          <router-link :to="{name: 'Product', params: {id : product.id}}">{{product.title}}</router-link>
         </h5>
         <div class="group-info">
           <div class="stars-rating">
@@ -65,7 +64,7 @@
       </div>
     </template>
     <DeletePopup
-        v-if="showDeletePopup || showDeletePopup === 0"
+        v-if="showDeletePopup"
         @confirm="removeHandler"
         @close="closeModal"
     />

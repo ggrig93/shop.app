@@ -37,6 +37,7 @@ export default new Vuex.Store({
     category: state => state.otherFilters.category,
     per_page: state => state.otherFilters.per_page,
     otherFilters: state => state.otherFilters,
+    wishList: state => state.wishList,
   },
   mutations: {
     setShopProducts(state, value) {
@@ -154,10 +155,11 @@ export default new Vuex.Store({
       state.shopProducts.forEach(item => totalPrice += (+item.price * item.count))
       state.cartTotalPrice = totalPrice
     },
-    getWishList({state}) {
-      state.wishList =
+    getWishList({commit}) {
+      const wishList =
         JSON.parse(localStorage.getItem("wishList")) ?
           JSON.parse(localStorage.getItem("wishList")) : []
+      commit('setWishList', wishList)
     }
   },
   modules: {

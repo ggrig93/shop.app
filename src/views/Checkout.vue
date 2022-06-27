@@ -177,7 +177,6 @@ export default {
     'form.phone'(val){
       // const regex =  /^([0-9]{2,3})?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
       const regex =  /^[0-9-+() ]*$/
-      console.log(val.match(regex), "val.match(regex)", val.length);
       this.phoneInvalid = val.match(regex) === null && val.length || val.length > 20
 
       this.errors.phone = false

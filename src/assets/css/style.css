@@ -3347,9 +3347,9 @@ ul.list-products {
 .details-infor .group-button .yith-wcwl-add-to-wishlist div a::before {
 	content: "\f08a";
 }
-.details-infor .group-button .yith-wcwl-add-to-wishlist div a:hover::before {
-	content: "\f004";
-}
+/*.details-infor .group-button .yith-wcwl-add-to-wishlist div a:hover::before {*/
+/*	content: "\f004";*/
+/*}*/
 .details-infor .quantity, .details-infor .group-button .button {
 	display: inline-block;
 	vertical-align: middle;
@@ -5747,7 +5747,17 @@ a:hover, a:focus, a:active,
 }
 .wishlist-success-notify {
 	margin: 0;
-	top: -60px;
+	left: 40px;
+	top: -8px;
+}
+.wishlist-success-notify .bubble {
+	min-width: 130px;
+	height: 35px;
+	padding-top: 4px;
+}
+.wishlist-success-notify .triangle {
+	left: -4px;
+	bottom: 7px;
 }
 .suggested-products .product-item .product-inner img {
 	width: 100%;
@@ -5776,4 +5786,13 @@ a:hover, a:focus, a:active,
 
 .grecaptcha-badge {
 	display: none;
+}
+
+.active-heart {
+	color: #c09578;
+}
+
+.active-heart:before {
+	content: "\f004"!important;
+	color: #c09578!important;
 }

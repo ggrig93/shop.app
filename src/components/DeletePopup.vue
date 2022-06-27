@@ -9,7 +9,7 @@
       </div>
       <p class="popup-text">Այս գործողությունը կհեռացնի նշված ապրանքը ձեր
         <span v-if="fromCart">զամբյուղից</span>
-        <span v-else>նախընտրելիների ցուցակից</span>
+        <span v-else>նախընտրելիների ցանկից</span>
         :</p>
       <div class="popup-footer">
         <button @click="$emit('confirm')" class="btn-ok">Այո</button>
