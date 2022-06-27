@@ -5,7 +5,7 @@
         <div class="col-lg-12 products-header">
           <Breadcrumbs />
           <div v-if="isMobile" class="filter-btn flex-center" @click="showFilters = !showFilters">
-            <img src="@/assets/images/filter.svg" />
+            <img src="@/assets/images/filter.svg" alt="filter" />
           </div>
         </div>
       </div>
@@ -13,7 +13,13 @@
         <div class="content-area shop-grid-content no-banner col-lg-9 col-md-9 col-sm-12 col-xs-12">
           <div v-if="products && !products.length">Հարցման արդյունքում ոչինչ չի գտնվել</div>
           <div v-else class="site-main">
-            <div class="shop-top-control">
+            <div v-if="isMobile" class="sort-btn_wrap">
+              <div class="sort-btn" @click="showSort = !showSort">
+                <img v-if="showSort" src="@/assets/images/sort-up.svg" alt="sort" />
+                <img v-else src="@/assets/images/sort-down.svg" alt="sort" />
+              </div>
+            </div>
+            <div v-show="showSort || !isMobile" class="shop-top-control">
               <form class="select-item select-form">
                 <div class="title">Ըստ քանակի</div>
                 <select
@@ -29,7 +35,7 @@
                 </select>
               </form>
               <form class="select-item select-form">
-                <div class="title">Ըստ գնի</div>
+                <div class="title price-title">Ըստ գնի</div>
                 <select
                     title="sort-by"
                     data-placeholder="Price: "
@@ -98,6 +104,7 @@ export default {
       by_price: '',
       per_page: '',
       showFilters: false,
+      showSort: false,
       width: 0,
     }
   },
@@ -195,13 +202,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .products-header {
   position: relative;
 }
 .filter-btn {
   position: absolute;
-  right: 10px;
+  right: 14px;
   top: 50%;
   transform: translate(0, -50%);
   width: 30px;
@@ -212,4 +219,26 @@ export default {
   align-items: center;
   justify-content: center;
 }
+.sort-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #c9c9c9;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+
+  &_wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .shop-top-control .select-form .price-title {
+    margin-right: 44px;
+  }
+}
+
 </style>
