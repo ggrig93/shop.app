@@ -3373,7 +3373,9 @@ ul.list-products {
 	padding-bottom: 4px;
 }
 .no-sidebar .tab-details-product .tab-link {
-	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .tab-details-product .tab-link li {
 	list-style: none;
@@ -3383,6 +3385,7 @@ ul.list-products {
 }
 .tab-details-product .tab-link li:first-child {
 	padding-left: 0;
+	margin-right: 10px;
 }
 .tab-details-product .tab-link li:last-child {
 	padding-right: 0;
