@@ -2177,7 +2177,6 @@ table tr:last-child td, table tr:last-child th {
 }
 .shop-top-control .select-form, .shop-top-control .grid-view-mode {
 	padding: 0 13px;
-	border-right: 1px solid #F1F1F1;
 	display: table-cell;
 	vertical-align: middle;
 }
@@ -5425,12 +5424,6 @@ ul.list-products {
 	}
 	.ysera-iconbox.layout1 .icon-item {
 		display: inline-block;
-	}
-	/*products page*/
-	.shop-top-control .select-form, .shop-top-control .grid-view-mode, .shop-top-control {
-		/*display: inline-block;*/
-		/*text-align: center;*/
-		/*vertical-align: top;*/
 	}
 	.shop-top-control .select-form, .grid-view-mode {
 		margin-bottom: 10px;
