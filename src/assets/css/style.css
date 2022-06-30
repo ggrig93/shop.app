@@ -1382,13 +1382,17 @@ table tr:last-child td, table tr:last-child th {
 	position: relative;
 }
 .header-device-mobile .wapper {
-	display: table;
+	display: flex;
+	justify-content: space-between;
 	width: 100%;
 	padding: 0 15px;
 }
-.header-device-mobile .item {
-	display: table-cell;
-	vertical-align: middle;
+.header-searchform-box {
+	width: 100%;
+}
+.searchform-wrap {
+	display: flex;
+	align-items: center;
 }
 .header-device-mobile .item .block-sub {
 	position: absolute;
@@ -1466,11 +1470,8 @@ table tr:last-child td, table tr:last-child th {
 	line-height: 27px;
 	border: 1px solid #eee;
 }
-.header-device-mobile .header-searchform-box {
-	padding: 19px 0;
-}
 .header-device-mobile .header-searchform-box .search-input {
-	width: calc(100% - 100px);
+	width: calc(100% - 70px);
 	font-size: 13px;
 	color: #999999;
 	background: #ffffff;
@@ -3935,7 +3936,8 @@ ul.list-products {
 }
 .header.style7 .form-search .form-content {
 	position: relative;
-	display: table;
+	display: flex;
+	align-items: center;
 	width: 100%;
 	margin: 0 auto;
 	background-color: #fff;
@@ -5524,6 +5526,15 @@ ul.list-products {
 	}
 }
 @media (max-width: 480px) {
+	.mobile-logo svg {
+		width: 100px;
+	}
+	.searchform-wrap .button {
+		padding: 6px 20px;
+	}
+	.searchform-wrap .search-input {
+		height: 36px;
+	}
 	.product-grid-title,
 	.custommenu-title-blog {
 		font-size: 18px;
