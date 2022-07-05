@@ -52,7 +52,7 @@ export default {
             const shopProducts =
               JSON.parse(localStorage.getItem("shopProducts")) ?
                 JSON.parse(localStorage.getItem("shopProducts")) : [];
-            shopProducts.push(product)
+            shopProducts.unshift(product)
             localStorage.setItem('shopProducts', JSON.stringify(shopProducts))
             this.$store.commit("setShopProducts", JSON.parse(localStorage.getItem("shopProducts")))
         },
@@ -73,13 +73,13 @@ export default {
             setTimeout(() => { this.addedWishList = false }, 1500)
         },
         hasInWishlist(id) {
-            let wishlist = []
+            let wishlist = {}
             if(this.wishList.find(el => el.id === id)) {
                 wishlist = this.wishList.find(el => el.id === id)
             } else if(JSON.parse(localStorage.getItem("wishList"))) {
                 wishlist = JSON.parse(localStorage.getItem("wishList")).find(el => el.id === id)
             }
-            return wishlist
+            return wishlist && wishlist.id
         },
         removeWishListItem(id) {
             const products = JSON.parse(localStorage.getItem("wishList"))
