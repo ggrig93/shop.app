@@ -49,7 +49,8 @@
               <span :class="'star-' + product.countStar"></span>
             </div>
             <div class="count-star">
-              ({{product.countStar}})
+<!--              ({{product.countStar}})-->
+              {{product.stars_rate}}
             </div>
           </div>
           <div class="price">

@@ -46,7 +46,7 @@
                     <span class="star-5"></span>
                   </div>
                   <div class="count-star">
-                    (7)
+                    ({{product.stars_rate}})
                   </div>
                 </div>
                 <div class="availability">
