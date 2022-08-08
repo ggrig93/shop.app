@@ -4,8 +4,14 @@
       <div class="row">
         <div class="col-lg-12 products-header">
           <Breadcrumbs />
-          <div v-if="isMobile" class="filter-btn flex-center" @click="showFilters = !showFilters">
-            <img src="@/assets/images/filter.svg" />
+          <div v-if="isMobile" class="sort-filter_wrap">
+            <div class="sort-btn" @click="toggleSort">
+              <img v-if="showSort" src="@/assets/images/sort-up.svg" alt="sort" />
+              <img v-else src="@/assets/images/sort-down.svg" alt="sort" />
+            </div>
+            <div class="filter-btn flex-center" @click="toggleFilter">
+              <img src="@/assets/images/filter.svg" alt="filter" />
+            </div>
           </div>
         </div>
       </div>
@@ -13,7 +19,7 @@
         <div class="content-area shop-grid-content no-banner col-lg-9 col-md-9 col-sm-12 col-xs-12">
           <div v-if="products && !products.length">Հարցման արդյունքում ոչինչ չի գտնվել</div>
           <div v-else class="site-main">
-            <div class="shop-top-control">
+            <div v-show="showSort || !isMobile" class="shop-top-control">
               <form class="select-item select-form">
                 <div class="title">Ըստ քանակի</div>
                 <select
@@ -29,7 +35,7 @@
                 </select>
               </form>
               <form class="select-item select-form">
-                <div class="title">Ըստ գնի</div>
+                <div class="title price-title">Ըստ գնի</div>
                 <select
                     title="sort-by"
                     data-placeholder="Price: "
@@ -67,7 +73,7 @@
             />
           </div>
         </div>
-        <div v-if="showFilters || !isMobile" class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <div v-show="showFilters || !isMobile" class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
           <Sidebar
               class="shop-sidebar"
               :categories="categories"
@@ -98,6 +104,7 @@ export default {
       by_price: '',
       per_page: '',
       showFilters: false,
+      showSort: false,
       width: 0,
     }
   },
@@ -190,20 +197,35 @@ export default {
     },
     sortPerPage() {
       this.setPerPage(this.per_page)
-    }
+    },
+    toggleFilter() {
+      this.showFilters = !this.showFilters
+      if(this.showFilters) {
+        this.showSort = false
+      }
+    },
+    toggleSort() {
+      this.showSort = !this.showSort
+      if(this.showSort) {
+        this.showFilters = false
+      }
+    },
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .products-header {
   position: relative;
 }
-.filter-btn {
+.sort-filter_wrap {
+  display: flex;
   position: absolute;
-  right: 10px;
+  right: 15px;
   top: 50%;
   transform: translate(0, -50%);
+}
+.filter-btn {
   width: 30px;
   height: 30px;
   border: 1px solid #c9c9c9;
@@ -212,4 +234,27 @@ export default {
   align-items: center;
   justify-content: center;
 }
+.sort-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #c9c9c9;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  margin-right: 10px;
+}
+@media (max-width: 768px) {
+  .shop-top-control {
+    background-color: unset;
+    border-radius: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .shop-top-control .select-form .price-title {
+    margin-right: 44px;
+  }
+}
+
 </style>

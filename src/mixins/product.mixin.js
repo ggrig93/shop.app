@@ -1,12 +1,15 @@
+import {mapGetters} from "vuex";
+
 export default {
     data() {
         return {
             activeImg: null,
             activeBlock: null,
-            hasWishListItem: false
+            addedWishList: false
         }
     },
     computed: {
+        ...mapGetters(['wishList']),
         colors() {
             return this.product.gallery.map(el => ({...el.color, block: el.block}))
         },
@@ -49,7 +52,7 @@ export default {
             const shopProducts =
               JSON.parse(localStorage.getItem("shopProducts")) ?
                 JSON.parse(localStorage.getItem("shopProducts")) : [];
-            shopProducts.push(product)
+            shopProducts.unshift(product)
             localStorage.setItem('shopProducts', JSON.stringify(shopProducts))
             this.$store.commit("setShopProducts", JSON.parse(localStorage.getItem("shopProducts")))
         },
@@ -57,18 +60,32 @@ export default {
             const wishList =
               JSON.parse(localStorage.getItem("wishList")) ?
                 JSON.parse(localStorage.getItem("wishList")) : [];
-            console.log("find", wishList.find(el => el.id === product.id))
             if(wishList.find(el => el.id === product.id)) {
-                this.hasWishListItem = true;
-                setTimeout(() => { this.hasWishListItem = false }, 1500)
+                this.removeWishListItem(product.id)
+                this.addedWishList = "deleted";
+                setTimeout(() => { this.addedWishList = false }, 1500)
                 return;
             }
             wishList.push(product)
             localStorage.setItem('wishList', JSON.stringify(wishList))
             this.$store.commit("setWishList", JSON.parse(localStorage.getItem("wishList")))
+            this.addedWishList = "added";
+            setTimeout(() => { this.addedWishList = false }, 1500)
         },
-        removeWishListItem(idx) {
+        hasInWishlist(id) {
+            let wishlist = {}
+            if(this.wishList.find(el => el.id === id)) {
+                wishlist = this.wishList.find(el => el.id === id)
+            } else if(JSON.parse(localStorage.getItem("wishList"))) {
+                wishlist = JSON.parse(localStorage.getItem("wishList")).find(el => el.id === id)
+            }
+            return wishlist && wishlist.id
+        },
+        removeWishListItem(id) {
             const products = JSON.parse(localStorage.getItem("wishList"))
+            const idx = products.findIndex(object => {
+                return object.id === id;
+            });
             products.splice(idx,1)
             localStorage.setItem('wishList', JSON.stringify(products))
             this.$store.dispatch('getWishList')

@@ -1,10 +1,16 @@
 <template>
   <transition-group name="slide">
-    <div class="ysera-menu-clone-wrap open" v-if="open" key="slide" style="overflow: hidden">
+    <div
+        v-if="open"
+        key="slide"
+        class="ysera-menu-clone-wrap open"
+        style="overflow: hidden"
+        v-click-outside="closeMenu"
+    >
       <div class="ysera-menu-panels-actions-wrap">
         <a v-if="historyMenu.length" class="ysera-menu-prev-panel" href="javascript:void(0)" @click="goBack"></a>
         <span class="ysera-menu-current-panel-title">{{titleMenu}}</span>
-        <a class="ysera-menu-close-btn ysera-menu-close-panels" href="javascript:void(0)" @click="open = false">x</a>
+        <a class="ysera-menu-close-btn ysera-menu-close-panels" href="javascript:void(0)" @click="closeMenu">x</a>
       </div>
       <transition name="slide-fade">
         <div class="ysera-menu-panels" :key="key">
@@ -53,6 +59,9 @@ export default {
     },
     openMenu() {
       this.open = true
+    },
+    closeMenu() {
+      this.open = false
     },
     goBack() {
       const obj = this.historyMenu.pop()

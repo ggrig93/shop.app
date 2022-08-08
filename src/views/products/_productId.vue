@@ -18,9 +18,6 @@
                       :hide-hint="true"
                       zoom-type="hover"
                   />
-<!--                  <a class="btn-zoom open_qv">-->
-<!--                    <i class="fa fa-search" aria-hidden="true"></i>-->
-<!--                  </a>-->
                 </div>
                 <div class="product-preview image-small product_preview">
                   <carousel
@@ -49,7 +46,7 @@
                     <span class="star-5"></span>
                   </div>
                   <div class="count-star">
-                    (7)
+                    ({{product.stars_rate}})
                   </div>
                 </div>
                 <div class="availability">
@@ -98,12 +95,16 @@
                 </div>
                 <div class="group-button" style="position: relative">
                   <div class="yith-wcwl-add-to-wishlist wishlist-notify-wrap">
-                    <div v-if="hasWishListItem" class="success-notify wishlist-success-notify">
-                      <div class="bubble">Product already exist</div>
+                    <div v-if="addedWishList" class="success-notify wishlist-success-notify">
+                      <div class="bubble">{{ addedWishList === 'added' ? 'Ավելացվել է' : 'Ջնջվել է' }}</div>
                       <div class="triangle"></div>
                     </div>
                     <div class="yith-wcwl-add-button">
-                      <a @click="addToWishList(product)" style="cursor: pointer">Հավանել</a>
+                      <a
+                          :class="{ 'active-heart': hasInWishlist(product.id) }"
+                          @click="addToWishList(product)"
+                          style="cursor: pointer"
+                      ></a>
                     </div>
                   </div>
                   <div v-if="showSuccessNotify" class="success-notify">

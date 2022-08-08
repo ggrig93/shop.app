@@ -19,11 +19,6 @@ const routes = [
     name: 'WishList',
     component: () => import('@/views/WishList')
   },
-  // {
-  //   path: '/authentication',
-  //   name: 'Authentication',
-  //   component: () => import('@/views/LoginRegister')
-  // },
   {
     path: '/shopping-cart',
     name: 'ShoppingCart',
@@ -33,11 +28,6 @@ const routes = [
     path: '/checkout',
     name: 'Checkout',
     component: () => import('@/views/Checkout')
-  },
-  {
-    path: '/contact',
-    name: 'Contact',
-    component: () => import('@/views/Contact')
   },
   {
     path: '/products',
@@ -50,21 +40,6 @@ const routes = [
     component: () => import('@/views/products/_productId'),
     props: true
   },
-  // {
-  //   path: '/blogs',
-  //   name: 'Blogs',
-  //   component: () => import('@/views/blogs')
-  // },
-  // {
-  //   path: '/blogs/:id',
-  //   name: 'Blog',
-  //   component: () => import('@/views/blogs/_blogId')
-  // },
-  // {
-  //   path: '/categories/:category',
-  //   name: 'Categories',
-  //   component: () => import('@/views/categories/_category')
-  // },
   {
     path: '*',
     component: () => import('@/views/error')

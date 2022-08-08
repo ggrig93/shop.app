@@ -38,7 +38,8 @@
                         class="input-text"
                         :class="{'input-error': errors.phone}"
                     >
-                    <p class="error-text" v-if="errors.phone">Պարտադիր է</p>
+                    <p class="error-text" v-if="phoneInvalid">Սխալ ֆորմատ</p>
+                    <p class="error-text" v-else-if="errors.phone">Պարտադիր է</p>
                   </div>
                 </div>
                 <div class="row-wrap">
@@ -65,7 +66,9 @@
                     <p class="error-text" v-if="errors.zipCode">Պարտադիր է</p>
                   </div>
                 </div>
-                <CaptchaComponent :form="form" />
+                <CaptchaComponent :form="form" @verify="verifyHandler" />
+                <p class="error-text" v-if="errors.token">Պարտադիր է</p>
+
                 <p v-if="errorFromBack" class="error-text">{{errorFromBack}}</p>
               </div>
             </div>
@@ -154,7 +157,9 @@ export default {
         phone: false,
         address: false,
         zipCode: false,
-      }
+        token: false,
+      },
+      phoneInvalid: false
     }
   },
   computed: {
@@ -169,7 +174,11 @@ export default {
     'form.name'(){
       this.errors.name = false
     },
-    'form.phone'(){
+    'form.phone'(val){
+      // const regex =  /^([0-9]{2,3})?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+      const regex =  /^[0-9-+() ]*$/
+      this.phoneInvalid = val.match(regex) === null && val.length || val.length > 20
+
       this.errors.phone = false
     },
     'form.address'(){
@@ -178,16 +187,20 @@ export default {
     'form.zipCode'(){
       this.errors.zipCode = false
     },
+    'form.token'(){
+      this.errors.token = false
+    },
   },
   created() {
     this.$store.dispatch('getShopProducts')
   },
   methods: {
+    verifyHandler(token) {
+      this.form.token = token;
+    },
     orderHandler() {
       for(let key in this.form) {
-        if(!this.form[key]) {
-          this.errors[key] = true;
-        }
+          this.errors[key] = !this.form[key];
       }
       if(Object.values(this.errors).includes(true)) return;
       const orders = []

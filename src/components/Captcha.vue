@@ -1,7 +1,10 @@
 <template>
   <div class="captcha-wrapper">
     <form>
-      <vue-recaptcha :sitekey="captchaKey" @verify="onCaptchaVerify" />
+      <vue-recaptcha
+          :sitekey="captchaKey"
+          @verify="onCaptchaVerify"
+      />
     </form>
   </div>
 </template>
@@ -20,7 +23,7 @@ export default {
 
   methods: {
     onCaptchaVerify(token) {
-      this.form.token = token;
+      this.$emit('verify', token)
     },
   }
 }
