@@ -103,6 +103,7 @@ export default new Vuex.Store({
       http.get('/product/by-slide-group/top')
           .then(res => state.topSlideProducts = res.data.data)
           .catch(err => console.log(err))
+      console.log(state.topSlideProducts);
     },
     getBottomSlideProducts({state}) {
       http.get('/product/by-slide-group/bottom')

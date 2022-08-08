@@ -18,9 +18,9 @@
                           :style="{backgroundImage: `url(${product.avatar})`}"
                       >
                         <div class="slider-infor">
-<!--                          <h5 class="title-small">-->
-<!--                            {{product.description}}-->
-<!--                          </h5>-->
+                          <h5 class="title-small">
+                            {{product.description}}
+                          </h5>
                           <h3 class="title-big custom-title">
                             {{product.title}}
                           </h3>
@@ -47,7 +47,6 @@
                     v-for="product in mainProducts.bannerItems"
                     :key="product.id"
                     img-class="style7"
-                    :backgroundImage="product.avatar"
                 >
                   <h3 class="title custom-title">{{product.title}}</h3>
                   <span class="price">{{product.price}} դրամ</span> <br>
@@ -298,7 +297,7 @@ export default {
     this.$store.dispatch('getBottomContainerProducts')
     this.$store.dispatch('getDealDayProducts')
     this.$store.dispatch('getBestsellers')
-  }
+  },
 }
 </script>
 
@@ -317,5 +316,11 @@ export default {
 }
 .free-title {
   text-transform: uppercase!important;
+}
+.slider-infor{
+  background-image: url("../assets/images/p_62a1ad065399f_1654762758.jpg");
+}
+.style7>.inner{
+  background-image: url("../assets/images/p_629f28d1a45a6_1654597841.jpg") !important;
 }
 </style>
