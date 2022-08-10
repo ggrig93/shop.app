@@ -242,8 +242,8 @@ export default {
           {id: 10, title: 'Աստղ վզնոց', price: '3900', avatar: require('@/assets/images/image1.jpg')},
       ]
       const bannerItems = [
-        {id: 22, title: 'Թևնոց', price: '2000', avatar: require('@/assets/images/3.jpg')},
-        {id: 22, title: 'Վզնոց', price: '2000', avatar: require('@/assets/images/2.jpg')},
+        {id: 9, title: 'Թևնոց', price: '2000', avatar: require('@/assets/images/3.jpg')},
+        {id: 24, title: 'Վզնոց', price: '2000', avatar: require('@/assets/images/2.jpg')},
       ]
       return {
         bannerItems: bannerItems,
