@@ -121,7 +121,7 @@ export default {
 
 <style scoped lang="scss">
 .thumb-inner img{
-  width: 266px;
+  width: 100%;
   height: 266px;
   object-fit: cover;
 }
