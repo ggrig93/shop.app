@@ -271,8 +271,9 @@ export default {
         count: this.count,
       }
       this.addToCart(product)
-      this.showSuccessNotify = true
-      setTimeout(() => { this.showSuccessNotify = false }, 1500)
+      this.$store.commit('setOpenMiniCartFromProduct', true)
+      // this.showSuccessNotify = true
+      setTimeout(() => { this.$store.commit('setOpenMiniCartFromProduct', false) }, 1500)
     }
   }
 }
