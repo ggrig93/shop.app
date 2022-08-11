@@ -15,9 +15,6 @@ export default new Vuex.Store({
     dealDayProducts: null,
     popularProducts: null,
     categories: null,
-    topSlideProducts: [],
-    bottomSlideProducts: [],
-    bottomContainerProducts: [],
     shopProducts: [],
     wishList: [],
     cartTotalPrice: 0,
@@ -71,6 +68,7 @@ export default new Vuex.Store({
   },
   actions: {
     getProduct({state}, id) {
+      state.product = null
       http.get('/product/' + id)
         .then(res => state.product = res.data.data)
         .catch(err => console.log(err))
@@ -102,21 +100,21 @@ export default new Vuex.Store({
           state.loading = false
         })
     },
-    getTopSlideProducts({state}) {
-      http.get('/product/by-slide-group/top')
-          .then(res => state.topSlideProducts = res.data.data)
-          .catch(err => console.log(err))
-    },
-    getBottomSlideProducts({state}) {
-      http.get('/product/by-slide-group/bottom')
-          .then(res => state.bottomSlideProducts = res.data.data)
-          .catch(err => console.log(err))
-    },
-    getBottomContainerProducts({state}) {
-      http.get('/product/by-slide-group/bottom-container')
-          .then(res => state.bottomContainerProducts = res.data.data)
-          .catch(err => console.log(err))
-    },
+    // getTopSlideProducts({state}) {
+    //   http.get('/product/by-slide-group/top')
+    //       .then(res => state.topSlideProducts = res.data.data)
+    //       .catch(err => console.log(err))
+    // },
+    // getBottomSlideProducts({state}) {
+    //   http.get('/product/by-slide-group/bottom')
+    //       .then(res => state.bottomSlideProducts = res.data.data)
+    //       .catch(err => console.log(err))
+    // },
+    // getBottomContainerProducts({state}) {
+    //   http.get('/product/by-slide-group/bottom-container')
+    //       .then(res => state.bottomContainerProducts = res.data.data)
+    //       .catch(err => console.log(err))
+    // },
     getColors({state}) {
       http.get('/color')
           .then(res => state.colors = res.data.data)

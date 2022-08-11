@@ -2,7 +2,7 @@
   <div class="home">
     <div>
       <div class="fullwidth-template">
-        <div v-if="topSlideProducts.length > 2" class="home-slider-banner">
+        <div class="home-slider-banner">
           <div class="container">
             <div class="row10">
               <div class="col-lg-8 silider-wrapp">
@@ -49,7 +49,7 @@
                     img-class="style7"
                     :backgroundImage="product.avatar"
                 >
-                  <h3 class="title custom-title">{{product.title}}</h3>
+                  <h3 class="title custom-title">{{product.title}} </h3>
                   <span class="price">{{product.price}} դրամ</span> <br>
                   <router-link
                       :to="{name: 'Product', params: {id: product.id}}"
@@ -86,9 +86,8 @@
                   :key="product.id"
                   class="col-lg-6 col-md-6 col-sm-12">
                 <banner img-class="style4" :backgroundImage="product.avatar">
-<!--                  <h4 class="ysera-subtitle">TOP STAFF PICK</h4>-->
                   <h3 class="title custom-title">{{product.title}}</h3>
-                  <div class="description">{{product.description}}</div>
+<!--                  <div class="description">{{product.description}}</div>-->
                   <router-link
                       :to="{name: 'Product', params: {id: product.id}}"
                       class="button btn-shop-now"
@@ -98,32 +97,6 @@
                 </banner>
               </div>
             </div>
-          </div>
-        </div>
-        <div v-if="bottomContainerProducts.length" class="banner-wrapp rows-space-65">
-          <div class="container">
-            <banner img-class="style17" :backgroundImage="bottomContainerProducts[0].avatar">
-              <h3 class="title">{{bottomContainerProducts[0].title}}</h3>
-              <div class="description">
-                {{bottomContainerProducts[0].description}}
-              </div>
-              <div class="banner-price">
-                Գինը սկսած՝
-                <span class="number-price">{{bottomContainerProducts[0].price}} դրամից</span>
-              </div>
-              <router-link
-                  :to="{name: 'Product', params: {id: bottomContainerProducts[0].id}}"
-                  class="button btn-shop-now"
-              >
-                Գնել
-              </router-link>
-              <router-link
-                  :to="{name: 'Products'}"
-                  class="button btn-view-collection"
-              >
-                Տեսնել ավելին
-              </router-link>
-            </banner>
           </div>
         </div>
         <div class="ysera-tabs  default rows-space-40">
@@ -263,20 +236,25 @@ export default {
     }
   },
   computed: {
-    topSlideProducts() {
-      return this.$store.state.topSlideProducts
-    },
     mainProducts() {
+      const slideItems = [
+          {id: 21, title: 'Մարգարտյա ականջօղ', price: '4500', avatar: require('@/assets/images/image2.webp')},
+          {id: 10, title: 'Աստղ վզնոց', price: '3900', avatar: require('@/assets/images/image1.jpg')},
+      ]
+      const bannerItems = [
+        {id: 9, title: 'Թևնոց', price: '2000', avatar: require('@/assets/images/3.jpg')},
+        {id: 24, title: 'Վզնոց', price: '2000', avatar: require('@/assets/images/2.jpg')},
+      ]
       return {
-        bannerItems: this.topSlideProducts?.slice(0,2),
-        slideItems: this.topSlideProducts?.slice(2, this.topSlideProducts.length)
+        bannerItems: bannerItems,
+        slideItems: slideItems
       }
     },
     bottomSlideProducts() {
-      return this.$store.state.bottomSlideProducts
-    },
-    bottomContainerProducts() {
-      return this.$store.state.bottomContainerProducts
+      return [
+        {id: 22, title: 'Մատանի', price: '2000', avatar: require('@/assets/images/matani4.jpg')},
+        {id: 15, title: 'Թևնոց', price: '2200', avatar: require('@/assets/images/cat2.jpg')},
+      ]
     },
     dealDayProducts() {
       return this.$store.state.dealDayProducts
@@ -293,9 +271,6 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('getTopSlideProducts')
-    this.$store.dispatch('getBottomSlideProducts')
-    this.$store.dispatch('getBottomContainerProducts')
     this.$store.dispatch('getDealDayProducts')
     this.$store.dispatch('getBestsellers')
   }
@@ -307,6 +282,7 @@ export default {
   padding: 0;
 }
 .custom-title {
+  color: #FFFFFF;
   min-height: 82px;
   max-height: 82px;
   padding-top: 44px;

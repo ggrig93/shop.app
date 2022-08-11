@@ -15,7 +15,6 @@
     "core-js": "^3.6.5",
     "font-awesome": "^4.7.0",
     "jquery.scrollbar": "^0.2.11",
-    "vue": "^2.6.11",
     "vue-click-outside": "^1.1.0",
     "vue-inner-image-zoom": "^1.1.1",
     "vue-owl-carousel": "^2.0.3",
@@ -37,6 +36,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^6.0.0",
     "sass-loader": "^10.1.1",
+    "vue": "^2.6.11",
     "vue-template-compiler": "^2.6.11"
   }
 }

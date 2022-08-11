@@ -49,7 +49,8 @@
               <span :class="'star-' + product.countStar"></span>
             </div>
             <div class="count-star">
-              ({{product.countStar}})
+<!--              ({{product.countStar}})-->
+              {{product.stars_rate}}
             </div>
           </div>
           <div class="price">
@@ -120,7 +121,7 @@ export default {
 
 <style scoped lang="scss">
 .thumb-inner img{
-  width: 266px;
+  width: 100%;
   height: 266px;
   object-fit: cover;
 }
