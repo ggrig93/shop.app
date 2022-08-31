@@ -190,12 +190,14 @@ export default {
       this.width = e.target.innerWidth
     },
     sortByPrice() {
+      this.setPage(1)
       this.setByPrice(this.by_price)
     },
     onPageChange(page) {
       this.setPage(page)
     },
     sortPerPage() {
+      this.setPage(1)
       this.setPerPage(this.per_page)
     },
     toggleFilter() {
