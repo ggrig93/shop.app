@@ -40,12 +40,19 @@
             </div>
           </router-link>
 
-          <div class="block-minicart ysera-mini-cart block-header ysera-dropdown" :class="{'open': openCart}" v-click-outside="hideCart">
+          <div
+              class="block-minicart ysera-mini-cart block-header ysera-dropdown"
+              :class="{'open': openCartHandler}"
+              v-click-outside="hideCart"
+          >
             <a href="javascript:void(0);" class="shopcart-icon" data-ysera="ysera-dropdown" @click="toggleCart">
               Cart
               <span class="count">{{shopCartCount}}</span>
             </a>
-            <div class="shopcart-description ysera-submenu">
+            <div
+                class="shopcart-description ysera-submenu mini-cart"
+                :class="{'fixed-mini-cart': fixedCartPopup }"
+            >
               <div class="content-wrap">
                 <h3 class="title">Զամբյուղ</h3>
                 <ul class="minicart-items">
@@ -122,12 +129,19 @@ export default {
       tab: 'login',
       selectedCategory: 1,
       search: "",
-      showDeletePopup: false
+      showDeletePopup: false,
+      fixedCartPopup: false
     }
   },
   computed: {
     categories() {
       return this.$store.state.categories
+    },
+    openMiniCartFromProduct() {
+      return this.$store.state.openMiniCartFromProduct
+    },
+    openCartHandler() {
+      return this.openCart || this.openMiniCartFromProduct
     },
     cartTotalPrice() {
       return this.$store.state.cartTotalPrice
@@ -149,10 +163,19 @@ export default {
     },
   },
   watch: {
-    openCart(val) {
+    openCartHandler(val) {
       if(val) {
         this.$store.dispatch('getShopProducts')
       }
+    },
+    openMiniCartFromProduct(val) {
+      if(!val) {
+        document.querySelector('.mini-cart').style.display = "none"
+      } else {
+        document.querySelector('.mini-cart').style.display = "block"
+      }
+      this.fixedCartPopup = val && window.scrollY > 180
+      console.log(val, window.scrollY)
     },
     '$route.query': {
       immediate: true,
@@ -236,4 +259,15 @@ export default {
       margin-left: -16px;
     }
   }
+</style>
+<style lang="scss" scoped>
+.fixed-mini-cart {
+  position: fixed;
+  top: 0!important;
+  right: 10%!important;
+
+  @media(max-width: 1280px) {
+    right: 5%!important;
+  }
+}
 </style>

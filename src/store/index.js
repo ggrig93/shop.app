@@ -25,7 +25,8 @@ export default new Vuex.Store({
       category: [],
       per_page: '',
     },
-    loading: false
+    loading: false,
+    openMiniCartFromProduct: false
   },
   getters: {
     search: state => state.otherFilters.search,
@@ -39,6 +40,9 @@ export default new Vuex.Store({
   mutations: {
     setShopProducts(state, value) {
       state.shopProducts = value
+    },
+    setOpenMiniCartFromProduct(state, value) {
+      state.openMiniCartFromProduct = value
     },
     setWishList(state, value) {
       state.wishList = value
