@@ -41,7 +41,9 @@
                 <div class="star-rating">
                   <span class="star-5"></span>
                 </div>
-                <div class="count-star">(7)</div>
+                <div class="count-star">
+                  ({{product.stars_rate}})
+                </div>
               </div>
               <div class="availability"><a>{{product.available_type === 'is_available' ? 'Հասանելի է' : 'Հասանելի չէ'}}</a></div>
               <div class="price"><span>{{product.price}} դրամ</span></div>
