@@ -2017,11 +2017,11 @@ table tr:last-child td, table tr:last-child th {
 	color: #aaa;
 	text-decoration: underline;
 }
-.woof_Widget .widget:last-child {
-	border-bottom: 0;
-	margin-bottom: 0;
-	border-radius: 0;
-}
+/*.woof_Widget .widget:last-child {*/
+/*	border-bottom: 0;*/
+/*	margin-bottom: 0;*/
+/*	border-radius: 0;*/
+/*}*/
 /*sidebar products*/
 .list-brand {
 	border-top: none;
@@ -2153,6 +2153,13 @@ table tr:last-child td, table tr:last-child th {
 .widget-related-products .product-item {
 	margin-bottom: 0;
 }
+.sidebar-filter {
+	width: 100%;
+	border: 1px solid #F1F1F1;
+	border-radius: 10px;
+	padding: 30px 10px;
+	margin-bottom: 20px;
+}
 .sidebar-details .widgettitle {
 	margin-bottom: 0;
 }
@@ -2169,7 +2176,6 @@ table tr:last-child td, table tr:last-child th {
 .shop-top-control {
 	border: 1px solid #f3f3f3;
 	background-color: #f3f3f3;
-	border-radius: 0;
 	padding: 15px 0 15px;
 	margin-bottom: 40px;
 	display: flex;
@@ -5099,9 +5105,6 @@ ul.list-products {
 	.sidebar-filters_wrap {
 		display: flex;
 		flex-flow: wrap;
-	}
-	.sidebar-filter {
-		margin-right: 40px;
 	}
 	.item-banner.style7 .banner-content {
 		padding-right: 130px;
