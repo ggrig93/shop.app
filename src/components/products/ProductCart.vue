@@ -123,6 +123,9 @@ export default {
   width: 100%;
   height: 266px;
   object-fit: cover;
+  @media(max-width: 768px) {
+    height: auto;
+  }
 }
 .product-remove {
   display: inline-block;
@@ -135,7 +138,7 @@ export default {
 }
 </style>
 
-<style>
+<style lang="scss">
 .product-count-down {
   margin-bottom: 7px;
 }
@@ -155,6 +158,9 @@ export default {
   position: relative;
   background-color: #c09578;
   color: #fff;
+  @media(max-width: 480px) {
+    margin: 0 2px;
+  }
 }
 .vuejs-countdown li:after {
   display: none;

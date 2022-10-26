@@ -42,15 +42,16 @@
                   </vue-slick-carousel>
                 </div>
               </div>
-              <div class="col-lg-4 banner-wrapp">
+              <div class="col-lg-4 banner-wrapp mainProducts_wrap">
                 <banner
                     v-for="product in mainProducts.bannerItems"
                     :key="product.id"
                     img-class="style7"
                     :backgroundImage="product.avatar"
+                    class="col-xs-6 col-lg-12"
                 >
-                  <h3 class="title custom-title">{{product.title}} </h3>
-                  <span class="price">{{product.price}} դրամ</span> <br>
+<!--                  <h3 class="title custom-title">{{product.title}} </h3>-->
+<!--                  <span class="price">{{product.price}} դրամ</span> <br>-->
                   <router-link
                       :to="{name: 'Product', params: {id: product.id}}"
                       class="button btn-lets-do-it"
@@ -84,17 +85,16 @@
               <div
                   v-for="product in bottomSlideProducts"
                   :key="product.id"
-                  class="col-lg-6 col-md-6 col-sm-12">
-                <banner img-class="style4" :backgroundImage="product.avatar">
-                  <h3 class="title custom-title">{{product.title}}</h3>
-<!--                  <div class="description">{{product.description}}</div>-->
-                  <router-link
-                      :to="{name: 'Product', params: {id: product.id}}"
-                      class="button btn-shop-now"
-                  >
-                    Գնել
-                  </router-link>
-                </banner>
+                  class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <router-link :to="{name: 'Product', params: {id: product.id}}">
+                  <banner img-class="style4" :backgroundImage="product.avatar">
+<!--                    <h3 class="title custom-title">{{product.title}}</h3>-->
+  <!--                  <div class="description">{{product.description}}</div>-->
+                    <div class="button btn-shop-now">
+                      Գնել
+                    </div>
+                  </banner>
+                </router-link>
               </div>
             </div>
           </div>
@@ -118,7 +118,11 @@
               <div class="tab-panel active">
                 <div class="ysera-product">
                   <ul class="row list-products auto-clear equal-container product-grid">
-                    <li class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1" v-for="(prod, idx) in topPanel[activeTabPanel]" :key="idx">
+                    <li
+                        class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-6 style-1"
+                        v-for="(prod, idx) in topPanel[activeTabPanel]"
+                        :key="idx"
+                    >
                       <ProductCart :product="prod.product"/>
                     </li>
                   </ul>
@@ -158,7 +162,7 @@
         <div class="ysera-instagram">
           <vue-slick-carousel class="instagram" v-bind="instagramSettings">
             <div class="item-instagram" v-for="i in 5" :key="i">
-              <a href="javascript:void(0)">
+              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">
                 <img :src="`http://ledthanhdat.vn/html/ysera/assets/images/item-instagram-${i}.jpg`" alt="img">
               </a>
               <span class="text">
@@ -213,7 +217,7 @@ export default {
           {"breakpoint":2000, "settings":{"slidesToShow":4}},
           {"breakpoint":1200, "settings":{"slidesToShow":3}},
           {"breakpoint":992, "settings":{"slidesToShow":2}},
-          {"breakpoint":480, "settings":{"slidesToShow":1}}
+          {"breakpoint":480, "settings":{"slidesToShow":2}}
         ]
       },
       instagramSettings: {
