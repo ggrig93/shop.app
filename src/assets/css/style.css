@@ -898,6 +898,7 @@ table tr:last-child td, table tr:last-child th {
 	color: #333;
 	border: 1px solid #f1f1f1;
 	padding: 8px 15px;
+	border-radius: 10px;
 }
 .shopcart-description .actions .button-viewcart:hover {
 	color: #ffffff;
@@ -906,6 +907,7 @@ table tr:last-child td, table tr:last-child th {
 	width: 110px;
 	float: right;
 	color: #ffffff;
+	border-radius: 10px;
 }
 .minicart-items .mCSB_scrollTools {
 	right: -5px;
@@ -2015,11 +2017,11 @@ table tr:last-child td, table tr:last-child th {
 	color: #aaa;
 	text-decoration: underline;
 }
-.woof_Widget .widget:last-child {
-	border-bottom: 0;
-	margin-bottom: 0;
-	border-radius: 0;
-}
+/*.woof_Widget .widget:last-child {*/
+/*	border-bottom: 0;*/
+/*	margin-bottom: 0;*/
+/*	border-radius: 0;*/
+/*}*/
 /*sidebar products*/
 .list-brand {
 	border-top: none;
@@ -2151,6 +2153,13 @@ table tr:last-child td, table tr:last-child th {
 .widget-related-products .product-item {
 	margin-bottom: 0;
 }
+.sidebar-filter {
+	width: 100%;
+	border: 1px solid #F1F1F1;
+	border-radius: 10px;
+	padding: 30px 10px;
+	margin-bottom: 20px;
+}
 .sidebar-details .widgettitle {
 	margin-bottom: 0;
 }
@@ -2167,7 +2176,6 @@ table tr:last-child td, table tr:last-child th {
 .shop-top-control {
 	border: 1px solid #f3f3f3;
 	background-color: #f3f3f3;
-	border-radius: 0;
 	padding: 15px 0 15px;
 	margin-bottom: 40px;
 	display: flex;
@@ -2175,6 +2183,7 @@ table tr:last-child td, table tr:last-child th {
 	/*font-weight: 500;*/
 	color: #6d6d6d;
 	position: relative;
+	border-radius: 10px;
 }
 .shop-top-control .select-form, .shop-top-control .grid-view-mode {
 	padding: 0 13px;
@@ -2268,12 +2277,12 @@ ul.list-products {
 	margin-bottom: 30px;
 }
 .product-item .product-inner {
-	border-radius: 0;
 	overflow: hidden;
 	position: relative;
 	border: 2px solid #F1F1F1;
 	padding: 0 0 20px;
 	background-color: #fff;
+	border-radius: 10px;
 }
 .ysera-product.layout1 .product-item .product-inner {
 	background-color: transparent;
@@ -2889,6 +2898,7 @@ ul.list-products {
 	/*background-color: #c09578;*/
 	border-color: #c09578;
 	margin-top: 0;
+	border-radius: 10px;
 }
 /*ysera-iconbox */
 .ysera-iconbox.layout1 {
@@ -3357,10 +3367,12 @@ ul.list-products {
 }
 .details-infor .quantity .control {
 	padding: 1px 8px;
+	border-radius: 10px;
 }
 .details-infor .group-button .button {
 	min-width: 150px;
 	font-size: 13px;
+	border-radius: 10px;
 }
 .tab-details-product {
 	margin-top: 80px;
@@ -3860,6 +3872,7 @@ ul.list-products {
 }
 .slider-item.style9 .slider-inner {
 	background-image: url(http://ledthanhdat.vn/html/ysera/assets/images/slider-thumb6.jpg);
+	border-radius: 10px;
 }
 .slider-item.style9 .slider-inner .slider-infor {
 	padding-top: 185px;
@@ -4025,6 +4038,9 @@ ul.list-products {
 	display: block;
 	padding: 15px 30px 14px;
 	letter-spacing: 0.05em;
+}
+.header-nav-wapper .vertical-wapper {
+	border-radius: 10px;
 }
 .vertical-wapper .block-title .text {
 	display: inline-block;
@@ -4518,12 +4534,12 @@ ul.list-products {
 	border: 1px solid #c09578;
 	color: #fff;
 	background-color: #c09578;
-	padding-right: 25px;
-	padding-left: 25px;
-	padding-top: 7px;
-	padding-bottom: 7px;
+	padding: 7px 25px;
 	margin-right: 5px;
-	border-radius: 30px;
+	border-radius: 15px;
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
 }
 .item-banner .banner-content > .button:last-child {
 	margin-right: 0;
@@ -4570,12 +4586,14 @@ ul.list-products {
 .item-banner.style4 .inner {
 	background-image: url(http://ledthanhdat.vn/html/ysera/assets/images/banner-home-2.jpg);
 	background-size: cover;
+	border-radius: 10px;
+	padding-top: 80px;
+	padding-bottom: 80px;
+	position: relative;
+	margin-bottom: 40px;
 }
 .item-banner.style4 .banner-content {
-	padding-left: 40px;
-	padding-bottom: 60px;
-	padding-right: 300px;
-	padding-top: 57px;
+	padding: 57px 300px 60px 40px;
 	margin-bottom: 30px;
 }
 .item-banner.style4 .title {
@@ -4591,12 +4609,10 @@ ul.list-products {
 .item-banner.style7 .inner {
 	background-image: url(http://ledthanhdat.vn/html/ysera/assets/images/banner-home-5.jpg);
 	background-size: cover;
+	border-radius: 10px;
 }
 .item-banner.style7 .banner-content {
-	padding-top: 58px;
-	padding-right: 165px;
-	padding-bottom: 60px;
-	padding-left: 30px;
+	padding: 140px;
 	margin-bottom: 20px;
 }
 .item-banner.style7 .description {
@@ -4850,8 +4866,7 @@ ul.list-products {
 		opacity: 0.5;
 		display: none;
 	}
-	.header-banner.banner-image .banner-wrap .banner-header,
-	.item-banner .banner-content {
+	.header-banner.banner-image .banner-wrap .banner-header {
 		position: relative;
 	}
 	.banner-wrapp.rows-space-65,
@@ -5064,12 +5079,21 @@ ul.list-products {
 	.col-lg-4.banner-wrapp .banner {
 		width: calc(50% - 10px);
 		float: left;
+		padding: 0;
 	}
 	.col-lg-4.banner-wrapp .banner:last-child {
 		float: right;
 	}
 }
 @media (max-width: 991px) {
+	.col-lg-4.banner-wrapp .banner {
+		width: calc(50% - 10px);
+		padding: 0;
+	}
+	.mainProducts_wrap {
+		display: flex;
+		justify-content: space-between;
+	}
 	.block-minicart .ysera-submenu {
 		right: unset!important;
 		left: 0;
@@ -5081,9 +5105,6 @@ ul.list-products {
 	.sidebar-filters_wrap {
 		display: flex;
 		flex-flow: wrap;
-	}
-	.sidebar-filter {
-		margin-right: 40px;
 	}
 	.item-banner.style7 .banner-content {
 		padding-right: 130px;
@@ -5526,6 +5547,34 @@ ul.list-products {
 	}
 }
 @media (max-width: 480px) {
+	.list-products .product-item {
+		padding: 0 5px;
+	}
+	.product-item .product-name {
+		font-size: 12px;
+		height: 18px;
+		margin: 0;
+		-webkit-line-clamp: 1;
+	}
+	.product-item .price {
+		font-size: 12px;
+	}
+	.item-banner.style7 .banner-content {
+		padding-top: 0;
+	}
+	.item-banner.style4 .inner {
+		border-radius: 10px;
+	}
+	.item-banner.style4 .banner-content {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	.item-banner .banner-content > .button {
+		bottom: 10px;
+		right: 10px;
+		font-size: 10px;
+		padding: 2px 25px;
+	}
 	.mobile-logo svg {
 		width: 100px;
 	}
@@ -5634,6 +5683,10 @@ ul.list-products {
 	.item-banner .banner-content {
 		padding-right: 15px !important;
 		padding-left: 15px !important;
+	}
+	.slider-item.style9 .slider-inner .slider-infor {
+		padding-top: 20px;
+		padding-bottom: 20px;
 	}
 }
 .button, button, input[type="submit"], .block-minicart .shopcart-icon .count, .load-more a:hover,

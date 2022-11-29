@@ -4,6 +4,10 @@
 ```
 npm install
 ```
+## Fixing vue-template-compiler error
+```
+npm install vue-template-compiler@2.6.14 --save-dev
+```
 
 ### Compiles and hot-reloads for development
 ```

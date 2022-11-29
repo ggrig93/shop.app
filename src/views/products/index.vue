@@ -58,7 +58,7 @@
             >
               <li class="product-item"
                   :class="layoutMode
-                  ? 'col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1'
+                  ? 'col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-6 style-1'
                   : 'col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12 style-list'"
                   v-for="prod in products" :key="prod.id"
                   @click="$router.push({name: 'Product', params: {id: prod.id}})"
@@ -195,12 +195,14 @@ export default {
       this.width = e.target.innerWidth
     },
     sortByPrice() {
+      this.setPage(1)
       this.setByPrice(this.by_price)
     },
     onPageChange(page) {
       this.setPage(page)
     },
     sortPerPage() {
+      this.setPage(1)
       this.setPerPage(this.per_page)
     },
     toggleFilter() {

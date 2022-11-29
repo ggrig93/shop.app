@@ -23,9 +23,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(prod, idx) in shopProducts" :key="prod.id + idx" class="cart_item">
+                    <tr v-for="(prod, idx) in shopProducts" :key="idx" class="cart_item">
                       <td class="product-remove" :style="styleObject">
-                        <a class="remove" @click="showDeletePopup = idx" ></a>
+                        <a class="remove" @click="showDeletePopup = idx"></a>
                       </td>
                       <td class="product-thumbnail">
                         <a>

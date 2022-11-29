@@ -49,8 +49,7 @@
               <span :class="'star-' + product.countStar"></span>
             </div>
             <div class="count-star">
-<!--              ({{product.countStar}})-->
-              {{product.stars_rate}}
+              ({{product.stars_rate}})
             </div>
           </div>
           <div class="price">
@@ -133,6 +132,9 @@ export default {
   width: 100%;
   height: 266px;
   object-fit: cover;
+  @media(max-width: 768px) {
+    height: auto;
+  }
 }
 .product-remove {
   display: inline-block;
@@ -145,7 +147,7 @@ export default {
 }
 </style>
 
-<style>
+<style lang="scss">
 .product-count-down {
   margin-bottom: 7px;
 }
@@ -167,6 +169,9 @@ export default {
   /*background-color: #c09578;*/
   background-color: var(--bg-color);
   color: #fff;
+  @media(max-width: 480px) {
+    margin: 0 2px;
+  }
 }
 ins{
   color: var(--bg-color) !important;

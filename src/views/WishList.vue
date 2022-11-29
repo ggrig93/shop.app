@@ -73,6 +73,7 @@ export default {
 .view-all {
   margin-top: 20px;
   border: 1px solid var(--bg-color) !important ;
+  border-radius: 10px;
   &:hover {
     color: #c09578;
     background: #FFFFFF;
