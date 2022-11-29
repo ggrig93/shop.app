@@ -53,7 +53,7 @@
                   <router-link
                       :to="{name: 'Product', params: {id: product.id}}"
                       class="button btn-lets-do-it"
-                  >
+                  :style="styleObject">
                     Գնել
                   </router-link>
                 </banner>
@@ -63,10 +63,10 @@
         </div>
         <div class="ysera-product produc-featured rows-space-65">
           <div class="container">
-            <h3 class="custommenu-title-blog">
+            <h3 class="custommenu-title-blog" :style="styleObject">
               Օրվա առաջարկները
             </h3>
-            <vue-slick-carousel v-if="dealDayProducts" class="owl-products owl-slick" v-bind="productsSettings">
+            <vue-slick-carousel v-if="dealDayProducts" class="owl-products owl-slick" v-bind="productsSettings" :style="styleObject">
               <a
                   v-for="(item, i) in dealDayProducts"
                   :key="i"
@@ -128,7 +128,7 @@
         <div class="ysera-tabs  default rows-space-40">
           <div class="container">
             <div class="tab-head">
-              <ul class="tab-link">
+              <ul class="tab-link" :style="styleObject">
                 <li :class="[activeTabPanel === 'bestseller' ? 'active' : '']">
                   <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'bestseller'">Բեսթսելեր</a>
                 </li>
@@ -153,7 +153,7 @@
             </div>
           </div>
         </div>
-        <div class="ysera-iconbox-wrapp default">
+        <div class="ysera-iconbox-wrapp default" :style="{'background-color': design ? design.main_color : null}">
           <div class="container">
             <div class="row">
               <div class="col-sm-12 col-xs-12">
@@ -175,7 +175,7 @@
         </div>
       </div>
     </div>
-    <div class="instagram-wrapp">
+    <div class="instagram-wrapp" :style="styleObject">
       <div>
         <h3 class="custommenu-title-blog">
           <i class="flaticon-instagram" aria-hidden="true"></i>
@@ -203,6 +203,7 @@
 import VueSlickCarousel from 'vue-slick-carousel'
 import ProductCart from "@/components/products/ProductCart";
 import Banner from '@/components/Banner'
+import {mapGetters} from "vuex";
 
 export default {
   name: 'Home',
@@ -262,6 +263,12 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({"design":"settings"}),
+    styleObject: function() {
+      return {
+        '--bg-color': this.design ? this.design.main_color : null,
+      }
+    },
     topSlideProducts() {
       return this.$store.state.topSlideProducts
     },
@@ -322,5 +329,26 @@ export default {
 }
 .style7>.inner{
   background-image: url("../assets/images/p_629f28d1a45a6_1654597841.jpg") !important;
+}
+.custommenu-title-blog::before{
+  border-bottom: 4px solid var(--bg-color)
+}
+.ysera-tabs .tab-link li.active a{
+  color: var(--bg-color);
+}
+.ysera-tabs .tab-link li a:hover{
+  color: var(--bg-color);
+}
+.instagram-wrapp .custommenu-title-blog i{
+  color: var(--bg-color);
+}
+.item-banner .banner-content>.button {
+  background: var(--bg-color) !important;
+  border: 2px solid var(--bg-color) !important;
+}
+
+.slider-item .slider-infor .button{
+  background: var(--bg-color) !important;
+  border: 2px solid var(--bg-color) !important;
 }
 </style>

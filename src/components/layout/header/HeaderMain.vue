@@ -25,7 +25,7 @@
               <div class="inner">
                 <input type="text" class="input" v-model="search" placeholder="Փնտրել">
               </div>
-              <button class="btn-search" type="submit">
+              <button class="btn-search" type="submit" :style="{'background-color': settings ? settings.main_color : 'white'}">
                 <span class="icon-search"></span>
               </button>
             </div>
@@ -35,15 +35,15 @@
       <div class="col-lg-2 col-sm-12 col-md-3 col-xs-12 col-ts-12">
         <div class="header-control heart-wrap">
           <router-link to="/wishlist">
-            <div class="heart">
-              <div class="heart-count">{{wishListCount}}</div>
+            <div class="heart"  :style="styleObject">
+              <div class="heart-count" :style="{'background-color': settings ? settings.main_color : 'white'}">{{wishListCount}}</div>
             </div>
           </router-link>
 
           <div class="block-minicart ysera-mini-cart block-header ysera-dropdown" :class="{'open': openCart}" v-click-outside="hideCart">
-            <a href="javascript:void(0);" class="shopcart-icon" data-ysera="ysera-dropdown" @click="toggleCart">
+            <a href="javascript:void(0);" class="shopcart-icon" data-ysera="ysera-dropdown" @click="toggleCart" :style="styleObject">
               Cart
-              <span class="count">{{shopCartCount}}</span>
+              <span class="count" :style="{'background-color': settings ? settings.main_color : 'white'}">{{shopCartCount}}</span>
             </a>
             <div class="shopcart-description ysera-submenu">
               <div class="content-wrap">
@@ -79,11 +79,11 @@
                     <span class="Price-amount">{{cartTotalPrice}} դրամ</span>
                   </span>
                 </div>
-                <div class="actions">
-                  <router-link class="button button-viewcart" :to="{name: 'ShoppingCart'}" @click.native="hideCart">
+                <div class="actions" :style="styleObject">
+                  <router-link class="button button-viewcart" :to="{name: 'ShoppingCart'}" @click.native="hideCart"  :style="{'border': settings ? '1px solid' + settings.main_color : '1px solid white'}">
                     <span>Գնալ զամբյուղ</span>
                   </router-link>
-                  <router-link class="button button-checkout" :to="{name: 'Checkout'}" @click.native="hideCart">
+                  <router-link class="button button-checkout" :to="{name: 'Checkout'}" @click.native="hideCart"  :style="{'background-color': settings ? settings.main_color : 'white','border': settings ? '1px solid' + settings.main_color : '1px solid white'}">
                     <span>Պատվիրել</span>
                   </router-link>
                 </div>
@@ -111,7 +111,7 @@
 import DeletePopup from "@/components/DeletePopup.vue";
 import headerMixin from "@/mixins/header.mixin";
 import productMixin from "@/mixins/product.mixin";
-import {mapMutations} from "vuex";
+import {mapGetters, mapMutations} from "vuex";
 
 export default {
   name: "HeaderMain",
@@ -126,6 +126,12 @@ export default {
     }
   },
   computed: {
+      ...mapGetters(["settings"]),
+    styleObject: function() {
+      return {
+        '--bg-color': this.settings ? this.settings.main_color : 'white',
+      }
+    },
     categories() {
       return this.$store.state.categories
     },
@@ -180,11 +186,14 @@ export default {
       this.removeCartItem(this.showDeletePopup)
       this.closeModal()
     },
-  }
+  },
+
+
 }
 </script>
 
 <style lang="scss">
+
   select {
     border: none!important;
   }
@@ -228,12 +237,26 @@ export default {
     }
   }
   .heart:hover:before {
-    color: #c09578;
+    color:  var(--bg-color);
   }
   .logo {
     svg {
       margin-top: -30px;
       margin-left: -16px;
     }
+  }
+  a:hover:before{
+    color: var(--bg-color);
+  }
+  .shopcart-description .actions .button-viewcart:hover{
+    background: var(--bg-color) !important;
+    color: white !important;
+  }
+  .button-checkout{
+    border: 2px solid;
+  }
+  .button-checkout:hover{
+    color:var(--bg-color) !important ;
+    background: white !important;
   }
 </style>

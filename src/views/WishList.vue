@@ -17,7 +17,7 @@
               <ProductCart :product="product" :index="idx"/>
             </li>
           </ul>
-          <div v-else class="empty-wishlist">
+          <div v-else class="empty-wishlist" :style="styleObject">
              <div class="empty-wishlist_text">Դեռևս հավանած ապրանքներ չկան</div>
             <router-link to="/products" class="button view-all">Դիտել բոլորը</router-link>
           </div>
@@ -30,11 +30,18 @@
 <script>
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ProductCart from "@/components/products/ProductCart";
+import {mapGetters} from "vuex";
 
 export default {
   name: "WishList",
   components: {Breadcrumbs, ProductCart},
   computed: {
+    ...mapGetters({"design": "settings"}),
+    styleObject: function () {
+      return {
+        '--bg-color': this.design ? this.design.main_color : null,
+      }
+    },
     products() {
       return this.$store.state.wishList;
     }
@@ -43,10 +50,14 @@ export default {
     this.$store.dispatch('getWishList')
   },
 
+
 }
 </script>
 
 <style lang="scss" scoped>
+.view-all{
+  background:var(--bg-color);
+}
 .wishlist-products {
   min-height: 350px;
 }
@@ -61,7 +72,7 @@ export default {
 }
 .view-all {
   margin-top: 20px;
-  border: 1px solid #c09578;
+  border: 1px solid var(--bg-color) !important ;
   &:hover {
     color: #c09578;
     background: #FFFFFF;

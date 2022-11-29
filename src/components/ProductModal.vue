@@ -9,7 +9,7 @@
               <div class="slider-product slider-for slick-initialized slick-slider">
                 <div aria-live="polite" class="slick-list draggable">
                   <div class="slick-track" role="listbox">
-                    <div class="details-item slick-slide slick-current slick-active">
+                    <div class="details-item slick-slide slick-current slick-active" :style="styleObject">
                       <img :src="img" alt="img">
                     </div>
                   </div>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="count-star">(7)</div>
               </div>
-              <div class="availability"><a>{{product.available_type === 'is_available' ? 'Հասանելի է' : 'Հասանելի չէ'}}</a></div>
+              <div class="availability"><a  :style="{'color': design ? design.main_color : 'white'}">{{product.available_type === 'is_available' ? 'Հասանելի է' : 'Հասանելի չէ'}}</a></div>
               <div class="price"><span>{{product.price}} դրամ</span></div>
               <div class="product-details-description">
                 <ul v-if="product.details.additional">
@@ -73,7 +73,7 @@
                 </div>
                 <div class="attribute attribute_size">
                   <div class="size-text text-attribute">Չափս</div>
-                  <div class="list-size list-item">
+                  <div class="list-size list-item" :style="styleObject">
                     <a v-for="item in coloredProduct.sizes"
                        :key="item.id"
                        :class="{active: size && size.id === item.id}"
@@ -84,33 +84,32 @@
                 </div>
               </div>
               <div class="group-button">
-                <div class="yith-wcwl-add-to-wishlist wishlist-notify-wrap">
-                  <div v-if="addedWishList" class="success-notify wishlist-success-notify">
-                    <div class="bubble">{{ addedWishList === 'added' ? 'Ավելացվել է' : 'Ջնջվել է' }}</div>
-                    <div class="triangle"></div>
+                <div class="yith-wcwl-add-to-wishlist wishlist-notify-wrap" >
+                  <div v-if="addedWishList" class="success-notify wishlist-success-notify" >
+                    <div class="bubble" :style="{'background': design ? design.main_color : 'white'}">{{ addedWishList === 'added' ? 'Ավելացվել է' : 'Ջնջվել է' }}</div>
+                    <div class="triangle" :style="{'background': design ? design.main_color : 'white'}"></div>
                   </div>
-                  <div class="yith-wcwl-add-button">
+                  <div class="yith-wcwl-add-button"   :style="styleObject" >
                     <a
                         :class="{ 'active-heart': hasInWishlist(product.id) }"
                         @click.stop="addToWishList(product)"
-                        style="cursor: pointer"
                     ></a>
                   </div>
                 </div>
                 <div class="quantity-add-to-cart">
                   <div class="quantity">
                     <div class="control">
-                      <a class="btn-number qtychange qtyminus quantity-minus" @click="changeCount(-1)">-</a>
+                      <a class="btn-number qtychange qtyminus quantity-minus" @click="changeCount(-1)" :style="styleObject">-</a>
                       <input v-model="count" type="text" data-step="1" data-min="0" title="Qty" class="input-qty qty" size="4">
-                      <a class="btn-number qtychange qtyplus quantity-plus" @click="changeCount(+1)">+</a>
+                      <a class="btn-number qtychange qtyplus quantity-plus" @click="changeCount(+1)" :style="styleObject">+</a>
                     </div>
                   </div>
-                  <button class="single_add_to_cart_button button" @click.stop="addToCartHandler(product.id)">Ավելացնել զամբյուղ</button>
+                  <button class="single_add_to_cart_button button" @click.stop="addToCartHandler(product.id)" :style="{'background': design ? design.main_color : 'white'}">Ավելացնել զամբյուղ</button>
                 </div>
                 <p v-if="count < 1" class="error-message">Ընտրեք քանակը</p>
               </div>
             </div>
-            <button title="Close (Esc)" type="button" class="mfp-close" @click="closeModal">×</button>
+            <button title="Close (Esc)" type="button" class="mfp-close" @click="closeModal" :style="{'background': design ? design.main_color : 'white'}">×</button>
           </div>
         </div>
       </div>
@@ -122,6 +121,7 @@
 import {bus} from '@/main'
 import VueSlickCarousel from "vue-slick-carousel";
 import productMixin from "@/mixins/product.mixin";
+import {mapGetters} from "vuex";
 export default {
   name: "ProductModal",
   components: { VueSlickCarousel },
@@ -147,6 +147,14 @@ export default {
       showSizeError: false,
       showColorError: false,
     }
+  },
+  computed: {
+    ...mapGetters({"design": "settings"}),
+    styleObject: function () {
+      return {
+        '--bg-color': this.design ? this.design.main_color : null,
+      }
+    },
   },
   watch: {
     size: {
@@ -247,7 +255,27 @@ export default {
 .size-error {
   margin: -15px 0 0 0;
 }
-
+.active-heart{
+  cursor: pointer;
+  color: var(--bg-color) !important;
+}
+.slick-dots li.slick-active::before{
+  border:2px solid var(--bg-color) !important
+}
+a:hover{
+  color: var(--bg-color) !important;
+}
+.details-infor .group-button .yith-wcwl-add-to-wishlist div a::before{
+  color: var(--bg-color) !important;
+}
+.attribute_size .list-size a:hover{
+  background: var(--bg-color) !important;
+  color: white !important;
+}
+.attribute_size .list-size a.active{
+  background: var(--bg-color) !important;
+  color: white !important;
+}
 @media (max-width: 768px) {
   .kt-popup-quickview {
     width: 96%!important;
@@ -266,5 +294,6 @@ export default {
   .kt-popup-quickview .mfp-close {
     right: 0!important;
   }
+
 }
 </style>

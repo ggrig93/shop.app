@@ -20,7 +20,7 @@
         <form class="header-searchform" @submit.prevent="searchHandler">
           <div class="searchform-wrap">
             <input v-model="search" type="text" class="search-input" placeholder="Փնտրել" >
-            <button type="submit" class="submit button">
+            <button type="submit" class="submit button" :style="{'background-color': settings ? settings.main_color : 'white'}">
               <span class="icon">
                 <i class="fa fa-search" aria-hidden="true"></i>
               </span>
@@ -42,7 +42,7 @@
 <script>
 
 import headerMixin from "@/mixins/header.mixin";
-import {mapMutations} from "vuex";
+import {mapGetters, mapMutations} from "vuex";
 export default {
   name: "HeaderMobile",
   mixins: [headerMixin],
@@ -72,5 +72,11 @@ export default {
       }
     },
   },
+  computed: {
+    ...mapGetters(["settings"]),
+  }
 }
 </script>
+<style>
+
+</style>

@@ -11,7 +11,7 @@
         <span v-if="fromCart">զամբյուղից</span>
         <span v-else>նախընտրելիների ցանկից</span>
         :</p>
-      <div class="popup-footer">
+      <div class="popup-footer" :style="styleObject">
         <button @click="$emit('confirm')" class="btn-ok">Այո</button>
         <button class="btn-cancel" @click="closeModal">Ոչ</button>
       </div>
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   props: {
     fromCart: {
@@ -31,11 +33,22 @@ export default {
     closeModal() {
       this.$emit("close")
     }
-  }
+  },
+  computed: {
+    ...mapGetters({"design": "settings"}),
+    styleObject: function () {
+      return {
+        '--bg-color': this.design ? this.design.main_color : null,
+      }
+    },
+  },
 }
 </script>
 
 <style lang="scss">
+.btn-ok{
+  background:var(--bg-color) !important ;
+}
 .popup-wrapper {
   position: fixed;
   top: 0;

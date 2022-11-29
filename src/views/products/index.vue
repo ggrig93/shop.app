@@ -5,12 +5,16 @@
         <div class="col-lg-12 products-header">
           <Breadcrumbs />
           <div v-if="isMobile" class="sort-filter_wrap">
-            <div class="sort-btn" @click="toggleSort">
-              <img v-if="showSort" src="@/assets/images/sort-up.svg" alt="sort" />
-              <img v-else src="@/assets/images/sort-down.svg" alt="sort" />
+            <div class="sort-btn" @click="toggleSort" :style="{'color': settings ? settings.main_color : 'white'}">
+              <svg v-if="showSort" xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-sort-up" viewBox="0 0 16 16">
+                <path d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+              </svg>
+              <svg v-else xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+                <path d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+              </svg>
             </div>
             <div class="filter-btn flex-center" @click="toggleFilter">
-              <img src="@/assets/images/filter.svg" alt="filter" />
+              <i class="fa fa-filter" aria-hidden="true" :style="{'color': settings ? settings.main_color : 'white', 'font-size':'22px'}"></i>
             </div>
           </div>
         </div>
@@ -65,7 +69,7 @@
                 />
               </li>
             </ul>
-            <div v-else class="loader"></div>
+            <div v-else class="loader"  :style="{'border-top': settings ? '10px solid'+settings.main_color : '10px solid white'}"></div>
             <Pagination
               class="style3"
               :paginate="paginate"
@@ -94,7 +98,7 @@ import Sidebar from "@/components/Sidebar";
 import Pagination from "@/components/Pagination";
 import ProductCart from "@/components/products/ProductCart";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import {mapMutations} from "vuex";
+import {mapGetters, mapMutations} from "vuex";
 export default {
   name: "GridLeftSidebar",
   components: {Breadcrumbs, ProductCart, Pagination, Sidebar},
@@ -109,6 +113,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(["settings"]),
     isMobile() {
       return this.width <= 768 && this.width > 0
     },
@@ -245,6 +250,7 @@ export default {
   padding: 5px;
   margin-right: 10px;
 }
+
 @media (max-width: 768px) {
   .shop-top-control {
     background-color: unset;

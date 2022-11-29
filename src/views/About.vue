@@ -17,21 +17,21 @@
                     <div class="banner-header">
                       <div class="col-lg-5 col-md-offset-7">
                         <div class="content-inner">
-                          <h2 class="title">
+                          <h2 class="title" :style="{'color': design ? design.main_color : null}">
                             Նոր տեսականի <br/> հենց քեզ համար
                           </h2>
                           <div class="sub-title">
                             Ինքնատիպ և որակյալ զարդեր,որոնք <br/>
                             կգոհացնեն նույնիսկ ամենաքմահաճ հաճախորդին
                           </div>
-                          <router-link to="/products" class="ysera-button button">Գնել</router-link>
+                          <router-link to="/products" class="ysera-button button" :style="styleObject">Գնել</router-link>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 col-sm-4">
+                <div class="row"  :style="styleObject">
+                  <div class="col-lg-3 col-md-4 col-sm-4" >
                     <div class="ysera-iconbox  layout1">
                       <div class="iconbox-inner">
                         <div class="icon-item">
@@ -97,6 +97,7 @@
 
 <script>
 import Breadcrumbs from "@/components/Breadcrumbs";
+import {mapGetters} from "vuex";
 export default {
   name: 'About',
   components: {Breadcrumbs},
@@ -118,6 +119,23 @@ export default {
         ]
       }
     }
-  }
+  },
+  computed: {
+    ...mapGetters({design:"settings"}),
+    styleObject: function() {
+      return {
+        '--bg-color': this.design ? this.design.main_color : null,
+      }
+    }
+    },
 }
 </script>
+<style>
+.header-banner .ysera-button.button{
+  background: var(--bg-color);
+  border-color:var(--bg-color) ;
+}
+.ysera-iconbox.layout1 .icon-item .icon{
+  color:var(--bg-color) ;
+}
+</style>

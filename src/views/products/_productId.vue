@@ -49,8 +49,8 @@
                     ({{product.stars_rate}})
                   </div>
                 </div>
-                <div class="availability">
-                  <a>{{product.available_type === 'is_available' ? 'Հասանելի է' : 'Հասանելի չէ'}}</a>
+                <div class="availability" >
+                  <a :style="{'color': design ? design.main_color : 'white'}">{{product.available_type === 'is_available' ? 'Հասանելի է' : 'Հասանելի չէ'}}</a>
                 </div>
                 <div class="price">
                   <span>{{product.price}} դրամ</span>
@@ -83,7 +83,7 @@
                   </div>
                   <div class="attribute attribute_size">
                     <div class="size-text text-attribute">Չափս</div>
-                    <div class="list-size list-item">
+                    <div class="list-size list-item" :style="styleObject">
                       <a v-for="item in coloredProduct.sizes"
                          :key="item.id"
                          :class="{active: size && size.id === item.id}"
@@ -114,7 +114,7 @@
                   <div class="quantity-add-to-cart">
                     <div class="quantity">
                       <div class="control">
-                        <a class="btn-number qtychange qtyminus quantity-minus" @click="changeCount(-1)">-</a>
+                        <a class="btn-number qtychange qtyminus quantity-minus" @click="changeCount(-1)" :style="styleObject">-</a>
                         <input
                             v-model="count"
                             type="text"
@@ -124,19 +124,19 @@
                             class="input-qty qty"
                             size="4"
                         >
-                        <a class="btn-number qtychange qtyplus quantity-plus" @click="changeCount(+1)">+</a>
+                        <a class="btn-number qtychange qtyplus quantity-plus" @click="changeCount(+1)" :style="styleObject">+</a>
                       </div>
                     </div>
-                    <button class="single_add_to_cart_button button" @click.stop="addToCartHandler">Ավելացնել զամբյուղ</button>
+                    <button class="single_add_to_cart_button button" @click.stop="addToCartHandler" :style="{'background-color': design ? design.main_color : null}">Ավելացնել զամբյուղ</button>
                   </div>
                   <p v-if="count < 1" class="error-message">Ընտրեք քանակը</p>
                 </div>
               </div>
             </div>
             <div class="tab-details-product">
-              <ul class="tab-link">
-                <li :class="{active: tabPanel === 'Description'}">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Description'">Նկարագրություն</a>
+              <ul class="tab-link"  >
+                <li :class="{active: tabPanel === 'Description'}" >
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Description'" :style="styleObject">Նկարագրություն</a>
                 </li>
                 <li v-if="product.details.information" :class="{active: tabPanel === 'Information'}">
                   <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Information'">Բնութագիր</a>
@@ -188,6 +188,7 @@ import Description from "@/components/products/Description";
 import Information from "@/components/products/Information";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import productMixin from "@/mixins/product.mixin";
+import {mapGetters} from "vuex";
 export default {
   name: "Product",
   props: ['id'],
@@ -220,6 +221,12 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({"design":"settings"}),
+    styleObject: function() {
+      return {
+        '--bg-color': this.design ? this.design.main_color : 'white',
+      }
+    },
     product() {
       return this.$store.state.product
     },
@@ -312,4 +319,14 @@ picture > img.iiz__img {
 .size-error {
   margin: -15px 0 0 0;
 }
+a:hover{
+  color: var(--bg-color) !important;
+}
+.tab-details-product .tab-link li.active a{
+  color:  var(--bg-color) !important;
+}
+.tab-details-product .tab-link li.active a::after{
+  background: var(--bg-color) !important;
+}
+
 </style>

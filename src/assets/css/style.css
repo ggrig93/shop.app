@@ -2886,7 +2886,7 @@ ul.list-products {
 	padding: 0 15px;
 }
 .header-banner .ysera-button.button {
-	background-color: #c09578;
+	/*background-color: #c09578;*/
 	border-color: #c09578;
 	margin-top: 0;
 }
@@ -3711,7 +3711,7 @@ ul.list-products {
 -----------------home 02------------------
 =========================================*/
 .top-bar {
-	background: #c09578;
+	/*background: #c09578;*/
 	padding: 10px 0;
 	color: #fff;
 }
@@ -5795,11 +5795,7 @@ a:hover, a:focus, a:active,
 	display: none;
 }
 
-.active-heart {
-	color: #c09578;
-}
 
 .active-heart:before {
 	content: "\f004"!important;
-	color: #c09578!important;
 }

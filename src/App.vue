@@ -25,7 +25,9 @@ export default {
     MobileMenu
   },
   created() {
+    this.$store.dispatch('getPageSettings')
     this.$store.dispatch('getCategories')
   },
+
 }
 </script>
