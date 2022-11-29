@@ -175,11 +175,11 @@ export default {
       }
     },
     openMiniCartFromProduct(val) {
-      if(!val) {
-        document.querySelector('.mini-cart').style.display = "none"
-      } else {
-        document.querySelector('.mini-cart').style.display = "block"
-      }
+      // if(!val) {
+      //   document.querySelector('.mini-cart').style.display = "none"
+      // } else {
+      //   document.querySelector('.mini-cart').style.display = "block"
+      // }
       this.fixedCartPopup = val && window.scrollY > 180
       console.log(val, window.scrollY)
     },

@@ -134,6 +134,7 @@ export default {
 .header-banner .ysera-button.button{
   background: var(--bg-color);
   border-color:var(--bg-color) ;
+  color: white !important;
 }
 .ysera-iconbox.layout1 .icon-item .icon{
   color:var(--bg-color) ;

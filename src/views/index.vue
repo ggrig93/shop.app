@@ -26,14 +26,14 @@
                           </h3>
                           <div class="price">
                             Նոր գին՝
-                            <span class="number-price">
+                            <span class="number-price" :style="{'color': design ? design.main_color : null}">
 														{{product.price}} դրամ
 													</span>
                           </div>
                           <router-link
                               :to="{name: 'Product', params: {id: product.id}}"
                               class="button btn-shop-the-look bgroud-style"
-                          >
+                              :style="styleObject">
                             Գնել
                           </router-link>
                         </div>
@@ -90,7 +90,7 @@
                   <banner img-class="style4" :backgroundImage="product.avatar">
 <!--                    <h3 class="title custom-title">{{product.title}}</h3>-->
   <!--                  <div class="description">{{product.description}}</div>-->
-                    <div class="button btn-shop-now">
+                    <div class="button btn-shop-now" :style="styleObject">
                       Գնել
                     </div>
                   </banner>
@@ -130,6 +130,7 @@
               </div>
             </div>
           </div>
+
         </div>
         <div class="ysera-iconbox-wrapp default" :style="{'background-color': design ? design.main_color : null}">
           <div class="container">
@@ -326,10 +327,16 @@ export default {
 .item-banner .banner-content>.button {
   background: var(--bg-color) !important;
   border: 2px solid var(--bg-color) !important;
+  color: white;
 }
 
 .slider-item .slider-infor .button{
   background: var(--bg-color) !important;
   border: 2px solid var(--bg-color) !important;
+}
+.item-banner .button:hover{
+  color: #fff !important;
+  background: #000 !important;
+  border-color: #000 !important;
 }
 </style>

@@ -69,7 +69,7 @@
                 />
               </li>
             </ul>
-            <div v-else class="loader"  :style="{'border-top': settings ? '10px solid'+settings.main_color : '10px solid white'}"></div>
+            <div v-else class="loader"  :style="{'border-top': settings ? '10px solid '+settings.main_color : '10px solid white'}"></div>
             <Pagination
               class="style3"
               :paginate="paginate"
