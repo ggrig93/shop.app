@@ -25,7 +25,7 @@
                             {{product.title}}
                           </h3>
                           <div class="price">
-                            Նոր գին՝
+                            {{ $t('newPrice') }}
                             <span class="number-price" :style="{'color': design ? design.main_color : null}">
 														{{product.price}} դրամ
 													</span>
@@ -34,7 +34,7 @@
                               :to="{name: 'Product', params: {id: product.id}}"
                               class="button btn-shop-the-look bgroud-style"
                               :style="styleObject">
-                            Գնել
+                            {{$t('buy')}}
                           </router-link>
                         </div>
                       </div>
@@ -56,7 +56,7 @@
                       :to="{name: 'Product', params: {id: product.id}}"
                       class="button btn-lets-do-it"
                   :style="styleObject">
-                    Գնել
+                    {{$t('buy')}}
                   </router-link>
                 </banner>
               </div>
@@ -66,7 +66,7 @@
         <div class="ysera-product produc-featured rows-space-65">
           <div class="container">
             <h3 class="custommenu-title-blog" :style="styleObject">
-              Օրվա առաջարկները
+              {{$t('offers')}}
             </h3>
             <vue-slick-carousel v-if="dealDayProducts" class="owl-products owl-slick" v-bind="productsSettings" :style="styleObject">
               <a
@@ -91,7 +91,7 @@
 <!--                    <h3 class="title custom-title">{{product.title}}</h3>-->
   <!--                  <div class="description">{{product.description}}</div>-->
                     <div class="button btn-shop-now" :style="styleObject">
-                      Գնել
+                      {{$t('buy')}}
                     </div>
                   </banner>
                 </router-link>
@@ -104,13 +104,13 @@
             <div class="tab-head">
               <ul class="tab-link" :style="styleObject">
                 <li :class="[activeTabPanel === 'bestseller' ? 'active' : '']">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'bestseller'">Բեսթսելեր</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'bestseller'">{{$t('bestSeller')}}</a>
                 </li>
                 <li :class="activeTabPanel === 'newArrivals' ? 'active' : ''">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'newArrivals'">Նորույթներ</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'newArrivals'">{{$t('news')}}</a>
                 </li>
                 <li :class="activeTabPanel === 'topRated' ? 'active' : ''">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'topRated'">Լավագույն վաճառք</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'topRated'">{{$t('bestSellers')}}</a>
                 </li>
               </ul>
             </div>
@@ -143,7 +143,7 @@
                     </div>
                     <div class="content">
                       <h4 class="title free-title">
-                        Անվճար առաքում 5000 դրամ և ավել պատվերի դեպքում
+                        {{$t('freeDeliveryText')}}
                       </h4>
                     </div>
                   </div>

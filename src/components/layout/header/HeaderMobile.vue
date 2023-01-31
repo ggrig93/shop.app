@@ -19,7 +19,7 @@
       <div class="header-searchform-box">
         <form class="header-searchform" @submit.prevent="searchHandler">
           <div class="searchform-wrap">
-            <input v-model="search" type="text" class="search-input" placeholder="Փնտրել" >
+            <input v-model="search" type="text" class="search-input" :placeholder="$t('search')">
             <button type="submit" class="submit button" :style="{'background-color': settings ? settings.main_color : 'white'}">
               <span class="icon">
                 <i class="fa fa-search" aria-hidden="true"></i>

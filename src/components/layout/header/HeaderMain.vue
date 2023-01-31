@@ -1,6 +1,6 @@
 <template>
   <div class="main-header">
-    <div class="row">
+    <div class="row main-header-container">
       <div class="col-lg-3 col-sm-4 col-md-3 col-xs-7 col-ts-12 header-element">
         <div class="logo">
           <router-link :to="{name: 'Home'}">
@@ -23,7 +23,7 @@
           <form action="" class="form-search form-search-width-category" @submit.prevent="searchHandler">
             <div class="form-content">
               <div class="inner">
-                <input type="text" class="input" v-model="search" placeholder="Փնտրել">
+                <input type="text" class="input" v-model="search" :placeholder="$t('search')">
               </div>
               <button class="btn-search" type="submit" :style="{'background-color': settings ? settings.main_color : 'white'}">
                 <span class="icon-search"></span>

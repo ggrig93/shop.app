@@ -2,7 +2,7 @@
   <div class="breadcrumb-trail breadcrumbs">
     <ul class="trail-items breadcrumb">
       <li class="trail-item trail-begin">
-        <router-link :to="{name: 'Home'}">Գլխավոր էջ</router-link>
+        <router-link :to="{name: 'Home'}">{{ $t('mainPage') }}</router-link>
       </li>
       <li class="trail-item trail-end active">
         {{currentRouteName}}
@@ -12,23 +12,24 @@
 </template>
 
 <script>
+
 export default {
   name: "Breadcrumbs",
   computed: {
     currentRouteName() {
       switch (this.$route.name) {
         case 'About':
-          return 'Մեր մասին';
+          return this.$t('about');
         case 'Checkout':
-          return 'Պատվերի էջ';
+          return this.$t('orderPage');
         case 'WishList':
-          return 'Հավանումներ';
+          return this.$t('wishList');
         case 'ShoppingCart':
-          return 'Իմ զամբյուղը';
+          return this.$t('shoppingCart');
         case 'Products':
-          return 'Բոլորը';
+          return this.$t('allProducts');
         case 'Product':
-          return 'Ապրանք';
+          return this.$t('product');
         default:
           return this.$route.name
       }

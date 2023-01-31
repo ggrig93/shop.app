@@ -16,6 +16,8 @@
     "font-awesome": "^4.7.0",
     "jquery.scrollbar": "^0.2.11",
     "vue-click-outside": "^1.1.0",
+    "vue-flag-icon": "^2.1.0",
+    "vue-i18n": "^8.28.2",
     "vue-inner-image-zoom": "^1.1.1",
     "vue-owl-carousel": "^2.0.3",
     "vue-recaptcha": "^2.0.2",

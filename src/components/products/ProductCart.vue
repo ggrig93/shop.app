@@ -5,7 +5,7 @@
         <div v-if="product.new" class="flash">
           <span class="onnew">
             <span class="text">
-              new
+                new
             </span>
           </span>
         </div>

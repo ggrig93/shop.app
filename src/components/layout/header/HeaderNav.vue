@@ -9,7 +9,7 @@
                   <span></span>
                   <span></span>
                 </span>
-            <span class="text">Տեսականի</span>
+            <span class="text">{{ $t('assortment') }}</span>
           </div>
           <div class="block-content verticalmenu-content" :class="{'show-up': openCategories}">
             <ul class="ysera-nav-vertical vertical-menu ysera-clone-mobile-menu" :style="styleObject">
@@ -47,23 +47,39 @@
 
 <script>
 import headerMixin from "@/mixins/header.mixin";
-import header from '@/customdata/menu'
 import {mapGetters, mapMutations} from "vuex";
 
 export default {
   name: "HeaderNav",
   mixins: [headerMixin],
-  data() {
-    return {
-      nav: header.nav
-    }
-  },
   computed: {
     ...mapGetters(["settings"]),
     styleObject: function() {
       return {
         '--bg-color': this.settings ? this.settings.main_color : 'white',
       }
+    },
+    nav() {
+      return  [
+        {
+          id: 1,
+          name: this.$t('mainPage'),
+          view: 'Home',
+          children: []
+        },
+        {
+          id: 2,
+          name: this.$t('allProducts'),
+          view: 'Products',
+          children: []
+        },
+        {
+          id: 5,
+          name: this.$t('about'),
+          view: 'About',
+          children: []
+        },
+      ]
     },
     categories() {
       return this.$store.state.categories

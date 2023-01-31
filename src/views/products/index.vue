@@ -25,7 +25,7 @@
           <div v-else class="site-main">
             <div v-show="showSort || !isMobile" class="shop-top-control">
               <form class="select-item select-form">
-                <div class="title">Ըստ քանակի</div>
+                <div class="title">{{$t('quantity')}}</div>
                 <select
                     v-model="per_page"
                     title="sort"
@@ -39,7 +39,7 @@
                 </select>
               </form>
               <form class="select-item select-form">
-                <div class="title price-title">Ըստ գնի</div>
+                <div class="title price-title">{{$t('price') }}</div>
                 <select
                     title="sort-by"
                     data-placeholder="Price: "

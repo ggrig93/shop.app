@@ -36,7 +36,6 @@
 
 <script>
 import {bus} from '@/main'
-import header from '@/customdata/menu'
 
 export default {
   name: "MobileMenu",
@@ -44,9 +43,45 @@ export default {
     return {
       open: false,
       key: 1,
-      menu: header.mobileMenu,
       historyMenu: [],
-      titleMenu: 'BeMine'
+      titleMenu: 'BeMine',
+      langs: ['en', 'ru','am']
+    }
+  },
+  computed: {
+    menu() {
+      return [
+        {
+          id: 1,
+          name: this.$t('mainPage'),
+          view: 'Home',
+          children: []
+        },
+        {
+          id: 2,
+          name: this.$t('allProducts'),
+          view: 'Products',
+          children: []
+        },
+        {
+          id: 3,
+          name: this.$t('shoppingCart'),
+          view: 'ShoppingCart',
+          children: []
+        },
+        {
+          id: 4,
+          name: this.$t('orderPage'),
+          view: 'Checkout',
+          children: []
+        },
+        {
+          id: 5,
+          name: this.$t('about'),
+          view: 'About',
+          children: []
+        },
+      ]
     }
   },
   mounted() {
