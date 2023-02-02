@@ -250,7 +250,7 @@ export default {
     &:before {
       content: "\f08a";
       font-family: 'FontAwesome';
-      margin-right: 7px;
+      margin-right: 13px;
       color: #555;
       font-size: 24px;
       line-height: normal;

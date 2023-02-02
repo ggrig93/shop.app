@@ -710,7 +710,7 @@ table tr:last-child td, table tr:last-child th {
 
 /*header-style-1*/
 .header .main-header {
-	padding: 50px 0;
+	padding: 30px 0;
 }
 .social-header, .header-language {
 	display: inline-block;
@@ -1452,6 +1452,7 @@ table tr:last-child td, table tr:last-child th {
 	margin: 0;
 	text-align: center;
 	padding: 13px 11px 10px;
+	border: none;
 }
 .header-device-mobile .mobile-navigation span {
 	background-color: #555;
@@ -4996,7 +4997,7 @@ ul.list-products {
 		display: inline-block;
 		vertical-align: top;
 		margin-left: 17px;
-		border: 2px solid #dedede;
+		border: none;
 		border-radius: 0;
 		padding: 14px 11px 10px;
 		position: relative;
@@ -5037,7 +5038,7 @@ ul.list-products {
 	}
 	/*==========home 07=========*/
 	.header .main-header {
-		padding: 40px 0 37px;
+		padding: 30px 0 37px;
 	}
 	.header.style7 .header-nav-container,
 	.header.style7 .header-nav-wapper {
@@ -5545,6 +5546,40 @@ ul.list-products {
 	.slider-item.style4 .title-big {
 		font-size: 28px;
 	}
+	.header-device-mobile .wapper {
+		flex-direction: column;
+		padding: 0;
+	}
+	.wapper-first-item {
+		display: flex;
+		justify-content: space-between;
+	}
+	.header-device-mobile {
+		width: 100%;
+		padding:15px;
+	}
+	.logo svg {
+		margin-left: -12px;
+	}
+	.header-device-mobile .header-searchform-box .search-input {
+		width: calc(100% - 50px);
+	}
+	.searchform-wrap .icon i {
+		font-size: 15px;
+	}
+	.the-header {
+		display: none;
+	}
+	.header-device-mobile .menu-bar {
+		padding-left: 0;
+		display: flex;
+		justify-content: end;
+		width: 100%;
+	}
+	.header-device-mobile .menu-bar p{
+		margin-right: 15px;
+		margin-top: 6px;
+	}
 }
 @media (max-width: 480px) {
 	.list-products .product-item {
@@ -5662,7 +5697,7 @@ ul.list-products {
 		font-size: 15px;
 	}
 	.header-device-mobile .mobile-search-box, .header-device-mobile .mobile-settings-box, .header-device-mobile .menu-bar {
-		width: 35px;
+		width: 100%;
 	}
 	.header-device-mobile .mobile-navigation, .mobile-search-box > a, .mobile-settings-box > a {
 		width: 35px;
@@ -5671,6 +5706,7 @@ ul.list-products {
 	}
 	.header-device-mobile .mobile-navigation {
 		padding: 11px 8px 10px;
+		border: none;
 	}
 	.slider-item.style4 .slider-inner .slider-infor,
 	.slider-item.style7 .slider-inner .slider-infor, .slider-item.style9 .slider-inner .slider-infor {

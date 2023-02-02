@@ -5,15 +5,15 @@
 <!--        <div class="header-message">-->
 <!--          {{ $t('welcome') }}-->
 <!--        </div>-->
-<!--        <select v-model="$i18n.locale" @change="changeLocale($i18n.locale)" class="language">-->
-<!--          <option-->
-<!--              v-for="(lang, i) in langs"-->
-<!--              :key="`lang-${i}`"-->
-<!--              :value="lang"-->
-<!--          >-->
-<!--            {{ lang }}-->
-<!--          </option>-->
-<!--        </select>-->
+  <!--        <select v-model="$i18n.locale" @change="changeLocale($i18n.locale)" class="language">-->
+  <!--          <option-->
+  <!--              v-for="(lang, i) in langs"-->
+  <!--              :key="`lang-${i}`"-->
+  <!--              :value="lang"-->
+  <!--          >-->
+  <!--            {{ lang }}-->
+  <!--          </option>-->
+  <!--        </select>-->
 <!--      </div>-->
 <!--    </div>-->
 <!--  </div>-->
@@ -40,9 +40,20 @@
       <li id="gh-shipto-click" class="gh-eb-li ">
         bbbbb
     </li>
-      <li id="gh-p-2" class="gh-eb-li gh-t-rt gh--link__divider rt">
-        <a href="https://www.ebay.com/sl/sell" _sp="m570.l1528" data-sp="m570.l1528" class="gh-p"> Sell</a>
-      </li>
+      <select v-model="$i18n.locale" @change="changeLocale($i18n.locale)" class="language">
+        <option
+            v-for="(lang, i) in langs"
+            :key="`lang-${i}`"
+            :value="lang"
+        >
+          {{ lang }}
+        </option>
+      </select>
+<!--      <li id="gh-p-2" class="gh-eb-li gh-t-rt gh&#45;&#45;link__divider rt">-->
+<!--        <a href="https://www.ebay.com/sl/sell" _sp="m570.l1528" data-sp="m570.l1528" class="gh-p">-->
+
+<!--        </a>-->
+<!--      </li>-->
 <!--      <li id="gh-wl-click" class="gh-eb-li gh-margin rt">-->
 <!--        <div class="gh-menu gh&#45;&#45;link__divider">-->
 <!--          <a href="https://www.ebay.com/mye/myebay/watchlist" _sp="m570.l47137" title="Watchlist" class="gh-eb-li-a gh-rvi-menu watchlist-menu">Watchlist-->
@@ -181,7 +192,7 @@ export default {
   justify-content: space-around;
 }
 .language{
-  color: white;
+  padding-right: 1px;
 }
 option{
   color: #000;
