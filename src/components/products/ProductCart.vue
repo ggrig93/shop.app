@@ -1,11 +1,11 @@
 <template>
-  <div class="product-inner equal-element" v-if="product">
+  <div class="product-inner equal-element" v-if="product" :style="styleObject">
     <template v-if="layout === 'grid'">
       <div class="product-top">
         <div v-if="product.new" class="flash">
           <span class="onnew">
             <span class="text">
-              new
+                new
             </span>
           </span>
         </div>
@@ -19,7 +19,7 @@
                 <div
                     v-if="$route.name === 'WishList'"
                     class="product-remove"
-                >
+                    :style="styleObject">
                   <span @click="showDeletePopup = product.id"  style="cursor: pointer;">
                     <i aria-hidden="true" class="fa fa-trash-o"></i>
                   </span>
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="product-info">
-        <div v-if="endDate" class="product-count-down">
+        <div v-if="endDate" class="product-count-down" :style="styleObject">
           <Countdown :end="endDate" />
         </div>
         <h5 class="product-name product_title">
@@ -56,7 +56,7 @@
             <del v-if="product.old_price">
               {{product.old_price}} դր․
             </del>
-            <ins>
+            <ins :style="styleObject">
               {{product.price}} դր․
             </ins>
           </div>
@@ -76,6 +76,7 @@ import DeletePopup from "@/components/DeletePopup.vue";
 import {bus} from '@/main'
 import Countdown from 'vuejs-countdown'
 import productMixin from "@/mixins/product.mixin";
+import {mapGetters} from "vuex";
 
 export default {
   name: "ProductCart",
@@ -114,6 +115,14 @@ export default {
       this.removeWishListItem(this.showDeletePopup)
       this.closeModal()
     },
+  },
+  computed: {
+    ...mapGetters(["settings"]),
+    styleObject: function() {
+      return {
+        '--bg-color': this.settings ? this.settings.main_color : 'white',
+      }
+    }
   }
 }
 </script>
@@ -149,6 +158,7 @@ export default {
   display: inline-block;
   vertical-align: middle;
   text-align: center;
+  text-align: center;
   padding: 7px 0 7px;
   min-width: 40px;
   border-radius: 50%;
@@ -156,11 +166,15 @@ export default {
   font-weight: 700;
   margin-bottom: 7px;
   position: relative;
-  background-color: #c09578;
+  /*background-color: #c09578;*/
+  background-color: var(--bg-color);
   color: #fff;
   @media(max-width: 480px) {
     margin: 0 2px;
   }
+}
+ins{
+  color: var(--bg-color) !important;
 }
 .vuejs-countdown li:after {
   display: none;
@@ -181,5 +195,14 @@ export default {
 .vuejs-countdown li .text {
   font-size: 9px;
   text-transform: uppercase;
+}
+.product-inner:hover{
+  border-color: var(--bg-color) !important
+}
+.fa-trash-o:hover{
+  color:var(--bg-color) !important ;
+}
+.thumb-group:hover a {
+  color:var(--bg-color) !important ;
 }
 </style>

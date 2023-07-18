@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="header style7">
+    <header class="header style7 the-header">
       <TopBar/>
       <div class="container">
         <HeaderMain/>

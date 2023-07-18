@@ -16,8 +16,11 @@
           class="page-numbers"
           :class="{
             current: isPageActive(page.label),
-             'page-arrow': page.label.includes('Prev') || page.label.includes('Next')
-          }">
+             'page-arrow': page.label.includes('Prev') || page.label.includes('Next'),
+          }"
+          @mouseover="page.active = true"
+          @mouseleave="page.active = false"
+          :style="(settings && isPageActive(page.label)) || (page.active) ? styleObject : null">
         <button
             v-if="page.label.includes('Prev')"
             @click.prevent="onClickPreviousPage"
@@ -52,8 +55,15 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "Pageination",
+  data(){
+    return{
+      active: false
+    }
+  },
   props: {
     paginate: {
       type: Object,
@@ -68,6 +78,12 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(["settings"]),
+    styleObject: function() {
+      return {
+        '--bg-color': this.settings ? this.settings.main_color : 'white',
+      }
+    },
     currentPage() {
       return this.paginate?.current_page
     },
@@ -75,6 +91,7 @@ export default {
       return this.paginate?.last_page
     },
     pages() {
+      console.log(this.paginate?.links)
       return this.paginate?.links
     },
     isInFirstPage() {
@@ -126,5 +143,15 @@ button {
     border-color: #F1F1F1;
     background-color: unset;
   }
+
 }
+.pagination .page-numbers:hover{
+  background-color: var(--bg-color);
+  //background: #5b2dff;
+  color: white;
+}
+.pagination .page-numbers{
+  background-color: var(--bg-color);
+}
+
 </style>

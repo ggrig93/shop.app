@@ -10,28 +10,28 @@
         <div class="row">
           <div class="content-area content-about col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="site-main">
-              <h3 class="custom_blog_title">Մեր մասին</h3>
+              <h3 class="custom_blog_title">{{ $t('aboutUs') }}</h3>
               <div class="page-main-content">
                 <div class="header-banner banner-image">
                   <div class="banner-wrap">
                     <div class="banner-header">
                       <div class="col-lg-5 col-md-offset-7">
                         <div class="content-inner">
-                          <h2 class="title">
-                            Նոր տեսականի <br/> հենց քեզ համար
+                          <h2 class="title" :style="{'color': design ? design.main_color : null}">
+                            {{ $t('newAssortment') }} <br/> {{$t('forYou')}}
                           </h2>
                           <div class="sub-title">
-                            Ինքնատիպ և որակյալ զարդեր,որոնք <br/>
-                            կգոհացնեն նույնիսկ ամենաքմահաճ հաճախորդին
+                            {{$t('unique_text1')}} <br/>
+                            {{$t('unique_text2')}}
                           </div>
-                          <router-link to="/products" class="ysera-button button">Գնել</router-link>
+                          <router-link to="/products" class="ysera-button button" :style="styleObject">{{ $t('buy') }}</router-link>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 col-sm-4">
+                <div class="row"  :style="styleObject">
+                  <div class="col-lg-3 col-md-4 col-sm-4" >
                     <div class="ysera-iconbox  layout1">
                       <div class="iconbox-inner">
                         <div class="icon-item">
@@ -40,10 +40,10 @@
                         </div>
                         <div class="content">
                           <h4 class="title">
-                            ԱՆՎՃԱՐ ԱՌԱՔՈՒՄ
+                            {{$t('freeDelivery')}}
                           </h4>
                           <div class="text">
-                            Անվճար առաքում ՀՀ տարածքում՝ 5000 դրամ և ավել բոլոր պատվերների համար։
+                            {{$t('freeDeliveryText')}}
                           </div>
                         </div>
                       </div>
@@ -58,10 +58,10 @@
                         </div>
                         <div class="content">
                           <h4 class="title">
-                            Նրբաոճ տեսականի
+                            {{$t('style')}}
                           </h4>
                           <div class="text">
-                            Մեր զարդերը նորաձև և յուրօրինակ նվեր են Ձեր սիրելիների համար։
+                            {{$t('styleText')}}
                           </div>
                         </div>
                       </div>
@@ -76,10 +76,10 @@
                         </div>
                         <div class="content">
                           <h4 class="title">
-                            Առցանց սպասարկում
+                            {{ $t('onlineService') }}
                           </h4>
                           <div class="text">
-                            Մենք սիրով աջակցում ենք մեր հաճախորդներին: Եկեք գնումներ կատարենք միասին:
+                            {{ $t('onlineServiceText') }}
                           </div>
                         </div>
                       </div>
@@ -97,6 +97,7 @@
 
 <script>
 import Breadcrumbs from "@/components/Breadcrumbs";
+import {mapGetters} from "vuex";
 export default {
   name: 'About',
   components: {Breadcrumbs},
@@ -118,6 +119,24 @@ export default {
         ]
       }
     }
-  }
+  },
+  computed: {
+    ...mapGetters({design:"settings"}),
+    styleObject: function() {
+      return {
+        '--bg-color': this.design ? this.design.main_color : null,
+      }
+    }
+    },
 }
 </script>
+<style>
+.header-banner .ysera-button.button{
+  background: var(--bg-color);
+  border-color:var(--bg-color) ;
+  color: white !important;
+}
+.ysera-iconbox.layout1 .icon-item .icon{
+  color:var(--bg-color) ;
+}
+</style>

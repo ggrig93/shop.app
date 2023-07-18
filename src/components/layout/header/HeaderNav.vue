@@ -3,16 +3,16 @@
     <div class="container">
       <div class="header-nav-wapper main-menu-wapper">
         <div class="vertical-wapper block-nav-categori">
-          <div class="block-title" @click="toggleCategories">
+          <div class="block-title" @click="toggleCategories" :style="{'background-color': settings ? settings.main_color : 'white'}">
                 <span class="icon-bar">
                   <span></span>
                   <span></span>
                   <span></span>
                 </span>
-            <span class="text">Տեսականի</span>
+            <span class="text">{{ $t('assortment') }}</span>
           </div>
           <div class="block-content verticalmenu-content" :class="{'show-up': openCategories}">
-            <ul class="ysera-nav-vertical vertical-menu ysera-clone-mobile-menu">
+            <ul class="ysera-nav-vertical vertical-menu ysera-clone-mobile-menu" :style="styleObject">
               <li
                   v-for="item in categories" :key="item.id"
                   class="menu-item"
@@ -34,7 +34,7 @@
             <ul class="ysera-clone-mobile-menu ysera-nav main-menu " id="menu-main-menu">
               <li :class="['menu-item', item.children.length ? 'menu-item-has-children' : '']" v-for="item in nav" :key="item.id">
                 <template>
-                  <router-link :to="{name: item.view}" class="ysera-menu-item-title" :title="item.name">{{item.name}}</router-link>
+                  <router-link :to="{name: item.view}" class="ysera-menu-item-title" :style="styleObject" :title="item.name">{{item.name}}</router-link>
                 </template>
               </li>
             </ul>
@@ -47,18 +47,40 @@
 
 <script>
 import headerMixin from "@/mixins/header.mixin";
-import header from '@/customdata/menu'
-import {mapMutations} from "vuex";
+import {mapGetters, mapMutations} from "vuex";
 
 export default {
   name: "HeaderNav",
   mixins: [headerMixin],
-  data() {
-    return {
-      nav: header.nav
-    }
-  },
   computed: {
+    ...mapGetters(["settings"]),
+    styleObject: function() {
+      return {
+        '--bg-color': this.settings ? this.settings.main_color : 'white',
+      }
+    },
+    nav() {
+      return  [
+        {
+          id: 1,
+          name: this.$t('mainPage'),
+          view: 'Home',
+          children: []
+        },
+        {
+          id: 2,
+          name: this.$t('allProducts'),
+          view: 'Products',
+          children: []
+        },
+        {
+          id: 5,
+          name: this.$t('about'),
+          view: 'About',
+          children: []
+        },
+      ]
+    },
     categories() {
       return this.$store.state.categories
     }
@@ -81,5 +103,11 @@ export default {
   &:hover {
     color: #c09578;
   }
+}
+.ysera-menu-item-title:hover{
+  color: var(--bg-color);
+}
+.vertical-menu .menu-item a:hover{
+  color: var(--bg-color);
 }
 </style>

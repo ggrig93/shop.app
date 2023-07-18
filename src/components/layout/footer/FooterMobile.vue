@@ -13,7 +13,7 @@
         <router-link :to="{name: 'WishList'}">
 					<span class="icon">
 						<i class="fa fa-heart" aria-hidden="true"></i>
-            <span class="count-icon">
+            <span class="count-icon" :style="{'background-color': settings ? settings.main_color : 'white'}">
 							{{wishListCount}}
 						</span>
 					</span>
@@ -24,7 +24,7 @@
         <router-link :to="{name: 'ShoppingCart'}">
 					<span class="icon">
 						<i class="fa fa-shopping-basket" aria-hidden="true"></i>
-						<span class="count-icon">
+						<span class="count-icon" :style="{'background-color': settings ? settings.main_color : 'white'}">
 							{{shopCartCount}}
 						</span>
 					</span>
@@ -36,9 +36,12 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "FooterMobile",
   computed: {
+    ...mapGetters(["settings"]),
     shopCartCount() {
       return this.$store.state.shopProducts?.length ?
           this.$store.state.shopProducts.length :

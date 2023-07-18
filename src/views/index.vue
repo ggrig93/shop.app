@@ -25,16 +25,16 @@
                             {{product.title}}
                           </h3>
                           <div class="price">
-                            Նոր գին՝
-                            <span class="number-price">
+                            {{ $t('newPrice') }}
+                            <span class="number-price" :style="{'color': design ? design.main_color : null}">
 														{{product.price}} դրամ
 													</span>
                           </div>
                           <router-link
                               :to="{name: 'Product', params: {id: product.id}}"
                               class="button btn-shop-the-look bgroud-style"
-                          >
-                            Գնել
+                              :style="styleObject">
+                            {{$t('buy')}}
                           </router-link>
                         </div>
                       </div>
@@ -55,8 +55,8 @@
                   <router-link
                       :to="{name: 'Product', params: {id: product.id}}"
                       class="button btn-lets-do-it"
-                  >
-                    Գնել
+                  :style="styleObject">
+                    {{$t('buy')}}
                   </router-link>
                 </banner>
               </div>
@@ -65,10 +65,10 @@
         </div>
         <div class="ysera-product produc-featured rows-space-65">
           <div class="container">
-            <h3 class="custommenu-title-blog">
-              Օրվա առաջարկները
+            <h3 class="custommenu-title-blog" :style="styleObject">
+              {{$t('offers')}}
             </h3>
-            <vue-slick-carousel v-if="dealDayProducts" class="owl-products owl-slick" v-bind="productsSettings">
+            <vue-slick-carousel v-if="dealDayProducts" class="owl-products owl-slick" v-bind="productsSettings" :style="styleObject">
               <a
                   v-for="(item, i) in dealDayProducts"
                   :key="i"
@@ -90,8 +90,8 @@
                   <banner img-class="style4" :backgroundImage="product.avatar">
 <!--                    <h3 class="title custom-title">{{product.title}}</h3>-->
   <!--                  <div class="description">{{product.description}}</div>-->
-                    <div class="button btn-shop-now">
-                      Գնել
+                    <div class="button btn-shop-now" :style="styleObject">
+                      {{$t('buy')}}
                     </div>
                   </banner>
                 </router-link>
@@ -102,15 +102,15 @@
         <div class="ysera-tabs  default rows-space-40">
           <div class="container">
             <div class="tab-head">
-              <ul class="tab-link">
+              <ul class="tab-link" :style="styleObject">
                 <li :class="[activeTabPanel === 'bestseller' ? 'active' : '']">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'bestseller'">Բեսթսելեր</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'bestseller'">{{$t('bestSeller')}}</a>
                 </li>
                 <li :class="activeTabPanel === 'newArrivals' ? 'active' : ''">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'newArrivals'">Նորույթներ</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'newArrivals'">{{$t('news')}}</a>
                 </li>
                 <li :class="activeTabPanel === 'topRated' ? 'active' : ''">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'topRated'">Լավագույն վաճառք</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="activeTabPanel = 'topRated'">{{$t('bestSellers')}}</a>
                 </li>
               </ul>
             </div>
@@ -130,8 +130,9 @@
               </div>
             </div>
           </div>
+
         </div>
-        <div class="ysera-iconbox-wrapp default">
+        <div class="ysera-iconbox-wrapp default" :style="{'background-color': design ? design.main_color : null}">
           <div class="container">
             <div class="row">
               <div class="col-sm-12 col-xs-12">
@@ -142,7 +143,7 @@
                     </div>
                     <div class="content">
                       <h4 class="title free-title">
-                        Անվճար առաքում 5000 դրամ և ավել պատվերի դեպքում
+                        {{$t('freeDeliveryText')}}
                       </h4>
                     </div>
                   </div>
@@ -153,7 +154,7 @@
         </div>
       </div>
     </div>
-    <div class="instagram-wrapp">
+    <div class="instagram-wrapp" :style="styleObject">
       <div>
         <h3 class="custommenu-title-blog">
           <i class="flaticon-instagram" aria-hidden="true"></i>
@@ -181,6 +182,7 @@
 import VueSlickCarousel from 'vue-slick-carousel'
 import ProductCart from "@/components/products/ProductCart";
 import Banner from '@/components/Banner'
+import {mapGetters} from "vuex";
 
 export default {
   name: 'Home',
@@ -240,6 +242,12 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({"design":"settings"}),
+    styleObject: function() {
+      return {
+        '--bg-color': this.design ? this.design.main_color : null,
+      }
+    },
     mainProducts() {
       const slideItems = [
           {id: 21, title: 'Մարգարտյա ականջօղ', price: '4500', avatar: require('@/assets/images/image2.webp')},
@@ -277,7 +285,7 @@ export default {
   created() {
     this.$store.dispatch('getDealDayProducts')
     this.$store.dispatch('getBestsellers')
-  }
+  },
 }
 </script>
 
@@ -297,5 +305,38 @@ export default {
 }
 .free-title {
   text-transform: uppercase!important;
+}
+.slider-infor{
+  background-image: url("../assets/images/p_62a1ad065399f_1654762758.jpg");
+}
+.style7>.inner{
+  background-image: url("../assets/images/p_629f28d1a45a6_1654597841.jpg") !important;
+}
+.custommenu-title-blog::before{
+  border-bottom: 4px solid var(--bg-color)
+}
+.ysera-tabs .tab-link li.active a{
+  color: var(--bg-color);
+}
+.ysera-tabs .tab-link li a:hover{
+  color: var(--bg-color);
+}
+.instagram-wrapp .custommenu-title-blog i{
+  color: var(--bg-color);
+}
+.item-banner .banner-content>.button {
+  background: var(--bg-color) !important;
+  border: 2px solid var(--bg-color) !important;
+  color: white;
+}
+
+.slider-item .slider-infor .button{
+  background: var(--bg-color) !important;
+  border: 2px solid var(--bg-color) !important;
+}
+.item-banner .button:hover{
+  color: #fff !important;
+  background: #000 !important;
+  border-color: #000 !important;
 }
 </style>

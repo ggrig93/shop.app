@@ -10,7 +10,7 @@
         Պատվերի էջ
       </h3>
       <div class="checkout-wrapp">
-        <div v-if="!showSuccess" class="shipping-address-form-wrapp">
+        <div v-if="!showSuccess" class="shipping-address-form-wrapp" :style="styleObject">
           <div class="shipping-address-form  checkout-form">
             <div class="row-col-1 row-col">
               <div class="shipping-address">
@@ -112,7 +112,7 @@
               </div>
             </div>
           </div>
-          <div class="button button-payment" @click="orderHandler">Հաստատել պատվերը</div>
+          <div class="button button-payment" @click="orderHandler" :style="styleObject">Հաստատել պատվերը</div>
         </div>
         <div v-if="showSuccess" class="end-checkout-wrapp">
           <div class="end-checkout checkout-form">
@@ -137,6 +137,7 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { http } from '@/api/http-common';
 import CaptchaComponent from "../components/Captcha";
+import {mapGetters} from "vuex";
 
 export default {
   name: "Checkout",
@@ -169,6 +170,12 @@ export default {
     cartTotalPrice() {
       return this.$store.state.cartTotalPrice
     },
+      ...mapGetters({"design": "settings"}),
+      styleObject: function () {
+        return {
+          '--bg-color': this.design ? this.design.main_color : null,
+        }
+      }
   },
   watch: {
     'form.name'(){
@@ -240,6 +247,12 @@ export default {
 }
 .input-error {
   border: 1px solid #e80c0c;
+}
+.title-form::before{
+  border: 1px solid var(--bg-color) !important ;
+}
+.button-payment:hover{
+ background: var(--bg-color) !important ;
 }
 .row-wrap {
   width: 100%;

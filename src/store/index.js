@@ -12,6 +12,7 @@ export default new Vuex.Store({
     brands: null,
     sizes: null,
     tags: null,
+    settings: null,
     dealDayProducts: null,
     popularProducts: null,
     categories: null,
@@ -36,6 +37,7 @@ export default new Vuex.Store({
     per_page: state => state.otherFilters.per_page,
     otherFilters: state => state.otherFilters,
     wishList: state => state.wishList,
+    settings: state => state.settings
   },
   mutations: {
     setShopProducts(state, value) {
@@ -162,6 +164,18 @@ export default new Vuex.Store({
         JSON.parse(localStorage.getItem("wishList")) ?
           JSON.parse(localStorage.getItem("wishList")) : []
       commit('setWishList', wishList)
+    },
+    getPageSettings({state}) {
+      if (!sessionStorage.settings){
+        http.get('/settings')
+            .then(res => {
+              state.settings = res.data
+              sessionStorage.settings = JSON.stringify(state.settings)
+            })
+            .catch(err => console.log(err))
+      }else{
+        state.settings = JSON.parse(sessionStorage.settings)
+      }
     }
   },
   modules: {

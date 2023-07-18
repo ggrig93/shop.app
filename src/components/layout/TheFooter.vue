@@ -7,10 +7,10 @@
             <div class="row">
               <div class="col-sm-12 col-xs-12">
                 <div class="ysera-socials">
-                  <ul class="socials">
+                  <ul class="socials" :style="styleObject">
                     <li>
                       <a href="#" class="social-item" target="_blank">
-                        <i class="icon fa fa-facebook"></i>
+                        <i class="icon fa fa-facebook" ></i>
                       </a>
                     </li>
                     <li>
@@ -21,8 +21,8 @@
                   </ul>
                 </div>
                 <div class="coppyright">
-                  Copyright © {{new Date().getFullYear()}}
-                  <router-link to="/">BeMine</router-link>
+                  Copyright © {{ new Date().getFullYear() }}
+                  <router-link to="/" :style="{'color': settings ? settings.main_color : 'white'}">BeMine</router-link>
                   . All rights reserved
                 </div>
               </div>
@@ -37,8 +37,26 @@
 
 <script>
 import FooterMobile from "@/components/layout/footer/FooterMobile";
+import {mapGetters} from "vuex";
+
 export default {
   name: "TheFooter",
-  components: {FooterMobile}
+  components: {FooterMobile},
+  computed: {
+    ...mapGetters(["settings"]),
+    styleObject: function () {
+      return {
+        '--bg-color': this.settings ? this.settings.main_color : 'white',
+      }
+    },
+  }
 }
 </script>
+
+<style>
+a:hover {
+  color: var(--bg-color) !important;
+}
+
+
+</style>

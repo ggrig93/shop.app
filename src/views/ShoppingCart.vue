@@ -24,7 +24,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="(prod, idx) in shopProducts" :key="idx" class="cart_item">
-                      <td class="product-remove">
+                      <td class="product-remove" :style="styleObject">
                         <a class="remove" @click="showDeletePopup = idx"></a>
                       </td>
                       <td class="product-thumbnail">
@@ -72,7 +72,7 @@
                     </tbody>
                   </table>
                 </form>
-                <div class="control-cart">
+                <div class="control-cart" :style="styleObject">
                   <button class="button btn-continue-shopping" @click="$router.push({name: 'Products'})">
                     Շարունակել Shopping-ը
                   </button>
@@ -99,6 +99,7 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import DeletePopup from "@/components/DeletePopup.vue";
 import productMixin from "@/mixins/product.mixin";
+import {mapGetters} from "vuex";
 export default {
   name: "ShoppingCart",
   mixins: [productMixin],
@@ -109,6 +110,12 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({"settings":"settings"}),
+    styleObject: function() {
+      return {
+        '--bg-color': this.settings ? this.settings.main_color : 'white',
+      }
+    },
     shopProducts() {
       return this.$store.state.shopProducts
     },
@@ -147,5 +154,14 @@ export default {
   button {
     margin-bottom: 10px;
   }
+}
+.btn-continue-shopping:hover{
+  background: var(--bg-color) !important;
+}
+.btn-cart-to-checkout:hover{
+  background: var(--bg-color) !important;
+}
+.cart-form .product-remove:hover a:before{
+  color: var(--bg-color) !important;
 }
 </style>
