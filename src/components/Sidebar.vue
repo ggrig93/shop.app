@@ -4,14 +4,15 @@
       <div class="widget widget-categories sidebar-filter" v-if="categories">
         <h3 class="widgettitle">{{$t('selectType')}}</h3>
         <ul class="list-categories">
-          <li v-for="cat in categories" :key="cat.id">
-            <Checkbox
-                id="category"
-                :label="cat.name"
-                :input-value="cat.id"
-                v-model="filters.selectedCategories"
-            />
-          </li>
+          <Categories :categories="categories" v-model="filters.selectedCategories" ></Categories>
+<!--          <li v-for="cat in categories" :key="cat.id">-->
+<!--            <Checkbox-->
+<!--                id="category"-->
+<!--                :label="cat.name"-->
+<!--                :input-value="cat.id"-->
+<!--                v-model="filters.selectedCategories"-->
+<!--            />-->
+<!--          </li>-->
         </ul>
       </div>
       <div class="widget widget_filter_price sidebar-filter" v-if="price">
@@ -97,10 +98,11 @@
 <script>
 import Checkbox from "@/components/custom-input/Checkbox";
 import {mapGetters, mapMutations} from "vuex";
+import Categories from "@/components/Categories";
 
 export default {
   name: "Sidebar",
-  components: {Checkbox},
+  components: {Checkbox, Categories},
   props: {
     categories: {
       type: Array,
@@ -201,7 +203,7 @@ export default {
   methods: {
     ...mapMutations(["setSearch", "setByPrice", "setPage", "setPerPage"]),
     queryToArray(val) {
-      return typeof val === 'string' ? val.split(",").map(item => parseInt(item)) : val
+      return typeof val === 'string' ? val.split(",").map(item => parseInt(item)).filter(item => !isNaN(item)) : val
     },
     selectColor(color) {
       if (this.filters.selectedColors.includes(color.id)) {

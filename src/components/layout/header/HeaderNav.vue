@@ -13,19 +13,21 @@
           </div>
           <div class="block-content verticalmenu-content" :class="{'show-up': openCategories}">
             <ul class="ysera-nav-vertical vertical-menu ysera-clone-mobile-menu" :style="styleObject">
-              <li
-                  v-for="item in categories" :key="item.id"
-                  class="menu-item"
-                  @click="openCategories = false"
-              >
-                <a
-                    class="ysera-menu-item-title"
-                    :title="item.name"
-                    @click="selectCategory(item.id)"
-                >
-                  {{item.name}}
-                </a>
-              </li>
+
+              <HeaderCategories :categories="categories" @update:model="selectCategory"> </HeaderCategories>
+<!--              <li-->
+<!--                  v-for="item in categories" :key="item.id"-->
+<!--                  class="menu-item"-->
+<!--                  @click="selectCategory(item.id)"-->
+<!--              >-->
+<!--                <a-->
+<!--                    class="ysera-menu-item-title"-->
+<!--                    :title="item.name"-->
+
+<!--                >-->
+<!--                  {{item.name}}-->
+<!--                </a>-->
+<!--              </li>-->
             </ul>
           </div>
         </div>
@@ -46,13 +48,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import headerMixin from "@/mixins/header.mixin";
 import {mapGetters, mapMutations} from "vuex";
-
+import HeaderCategories from "@/components/layout/header/HeaderCategories";
 export default {
   name: "HeaderNav",
+  components: {HeaderCategories},
   mixins: [headerMixin],
   computed: {
+    ...mapState(['categoryFromMenu']),
     ...mapGetters(["settings"]),
     styleObject: function() {
       return {
@@ -85,11 +90,17 @@ export default {
       return this.$store.state.categories
     }
   },
+  watch: {
+    categoryFromMenu(id) {
+      this.selectCategory(id)
+    },
+  },
   methods: {
     ...mapMutations(["setCategory"]),
     selectCategory(id) {
+      this.openCategories = false
       this.setCategory([id])
-      if(this.$route.name !== 'Products') {
+      if (this.$route.name !== 'Products') {
         this.$router.replace({name: 'Products', query: {'filter[categories]': [id]}})
       }
     }

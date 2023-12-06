@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="className">
     <input type="checkbox" :id="label + $attrs.id" :value="inputValue" v-model="model">
     <label class="label-text" :for="label + $attrs.id">{{ label }}</label>
   </div>
@@ -11,6 +11,7 @@ export default {
   name: "Checkbox",
   props: {
     label: String,
+    className: String,
     value: Array,
     inputValue: [String, Number]
   },
@@ -26,3 +27,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.bold-label label {
+  font-weight: 700;
+}
+</style>

@@ -16,6 +16,7 @@ export default new Vuex.Store({
     dealDayProducts: null,
     popularProducts: null,
     categories: null,
+    categoryFromMenu: null,
     shopProducts: [],
     wishList: [],
     cartTotalPrice: 0,
@@ -66,6 +67,9 @@ export default new Vuex.Store({
     },
     setLoading(state, value) {
       state.loading = value
+    },
+    setCategoryFromMenu(state, value) {
+      state.categoryFromMenu = value
     },
   },
   actions: {
@@ -133,7 +137,7 @@ export default new Vuex.Store({
           .catch(err => console.log(err))
     },
     getBestsellers({state}) {
-      http.get('/product/populars-by/')
+      http.get('/product/populars-by')
           .then(res => state.popularProducts = res.data.data)
           .catch(err => console.log(err))
     },
