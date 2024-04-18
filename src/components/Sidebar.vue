@@ -21,12 +21,12 @@
         <div class="price-slider-wrapper">
           <div class="price-input">
 <!--            <label for="min">Մինիմալ գին</label><br>-->
-            <input id="min" placeholder="Մինիմալ գին" :value="filters.minPrice" @change="filters.minPrice = $event.target.value" />
+            <input id="min" :placeholder="$t('min_price')" :value="filters.minPrice" @change="filters.minPrice = $event.target.value" />
           </div>
           <div class="line">-</div>
           <div class="price-input">
 <!--            <label for="max">Մաքսիմալ գին</label><br>-->
-            <input id="max" placeholder="Մաքսիմալ գին" :value="filters.maxPrice" @change="filters.maxPrice = $event.target.value" />
+            <input id="max" :placeholder="$t('max_price')" :value="filters.maxPrice" @change="filters.maxPrice = $event.target.value" />
           </div>
         </div>
       </div>

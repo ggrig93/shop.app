@@ -1,6 +1,6 @@
 <template>
   <div class="pagination clearfix">
-    <div class="nav-link">
+    <div class="nav-link" v-if="lastPage > 1">
       <!--      <a href="javascript:void(0)" class="page-numbers">-->
       <!--        <button-->
       <!--          @click="onClickFirstPage"-->
@@ -147,8 +147,7 @@ button {
 }
 .pagination .page-numbers:hover{
   background-color: var(--bg-color);
-  //background: #5b2dff;
-  color: white;
+  color: white !important;
 }
 .pagination .page-numbers{
   background-color: var(--bg-color);

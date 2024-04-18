@@ -32,7 +32,7 @@
                 >Հավանել</a>
               </div>
             </div>
-            <a class="button quick-wiew-button" @click.stop="openModal(product)">Quick View</a>
+            <a class="button quick-wiew-button" @click.stop="openModal(product)" style="cursor: pointer;">Quick View</a>
           </div>
         </div>
       </div>
@@ -54,10 +54,10 @@
           </div>
           <div class="price">
             <del v-if="product.old_price">
-              {{product.old_price}} դր․
+              {{product.old_price}} {{settings.currency_value}}
             </del>
             <ins :style="styleObject">
-              {{product.price}} դր․
+              {{product.price}} {{settings.currency_value}}
             </ins>
           </div>
         </div>

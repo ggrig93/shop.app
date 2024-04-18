@@ -139,7 +139,7 @@
                   <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Description'" :style="styleObject">Նկարագրություն</a>
                 </li>
                 <li v-if="product.details.information" :class="{active: tabPanel === 'Information'}">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Information'">Բնութագիր</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Information'" :style="styleObject">Բնութագիր</a>
                 </li>
               </ul>
               <div class="tab-container">

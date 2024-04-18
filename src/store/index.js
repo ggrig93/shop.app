@@ -167,9 +167,11 @@ export default new Vuex.Store({
     },
     getPageSettings({state}) {
       if (!sessionStorage.settings){
-        http.get('/settings')
+        http.get('/setting')
             .then(res => {
-              state.settings = res.data
+              res.data.data.map(item => {
+                state.settings = item
+              })
               sessionStorage.settings = JSON.stringify(state.settings)
             })
             .catch(err => console.log(err))

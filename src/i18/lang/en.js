@@ -11,6 +11,9 @@ const en = {
         bestSellers: 'Best sale',
         freeDeliveryText: 'Free shipping on the territory of the Republic of Armenia for all orders of  5000 AMD or above.',
         quantity: 'By quantity',
+        products_page_6: '6 products/page',
+        products_page_9: '9 products/page',
+        products_page_12: '12 products/page',
         price: 'By price',
         selectType: 'Select by type',
         selectPrice: 'Select by price',
@@ -33,6 +36,9 @@ const en = {
         wishList: 'Wishlist',
         shoppingCart: 'Shopping Cart',
         allProducts: 'All products',
-        product: 'Product'
+        product: 'Product',
+        max_price: 'Max price',
+        min_price: 'Min price',
+        help_contact: 'Help & Contact'
 }
 export {en}

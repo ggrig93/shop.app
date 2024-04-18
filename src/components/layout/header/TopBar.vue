@@ -20,26 +20,11 @@
   <div id="gh-top" class="gh-hide-if-nocss" role="navigation" aria-label="Account">
     <div>
     <ul id="gh-topl">
-      <li class="gh-t" id="gh-eb-u">
-        <span id="gh-ug" class="gh-ug-guest" aria-expanded="false">Hi!
-          <a href="https://signin.ebay.com/ws/eBayISAPI.dll?SignIn&amp;ru=https%3A%2F%2Fwww.ebay.com%2F" _sp="m570.l1524">Sign in
-          </a>&nbsp;
-          <span id="gh-ug-flex">or
-            <a href="https://signup.ebay.com/pa/crte?ru=https%3A%2F%2Fwww.ebay.com%2F" _sp="m570.l2621">register</a>
-          </span>
-        </span>
-      </li>
-      <li class="gh-t gh-divider-l" id="gh-p-1">
-        <a href="https://www.ebay.com/globaldeals" _sp="m570.l3188" data-sp="m570.l3188" class="gh-p"> Daily Deals</a>
-      </li>
       <li class="gh-t gh-divider-l" id="gh-p-3">
-        <a href="https://ocsnext.ebay.com/ocs/home" _sp="m570.l1545" data-sp="m570.l1545" class="gh-p"> Help &amp; Contact</a>
+        <a href="https://ocsnext.ebay.com/ocs/home" _sp="m570.l1545" data-sp="m570.l1545" class="gh-p"> {{$t('help_contact')}}</a>
       </li>
     </ul>
     <ul id="gh-eb">
-      <li id="gh-shipto-click" class="gh-eb-li ">
-        bbbbb
-    </li>
       <select v-model="$i18n.locale" @change="changeLocale($i18n.locale)" class="language">
         <option
             v-for="(lang, i) in langs"

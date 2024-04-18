@@ -11,6 +11,9 @@ const am = {
         bestSellers: 'Լավագույն վաճառք',
         freeDeliveryText: 'Անվճար առաքում ՀՀ տարածքում՝ 5000 դրամ և ավել բոլոր պատվերների համար։',
         quantity: 'Ըստ քանակի',
+        products_page_6: '6 ապրանք/էջ',
+        products_page_9: '9 ապրանք/էջ',
+        products_page_12: '12 ապրանք/էջ',
         price: 'Ըստ գնի',
         selectType: 'Ընտրել ըստ տեսակի',
         selectPrice: 'Ընտրել ըստ գնի',
@@ -33,7 +36,10 @@ const am = {
         wishList: 'Հավանումներ',
         shoppingCart: 'Զամբյուղ',
         allProducts: 'Բոլորը',
-        product: 'Ապրանք'
+        product: 'Ապրանք',
+        max_price: 'Մաքսիմալ գին',
+        min_price: 'Մինիմալ գին',
+        help_contact: 'Օգնություն և Կապ'
 }
 
 export {am}

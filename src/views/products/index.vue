@@ -33,9 +33,9 @@
                     class="chosen-select"
                     @change="sortPerPage"
                 >
-                  <option value="6">6 ապրանք/էջ</option>
-                  <option value="9">9 ապրանք/էջ</option>
-                  <option value="12">12 ապրանք/էջ</option>
+                  <option value="6">{{$t('products_page_6')}}</option>
+                  <option value="9">{{$t('products_page_9')}}</option>
+                  <option value="12">{{$t('products_page_12')}}</option>
                 </select>
               </form>
               <form class="select-item select-form">
@@ -61,7 +61,7 @@
                   ? 'col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-6 style-1'
                   : 'col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12 style-list'"
                   v-for="prod in products" :key="prod.id"
-                  @click="$router.push({name: 'Product', params: {id: prod.id}})"
+                  @click="productPage(prod)"
               >
                 <ProductCart
                     :layout="layoutMode ? 'grid' : 'list'"
@@ -217,6 +217,9 @@ export default {
         this.showFilters = false
       }
     },
+    productPage(prod) {
+      this.$router.push({name: 'Product', params: {id: prod.id}})
+    }
   }
 }
 </script>
