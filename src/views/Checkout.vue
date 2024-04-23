@@ -136,7 +136,7 @@
 <script>
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { http } from '@/api/http-common';
-import CaptchaComponent from "../../../shop.app/src/components/Captcha.vue";
+import CaptchaComponent from "@/components/Captcha.vue";
 import {mapGetters} from "vuex";
 
 export default {
