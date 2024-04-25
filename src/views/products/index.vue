@@ -41,14 +41,14 @@
               <form class="select-item select-form">
                 <div class="title price-title">{{$t('price') }}</div>
                 <select
+                    v-model="by_price"
                     title="sort-by"
                     data-placeholder="Price: "
                     class="chosen-select"
-                    v-model="by_price"
                     @change="sortByPrice"
                 >
-                  <option value="asc">աճման</option>
-                  <option value="desc">նվազման</option>
+                  <option value="asc">{{$t('asc')}}</option>
+                  <option value="desc">{{$t('desc')}}</option>
                 </select>
               </form>
             </div>
@@ -105,8 +105,8 @@ export default {
   data() {
     return {
       layoutMode: true,
-      by_price: '',
-      per_page: '',
+      by_price: 'asc',
+      per_page: 6,
       showFilters: false,
       showSort: false,
       width: 0,
@@ -158,8 +158,6 @@ export default {
         }
         if(val['filter[per_page]']) {
           this.per_page = val['filter[per_page]']
-        } else {
-          this.by_price = ""
         }
       }
     },

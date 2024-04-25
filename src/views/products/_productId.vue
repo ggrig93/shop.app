@@ -286,7 +286,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .details-thumd .image-preview-container {
   margin-bottom: 0;
   border: none;
@@ -328,6 +328,9 @@ a:hover{
 }
 .tab-details-product .tab-link li.active a::after{
   background: var(--bg-color) !important;
+}
+.details-thumd .thumbnails_carousel .owl-item a.active::before {
+  border-color: var(--bg-color) !important;
 }
 
 </style>

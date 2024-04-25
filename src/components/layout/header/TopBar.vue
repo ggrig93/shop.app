@@ -21,7 +21,7 @@
     <div>
     <ul id="gh-topl">
       <li class="gh-t gh-divider-l" id="gh-p-3">
-        <a href="https://ocsnext.ebay.com/ocs/home" _sp="m570.l1545" data-sp="m570.l1545" class="gh-p"> {{$t('help_contact')}}</a>
+        <a href="#" _sp="m570.l1545" data-sp="m570.l1545" class="gh-p"> {{$t('help_contact')}}</a>
       </li>
     </ul>
     <ul id="gh-eb">

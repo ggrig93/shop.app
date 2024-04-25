@@ -154,26 +154,66 @@
         </div>
       </div>
     </div>
-<!--    <div class="instagram-wrapp" :style="styleObject">-->
-<!--      <div>-->
-<!--        <h3 class="custommenu-title-blog">-->
-<!--          <i class="flaticon-instagram" aria-hidden="true"></i>-->
-<!--          Instagram Feed-->
-<!--        </h3>-->
-<!--        <div class="ysera-instagram">-->
-<!--          <vue-slick-carousel class="instagram" v-bind="instagramSettings">-->
-<!--            <div class="item-instagram" v-for="i in 5" :key="i">-->
-<!--              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">-->
-<!--                <img :src="`http://ledthanhdat.vn/html/ysera/assets/images/item-instagram-${i}.jpg`" alt="img">-->
-<!--              </a>-->
-<!--              <span class="text">-->
-<!--                <i class="icon flaticon-instagram" aria-hidden="true"></i>-->
-<!--              </span>-->
-<!--            </div>-->
-<!--          </vue-slick-carousel>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <div class="instagram-wrapp" :style="styleObject">
+      <div>
+        <h3 class="custommenu-title-blog">
+          <i class="flaticon-instagram" aria-hidden="true"></i>
+          Instagram Feed
+        </h3>
+        <div class="ysera-instagram">
+          <vue-slick-carousel class="instagram" v-bind="instagramSettings">
+            <div class="item-instagram">
+              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">
+                <img src="../assets/images/1.jpg" alt="img">
+              </a>
+              <span class="text">
+                <i class="icon flaticon-instagram" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="item-instagram">
+              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">
+                <img src="../assets/images/2.jpg" alt="img">
+              </a>
+              <span class="text">
+                <i class="icon flaticon-instagram" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="item-instagram">
+              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">
+                <img src="../assets/images/3.jpg" alt="img">
+              </a>
+              <span class="text">
+                <i class="icon flaticon-instagram" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="item-instagram">
+              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">
+                <img src="../assets/images/matani4.jpg" alt="img">
+              </a>
+              <span class="text">
+                <i class="icon flaticon-instagram" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="item-instagram">
+              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">
+                <img src="../assets/images/p_62a1ad065399f_1654762758.jpg" alt="img">
+              </a>
+              <span class="text">
+                <i class="icon flaticon-instagram" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div class="item-instagram">
+              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">
+                <img src="../assets/images/p_629f28d1a45a6_1654597841.jpg" alt="img">
+              </a>
+              <span class="text">
+                <i class="icon flaticon-instagram" aria-hidden="true"></i>
+              </span>
+            </div>
+          </vue-slick-carousel>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
