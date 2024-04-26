@@ -11,9 +11,9 @@ const ru = {
         bestSellers: 'Лучшая продажа',
         freeDeliveryText: 'Бесплатная доставка по территории Республики Армения для всех заказов на сумму 5000 драмов и выше.',
         quantity: 'По количеству',
-        products_page_6: '6 товаров',
-        products_page_9: '9 товаров',
-        products_page_12: '12 товаров',
+        products_page_6: '6 штук',
+        products_page_9: '9 штук',
+        products_page_12: '12 штук',
         asc: 'по возрастанию',
         desc: 'по убыванию',
         price: 'По цене',
@@ -41,7 +41,14 @@ const ru = {
         product: 'Продукт',
         max_price: 'Макс цена',
         min_price: 'Мин цена',
-        help_contact: 'Помощь и контакты'
+        help_contact: 'Помощь и контакты',
+        color: 'Цвет',
+        size: 'Размер',
+        is_available: 'Доступно',
+        not_available: 'Недоступно',
+        add_to_cart : 'Добавить в корзину',
+        description: 'ОПИСАНИЕ',
+        characteristics: 'ХАРАКТЕРИСТИКИ'
 }
 
 export {ru}

@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content main-content-details single no-sidebar">
+  <div :style="styleObject" class="main-content main-content-details single no-sidebar">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -50,10 +50,10 @@
                   </div>
                 </div>
                 <div class="availability" >
-                  <a :style="{'color': design ? design.main_color : 'white'}">{{product.available_type === 'is_available' ? 'Հասանելի է' : 'Հասանելի չէ'}}</a>
+                  <a :style="{'color': design ? design.main_color : 'white'}">{{product.available_type === 'is_available' ? $t('is_available') : $t('not_available')}}</a>
                 </div>
                 <div class="price">
-                  <span>{{product.price}} դրամ</span>
+                  <span>{{product.price}} {{ design.currency_value }}</span>
                 </div>
                 <div class="product-details-description">
                   <ul v-if="product.details.additional">
@@ -67,7 +67,7 @@
                 </div>
                 <div class="variations">
                   <div class="attribute attribute_color">
-                    <div class="color-text text-attribute">Գույն</div>
+                    <div class="color-text text-attribute">{{$t('color')}}</div>
                     <div class="list-color list-item">
                       <a v-for="color in colors"
                          :key="color.id"
@@ -82,7 +82,7 @@
                     <p v-if="showColorError" class="error-message color-error">Ընտրեք գույնը</p>
                   </div>
                   <div class="attribute attribute_size">
-                    <div class="size-text text-attribute">Չափս</div>
+                    <div class="size-text text-attribute">{{$t('size')}}</div>
                     <div class="list-size list-item" :style="styleObject">
                       <a v-for="item in coloredProduct.sizes"
                          :key="item.id"
@@ -127,7 +127,7 @@
                         <a class="btn-number qtychange qtyplus quantity-plus" @click="changeCount(+1)" :style="styleObject">+</a>
                       </div>
                     </div>
-                    <button class="single_add_to_cart_button button" @click.stop="addToCartHandler" :style="{'background-color': design ? design.main_color : null}">Ավելացնել զամբյուղ</button>
+                    <button class="single_add_to_cart_button button" @click.stop="addToCartHandler" :style="{'background-color': design ? design.main_color : null}">{{$t('add_to_cart')}}</button>
                   </div>
                   <p v-if="count < 1" class="error-message">Ընտրեք քանակը</p>
                 </div>
@@ -136,10 +136,10 @@
             <div class="tab-details-product">
               <ul class="tab-link"  >
                 <li :class="{active: tabPanel === 'Description'}" >
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Description'" :style="styleObject">Նկարագրություն</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Description'" :style="styleObject">{{$t('description')}}</a>
                 </li>
                 <li v-if="product.details.information" :class="{active: tabPanel === 'Information'}">
-                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Information'" :style="styleObject">Բնութագիր</a>
+                  <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)" @click="tabPanel = 'Information'" :style="styleObject">{{$t('characteristics')}}</a>
                 </li>
               </ul>
               <div class="tab-container">
@@ -286,7 +286,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .details-thumd .image-preview-container {
   margin-bottom: 0;
   border: none;
@@ -320,6 +320,10 @@ picture > img.iiz__img {
 .size-error {
   margin: -15px 0 0 0;
 }
+
+</style>
+
+<style lang="scss">
 a:hover{
   color: var(--bg-color) !important;
 }
@@ -332,5 +336,11 @@ a:hover{
 .details-thumd .thumbnails_carousel .owl-item a.active::before {
   border-color: var(--bg-color) !important;
 }
-
+.bubble {
+  background-color: var(--bg-color) !important;
+}
+.triangle {
+  background-color: var(--bg-color) !important;
+}
 </style>
+

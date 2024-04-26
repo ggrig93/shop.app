@@ -166,7 +166,6 @@ export default new Vuex.Store({
       commit('setWishList', wishList)
     },
     getPageSettings({state}) {
-      if (!sessionStorage.settings){
         http.get('/setting')
             .then(res => {
               res.data.data.map(item => {
@@ -175,9 +174,6 @@ export default new Vuex.Store({
               sessionStorage.settings = JSON.stringify(state.settings)
             })
             .catch(err => console.log(err))
-      }else{
-        state.settings = JSON.parse(sessionStorage.settings)
-      }
     }
   },
   modules: {

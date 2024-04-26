@@ -30,12 +30,12 @@
 														{{product.price}} դրամ
 													</span>
                           </div>
-                          <router-link
-                              :to="{name: 'Product', params: {id: product.id}}"
+                          <a
+                              :href="product.link"
                               class="button btn-shop-the-look bgroud-style"
                               :style="styleObject">
                             {{$t('buy')}}
-                          </router-link>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -52,12 +52,12 @@
                 >
 <!--                  <h3 class="title custom-title">{{product.title}} </h3>-->
 <!--                  <span class="price">{{product.price}} դրամ</span> <br>-->
-                  <router-link
-                      :to="{name: 'Product', params: {id: product.id}}"
+                  <a
+                      :href="product.link"
                       class="button btn-lets-do-it"
                   :style="styleObject">
                     {{$t('buy')}}
-                  </router-link>
+                  </a>
                 </banner>
               </div>
             </div>
@@ -86,7 +86,7 @@
                   v-for="product in bottomSlideProducts"
                   :key="product.id"
                   class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <router-link :to="{name: 'Product', params: {id: product.id}}">
+                <a :href="product.link">
                   <banner img-class="style4" :backgroundImage="product.avatar">
 <!--                    <h3 class="title custom-title">{{product.title}}</h3>-->
   <!--                  <div class="description">{{product.description}}</div>-->
@@ -94,7 +94,7 @@
                       {{$t('buy')}}
                     </div>
                   </banner>
-                </router-link>
+                </a>
               </div>
             </div>
           </div>
@@ -163,52 +163,52 @@
         <div class="ysera-instagram">
           <vue-slick-carousel class="instagram" v-bind="instagramSettings">
             <div class="item-instagram">
-              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">
-                <img src="../assets/images/1.jpg" alt="img">
+              <a href="https://www.instagram.com/p/ChsSSxUIq3x/?img_index=1" target="_blank">
+                <img src="../assets/images/inst_1.jpg" alt="img">
               </a>
-              <span class="text">
+              <a href="https://www.instagram.com/p/ChsSSxUIq3x/?img_index=1" target="_blank" class="text">
                 <i class="icon flaticon-instagram" aria-hidden="true"></i>
-              </span>
+              </a>
             </div>
             <div class="item-instagram">
-              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">
-                <img src="../assets/images/2.jpg" alt="img">
+              <a href="https://www.instagram.com/p/Chzx6gsokda/?img_index=1" target="_blank">
+                <img src="../assets/images/inst_2.jpg" alt="img">
               </a>
-              <span class="text">
+              <a href="https://www.instagram.com/p/Chzx6gsokda/?img_index=1" target="_blank" class="text">
                 <i class="icon flaticon-instagram" aria-hidden="true"></i>
-              </span>
+              </a>
             </div>
             <div class="item-instagram">
-              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">
-                <img src="../assets/images/3.jpg" alt="img">
+              <a href="https://www.instagram.com/p/CiKL81EocQQ/?img_index=1" target="_blank">
+                <img src="../assets/images/inst_3.jpg" alt="img">
               </a>
-              <span class="text">
+              <a href="https://www.instagram.com/p/CiKL81EocQQ/?img_index=1" target="_blank" class="text">
                 <i class="icon flaticon-instagram" aria-hidden="true"></i>
-              </span>
+              </a>
             </div>
             <div class="item-instagram">
-              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">
-                <img src="../assets/images/matani4.jpg" alt="img">
+              <a href="https://www.instagram.com/p/Ch4YmplIzu1/?img_index=1" target="_blank">
+                <img src="../assets/images/inst_4.jpg" alt="img">
               </a>
-              <span class="text">
+              <a href="https://www.instagram.com/p/Ch4YmplIzu1/?img_index=1" target="_blank" class="text">
                 <i class="icon flaticon-instagram" aria-hidden="true"></i>
-              </span>
+              </a>
             </div>
             <div class="item-instagram">
-              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">
-                <img src="../assets/images/p_62a1ad065399f_1654762758.jpg" alt="img">
+              <a href="https://www.instagram.com/p/Chr9OnCIlOu/?img_index=1" target="_blank">
+                <img src="../assets/images/inst_5.jpg" alt="img">
               </a>
-              <span class="text">
+              <a href="https://www.instagram.com/p/Chr9OnCIlOu/?img_index=1" target="_blank" class="text">
                 <i class="icon flaticon-instagram" aria-hidden="true"></i>
-              </span>
+              </a>
             </div>
             <div class="item-instagram">
-              <a href="https://www.instagram.com/jewelleryshop_bemine/" target="_blank">
-                <img src="../assets/images/p_629f28d1a45a6_1654597841.jpg" alt="img">
+              <a href="https://www.instagram.com/p/ChkjN2HI_Lb/?img_index=1" target="_blank">
+                <img src="../assets/images/inst_6.jpg" alt="img">
               </a>
-              <span class="text">
+              <a href="https://www.instagram.com/p/ChkjN2HI_Lb/?img_index=1" target="_blank" class="text">
                 <i class="icon flaticon-instagram" aria-hidden="true"></i>
-              </span>
+              </a>
             </div>
           </vue-slick-carousel>
         </div>
@@ -290,12 +290,12 @@ export default {
     },
     mainProducts() {
       const slideItems = [
-          {id: 21, title: 'Մարգարտյա ականջօղ', price: '4500', avatar: require('@/assets/images/image2.webp')},
-          {id: 10, title: 'Աստղ վզնոց', price: '3900', avatar: require('@/assets/images/image1.jpg')},
+          {id: 21, title: 'Արծաթյա ականջող Արև', price: '3400', avatar: require('@/assets/images/image3.webp'), link: 'https://bemine.am/product/4'},
+          {id: 10, title: 'Վզնոց Աստղիկ', price: '7200', avatar: require('@/assets/images/image4.webp'), link:'https://bemine.am/product/3'},
       ]
       const bannerItems = [
-        {id: 9, title: 'Թևնոց', price: '2000', avatar: require('@/assets/images/3.jpg')},
-        {id: 24, title: 'Վզնոց', price: '2000', avatar: require('@/assets/images/2.jpg')},
+        {id: 9, title: 'Ապարանջան Խաղող', price: '4900', avatar: require('@/assets/images/product_1.webp'), link:'https://bemine.am/product/5'},
+        {id: 24, title: 'Նուրբ 925 հարգի արծաթե ապարանջան', price: '6500', avatar: require('@/assets/images/product_2.webp'), link:'https://bemine.am/product/2'},
       ]
       return {
         bannerItems: bannerItems,
@@ -304,8 +304,8 @@ export default {
     },
     bottomSlideProducts() {
       return [
-        {id: 22, title: 'Մատանի', price: '2000', avatar: require('@/assets/images/matani4.jpg')},
-        {id: 15, title: 'Թևնոց', price: '2200', avatar: require('@/assets/images/cat2.jpg')},
+        {id: 22, title: 'Ականջող Վինտաժ', price: '4500', avatar: require('@/assets/images/product_3.webp'), link: 'https://bemine.am/product/6'},
+        {id: 15, title: 'Տոնական արծաթե ականջօղեր', price: '4500', avatar: require('@/assets/images/product_4.webp'), link: 'https://bemine.am/product/1'},
       ]
     },
     dealDayProducts() {
@@ -346,12 +346,12 @@ export default {
 .free-title {
   text-transform: uppercase!important;
 }
-.slider-infor{
+/*.slider-infor{
   background-image: url("../assets/images/p_62a1ad065399f_1654762758.jpg");
 }
 .style7>.inner{
   background-image: url("../assets/images/p_629f28d1a45a6_1654597841.jpg") !important;
-}
+}*/
 .custommenu-title-blog::before{
   border-bottom: 4px solid var(--bg-color)
 }

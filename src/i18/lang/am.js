@@ -11,9 +11,9 @@ const am = {
         bestSellers: 'Լավագույն վաճառք',
         freeDeliveryText: 'Անվճար առաքում ՀՀ տարածքում՝ 5000 դրամ և ավել բոլոր պատվերների համար։',
         quantity: 'Ըստ քանակի',
-        products_page_6: '6 ապրանք',
-        products_page_9: '9 ապրանք',
-        products_page_12: '12 ապրանք',
+        products_page_6: '6 հատ',
+        products_page_9: '9 հատ',
+        products_page_12: '12 հատ',
         asc: 'աճման',
         desc: 'նվազման',
         price: 'Ըստ գնի',
@@ -41,7 +41,14 @@ const am = {
         product: 'Ապրանք',
         max_price: 'Մաքսիմալ գին',
         min_price: 'Մինիմալ գին',
-        help_contact: 'Օգնություն և Կապ'
+        help_contact: 'Օգնություն և Կապ',
+        color: 'Գույն',
+        size: 'Չափս',
+        is_available: 'Հասանելի է',
+        not_available: 'Հասանելի չէ',
+        add_to_cart : 'Ավելացնել զամբյուղ',
+        description: 'ՆԿԱՐԱԳՐՈՒԹՅՈՒՆ',
+        characteristics: 'ԲՆՈՒԹԱԳԻՐ'
 }
 
 export {am}
