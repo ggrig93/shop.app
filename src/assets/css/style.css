@@ -4048,7 +4048,7 @@ ul.list-products {
 	vertical-align: top;
 }
 .verticalmenu-content {
-	background-color: #fff;
+	background: #f1f1f1;
 	padding: 20px 0;
 	position: absolute;
 	top: 100%;
@@ -4066,6 +4066,7 @@ ul.list-products {
 	-webkit-box-shadow: 0 3px 18px 0 rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0 3px 18px 0 rgba(0, 0, 0, 0.1);
 	box-shadow: 0 3px 18px 0 rgba(0, 0, 0, 0.1);
+	display: flex;
 }
 .verticalmenu-content.show-up {
 	opacity: 1;
@@ -4106,14 +4107,28 @@ ul.list-products {
 	list-style: none;
 	position: relative;
 }
+.vertical-menu .menu-item-categories a{
+	font-weight: 700;
+	color: #000;
+	display: block;
+	font-size: 16px;
+	letter-spacing: 0;
+}
+.vertical-menu .menu-item-sub-categories a{
+	font-weight: 300;
+	color: #000;
+	display: block;
+	font-size: 16px;
+	letter-spacing: 0;
+}
+
 .vertical-menu .menu-item a {
 	line-height: 41px;
 	font-size: 15px;
-	color: #555555;
+	color: #000000;
 	text-transform: capitalize;
 	position: relative;
 	display: block;
-	border-bottom: 1px solid #e6e6e6;
 	margin: 0 25px;
 }
 .vertical-menu .menu-item a:hover {
@@ -4121,6 +4136,9 @@ ul.list-products {
 }
 .vertical-menu .menu-item:last-child a {
 	border: none;
+}
+.vertical-menu-content {
+	display: flex;
 }
 /*slider*/
 .home-slider-7 .slider-item .slider-infor .button {
@@ -5730,7 +5748,6 @@ ul.list-products {
 .shoppingcart-content .control-cart .button:hover, .checkout-wrapp .button:hover, .end-checkout .button,
 .attribute_size .list-size a.active, .attribute_size .list-size a:hover, .tab-details-product .tab-link li a::after,
 .shopcart-description .actions .button-viewcart:hover, .kt-popup-quickview .mfp-close,
-.header-nav-wapper .vertical-wapper,
 .list-category .category-item:hover {
 	background-color: #c09578;
 	

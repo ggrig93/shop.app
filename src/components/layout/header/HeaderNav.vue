@@ -1,45 +1,61 @@
 <template>
-  <div class="header-nav-container">
+  <div :style="styleObject" class="header-nav-container">
     <div class="container">
       <div class="header-nav-wapper main-menu-wapper">
-        <div class="vertical-wapper block-nav-categori">
-          <div class="block-title" @click="toggleCategories" :style="{'background-color': settings ? settings.main_color : 'white'}">
-                <span class="icon-bar">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </span>
-            <span class="text">{{ $t('assortment') }}</span>
+        <div class="vertical-wapper block-nav-categori"  @mouseleave="openCategories = false">
+          <div class="block-title-section">
+            <div v-for="item in categories" :key="item.id" class="block-title">
+              <a
+                  class="ysera-menu-item-title ysera-menu-item-title-before"
+                  :title="item.name"
+                  @click="selectCategory(item.id)"
+              >
+                <span @mouseover="toggleSection(item.id)">{{item.name}}</span>
+              </a>
+            </div>
           </div>
           <div class="block-content verticalmenu-content" :class="{'show-up': openCategories}">
-            <ul class="ysera-nav-vertical vertical-menu ysera-clone-mobile-menu" :style="styleObject">
+            <ul v-for="sub in sub_categories" :key="sub.id" class="ysera-nav-vertical vertical-menu ysera-clone-mobile-menu">
               <li
-                  v-for="item in categories" :key="item.id"
-                  class="menu-item"
+                  class="menu-item menu-item-categories"
                   @click="openCategories = false"
               >
                 <a
                     class="ysera-menu-item-title"
-                    :title="item.name"
-                    @click="selectCategory(item.id)"
+                    :title="sub.name"
+                    @click="selectCategory(sub.id)"
                 >
-                  {{item.name}}
+                  {{sub.name}}
+                </a>
+              </li>
+              <li
+                  v-for="sub_sub in sub.sub_sections" :key="sub_sub.id"
+                  class="menu-item menu-item-sub-categories"
+                  @click="openCategories = false"
+              >
+                <a
+                    class="ysera-menu-item-title"
+                    :title="sub_sub.name"
+                    @click="selectCategory(sub_sub.id)"
+                >
+                  {{sub_sub.name}}
                 </a>
               </li>
             </ul>
           </div>
         </div>
-        <div class="header-nav">
-          <div class="container-wapper">
-            <ul class="ysera-clone-mobile-menu ysera-nav main-menu " id="menu-main-menu">
-              <li :class="['menu-item', item.children.length ? 'menu-item-has-children' : '']" v-for="item in nav" :key="item.id">
-                <template>
-                  <router-link :to="{name: item.view}" class="ysera-menu-item-title" :style="styleObject" :title="item.name">{{item.name}}</router-link>
-                </template>
-              </li>
-            </ul>
-          </div>
-        </div>
+
+<!--        <div class="header-nav">-->
+<!--          <div class="container-wapper">-->
+<!--            <ul class="ysera-clone-mobile-menu ysera-nav main-menu " id="menu-main-menu">-->
+<!--              <li :class="['menu-item', item.children.length ? 'menu-item-has-children' : '']" v-for="item in nav" :key="item.id">-->
+<!--                <template>-->
+<!--                  <router-link :to="{name: item.view}" class="ysera-menu-item-title" :style="styleObject" :title="item.name">{{item.name}}</router-link>-->
+<!--                </template>-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </div>
   </div>
@@ -51,6 +67,11 @@ import {mapGetters, mapMutations} from "vuex";
 
 export default {
   name: "HeaderNav",
+  data() {
+    return {
+      sub_categories: []
+    }
+  },
   mixins: [headerMixin],
   computed: {
     ...mapGetters(["settings"]),
@@ -92,6 +113,17 @@ export default {
       if(this.$route.name !== 'Products') {
         this.$router.replace({name: 'Products', query: {'filter[categories]': [id]}})
       }
+    },
+    toggleSection(id) {
+      this.sub_categories = []
+      this.categories.map(item => {
+        if (item.id === id) {
+          item.sub_sections.map(sub => {
+            this.sub_categories.push(sub)
+          })
+          this.openCategories = true
+        }
+      })
     }
   }
 }
@@ -99,15 +131,29 @@ export default {
 
 <style lang="scss" scoped>
 .ysera-menu-item-title {
+  color: #757575;
   cursor: pointer;
+  font: 500 16px knockout, helvetica, arial, sans-serif;
+  letter-spacing: 1.8px;
   &:hover {
-    color: #c09578;
+    color: var(--bg-color);
   }
+}
+.ysera-menu-item-title-before:hover:before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background-color: red;
 }
 .ysera-menu-item-title:hover{
   color: var(--bg-color);
 }
 .vertical-menu .menu-item a:hover{
   color: var(--bg-color);
+}
+.block-title-section {
+  display: flex;
+  width: 100%;
 }
 </style>
