@@ -4026,7 +4026,7 @@ ul.list-products {
 }
 .header-nav-wapper .vertical-wapper {
 	width: 270px;
-	position: relative;
+	/*position: relative;*/
 }
 .vertical-wapper .block-title {
 	font-size: 14px;
@@ -4048,10 +4048,9 @@ ul.list-products {
 	vertical-align: top;
 }
 .verticalmenu-content {
-	background: #f1f1f1;
+	background: #ffffff;
 	padding: 20px 0;
 	position: absolute;
-	top: 100%;
 	z-index: 1001;
 	left: 0;
 	width: 100%;
@@ -4063,9 +4062,6 @@ ul.list-products {
 	-o-transform: translateY(50px);
 	transform: translateY(50px);
 	transition: all 0.3s;
-	-webkit-box-shadow: 0 3px 18px 0 rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 0 3px 18px 0 rgba(0, 0, 0, 0.1);
-	box-shadow: 0 3px 18px 0 rgba(0, 0, 0, 0.1);
 	display: flex;
 }
 .verticalmenu-content.show-up {
