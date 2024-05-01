@@ -4048,6 +4048,7 @@ ul.list-products {
 	vertical-align: top;
 }
 .verticalmenu-content {
+	box-shadow: 0 10px 20px -10px #b3b3b3;
 	background: #ffffff;
 	padding: 20px 0;
 	position: absolute;

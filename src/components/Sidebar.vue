@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper-sidebar">
         <div class="widget woof_Widget sidebar-filters_wrap">
-            <div class="widget widget-categories sidebar-filter" v-if="categories">
+            <div class="widget widget-categories sidebar-filter" v-if="categories.length">
                 <h3 class="widgettitle">{{ $t('selectType') }}</h3>
                 <ul class="list-categories">
                     <li v-for="cat in categories" :key="cat.id">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="widget widget-brand sidebar-filter" v-if="brands">
+            <div class="widget widget-brand sidebar-filter" v-if="brands.length">
                 <h3 class="widgettitle">{{ $t('selectBrand') }}</h3>
                 <ul class="list-brand">
                     <li v-for="brand in brands" :key="brand.id">
@@ -46,7 +46,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="widget widget_filter_size sidebar-filter" v-if="sizes">
+            <div class="widget widget_filter_size sidebar-filter" v-if="sizes.length">
                 <h4 class="widgettitle">{{ $t('selectSize') }}</h4>
                 <ul class="list-brand">
                     <li v-for="size in sizes" :key="size.id">

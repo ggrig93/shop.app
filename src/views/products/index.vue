@@ -122,7 +122,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["settings", 'categoryBrands', 'categorySizes']),
+        ...mapGetters(["settings", 'categoryBrands', 'categorySizes', 'subCategories']),
         isMobile() {
             return this.width <= 768 && this.width > 0
         },
@@ -139,7 +139,7 @@ export default {
             return this.$store.state.categoryBrands
         },
         categories() {
-            return this.$store.state.categories
+            return this.$store.state.subCategories
         },
         sizes() {
             return this.$store.state.categorySizes
@@ -179,6 +179,7 @@ export default {
         this.$store.dispatch('getTags')
         this.$store.dispatch('getCategoryBrands', this.categoryIds)
         this.$store.dispatch('getCategorySizes', this.categoryIds)
+        this.$store.dispatch('getSubCategories', this.categoryIds)
     },
     beforeDestroy() {
         this.setSearch('')
@@ -194,7 +195,7 @@ export default {
         window.removeEventListener('resize', this.onResizeEvent)
     },
     methods: {
-        ...mapMutations(["setByPrice", "setSearch", "setPage", "setCategory", "setPerPage", "setCategoryBrands", 'setCategorySizes']),
+        ...mapMutations(["setByPrice", "setSearch", "setPage", "setCategory", "setPerPage", "setCategoryBrands", 'setCategorySizes', 'setSubCategories']),
         addResizeListener() {
             if (window) {
                 window.addEventListener('resize', this.onResizeEvent)

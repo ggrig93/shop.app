@@ -48,7 +48,26 @@ const ru = {
         not_available: 'Недоступно',
         add_to_cart : 'Добавить в корзину',
         description: 'ОПИСАНИЕ',
-        characteristics: 'ХАРАКТЕРИСТИКИ'
+        characteristics: 'ХАРАКТЕРИСТИКИ',
+        name: 'Имя',
+        phone: 'Телефон',
+        your_order: 'Ваш заказ',
+        address: 'Адрес',
+        postal_code: 'Почтовый Индекс',
+        total_cost: 'Общая Стоимость',
+        currency: 'Драм',
+        piece: 'Кусок',
+        necessarily: 'Обязательно',
+        incorrect_format: 'Неправильный формат',
+        shipping_Information: 'Информация О Доставке',
+        confirm_order: 'Подтвердите заказ',
+        congratulations_registered: 'Поздравляю, ваш заказ был зарегистрирован:',
+        will_contact_you_within_a_very_short_period_of_time: 'Мы свяжемся с вами в течение очень короткого периода времени:',
+        go_back_to_the_list: 'Вернитесь в список',
+        buy_now: 'Купить сейчас',
+        continue_shopping: 'Продолжить покупки',
+        to_order: 'To order',
+        shopping_cart: 'Go to the shopping cart',
 }
 
 export {ru}

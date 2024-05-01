@@ -21,7 +21,7 @@
                         class="block-content verticalmenu-content"
                         :class="{'show-up': openCategories}"
                     >
-                        <div class="container">
+                        <div class="container container-items">
                             <ul v-for="sub in sub_categories" :key="sub.id"
                                 class="ysera-nav-vertical vertical-menu ysera-clone-mobile-menu">
                                 <li
@@ -139,6 +139,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container-items {
+    display: flex;
+}
 .ysera-menu-item-title {
     position: relative;
     color: #757575;

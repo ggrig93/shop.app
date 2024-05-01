@@ -73,7 +73,7 @@
                       <span class="product-price">
                         <span class="price">{{product.price}} դր․ </span>
                       </span>
-                      <span class="product-quantity">({{product.count}} հատ)</span>
+                      <span class="product-quantity">({{product.count}} {{ $t('piece') }})</span>
                       <div class="product-remove">
                         <span @click="showDeletePopup = i" style="cursor: pointer"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
                       </div>
@@ -81,17 +81,17 @@
                   </li>
                 </ul>
                 <div class="subtotal">
-                  <span class="total-title">Ընդհամենը՝ </span>
+                  <span class="total-title">{{ $t('total_cost') }} </span>
                   <span class="total-price">
-                    <span class="Price-amount">{{cartTotalPrice}} դրամ</span>
+                    <span class="Price-amount"> {{cartTotalPrice}} {{ $t('currency') }}</span>
                   </span>
                 </div>
                 <div class="actions" :style="styleObject">
                   <router-link class="button button-viewcart" :to="{name: 'ShoppingCart'}" @click.native="hideCart"  :style="{'border': settings ? '1px solid' + settings.main_color : '1px solid white'}">
-                    <span>Գնալ զամբյուղ</span>
+                    <span>{{ $t('shopping_cart') }}</span>
                   </router-link>
                   <router-link class="button button-checkout" :to="{name: 'Checkout'}" @click.native="hideCart"  :style="{'background-color': settings ? settings.main_color : 'white','border': settings ? '1px solid' + settings.main_color : '1px solid white'}">
-                    <span>Պատվիրել</span>
+                    <span>{{ $t('to_order') }}</span>
                   </router-link>
                 </div>
               </div>
