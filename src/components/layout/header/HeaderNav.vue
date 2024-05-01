@@ -7,7 +7,7 @@
                         <div v-for="item in categories" :key="item.id" class="block-title">
                             <a
                                 class="ysera-menu-item-title ysera-menu-item-title-before"
-                                @mouseenter="openCategories = item.id"
+                                @mouseenter="openCategories = item.id && sub_categories.length"
                                 :class="{ 'hovered': openCategories === item.id }"
                                 :title="item.name"
                                 @click="selectCategory(item.id)"
@@ -16,7 +16,11 @@
                             </a>
                         </div>
                     </div>
-                    <div class="block-content verticalmenu-content" :class="{'show-up': openCategories}">
+                    <div
+                        v-if="sub_categories.length"
+                        class="block-content verticalmenu-content"
+                        :class="{'show-up': openCategories}"
+                    >
                         <div class="container">
                             <ul v-for="sub in sub_categories" :key="sub.id"
                                 class="ysera-nav-vertical vertical-menu ysera-clone-mobile-menu">
