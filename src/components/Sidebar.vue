@@ -9,7 +9,7 @@
                             id="category"
                             :label="cat.name"
                             :input-value="cat.id"
-                            v-model="filters.selectedCategories"
+                            v-model="selectedCategories"
                             @change.native="getCategoryBrandsAndSizes"
                         />
                     </li>
@@ -141,6 +141,7 @@ export default {
                 minPrice: "",
                 maxPrice: "",
             },
+            selectedCategories: []
         }
     },
     computed: {
@@ -205,10 +206,10 @@ export default {
         ...mapMutations(["setSearch", "setByPrice", "setPage", "setPerPage", 'setCategoryBrands', 'setCategorySizes']),
 
         getCategoryBrandsAndSizes() {
-            this.$store.dispatch('getCategoryBrands', this.filters.selectedCategories)
-            this.$store.dispatch('getCategorySizes', this.filters.selectedCategories)
+            this.$store.dispatch('getCategoryBrands', this.selectedCategories.length ? this.selectedCategories : this.filters.selectedCategories)
+            this.$store.dispatch('getCategorySizes', this.selectedCategories.length ? this.selectedCategories : this.filters.selectedCategories)
+            this.filterProduct()
         },
-
 
         queryToArray(val) {
             return typeof val === 'string' ? val.split(",").map(item => parseInt(item)) : val
@@ -229,7 +230,7 @@ export default {
         },
         filterProduct() {
             const data = {
-                'filter[categories]': this.category.length ? this.category : this.filters.selectedCategories,
+                'filter[categories]': this.selectedCategories.length ? this.selectedCategories : this.category.length ? this.category :  this.filters.selectedCategories,
                 'filter[brands]': this.filters.selectedBrands,
                 'filter[colors]': this.filters.selectedColors,
                 'filter[sizes]': this.filters.selectedSizes,

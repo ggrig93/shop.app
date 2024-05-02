@@ -54,9 +54,16 @@
                 :class="{'fixed-mini-cart': fixedCartPopup }"
             >
               <div class="content-wrap">
-                <h3 class="title">Զամբյուղ</h3>
-                <ul class="minicart-items">
-                  <li class="product-cart mini_cart_item" v-for="(product, i) in shopProducts" :key="i">
+                <h3 class="title">{{ $t('shoppingCart') }}</h3>
+                <ul
+                    v-if="shopProducts"
+                    class="minicart-items"
+                >
+                  <li
+                      class="product-cart mini_cart_item"
+                      v-for="(product, i) in shopProducts"
+                      :key="i"
+                  >
                     <router-link :to="{name: 'Product', params: {id: product.id}}" class="product-media">
                       <img :src="product.avatar" alt="img">
                     </router-link>
@@ -80,13 +87,23 @@
                     </div>
                   </li>
                 </ul>
-                <div class="subtotal">
+                <div
+                    v-if="shopProducts.length"
+                    class="subtotal"
+                >
                   <span class="total-title">{{ $t('total_cost') }} </span>
                   <span class="total-price">
                     <span class="Price-amount"> {{cartTotalPrice}} {{ $t('currency') }}</span>
                   </span>
                 </div>
-                <div class="actions" :style="styleObject">
+                  <div v-else class="cart-empty">
+                      {{ $t('cart_empty') }}
+                  </div>
+                <div
+                    class="actions"
+                    :style="styleObject"
+                    v-if="shopProducts.length"
+                >
                   <router-link class="button button-viewcart" :to="{name: 'ShoppingCart'}" @click.native="hideCart"  :style="{'border': settings ? '1px solid' + settings.main_color : '1px solid white'}">
                     <span>{{ $t('shopping_cart') }}</span>
                   </router-link>
@@ -216,7 +233,11 @@ export default {
 </script>
 
 <style lang="scss">
-
+  .cart-empty {
+      padding: 20px;
+      font-size: 16px;
+      font-weight: 600;
+  }
   select {
     border: none!important;
   }

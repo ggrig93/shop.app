@@ -66,8 +66,9 @@ const am = {
         go_back_to_the_list: 'Վերադառնալ ցանկին',
         buy_now: 'Գնել հիմա',
         continue_shopping: 'Շարունակել գնումները',
-        to_order: 'Заказать',
-        shopping_cart: 'Перейти к корзине',
+        to_order: 'Պատվիրել',
+        shopping_cart: 'Գնալ զամբյուղ',
+        cart_empty: 'Զամբյուղում ապրանք չկա',
 }
 
 export {am}

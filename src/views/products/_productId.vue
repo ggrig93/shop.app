@@ -38,9 +38,12 @@
                 </div>
               </div>
               <div class="details-infor">
-                <h1 class="product-title">
-                  {{product.title}}
-                </h1>
+               <div class="details-info-title">
+                   <h1 class="product-title">
+                       {{product.title}}
+                   </h1>
+                   <img :src="product.brand.avatar" alt="">
+               </div>
                 <div class="stars-rating">
                   <div class="star-rating">
                     <span class="star-5"></span>
@@ -287,6 +290,18 @@ export default {
 </script>
 
 <style>
+.details-info-title {
+    display: flex;
+    align-items: center;
+}
+.details-info-title img {
+    width: 100px;
+    margin-bottom: 15px;
+    margin-top: -9px;
+}
+.details-info-title .product-title {
+    margin-right: 20px;
+}
 .details-thumd .image-preview-container {
   margin-bottom: 0;
   border: none;

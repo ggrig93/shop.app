@@ -66,8 +66,9 @@ const ru = {
         go_back_to_the_list: 'Вернитесь в список',
         buy_now: 'Купить сейчас',
         continue_shopping: 'Продолжить покупки',
-        to_order: 'To order',
-        shopping_cart: 'Go to the shopping cart',
+        to_order: 'Заказать',
+        shopping_cart: 'Перейдите к корзине покупок',
+        cart_empty: 'В корзине нет товара',
 }
 
 export {ru}

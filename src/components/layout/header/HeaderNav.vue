@@ -119,9 +119,7 @@ export default {
         ...mapMutations(["setCategory"]),
         selectCategory(id) {
             this.setCategory([id])
-            if (this.$route.name !== 'Products') {
-                this.$router.replace({name: 'Products', query: {'filter[categories]': [id]}})
-            }
+            this.$router.replace({name: 'Products', query: {'filter[categories]': [id]}})
         },
         toggleSection(id) {
             this.sub_categories = []

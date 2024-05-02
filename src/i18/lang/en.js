@@ -68,5 +68,6 @@ const en = {
         continue_shopping: 'Continue shopping',
         to_order: 'To order',
         shopping_cart: 'Go to the shopping cart',
+        cart_empty: 'There is no product in the cart',
 }
 export {en}

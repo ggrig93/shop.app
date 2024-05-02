@@ -701,7 +701,7 @@ table tr:last-child td, table tr:last-child th {
 /* -------------------- */
 @media (min-width: 1200px) {
 	.container {
-		width: 1200px;
+		width: 1300px;
 	}
 }
 /* -------------------- */
@@ -2175,13 +2175,8 @@ table tr:last-child td, table tr:last-child th {
 }
 /*---------FORM control products--------------*/
 .shop-top-control {
-	border: 1px solid #f3f3f3;
-	background-color: #f3f3f3;
-	padding: 15px 0 15px;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 	display: flex;
-	width: 100%;
-	/*font-weight: 500;*/
 	color: #6d6d6d;
 	position: relative;
 	border-radius: 10px;
@@ -2205,8 +2200,7 @@ table tr:last-child td, table tr:last-child th {
 	display: flex;
 	flex-flow: wrap;
 	align-items: center;
-	width: 310px;
-}
+	}
 .shop-top-control .chosen-select {
 	border-radius: 10px;
 	border: 1px solid #6d6d6d !important;
