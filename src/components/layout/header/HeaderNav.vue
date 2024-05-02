@@ -10,7 +10,7 @@
                                 @mouseenter="openCategories = item.id && sub_categories.length"
                                 :class="{ 'hovered': openCategories === item.id }"
                                 :title="item.name"
-                                @click="selectCategory(item.id)"
+
                             >
                                 <span @mouseover="toggleSection(item.id)">{{ item.name }}</span>
                             </a>
