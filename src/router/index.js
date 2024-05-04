@@ -27,7 +27,12 @@ const routes = [
   {
     path: '/checkout',
     name: 'Checkout',
-    component: () => import('@/views/Checkout')
+    component: () => import('@/views/Checkout'),
+    beforeEnter: (to, from, next) => {
+      if (to.params.shopProducts.length) {
+        next();
+      }
+    }
   },
   {
     path: '/products',

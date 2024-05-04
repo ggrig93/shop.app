@@ -7,7 +7,7 @@
         </div>
       </div>
       <h3 class="custom_blog_title">
-        Պատվերի էջ
+          {{ $t('orderPage') }}
       </h3>
       <div class="checkout-wrapp">
         <div v-if="!showSuccess" class="shipping-address-form-wrapp" :style="styleObject">
@@ -15,11 +15,11 @@
             <div class="row-col-1 row-col">
               <div class="shipping-address">
                 <h3 class="title-form">
-                  Առաքման տվյալներ
+                    {{ $t('shipping_Information') }}
                 </h3>
                 <div class="row-wrap">
                   <div class="form-row form-row-first">
-                    <label class="text">Անուն</label>
+                    <label class="text">{{ $t('name') }}</label>
                     <input
                         v-model="form.name"
                         title="first"
@@ -27,10 +27,10 @@
                         class="input-text"
                         :class="{'input-error': errors.name}"
                     >
-                    <p class="error-text" v-if="errors.name">Պարտադիր է</p>
+                    <p class="error-text" v-if="errors.name">{{ $t('necessarily') }}</p>
                   </div>
                   <div class="form-row form-row-last">
-                    <label class="text">Հեռախոսահամար</label>
+                    <label class="text">{{ $t('phone') }}</label>
                     <input
                         v-model="form.phone"
                         title="phone"
@@ -38,13 +38,13 @@
                         class="input-text"
                         :class="{'input-error': errors.phone}"
                     >
-                    <p class="error-text" v-if="phoneInvalid">Սխալ ֆորմատ</p>
-                    <p class="error-text" v-else-if="errors.phone">Պարտադիր է</p>
+                    <p class="error-text" v-if="phoneInvalid">{{ $t('incorrect_format') }}</p>
+                    <p class="error-text" v-else-if="errors.phone">{{ $t('necessarily') }}</p>
                   </div>
                 </div>
                 <div class="row-wrap">
                   <div class="form-row form-row-last">
-                    <label class="text">Հասցե</label>
+                    <label class="text">{{ $t('address') }}</label>
                     <input
                         v-model="form.address"
                         title="address"
@@ -52,10 +52,10 @@
                         class="input-text"
                         :class="{'input-error': errors.address}"
                     >
-                    <p class="error-text" v-if="errors.address">Պարտադիր է</p>
+                    <p class="error-text" v-if="errors.address">{{ $t('necessarily') }}</p>
                   </div>
                   <div class="form-row form-row-first">
-                    <label class="text">Փոստային ինդեքս</label>
+                    <label class="text">{{ $t('postal_code') }}</label>
                     <input
                         v-model="form.zipCode"
                         title="zip"
@@ -63,11 +63,11 @@
                         class="input-text"
                         :class="{'input-error': errors.zipCode}"
                     >
-                    <p class="error-text" v-if="errors.zipCode">Պարտադիր է</p>
+                    <p class="error-text" v-if="errors.zipCode">{{ $t('necessarily') }}</p>
                   </div>
                 </div>
                 <CaptchaComponent :form="form" @verify="verifyHandler" />
-                <p class="error-text" v-if="errors.token">Պարտադիր է</p>
+                <p class="error-text" v-if="errors.token">{{ $t('necessarily') }}</p>
 
                 <p v-if="errorFromBack" class="error-text">{{errorFromBack}}</p>
               </div>
@@ -75,7 +75,7 @@
             <div class="row-col-2 row-col">
               <div class="your-order">
                 <h3 class="title-form">
-                  Ձեր պատվերը
+                    {{ $t('your_order') }}
                 </h3>
                 <ul class="list-product-order">
                   <li
@@ -95,24 +95,24 @@
                       <span class="attributes-select attributes-color">{{product.color.name}},</span>
                       <span class="attributes-select attributes-size">{{product.size.name}}</span>
                       <div class="price">
-                        {{product.price}} դրամ
-                        <span class="count">({{product.count}} հատ)</span>
+                        {{product.price}} {{ $t('currency') }}
+                        <span class="count">({{product.count}} {{ $t('piece') }})</span>
                       </div>
                     </div>
                   </li>
                 </ul>
                 <div class="order-total">
 									<span class="title">
-										Ընդհանուր արժեքը՝
+										{{ $t('total_cost') }}
 									</span>
                   <span class="total-price">
-										{{cartTotalPrice}} դրամ
+										{{cartTotalPrice}} {{ $t('currency') }}
 									</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="button button-payment" @click="orderHandler" :style="styleObject">Հաստատել պատվերը</div>
+          <div class="button button-payment" @click="orderHandler" :style="styleObject">{{ $t('confirm_order') }}</div>
         </div>
         <div v-if="showSuccess" class="end-checkout-wrapp">
           <div class="end-checkout checkout-form">
@@ -120,12 +120,12 @@
               <span class="flaticon-checked"></span>
             </div>
             <h3 class="title-checkend">
-              Շնորհավորում ենք Ձեր պատվերը գրանցվել է:
+                {{ $t('congratulations_registered') }}
             </h3>
             <div class="sub-title">
-              Շատ կարճ ժամանակահատվածում մենք ձեզ հետ կապ կհաստատենք:
+                {{ $t('will_contact_you_within_a_very_short_period_of_time') }}
             </div>
-            <router-link to="/products" class="button btn-return">Վերադառնալ ցանկին</router-link>
+            <router-link to="/products" class="button btn-return">{{ $t('go_back_to_the_list') }}</router-link>
           </div>
         </div>
       </div>

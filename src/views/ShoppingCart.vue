@@ -6,7 +6,7 @@
         <div class="row">
           <div class="main-content-cart main-content col-sm-12">
             <h3 class="custom_blog_title">
-              Զամբյուղ
+                {{ $t('shoppingCart') }}
             </h3>
             <div class="page-main-content">
               <div class="shoppingcart-content">
@@ -51,7 +51,7 @@
 													<span class="woocommerce-Price-amount amount">
 														{{prod.price}}
                             <span class="woocommerce-Price-currencySymbol">
-															դրամ
+															{{ $t('currency') }}
 														</span>
 													</span>
                       </td>
@@ -64,8 +64,8 @@
 <!--                          <a href="#" class="button"></a>-->
 <!--                        </div>-->
                         <div class="order-total">
-                          <span class="title">Ընդհանուր արժեքը՝ </span>
-                          <span class="total-price">{{cartTotalPrice}} դրամ</span>
+                          <span class="title">{{ $t('total_cost') }}</span>
+                          <span class="total-price"> {{cartTotalPrice}} {{ $t('currency') }}</span>
                         </div>
                       </td>
                     </tr>
@@ -74,10 +74,14 @@
                 </form>
                 <div class="control-cart" :style="styleObject">
                   <button class="button btn-continue-shopping" @click="$router.push({name: 'Products'})">
-                    Շարունակել Shopping-ը
+                      {{ $t('continue_shopping') }}
                   </button>
-                  <button class="button btn-cart-to-checkout" @click="$router.push({name: 'Checkout'})">
-                    Գնել հիմա
+                  <button
+                      v-if="shopProducts.length"
+                      class="button btn-cart-to-checkout"
+                      @click="$router.push({ name: 'Checkout', params: { shopProducts: shopProducts }})"
+                  >
+                      {{ $t('buy_now') }}
                   </button>
                 </div>
               </div>

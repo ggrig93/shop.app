@@ -25,6 +25,7 @@
     border-bottom: 1px solid #eee;
     height: 50px;
     position: relative;
+    margin-bottom: 15px;
 }
 .ysera-menu-panels-actions-wrap .ysera-menu-close-btn,
 .ysera-menu-panels-actions-wrap .ysera-menu-prev-panel {

@@ -48,7 +48,27 @@ const am = {
         not_available: 'Հասանելի չէ',
         add_to_cart : 'Ավելացնել զամբյուղ',
         description: 'ՆԿԱՐԱԳՐՈՒԹՅՈՒՆ',
-        characteristics: 'ԲՆՈՒԹԱԳԻՐ'
+        characteristics: 'ԲՆՈՒԹԱԳԻՐ',
+        name: 'Անուն',
+        phone: 'Հեռախոսահամար',
+        your_order: 'Ձեր պատվերը',
+        address: 'Հասցե',
+        postal_code: 'Փոստային Ինդեքս',
+        total_cost: 'Ընդհանուր Արժեքը՝',
+        currency: 'Դրամ',
+        piece: 'հատ',
+        necessarily: 'Պարտադիր է',
+        incorrect_format: 'Սխալ ֆորմատ',
+        shipping_Information: 'Առաքման տվյալներ',
+        confirm_order: 'Հաստատել պատվերը',
+        congratulations_registered: 'Շնորհավորում ենք Ձեր պատվերը գրանցվել է:',
+        will_contact_you_within_a_very_short_period_of_time: 'Շատ կարճ ժամանակահատվածում մենք ձեզ հետ կապ կհաստատենք:',
+        go_back_to_the_list: 'Վերադառնալ ցանկին',
+        buy_now: 'Գնել հիմա',
+        continue_shopping: 'Շարունակել գնումները',
+        to_order: 'Պատվիրել',
+        shopping_cart: 'Գնալ զամբյուղ',
+        cart_empty: 'Զամբյուղում ապրանք չկա',
 }
 
 export {am}
