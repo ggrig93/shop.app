@@ -11,6 +11,7 @@
                             :input-value="cat.id"
                             v-model="selectedCategories"
                             @change.native="getCategoryBrandsAndSizes"
+                            class="checkbox-color"
                         />
                     </li>
                 </ul>
@@ -145,7 +146,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["search", "by_price", "per_page", "page", "category", "otherFilters", "categoryBrands", 'categorySizes']),
+        ...mapGetters(["settings","search", "by_price", "per_page", "page", "category", "otherFilters", "categoryBrands", 'categorySizes']),
     },
     watch: {
         filters: {
@@ -255,6 +256,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .widget_filter_price {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

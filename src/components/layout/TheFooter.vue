@@ -5,19 +5,17 @@
                 <div class="container-wapper">
                     <div class="footer-end">
                         <div class="row footer-content">
-                            <div class="col-sm-12 col-xs-12 col-md-3 site-info-content">
+                            <div class="col-sm-12 col-xs-12 col-md-12 site-info-content">
                                 <div class="site-info">
                                     <ul>
                                         <li>
-                                            <a href="#">Գլխավոր էջ</a>
+                                            <a href="/">Գլխավոր էջ</a>
                                         </li>
                                         <li>
-                                            <a href="#">Մեր մասին</a>
+                                            <a href="/about">Մեր մասին</a>
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="col-sm-12 col-xs-12 col-md-3">
                                 <div class="ysera-socials">
                                     <ul class="socials" :style="styleObject">
                                         <li>
@@ -33,15 +31,15 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="coppyright">
-                                    Copyright © {{ new Date().getFullYear() }}
-                                    <router-link to="/" :style="{'color': settings ? settings.main_color : 'white'}">
-                                        BeMine
-                                    </router-link>
-                                    . All rights reserved
-                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="coppyright">
+                        Copyright © {{ new Date().getFullYear() }}
+                        <router-link to="/" :style="{'color': settings ? settings.main_color : 'white'}">
+                            BeMine
+                        </router-link>
+                        . All rights reserved
                     </div>
                 </div>
             </div>
@@ -79,11 +77,13 @@ a:hover {
 }
 .site-info-content {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
 }
 .site-info {
     display: flex;
     justify-content: flex-end;
+    margin-right: 20px;
 }
 
 .site-info ul {

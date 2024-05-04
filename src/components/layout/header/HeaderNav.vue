@@ -89,28 +89,6 @@ export default {
                 '--bg-color': this.settings ? this.settings.main_color : 'white',
             }
         },
-        nav() {
-            return [
-                {
-                    id: 1,
-                    name: this.$t('mainPage'),
-                    view: 'Home',
-                    children: []
-                },
-                {
-                    id: 2,
-                    name: this.$t('allProducts'),
-                    view: 'Products',
-                    children: []
-                },
-                {
-                    id: 5,
-                    name: this.$t('about'),
-                    view: 'About',
-                    children: []
-                },
-            ]
-        },
         categories() {
             return this.$store.state.categories
         }

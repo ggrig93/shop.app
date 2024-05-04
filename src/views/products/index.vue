@@ -5,7 +5,7 @@
                 <div class="col-lg-12 products-header">
                     <div class="products-header-actions">
                         <Breadcrumbs/>
-                        <div v-show="showSort || !isMobile" class="shop-top-control">
+                        <div class="shop-top-control desctop">
                             <form class="select-item select-form">
                                 <div class="title">{{ $t('quantity') }}</div>
                                 <select
@@ -54,6 +54,35 @@
                                :style="{'color': settings ? settings.main_color : 'white', 'font-size':'22px'}"></i>
                         </div>
                     </div>
+                </div>
+                <div v-show="showSort" class="shop-top-control mobile">
+                    <form class="select-item select-form">
+                        <div class="title">{{ $t('quantity') }}</div>
+                        <select
+                            v-model="per_page"
+                            title="sort"
+                            data-placeholder="Products/Page"
+                            class="chosen-select"
+                            @change="sortPerPage"
+                        >
+                            <option value="6">{{ $t('products_page_6') }}</option>
+                            <option value="9">{{ $t('products_page_9') }}</option>
+                            <option value="12">{{ $t('products_page_12') }}</option>
+                        </select>
+                    </form>
+                    <form class="select-item select-form">
+                        <div class="title price-title">{{ $t('price') }}</div>
+                        <select
+                            v-model="by_price"
+                            title="sort-by"
+                            data-placeholder="Price: "
+                            class="chosen-select"
+                            @change="sortByPrice"
+                        >
+                            <option value="asc">{{ $t('asc') }}</option>
+                            <option value="desc">{{ $t('desc') }}</option>
+                        </select>
+                    </form>
                 </div>
             </div>
             <div class="row products-wrapper">
@@ -239,6 +268,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .products-header-actions {
     display: flex;
     justify-content: space-between;
@@ -277,11 +307,20 @@ export default {
     padding: 5px;
     margin-right: 10px;
 }
-
+.shop-top-control.mobile {
+    display: none;
+}
 @media (max-width: 768px) {
     .shop-top-control {
         background-color: unset;
         border-radius: 10px;
+    }
+    .shop-top-control.desctop {
+        display: none;
+    }
+    .shop-top-control.mobile {
+        display: flex;
+        justify-content: flex-end;
     }
 }
 
