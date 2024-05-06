@@ -22,13 +22,11 @@
                 </h4>
                 <div class="price-slider-wrapper">
                     <div class="price-input">
-                        <!--            <label for="min">Մինիմալ գին</label><br>-->
                         <input id="min" :placeholder="$t('min_price')" :value="filters.minPrice"
                                @change="filters.minPrice = $event.target.value"/>
                     </div>
                     <div class="line">-</div>
                     <div class="price-input">
-                        <!--            <label for="max">Մաքսիմալ գին</label><br>-->
                         <input id="max" :placeholder="$t('max_price')" :value="filters.maxPrice"
                                @change="filters.maxPrice = $event.target.value"/>
                     </div>
@@ -142,11 +140,11 @@ export default {
                 minPrice: "",
                 maxPrice: "",
             },
-            selectedCategories: []
+            selectedCategories: [],
         }
     },
     computed: {
-        ...mapGetters(["settings","search", "by_price", "per_page", "page", "category", "otherFilters", "categoryBrands", 'categorySizes']),
+        ...mapGetters(["settings", "search", "by_price", "per_page", "page", "category", "otherFilters", "categoryBrands", 'categorySizes']),
     },
     watch: {
         filters: {
@@ -168,7 +166,14 @@ export default {
             deep: true,
             handler(val) {
                 if (val['filter[categories]']) {
-                    this.filters.selectedCategories = this.queryToArray(val['filter[categories]'])
+                    this.filters.selectedCategories = this.queryToArray(val['filter[categories]']);
+                    if (this.categories.length) {
+                        this.categories.map(item => {
+                            if (item.id == val['filter[categories]']) {
+                                this.selectedCategories = val['filter[categories]']
+                            }
+                        })
+                    }
                 }
                 if (val['filter[brands]']) {
                     this.filters.selectedBrands = this.queryToArray(val['filter[brands]'])
@@ -207,6 +212,10 @@ export default {
         ...mapMutations(["setSearch", "setByPrice", "setPage", "setPerPage", 'setCategoryBrands', 'setCategorySizes']),
 
         getCategoryBrandsAndSizes() {
+            if (!this.selectedCategories.length) {
+                this.filters.selectedCategories = []
+                this.filters.selectedCategories.push(this.categories[0].parent_id)
+            }
             this.$store.dispatch('getCategoryBrands', this.selectedCategories.length ? this.selectedCategories : this.filters.selectedCategories)
             this.$store.dispatch('getCategorySizes', this.selectedCategories.length ? this.selectedCategories : this.filters.selectedCategories)
             this.filterProduct()
@@ -231,7 +240,7 @@ export default {
         },
         filterProduct() {
             const data = {
-                'filter[categories]': this.selectedCategories.length ? this.selectedCategories : this.category.length ? this.category :  this.filters.selectedCategories,
+                'filter[categories]': this.selectedCategories.length ? this.selectedCategories : this.category.length ?  this.category : this.filters.selectedCategories,
                 'filter[brands]': this.filters.selectedBrands,
                 'filter[colors]': this.filters.selectedColors,
                 'filter[sizes]': this.filters.selectedSizes,

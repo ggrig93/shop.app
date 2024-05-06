@@ -6,8 +6,13 @@
           <div class="container">
             <div class="row10">
               <div class="col-lg-8 silider-wrapp">
-                <div class="home-slider">
-                  <vue-slick-carousel class="slider-owl owl-slick" v-bind="settings">
+                <div class="home-slider"
+                     v-if="mainProducts && mainProducts.slideItems.length"
+                >
+                  <vue-slick-carousel
+                      class="slider-owl owl-slick"
+                      v-bind="settings"
+                  >
                     <div
                         v-for="product in mainProducts.slideItems"
                         :key="product.id"
@@ -26,8 +31,8 @@
                           </h3>
                           <div class="price">
                             {{ $t('newPrice') }}
-                            <span class="number-price" :style="{'color': design ? design.main_color : null}">
-														{{product.price}} դրամ
+                            <span class="number-price" :style="{'color': design ? design.main_color : 'black'}">
+														{{product.price}} {{$t('currency')}}
 													</span>
                           </div>
                           <a
@@ -42,7 +47,10 @@
                   </vue-slick-carousel>
                 </div>
               </div>
-              <div class="col-lg-4 banner-wrapp mainProducts_wrap">
+              <div
+                  v-if="mainProducts && mainProducts.bannerItems.length"
+                  class="col-lg-4 banner-wrapp mainProducts_wrap"
+              >
                 <banner
                     v-for="product in mainProducts.bannerItems"
                     :key="product.id"
@@ -68,7 +76,12 @@
             <h3 class="custommenu-title-blog" :style="styleObject">
               {{$t('offers')}}
             </h3>
-            <vue-slick-carousel v-if="dealDayProducts" class="owl-products owl-slick" v-bind="productsSettings" :style="styleObject">
+            <vue-slick-carousel
+                v-if="dealDayProducts.length"
+                class="owl-products owl-slick"
+                v-bind="productsSettings"
+                :style="styleObject"
+            >
               <a
                   v-for="(item, i) in dealDayProducts"
                   :key="i"
@@ -81,7 +94,10 @@
         </div>
         <div class="banner-wrapp">
           <div class="container">
-            <div class="row">
+            <div
+                class="row"
+                v-if="bottomSlideProducts.length"
+            >
               <div
                   v-for="product in bottomSlideProducts"
                   :key="product.id"
@@ -117,7 +133,10 @@
             <div class="tab-container">
               <div class="tab-panel active">
                 <div class="ysera-product">
-                  <ul class="row list-products auto-clear equal-container product-grid">
+                  <ul
+                      v-if="topPanel[activeTabPanel].length"
+                      class="row list-products auto-clear equal-container product-grid"
+                  >
                     <li
                         class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-6 style-1"
                         v-for="(prod, idx) in topPanel[activeTabPanel]"
@@ -132,7 +151,7 @@
           </div>
 
         </div>
-        <div class="ysera-iconbox-wrapp default" :style="{'background-color': design ? design.main_color : null}">
+        <div class="ysera-iconbox-wrapp default" :style="{'background-color': design ? design.main_color : 'transparent'}">
           <div class="container">
             <div class="row">
               <div class="col-sm-12 col-xs-12">

@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="product-preview image-small product_preview">
                                     <carousel
-                                        :margin="10" :dots="false" class="thumbnails_carousel"
+                                        :margin="5" :dots="false" class="thumbnails_carousel"
                                         :responsive="{'0':{'items':3},'480':{'items':3},'600':{'items':3},'1000':{'items':3}}"
                                         :nav-text="[`<i class='fa fa-angle-left' aria-hidden='true'></i>`, `<i class='fa fa-angle-right' aria-hidden='true'></i>`]"
                                         :key="activeBlock+img"
@@ -53,13 +53,15 @@
                                     </div>
                                 </div>
                                 <div class="availability">
-                                    <a :style="{'color': design ? design.main_color : 'white'}">{{ product.available_type === 'is_available' ? $t('is_available') : $t('not_available') }}</a>
+                                    <a :style="{'color': design ? design.main_color : 'white'}">{{
+                                            product.available_type === 'is_available' ? $t('is_available') : $t('not_available')
+                                        }}</a>
                                 </div>
                                 <div class="price">
                                     <span>{{ product.price }} {{ design.currency_value }}</span>
                                 </div>
                                 <div class="product-details-description">
-                                    <ul v-if="product.details.additional">
+                                    <ul v-if="product.details.additional && product.details.additional.length">
                                         <li
                                             v-for="(item, i) in product.details.additional"
                                             :key="i"
@@ -76,9 +78,9 @@
                                                :key="color.id"
                                                :style="{backgroundColor: color.code}"
                                                :class="{
-                           active: activeColor(color),
-                           'black-check': color.name === 'White'
-                         }"
+                                                   active: activeColor(color),
+                                                   'black-check': color.name === 'White'
+                                                 }"
                                                @click.prevent="selectColor(color)"
                                             ></a>
                                         </div>
@@ -113,7 +115,7 @@
                                         </div>
                                     </div>
                                     <div v-if="showSuccessNotify" class="success-notify">
-                                        <div class="bubble">Ապրանքը զամբյուղում է</div>
+                                        <div class="bubble">{{ $t('product_cart') }}</div>
                                         <div class="triangle"></div>
                                     </div>
                                     <div class="quantity-add-to-cart">
@@ -139,7 +141,7 @@
                                             {{ $t('add_to_cart') }}
                                         </button>
                                     </div>
-                                    <p v-if="count < 1" class="error-message">Ընտրեք քանակը</p>
+                                    <p v-if="count < 1" class="error-message">{{ $t('select_quantity') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +152,7 @@
                                        @click="tabPanel = 'Description'"
                                        :style="styleObject">{{ $t('description') }}</a>
                                 </li>
-                                <li v-if="product.details.information" :class="{active: tabPanel === 'Information'}">
+                                <li v-if="isTablePanel" :class="{active: tabPanel === 'Information'}">
                                     <a data-toggle="tab" aria-expanded="true" href="javascript:void(0)"
                                        @click="tabPanel = 'Information'"
                                        :style="styleObject">{{ $t('characteristics') }}</a>
@@ -167,7 +169,7 @@
                         <div style="clear: left;"></div>
                         <div v-if="product.suggested_products && product.suggested_products.length"
                              class="related products product-grid">
-                            <h2 class="product-grid-title">Նմանատիպ ապրանքներ</h2>
+                            <h2 class="product-grid-title">{{ $t('similar_products') }}</h2>
                             <vue-slick-carousel
                                 v-bind="settings"
                                 class="owl-products nav-center suggested-products"
@@ -234,6 +236,7 @@ export default {
             showSizeError: false,
             showColorError: false,
             showSuccessNotify: false,
+            isTablePanel: false,
         }
     },
     computed: {
@@ -244,7 +247,19 @@ export default {
             }
         },
         product() {
-            return this.$store.state.product
+            let product = this.$store.state.product
+            if (product && product.details) {
+                for (const key in product.details.information) {
+                    // eslint-disable-next-line no-prototype-builtins
+                    if (product.details.information.hasOwnProperty(key)) {
+                        if (product.details.information[key].key && product.details.information[key].value) {
+                            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+                            this.isTablePanel = true
+                        }
+                    }
+                }
+            }
+            return product
         },
     },
     watch: {
@@ -330,8 +345,7 @@ export default {
 }
 
 .product-preview.image-small.product_preview img {
-    width: 170px;
-    height: 170px;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -360,6 +374,11 @@ picture > img.iiz__img {
 
 .size-error {
     margin: -15px 0 0 0;
+}
+
+.thumbnails_carousel a {
+    display: block;
+    height: 120px;
 }
 
 </style>

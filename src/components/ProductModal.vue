@@ -9,7 +9,7 @@
               <div class="slider-product slider-for slick-initialized slick-slider">
                 <div aria-live="polite" class="slick-list draggable">
                   <div class="slick-track" role="listbox">
-                    <div class="details-item slick-slide slick-current slick-active" :style="styleObject">
+                    <div st class="details-item slick-slide slick-current slick-active" :style="styleObject">
                       <img :src="img" alt="img">
                     </div>
                   </div>
@@ -71,10 +71,10 @@
                        @click.prevent="selectColor(color)"
                     ></a>
                   </div>
-                  <p v-if="showColorError" class="error-message color-error">Ընտրեք գույնը</p>
+                  <p v-if="showColorError" class="error-message color-error">{{ $t('choose_color') }}</p>
                 </div>
                 <div class="attribute attribute_size">
-                  <div class="size-text text-attribute">Չափս</div>
+                  <div class="size-text text-attribute">{{ $t('size') }}</div>
                   <div class="list-size list-item" :style="styleObject">
                     <a v-for="item in coloredProduct.sizes"
                        :key="item.id"
@@ -82,13 +82,13 @@
                        @click="size = item"
                     >{{item.name}}</a>
                   </div>
-                  <p v-if="showSizeError" class="error-message size-error">Ընտրեք չափսը</p>
+                  <p v-if="showSizeError" class="error-message size-error">{{ $t('choose_size') }}</p>
                 </div>
               </div>
               <div class="group-button">
                 <div class="yith-wcwl-add-to-wishlist wishlist-notify-wrap" >
                   <div v-if="addedWishList" class="success-notify wishlist-success-notify" >
-                    <div class="bubble" :style="{'background': design ? design.main_color : 'white'}">{{ addedWishList === 'added' ? 'Ավելացվել է' : 'Ջնջվել է' }}</div>
+                    <div class="bubble" :style="{'background': design ? design.main_color : 'white'}">{{ addedWishList === 'added' ? $t('added') : $t('deleted') }}</div>
                     <div class="triangle" :style="{'background': design ? design.main_color : 'white'}"></div>
                   </div>
                   <div class="yith-wcwl-add-button"   :style="styleObject" >
@@ -106,9 +106,9 @@
                       <a class="btn-number qtychange qtyplus quantity-plus" @click="changeCount(+1)" :style="styleObject">+</a>
                     </div>
                   </div>
-                  <button class="single_add_to_cart_button button" @click.stop="addToCartHandler(product.id)" :style="{'background': design ? design.main_color : 'white'}">Ավելացնել զամբյուղ</button>
+                  <button class="single_add_to_cart_button button" @click.stop="addToCartHandler(product.id)" :style="{'background': design ? design.main_color : 'white'}">{{ $t('add_to_cart') }}</button>
                 </div>
-                <p v-if="count < 1" class="error-message">Ընտրեք քանակը</p>
+                <p v-if="count < 1" class="error-message">{{ $t('select_quantity') }}</p>
               </div>
             </div>
             <button title="Close (Esc)" type="button" class="mfp-close" @click="closeModal" :style="{'background': design ? design.main_color : 'white'}">×</button>
@@ -231,9 +231,15 @@ export default {
 </script>
 
 <style lang="scss">
+.details-item {
+    height: 120px;
+    margin-right: 8px;
+}
+.details-item img {
+    width: 100%;
+    height: 100%;
+}
 .slick-slide img{
-  width: 100px;
-  height: 100px;
   object-fit: cover;
 }
 .slider-product  img {

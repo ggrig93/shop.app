@@ -9,10 +9,10 @@
                                 <div class="site-info">
                                     <ul>
                                         <li>
-                                            <a href="/">Գլխավոր էջ</a>
+                                            <a href="/">{{ $t('mainPage') }}</a>
                                         </li>
                                         <li>
-                                            <a href="/about">Մեր մասին</a>
+                                            <a href="/about">{{ $t('about') }}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -96,6 +96,4 @@ a:hover {
 .site-info ul li a {
     color: #888888;
 }
-
-
 </style>

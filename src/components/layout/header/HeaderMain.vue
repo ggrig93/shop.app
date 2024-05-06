@@ -4,8 +4,6 @@
             <div class="col-lg-3 col-sm-4 col-md-3 col-xs-7 col-ts-12 header-element">
                 <div class="logo_img" :style="styleObject">
                     <router-link :to="{name: 'Home'}">
-                        <!--            <img src="http://ledthanhdat.vn/html/ysera/assets/images/logo.png" alt="img">-->
-                        <!--            <img src="@/assets/images/logo.svg" alt="img">-->
                         <svg class="logo" width="169" height="80" viewBox="0 0 169 80" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <rect width="169" height="80" fill="white"/>
@@ -63,7 +61,9 @@
                         <a href="javascript:void(0);" class="shopcart-icon" data-ysera="ysera-dropdown"
                            @click="toggleCart" :style="styleObject">
                             Cart
-                            <span class="count" :style="{'background-color': settings ? settings.main_color : 'white'}">{{ shopCartCount }}</span>
+                            <span class="count" :style="{'background-color': settings ? settings.main_color : 'white'}">{{
+                                    shopCartCount
+                                }}</span>
                         </a>
                         <div
                             class="shopcart-description ysera-submenu mini-cart"

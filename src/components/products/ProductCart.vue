@@ -5,7 +5,7 @@
                 <div v-if="product.new" class="flash">
                   <span class="onnew">
                     <span class="text">
-                        new
+                        {{ $t('new') }}
                     </span>
                   </span>
                 </div>
@@ -29,11 +29,12 @@
                                     style="cursor: pointer;"
                                     :class="{ 'active-heart': hasInWishlist(product.id) }"
                                     @click.stop="addToWishList(product)"
-                                >Հավանել</a>
+                                >{{ $t('like') }}</a>
                             </div>
                         </div>
-                        <a class="button quick-wiew-button" @click.stop="openModal(product)" style="cursor: pointer;">Quick
-                            View</a>
+                        <a class="button quick-wiew-button" @click.stop="openModal(product)" style="cursor: pointer;">
+                            {{ $t('quick_view') }}
+                        </a>
                     </div>
                 </div>
             </div>
@@ -43,12 +44,19 @@
                 </div>
                 <div class="group-info">
                     <div class="price">
-                        <ins :style="styleObject" class="new-price">
-                            {{ product.price }} {{ settings.currency_value }}
-                        </ins>
-                        <del v-if="product.old_price" class="old-price">
-                            {{ product.old_price }} {{ settings.currency_value }}
-                        </del>
+                        <div v-if="product.price === product.old_price">
+                            <ins :style="styleObject" class="new-price">
+                                {{ product.price }} {{ settings.currency_value }}
+                            </ins>
+                        </div>
+                        <div v-else>
+                            <ins :style="styleObject" class="new-price">
+                                {{ product.price }} {{ settings.currency_value }}
+                            </ins>
+                            <del v-if="product.old_price" class="old-price">
+                                {{ product.old_price }} {{ settings.currency_value }}
+                            </del>
+                        </div>
                     </div>
                     <h5 class="product-name product_title">
                         <router-link :to="{name: 'Product', params: {id : product.id}}">{{ product.title }}
@@ -133,8 +141,9 @@ export default {
 .thumb-inner img {
     width: 100%;
     object-fit: cover;
+    height: 240px;
     @media(max-width: 768px) {
-        height: auto;
+        height: 200px;
     }
 }
 
