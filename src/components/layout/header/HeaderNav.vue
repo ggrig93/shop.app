@@ -45,6 +45,7 @@
                                         class="ysera-menu-item-title"
                                         :title="sub_sub.name"
                                         @click="selectCategory(sub_sub.id)"
+                                        :disabled="true"
                                     >
                                         {{ sub_sub.name }}
                                     </a>
@@ -97,7 +98,9 @@ export default {
         ...mapMutations(["setCategory"]),
         selectCategory(id) {
             this.setCategory([id])
-            this.$router.replace({name: 'Products', query: {'filter[categories]': [id]}})
+            if (id != this.$route.query['filter[categories]']) {
+                this.$router.replace({name: 'Products', query: {'filter[categories]': [id]}})
+            }
         },
         toggleSection(id) {
             this.sub_categories = []

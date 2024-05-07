@@ -91,7 +91,6 @@ export default {
       return this.paginate?.last_page
     },
     pages() {
-      console.log(this.paginate?.links)
       return this.paginate?.links
     },
     isInFirstPage() {

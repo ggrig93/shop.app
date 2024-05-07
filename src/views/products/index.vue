@@ -117,7 +117,7 @@
                 </div>
                 <div v-show="showFilters || !isMobile" class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
                     <Sidebar
-                        v-if="categories.length"
+                        v-if="categories && categories.length"
                         class="shop-sidebar"
                         :categories="categories"
                         :brands="brands"

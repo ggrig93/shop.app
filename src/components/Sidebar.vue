@@ -154,6 +154,12 @@ export default {
                 this.setPage(1)
             }
         },
+        categories: {
+            deep: true,
+            handler() {
+                this.checkSelectedCategories(this.$route.query['filter[categories]'])
+            }
+        },
         otherFilters: {
             immediate: true,
             deep: true,
@@ -206,7 +212,8 @@ export default {
         ...mapMutations(["setSearch", "setByPrice", "setPage", "setPerPage", 'setCategoryBrands', 'setCategorySizes']),
         checkSelectedCategories(categoryId) {
             if (this.categories.length) {
-                const categoryFound = this.categories.some(item => item.id == categoryId);
+                let categoryFound = this.categories.some(item => item.id == categoryId);
+
                 if (categoryFound) {
                     if (Array.isArray(categoryId)) {
                         this.selectedCategories = categoryId;
