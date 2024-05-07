@@ -7,7 +7,7 @@
             <div class="row10">
               <div class="col-lg-8 silider-wrapp">
                 <div class="home-slider"
-                     v-if="mainProducts && mainProducts.slideItems.length"
+                     v-if="mainProducts && mainProducts.slideItems && mainProducts.slideItems.length"
                 >
                   <vue-slick-carousel
                       class="slider-owl owl-slick"
@@ -23,9 +23,6 @@
                           :style="{backgroundImage: `url(${product.avatar})`}"
                       >
                         <div class="slider-infor">
-<!--                          <h5 class="title-small">-->
-<!--                            {{product.description}}-->
-<!--                          </h5>-->
                           <h3 class="title-big custom-title">
                             {{product.title}}
                           </h3>
@@ -48,7 +45,7 @@
                 </div>
               </div>
               <div
-                  v-if="mainProducts && mainProducts.bannerItems.length"
+                  v-if="mainProducts && mainProducts.bannerItems && mainProducts.bannerItems.length"
                   class="col-lg-4 banner-wrapp mainProducts_wrap"
               >
                 <banner
@@ -58,8 +55,6 @@
                     :backgroundImage="product.avatar"
                     class="col-xs-6 col-lg-12"
                 >
-<!--                  <h3 class="title custom-title">{{product.title}} </h3>-->
-<!--                  <span class="price">{{product.price}} դրամ</span> <br>-->
                   <a
                       :href="product.link"
                       class="button btn-lets-do-it"
@@ -71,13 +66,15 @@
             </div>
           </div>
         </div>
-        <div class="ysera-product produc-featured rows-space-65">
+        <div
+            v-if="dealDayProducts && dealDayProducts.length"
+             class="ysera-product produc-featured rows-space-65"
+        >
           <div class="container">
             <h3 class="custommenu-title-blog" :style="styleObject">
               {{$t('offers')}}
             </h3>
             <vue-slick-carousel
-                v-if="dealDayProducts.length"
                 class="owl-products owl-slick"
                 v-bind="productsSettings"
                 :style="styleObject"
@@ -92,20 +89,18 @@
             </vue-slick-carousel>
           </div>
         </div>
-        <div class="banner-wrapp">
+        <div
+            v-if="bottomSlideProducts && bottomSlideProducts.length"
+            class="banner-wrapp"
+        >
           <div class="container">
-            <div
-                class="row"
-                v-if="bottomSlideProducts.length"
-            >
+            <div class="row">
               <div
                   v-for="product in bottomSlideProducts"
                   :key="product.id"
                   class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <a :href="product.link">
                   <banner img-class="style4" :backgroundImage="product.avatar">
-<!--                    <h3 class="title custom-title">{{product.title}}</h3>-->
-  <!--                  <div class="description">{{product.description}}</div>-->
                     <div class="button btn-shop-now" :style="styleObject">
                       {{$t('buy')}}
                     </div>
@@ -134,7 +129,7 @@
               <div class="tab-panel active">
                 <div class="ysera-product">
                   <ul
-                      v-if="topPanel[activeTabPanel].length"
+                      v-if="topPanel[activeTabPanel] && topPanel[activeTabPanel].length"
                       class="row list-products auto-clear equal-container product-grid"
                   >
                     <li

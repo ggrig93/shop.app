@@ -131,7 +131,7 @@
                                                  :style="{'border': settings ? '1px solid' + settings.main_color : '1px solid white'}">
                                         <span>{{ $t('shopping_cart') }}</span>
                                     </router-link>
-                                    <router-link class="button button-checkout" :to="{name: 'Checkout'}"
+                                    <router-link class="button button-checkout" :to="{name: 'Checkout',  params: { shopProducts: shopProducts }}"
                                                  @click.native="hideCart"
                                                  :style="{'background-color': settings ? settings.main_color : 'white','border': settings ? '1px solid' + settings.main_color : '1px solid white'}">
                                         <span>{{ $t('to_order') }}</span>

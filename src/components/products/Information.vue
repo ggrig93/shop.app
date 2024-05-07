@@ -1,5 +1,5 @@
 <template>
-  <div id="information" class="tab-panel">
+  <div id="information" class="tab-panel" v-if="information && information.length">
     <table class="table table-bordered">
       <tr v-for="(item, i) in information" :key="i">
         <td>{{item.key}}</td>
@@ -14,7 +14,7 @@ export default {
   name: "Information",
   props: {
     information: {
-      type: Object
+      type: Array
     }
   }
 }
