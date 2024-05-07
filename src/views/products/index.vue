@@ -117,6 +117,7 @@
                 </div>
                 <div v-show="showFilters || !isMobile" class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
                     <Sidebar
+                        v-if="categories.length"
                         class="shop-sidebar"
                         :categories="categories"
                         :brands="brands"
@@ -206,12 +207,12 @@ export default {
             }
         },
     },
-    created() {
-        this.$store.dispatch('getColors')
-        this.$store.dispatch('getTags')
-        this.$store.dispatch('getCategoryBrands', this.categoryIds)
-        this.$store.dispatch('getCategorySizes', this.categoryIds)
-        this.$store.dispatch('getSubCategories', this.categoryIds)
+    async created() {
+        await this.$store.dispatch('getColors')
+        await this.$store.dispatch('getTags')
+        await this.$store.dispatch('getCategoryBrands', this.categoryIds)
+        await this.$store.dispatch('getCategorySizes', this.categoryIds)
+        await this.$store.dispatch('getSubCategories', this.categoryIds)
     },
     beforeDestroy() {
         this.setSearch('')

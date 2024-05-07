@@ -164,16 +164,10 @@ export default {
         '$route.query': {
             immediate: true,
             deep: true,
-            handler(val) {
+            async handler(val) {
                 if (val['filter[categories]']) {
                     this.filters.selectedCategories = this.queryToArray(val['filter[categories]']);
-                    if (this.categories.length) {
-                        this.categories.map(item => {
-                            if (item.id == val['filter[categories]']) {
-                                this.selectedCategories = val['filter[categories]']
-                            }
-                        })
-                    }
+                    this.checkSelectedCategories(val['filter[categories]'])
                 }
                 if (val['filter[brands]']) {
                     this.filters.selectedBrands = this.queryToArray(val['filter[brands]'])
@@ -210,7 +204,18 @@ export default {
     },
     methods: {
         ...mapMutations(["setSearch", "setByPrice", "setPage", "setPerPage", 'setCategoryBrands', 'setCategorySizes']),
-
+        checkSelectedCategories(categoryId) {
+            if (this.categories.length) {
+                const categoryFound = this.categories.some(item => item.id == categoryId);
+                if (categoryFound) {
+                    if (Array.isArray(categoryId)) {
+                        this.selectedCategories = categoryId;
+                    } else {
+                        this.selectedCategories.push(categoryId);
+                    }
+                }
+            }
+        },
         getCategoryBrandsAndSizes() {
             if (!this.selectedCategories.length) {
                 this.filters.selectedCategories = []
@@ -240,7 +245,7 @@ export default {
         },
         filterProduct() {
             const data = {
-                'filter[categories]': this.selectedCategories.length ? this.selectedCategories : this.category.length ?  this.category : this.filters.selectedCategories,
+                'filter[categories]': this.selectedCategories.length ? this.selectedCategories : this.filters.selectedCategories,
                 'filter[brands]': this.filters.selectedBrands,
                 'filter[colors]': this.filters.selectedColors,
                 'filter[sizes]': this.filters.selectedSizes,
@@ -251,9 +256,6 @@ export default {
                 'filter[max_price]': this.filters.maxPrice,
                 search: this.search,
                 'filter[page]': this.page,
-            }
-            if (this.category.length) {
-                this.filters.selectedCategories = this.category
             }
             const queryData = {...data}
             const params = new URLSearchParams(queryData).toString();
