@@ -46,15 +46,15 @@
                     <div class="price">
                         <div v-if="product.price === product.old_price">
                             <ins :style="styleObject" class="new-price">
-                                {{ product.price }} {{ settings.currency_value }}
+                                {{ product.price }} {{settings ? settings.currency_value : null }}
                             </ins>
                         </div>
                         <div v-else>
                             <ins :style="styleObject" class="new-price">
-                                {{ product.price }} {{ settings.currency_value }}
+                                {{ product.price }} {{settings ? settings.currency_value : null }}
                             </ins>
                             <del v-if="product.old_price" class="old-price">
-                                {{ product.old_price }} {{ settings.currency_value }}
+                                {{ product.old_price }} {{settings ? settings.currency_value : null }}
                             </del>
                         </div>
                     </div>

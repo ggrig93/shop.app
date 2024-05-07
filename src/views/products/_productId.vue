@@ -58,7 +58,7 @@
                                         }}</a>
                                 </div>
                                 <div class="price">
-                                    <span>{{ product.price }} {{ design.currency_value }}</span>
+                                    <span>{{ product.price }} {{ design ? design.currency_value : null}}</span>
                                 </div>
                                 <div class="product-details-description">
                                     <ul v-if="product.details.additional && product.details.additional.length">
