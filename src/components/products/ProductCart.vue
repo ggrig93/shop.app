@@ -1,84 +1,87 @@
 <template>
-    <div class="product-inner equal-element" v-if="product" :style="styleObject">
-        <template v-if="layout === 'grid'">
-            <div class="product-top">
-                <div v-if="product.new" class="flash">
+    <router-link :to="{name: 'Product', params: {id : product.id}}">{{ product.title }}
+        <div class="product-inner equal-element" v-if="product" :style="styleObject">
+            <template v-if="layout === 'grid'">
+                <div class="product-top">
+                    <div v-if="product.new" class="flash">
                   <span class="onnew">
                     <span class="text">
                         {{ $t('new') }}
                     </span>
                   </span>
+                    </div>
                 </div>
-            </div>
-            <div class="product-thumb">
-                <div class="thumb-inner">
-                    <img :src="product.avatar" alt="img">
-                    <div class="thumb-group">
-                        <div class="yith-wcwl-add-to-wishlist">
-                            <div class="yith-wcwl-add-button">
-                                <div
-                                    v-if="$route.name === 'WishList'"
-                                    class="product-remove"
-                                    :style="styleObject">
+                <div class="product-thumb">
+                    <div class="thumb-inner">
+                        <img :src="product.avatar" alt="img">
+                        <div class="thumb-group">
+                            <div class="yith-wcwl-add-to-wishlist">
+                                <div class="yith-wcwl-add-button">
+                                    <div
+                                        v-if="$route.name === 'WishList'"
+                                        class="product-remove"
+                                        :style="styleObject">
                                       <span @click="showDeletePopup = product.id" style="cursor: pointer;">
                                         <i aria-hidden="true" class="fa fa-trash-o"></i>
                                       </span>
+                                    </div>
+                                    <a
+                                        v-else
+                                        style="cursor: pointer;"
+                                        :class="{ 'active-heart': hasInWishlist(product.id) }"
+                                        @click.stop="addToWishList(product)"
+                                    >{{ $t('like') }}</a>
                                 </div>
-                                <a
-                                    v-else
-                                    style="cursor: pointer;"
-                                    :class="{ 'active-heart': hasInWishlist(product.id) }"
-                                    @click.stop="addToWishList(product)"
-                                >{{ $t('like') }}</a>
+                            </div>
+                            <a class="button quick-wiew-button" @click.stop="openModal(product)" style="cursor: pointer;">
+                                {{ $t('quick_view') }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div v-if="endDate" class="product-count-down" :style="styleObject">
+                        <Countdown :end="endDate"/>
+                    </div>
+                    <div class="group-info">
+                        <div class="price">
+                            <div v-if="product.price === product.old_price">
+                                <ins :style="styleObject" class="new-price">
+                                    {{ product.price }} {{settings ? settings.currency_value : null }}
+                                </ins>
+                            </div>
+                            <div v-else>
+                                <ins :style="styleObject" class="new-price">
+                                    {{ product.price }} {{settings ? settings.currency_value : null }}
+                                </ins>
+                                <del v-if="product.old_price" class="old-price">
+                                    {{ product.old_price }} {{settings ? settings.currency_value : null }}
+                                </del>
                             </div>
                         </div>
-                        <a class="button quick-wiew-button" @click.stop="openModal(product)" style="cursor: pointer;">
-                            {{ $t('quick_view') }}
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="product-info">
-                <div v-if="endDate" class="product-count-down" :style="styleObject">
-                    <Countdown :end="endDate"/>
-                </div>
-                <div class="group-info">
-                    <div class="price">
-                        <div v-if="product.price === product.old_price">
-                            <ins :style="styleObject" class="new-price">
-                                {{ product.price }} {{settings ? settings.currency_value : null }}
-                            </ins>
-                        </div>
-                        <div v-else>
-                            <ins :style="styleObject" class="new-price">
-                                {{ product.price }} {{settings ? settings.currency_value : null }}
-                            </ins>
-                            <del v-if="product.old_price" class="old-price">
-                                {{ product.old_price }} {{settings ? settings.currency_value : null }}
-                            </del>
-                        </div>
-                    </div>
-                    <h5 class="product-name product_title">
-                        <router-link :to="{name: 'Product', params: {id : product.id}}">{{ product.title }}
-                        </router-link>
-                    </h5>
-                    <div class="stars-rating">
-                        <div class="star-rating">
-                            <span :class="'star-' + product.countStar"></span>
-                        </div>
-                        <div class="count-star">
-                            ({{ product.stars_rate }})
+                        <h5 class="product-name product_title">
+                            <router-link :to="{name: 'Product', params: {id : product.id}}">{{ product.title }}
+                            </router-link>
+                        </h5>
+                        <div class="stars-rating">
+                            <div class="star-rating">
+                                <span :class="'star-' + product.countStar"></span>
+                            </div>
+                            <div class="count-star">
+                                ({{ product.stars_rate }})
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </template>
-        <DeletePopup
-            v-if="showDeletePopup"
-            @confirm="removeHandler"
-            @close="closeModal"
-        />
-    </div>
+            </template>
+            <DeletePopup
+                v-if="showDeletePopup"
+                @confirm="removeHandler"
+                @close="closeModal"
+            />
+        </div>
+    </router-link>
+
 </template>
 
 <script>
