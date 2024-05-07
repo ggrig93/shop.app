@@ -6,6 +6,6 @@ import {messages} from "@/i18/lang";
 Vue.use(VueI18n)
 
 export default new VueI18n({
-    locale: localStorage.lang ? localStorage.lang : 'am',
+    locale: localStorage.lang ? localStorage.lang : 'en',
     messages
 });

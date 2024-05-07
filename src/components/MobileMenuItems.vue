@@ -2,7 +2,7 @@
     <div>
        <div class="mobile-menu-items">
            <p class="menu-item" @click="toggleMenu">
-               <a @click.stop href="#">{{ menu.name }}</a>
+               <a>{{ menu.name }}</a>
                <span class="toggleIcon">
                     {{ this.isOpen ? "—" : "＋" }}
                 </span>

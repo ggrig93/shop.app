@@ -14,18 +14,12 @@
                 <a class="ysera-menu-close-btn ysera-menu-close-panels" href="javascript:void(0)"
                    @click="closeMenu">x</a>
             </div>
-            <div class="menu-item">
-                <a href="/">{{ $t('mainPage') }}</a>
-            </div>
             <MobileMenuItems
                 v-for="(items, index) in categories"
                 :key="index"
                 :menu="items"
                 @closeMenu="closeMenu"
             />
-            <div class="menu-item">
-                <a href="/about">{{ $t('about') }}</a>
-            </div>
         </div>
     </transition-group>
 </template>

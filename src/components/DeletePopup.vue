@@ -7,13 +7,13 @@
           <div class="glyph-icon flaticon-close"></div>
         </div>
       </div>
-      <p class="popup-text">Այս գործողությունը կհեռացնի նշված ապրանքը ձեր
-        <span v-if="fromCart">զամբյուղից</span>
-        <span v-else>նախընտրելիների ցանկից</span>
+      <p class="popup-text">{{ $t('action_remove_specified_element') }}
+        <span v-if="fromCart">{{ $t('from_basket') }}</span>
+        <span v-else>{{ $t('from_favorites_list') }}</span>
         :</p>
       <div class="popup-footer" :style="styleObject">
-        <button @click="$emit('confirm')" class="btn-ok">Այո</button>
-        <button class="btn-cancel" @click="closeModal">Ոչ</button>
+        <button @click="$emit('confirm')" class="btn-ok">{{ $t('yes') }}</button>
+        <button class="btn-cancel" @click="closeModal">{{ $t('no') }}</button>
       </div>
     </div>
   </div>

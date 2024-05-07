@@ -29,7 +29,7 @@ const routes = [
     name: 'Checkout',
     component: () => import('@/views/Checkout'),
     beforeEnter: (to, from, next) => {
-      if (to.params.shopProducts.length) {
+      if (to.params.shopProducts && to.params.shopProducts.length) {
         next();
       }
     }

@@ -87,7 +87,7 @@
             </div>
             <div class="row products-wrapper">
                 <div class="content-area shop-grid-content no-banner col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                    <div v-if="products && !products.length">Հարցման արդյունքում ոչինչ չի գտնվել</div>
+                    <div v-if="products && !products.length">{{ $t('nothing_was_found_result_query') }}</div>
                     <div v-else class="site-main">
                         <ul v-if="!loading"
                             class="row list-products auto-clear equal-container"
@@ -95,8 +95,8 @@
                         >
                             <li class="product-item"
                                 :class="layoutMode
-                  ? 'col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-6 style-1'
-                  : 'col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12 style-list'"
+                                  ? 'col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-6 style-1'
+                                  : 'col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12 style-list'"
                                 v-for="prod in products" :key="prod.id"
                                 @click="productPage(prod)"
                             >
@@ -107,7 +107,7 @@
                             </li>
                         </ul>
                         <div v-else class="loader"
-                             :style="{'border-top': settings ? '10px solid '+settings.main_color : '10px solid white'}"></div>
+                             :style="{'border-top': settings ? '10px solid ' + settings.main_color : '10px solid white'}"></div>
                         <Pagination
                             class="style3"
                             :paginate="paginate"
@@ -117,6 +117,7 @@
                 </div>
                 <div v-show="showFilters || !isMobile" class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
                     <Sidebar
+                        v-if="categories && categories.length"
                         class="shop-sidebar"
                         :categories="categories"
                         :brands="brands"
@@ -206,12 +207,12 @@ export default {
             }
         },
     },
-    created() {
-        this.$store.dispatch('getColors')
-        this.$store.dispatch('getTags')
-        this.$store.dispatch('getCategoryBrands', this.categoryIds)
-        this.$store.dispatch('getCategorySizes', this.categoryIds)
-        this.$store.dispatch('getSubCategories', this.categoryIds)
+    async created() {
+        await this.$store.dispatch('getColors')
+        await this.$store.dispatch('getTags')
+        await this.$store.dispatch('getCategoryBrands', this.categoryIds)
+        await this.$store.dispatch('getCategorySizes', this.categoryIds)
+        await this.$store.dispatch('getSubCategories', this.categoryIds)
     },
     beforeDestroy() {
         this.setSearch('')
