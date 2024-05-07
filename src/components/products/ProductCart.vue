@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="{name: 'Product', params: {id : product.id}}">{{ product.title }}
+    <router-link :to="{name: 'Product', params: {id : product.id}}">
         <div class="product-inner equal-element" v-if="product" :style="styleObject">
             <template v-if="layout === 'grid'">
                 <div class="product-top">
