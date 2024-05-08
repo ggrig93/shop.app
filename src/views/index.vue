@@ -98,7 +98,7 @@
               <div
                   v-for="product in bottomSlideProducts"
                   :key="product.id"
-                  class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                  class="col-lg-6 col-md-6 col-sm-6 col-xs-6 banner-wrapp-item">
                 <a :href="product.link">
                   <banner img-class="style4" :backgroundImage="product.avatar">
                     <div class="button btn-shop-now" :style="styleObject">
