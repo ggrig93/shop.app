@@ -4298,6 +4298,7 @@ ul.list-products {
 }
 .instagram .item-instagram img {
 	width: 100%;
+	height: 100px;
 }
 .instagram .item-instagram .text {
 	position: absolute;
