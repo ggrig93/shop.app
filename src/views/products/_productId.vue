@@ -60,13 +60,10 @@
                                 <div class="price">
                                     <span>{{ product.price }} {{ design ? design.currency_value : null}}</span>
                                 </div>
-                                <div class="product-details-description">
-                                    <ul v-if="product.details.additional && product.details.additional.length">
-                                        <li
-                                            v-for="(item, i) in product.details.additional"
-                                            :key="i"
-                                        >
-                                            {{ item }}
+                                <div v-for="(item, i) in product.details.information" :key="i" class="product-details-description">
+                                    <ul v-if="item.key !== null">
+                                        <li>
+                                          {{ item.key }}: {{ item.value }}
                                         </li>
                                     </ul>
                                 </div>
@@ -406,6 +403,12 @@ a:hover {
 
 .triangle {
     background-color: var(--bg-color) !important;
+}
+.product-grid-title {
+  color: var(--bg-color);
+}
+.product-grid-title::before {
+  border-bottom: 4px solid var(--bg-color);
 }
 
 @media screen and (max-width: 768px) {
