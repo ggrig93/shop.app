@@ -147,24 +147,10 @@ export default {
         ...mapGetters(["settings", "search", "by_price", "per_page", "page", "category", "otherFilters", "categoryBrands", 'categorySizes']),
     },
     watch: {
-        filters: {
-            deep: true,
-            handler() {
-                this.filterProduct()
-                this.setPage(1)
-            }
-        },
         categories: {
             deep: true,
             handler() {
                 this.checkSelectedCategories(this.$route.query['filter[categories]'])
-            }
-        },
-        otherFilters: {
-            immediate: true,
-            deep: true,
-            handler() {
-                this.filterProduct()
             }
         },
         '$route.query': {
@@ -207,6 +193,10 @@ export default {
                 }
             }
         }
+    },
+    created() {
+        this.filterProduct()
+        this.setPage(1)
     },
     methods: {
         ...mapMutations(["setSearch", "setByPrice", "setPage", "setPerPage", 'setCategoryBrands', 'setCategorySizes']),
