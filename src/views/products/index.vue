@@ -125,6 +125,8 @@
                         :colors="color"
                         :tags="tags"
                         :price="price"
+                        :per_page="per_page"
+                        :by_price="by_price"
                     />
                 </div>
             </div>
@@ -263,7 +265,7 @@ export default {
         },
         productPage(prod) {
             this.$router.push({name: 'Product', params: {id: prod.id}})
-        }
+        },
     }
 }
 </script>

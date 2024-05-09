@@ -136,6 +136,12 @@ export default {
         price: {
             type: Object,
             default: () => null
+        },
+        per_page: {
+            default: () => null
+        },
+        by_price: {
+            default: () => null
         }
     },
     data() {
@@ -153,13 +159,25 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["settings", "search", "by_price", "per_page", "page", "category", "otherFilters", "categoryBrands", 'categorySizes']),
+        ...mapGetters(["settings", "search", "page", "category", "otherFilters", "categoryBrands", 'categorySizes']),
     },
     watch: {
         categories: {
             deep: true,
             handler() {
                 this.checkSelectedCategories(this.$route.query['filter[categories]'])
+            }
+        },
+        per_page: {
+            deep: true,
+            handler() {
+                this.filterProduct()
+            }
+        },
+        by_price: {
+            deep: true,
+            handler() {
+                this.filterProduct()
             }
         },
         '$route.query': {
