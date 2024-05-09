@@ -304,12 +304,14 @@ export default {
     },
     mainProducts() {
       const slideItems = [
-          {id: 21, title: 'Արծաթյա ականջող Արև', price: '3400', avatar: require('@/assets/images/image3.webp'), link: 'https://bemine.am/product/4'},
-          {id: 10, title: 'Վզնոց Աստղիկ', price: '7200', avatar: require('@/assets/images/image4.webp'), link:'https://bemine.am/product/3'},
+          {id: 21, title: 'Dubai jewelry 2023 կանացի զարդերի հավաքածուներ', price: '8000', avatar: require('@/assets/images/8.webp'), link: 'https://bemine.am/product/17'},
+          {id: 22, title: 'աշնանային ձմեռային զույգ կոշիկներ', price: '10000', avatar: require('@/assets/images/10.webp'), link: 'https://bemine.am/product/19'},
+
       ]
       const bannerItems = [
-        {id: 9, title: 'Ապարանջան Խաղող', price: '4900', avatar: require('@/assets/images/product_1.webp'), link:'https://bemine.am/product/5'},
-        {id: 24, title: 'Նուրբ 925 հարգի արծաթե ապարանջան', price: '6500', avatar: require('@/assets/images/product_2.webp'), link:'https://bemine.am/product/2'},
+        {id: 9, title: '\n' +
+              'Կորեական նորաձևության քառակուսի ցիրկոնիայով կախազարդ վզնոց', price: '8500', avatar: require('@/assets/images/9.webp'), link:'https://bemine.am/product/18'},
+        {id: 24, title: 'Եռաշերտ կանացի կախովի ականջօղեր', price: '5500', avatar: require('@/assets/images/6.webp'), link:'https://bemine.am/product/23'},
       ]
       return {
         bannerItems: bannerItems,
@@ -318,8 +320,8 @@ export default {
     },
     bottomSlideProducts() {
       return [
-        {id: 22, title: 'Ականջող Վինտաժ', price: '4500', avatar: require('@/assets/images/product_3.webp'), link: 'https://bemine.am/product/6'},
-        {id: 15, title: 'Տոնական արծաթե ականջօղեր', price: '4500', avatar: require('@/assets/images/product_4.webp'), link: 'https://bemine.am/product/1'},
+        {id: 22, title: 'աշնանային ձմեռային զույգ կոշիկներ', price: '10000', avatar: require('@/assets/images/10.webp'), link: 'https://bemine.am/product/19'},
+        {id: 15, title: 'Կանացի բնական կաշվից սպորտային կոշիկներ', price: '9000', avatar: require('@/assets/images/12.webp'), link: 'https://bemine.am/product/21'},
       ]
     },
     dealDayProducts() {

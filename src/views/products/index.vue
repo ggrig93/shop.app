@@ -148,7 +148,7 @@ export default {
         return {
             layoutMode: true,
             by_price: 'asc',
-            per_page: 6,
+            per_page: 12,
             showFilters: false,
             showSort: false,
             width: 0,
