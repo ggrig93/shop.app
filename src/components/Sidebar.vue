@@ -22,14 +22,19 @@
                 </h4>
                 <div class="price-slider-wrapper">
                     <div class="price-input">
-                        <input id="min" :placeholder="$t('min_price')" :value="filters.minPrice"
-                               @change="updateMinPrice($event)"
+                        <input
+                            v-model="filters.minPrice"
+                            id="min" :placeholder="$t('min_price')"
+                            @change="filterProduct"
                         />
                     </div>
                     <div class="line">-</div>
                     <div class="price-input">
-                        <input id="max" :placeholder="$t('max_price')" :value="filters.maxPrice"
-                               @change="updateMaxPrice($event)"
+                        <input
+                            v-model="filters.maxPrice"
+                            id="max"
+                            :placeholder="$t('max_price')"
+                            @change="filterProduct"
                         />
                     </div>
                 </div>
@@ -265,14 +270,6 @@ export default {
             window.history.replaceState(null, null, '?' + params);
             this.$store.dispatch('getFilteredProducts', data)
         },
-        updateMinPrice(event) {
-            this.filterProduct()
-            this.filters.minPrice = event.target.value
-        },
-        updateMaxPrice(event) {
-            this.filterProduct()
-            this.filters.maxPrice = event.target.value
-        }
     }
 }
 </script>
