@@ -115,8 +115,8 @@
                                 >
                                     <span class="total-title">{{ $t('total_cost') }} </span>
                                     <span class="total-price">
-                    <span class="Price-amount"> {{ cartTotalPrice }} {{ $t('currency') }}</span>
-                  </span>
+                                    <span class="Price-amount"> {{ cartTotalPrice }} {{settings ? settings.currency_value : null }}</span>
+                                  </span>
                                 </div>
                                 <div v-else class="cart-empty">
                                     {{ $t('cart_empty') }}

@@ -29,8 +29,8 @@
                           <div class="price">
                             {{ $t('newPrice') }}
                             <span class="number-price" :style="{'color': design ? design.main_color : 'black'}">
-														{{product.price}} {{$t('currency')}}
-													</span>
+								{{product.price}} {{design ? design.currency_value : null }}
+                            </span>
                           </div>
                           <a
                               :href="product.link"

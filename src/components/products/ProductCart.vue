@@ -1,45 +1,47 @@
 <template>
-    <router-link :to="{name: 'Product', params: {id : product.id}}">
-        <div class="product-inner equal-element" v-if="product" :style="styleObject">
-            <template v-if="layout === 'grid'">
-                <div class="product-top">
-                    <div v-if="product.new" class="flash">
+    <div class="product-inner equal-element" v-if="product" :style="styleObject">
+        <template v-if="layout === 'grid'">
+            <div class="product-top">
+                <div v-if="product.new" class="flash">
                   <span class="onnew">
                     <span class="text">
                         {{ $t('new') }}
                     </span>
                   </span>
-                    </div>
                 </div>
-                <div class="product-thumb">
-                    <div class="thumb-inner">
+            </div>
+            <div class="product-thumb">
+                <div class="thumb-inner">
+                    <router-link :to="{name: 'Product', params: {id : product.id}}">
                         <img :src="product.avatar" alt="img">
-                        <div class="thumb-group">
-                            <div class="yith-wcwl-add-to-wishlist">
-                                <div class="yith-wcwl-add-button">
-                                    <div
-                                        v-if="$route.name === 'WishList'"
-                                        class="product-remove"
-                                        :style="styleObject">
+                    </router-link>
+                    <div class="thumb-group">
+                        <div class="yith-wcwl-add-to-wishlist">
+                            <div class="yith-wcwl-add-button">
+                                <div
+                                    v-if="$route.name === 'WishList'"
+                                    class="product-remove"
+                                    :style="styleObject">
                                       <span @click="showDeletePopup = product.id" style="cursor: pointer;">
                                         <i aria-hidden="true" class="fa fa-trash-o"></i>
                                       </span>
-                                    </div>
-                                    <a
-                                        v-else
-                                        style="cursor: pointer;"
-                                        :class="{ 'active-heart': hasInWishlist(product.id) }"
-                                        @click.stop="addToWishList(product)"
-                                    >{{ $t('like') }}</a>
                                 </div>
+                                <a
+                                    v-else
+                                    style="cursor: pointer;"
+                                    :class="{ 'active-heart': hasInWishlist(product.id) }"
+                                    @click.stop="addToWishList(product)"
+                                >{{ $t('like') }}</a>
                             </div>
-                            <a class="button quick-wiew-button" @click.stop="openModal(product)" style="cursor: pointer;">
-                                {{ $t('quick_view') }}
-                            </a>
                         </div>
+                        <a class="button quick-wiew-button" @click.stop="openModal(product)" style="cursor: pointer;">
+                            {{ $t('quick_view') }}
+                        </a>
                     </div>
                 </div>
-                <div class="product-info">
+            </div>
+            <div class="product-info">
+                <router-link :to="{name: 'Product', params: {id : product.id}}">
                     <div v-if="endDate" class="product-count-down" :style="styleObject">
                         <Countdown :end="endDate"/>
                     </div>
@@ -72,16 +74,15 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </template>
-            <DeletePopup
-                v-if="showDeletePopup"
-                @confirm="removeHandler"
-                @close="closeModal"
-            />
-        </div>
-    </router-link>
-
+                </router-link>
+            </div>
+        </template>
+        <DeletePopup
+            v-if="showDeletePopup"
+            @confirm="removeHandler"
+            @close="closeModal"
+        />
+    </div>
 </template>
 
 <script>
