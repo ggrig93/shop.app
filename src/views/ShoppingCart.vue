@@ -51,7 +51,7 @@
 													<span class="woocommerce-Price-amount amount">
 														{{prod.price}}
                             <span class="woocommerce-Price-currencySymbol">
-															{{ $t('currency') }}
+															{{settings ? settings.currency_value : null }}
 														</span>
 													</span>
                       </td>
@@ -65,7 +65,7 @@
 <!--                        </div>-->
                         <div class="order-total">
                           <span class="title">{{ $t('total_cost') }}</span>
-                          <span class="total-price"> {{cartTotalPrice}} {{ $t('currency') }}</span>
+                          <span class="total-price"> {{cartTotalPrice}} {{settings ? settings.currency_value : null }}</span>
                         </div>
                       </td>
                     </tr>

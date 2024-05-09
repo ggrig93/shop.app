@@ -55,7 +55,7 @@ const en = {
         address: 'Address',
         postal_code: 'Postal code',
         total_cost: 'Total Cost',
-        currency: '$',
+        currency: '֏',
         piece: 'Piece',
         necessarily: 'Necessarily',
         incorrect_format: 'Incorrect format',

@@ -55,7 +55,7 @@ const ru = {
         address: 'Адрес',
         postal_code: 'Почтовый Индекс',
         total_cost: 'Общая Стоимость',
-        currency: '₽',
+        currency: '֏',
         piece: 'Кусок',
         necessarily: 'Обязательно',
         incorrect_format: 'Неправильный формат',

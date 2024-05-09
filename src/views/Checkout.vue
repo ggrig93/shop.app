@@ -95,7 +95,7 @@
                       <span class="attributes-select attributes-color">{{product.color.name}},</span>
                       <span class="attributes-select attributes-size">{{product.size.name}}</span>
                       <div class="price">
-                        {{product.price}} {{ $t('currency') }}
+                        {{product.price}} {{design ? design.currency_value : null }}
                         <span class="count">({{product.count}} {{ $t('piece') }})</span>
                       </div>
                     </div>
@@ -106,8 +106,8 @@
 										{{ $t('total_cost') }}
 									</span>
                   <span class="total-price">
-										{{cartTotalPrice}} {{ $t('currency') }}
-									</span>
+                      {{cartTotalPrice}} {{design ? design.currency_value : null }}
+                  </span>
                 </div>
               </div>
             </div>
