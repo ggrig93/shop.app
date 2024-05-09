@@ -23,12 +23,14 @@
                 <div class="price-slider-wrapper">
                     <div class="price-input">
                         <input id="min" :placeholder="$t('min_price')" :value="filters.minPrice"
-                               @change="filters.minPrice = $event.target.value"/>
+                               @change="updateMinPrice($event)"
+                        />
                     </div>
                     <div class="line">-</div>
                     <div class="price-input">
                         <input id="max" :placeholder="$t('max_price')" :value="filters.maxPrice"
-                               @change="filters.maxPrice = $event.target.value"/>
+                               @change="updateMaxPrice($event)"
+                        />
                     </div>
                 </div>
             </div>
@@ -41,6 +43,7 @@
                             :label="brand.name"
                             :input-value="brand.id"
                             v-model="filters.selectedBrands"
+                            @change.native="filterProduct"
                         />
                     </li>
                 </ul>
@@ -54,6 +57,7 @@
                             :label="size.name"
                             :input-value="size.id"
                             v-model="filters.selectedSizes"
+                            @change.native="filterProduct"
                         />
                     </li>
                 </ul>
@@ -67,9 +71,9 @@
                        :key="color.id"
                        :style="{backgroundColor: color.code}"
                        :class="{
-               active: filters.selectedColors.includes(color.id),
-               'black-check': color.name === 'White'
-             }"
+                           active: filters.selectedColors.includes(color.id),
+                           'black-check': color.name === 'White'
+                         }"
                        class="pointer"
                        @click="selectColor(color)"
                     ></a>
@@ -227,6 +231,7 @@ export default {
             return typeof val === 'string' ? val.split(",").map(item => parseInt(item)) : val
         },
         selectColor(color) {
+            this.filterProduct()
             if (this.filters.selectedColors.includes(color.id)) {
                 this.filters.selectedColors = this.filters.selectedColors.filter(item => item !== color.id)
             } else {
@@ -234,6 +239,7 @@ export default {
             }
         },
         selectTag(tag) {
+            this.filterProduct()
             if (this.filters.selectedTags.includes(tag.id)) {
                 this.filters.selectedTags = this.filters.selectedTags.filter(item => item !== tag.id)
             } else {
@@ -258,6 +264,14 @@ export default {
             const params = new URLSearchParams(queryData).toString();
             window.history.replaceState(null, null, '?' + params);
             this.$store.dispatch('getFilteredProducts', data)
+        },
+        updateMinPrice(event) {
+            this.filterProduct()
+            this.filters.minPrice = event.target.value
+        },
+        updateMaxPrice(event) {
+            this.filterProduct()
+            this.filters.maxPrice = event.target.value
         }
     }
 }
