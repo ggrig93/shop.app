@@ -29,6 +29,7 @@
                                     class="chosen-select"
                                     @change="sortByPrice"
                                 >
+                                    <option selected value="">{{ $t('choose') }}</option>
                                     <option value="asc">{{ $t('asc') }}</option>
                                     <option value="desc">{{ $t('desc') }}</option>
                                 </select>
@@ -79,6 +80,7 @@
                             class="chosen-select"
                             @change="sortByPrice"
                         >
+                            <option selected value="">{{ $t('choose') }}</option>
                             <option value="asc">{{ $t('asc') }}</option>
                             <option value="desc">{{ $t('desc') }}</option>
                         </select>
@@ -127,6 +129,7 @@
                         :price="price"
                         :per_page="per_page"
                         :by_price="by_price"
+                        :select_page="select_page"
                     />
                 </div>
             </div>
@@ -147,11 +150,12 @@ export default {
     data() {
         return {
             layoutMode: true,
-            by_price: 'asc',
+            by_price: '',
             per_page: 12,
             showFilters: false,
             showSort: false,
             width: 0,
+            select_page: 0,
             categoryIds: [],
         }
     },
@@ -245,6 +249,7 @@ export default {
             this.setByPrice(this.by_price)
         },
         onPageChange(page) {
+            this.select_page = page
             this.setPage(page)
         },
         sortPerPage() {

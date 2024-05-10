@@ -8,7 +8,7 @@ const ru = {
         offers: 'СЕГОДНЯШНИЕ ПРЕДЛОЖЕНИЯ',
         bestSeller: 'БЕСТСЕЛЛЕР',
         news: 'НОВИНКИ',
-        bestSellers: 'Лучшая продажа',
+        bestSellers: 'САМЫЕ ПОПУЛЯРНЫЕ',
         freeDeliveryText: 'Бесплатная доставка по территории Республики Армения для всех заказов на сумму 5000 драмов и выше.',
         quantity: 'По количеству',
         products_page_6: '6 штук',
@@ -87,6 +87,7 @@ const ru = {
         nothing_was_found_result_query: 'В результате запроса ничего не найдено',
         there_are_still_products: 'Раздел пуст',
         view_all: 'Посмотреть все',
+        choose: 'Выбирать',
 }
 
 export {ru}

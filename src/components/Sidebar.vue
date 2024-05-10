@@ -25,7 +25,7 @@
                         <input
                             v-model="filters.minPrice"
                             id="min" :placeholder="$t('min_price')"
-                            @change="filterProduct"
+                            @change="changeFilter('minPrice')"
                         />
                     </div>
                     <div class="line">-</div>
@@ -34,7 +34,7 @@
                             v-model="filters.maxPrice"
                             id="max"
                             :placeholder="$t('max_price')"
-                            @change="filterProduct"
+                            @change="changeFilter('maxPrice')"
                         />
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                             :label="brand.name"
                             :input-value="brand.id"
                             v-model="filters.selectedBrands"
-                            @change.native="filterProduct"
+                            @change.native="changeFilter('brands')"
                         />
                     </li>
                 </ul>
@@ -62,7 +62,7 @@
                             :label="size.name"
                             :input-value="size.id"
                             v-model="filters.selectedSizes"
-                            @change.native="filterProduct"
+                            @change.native="changeFilter('sizes')"
                         />
                     </li>
                 </ul>
@@ -142,6 +142,9 @@ export default {
         },
         by_price: {
             default: () => null
+        },
+        select_page: {
+            default: () => null
         }
     },
     data() {
@@ -156,12 +159,22 @@ export default {
                 maxPrice: "",
             },
             selectedCategories: [],
+            selectedPage: null,
         }
     },
     computed: {
         ...mapGetters(["settings", "search", "page", "category", "otherFilters", "categoryBrands", 'categorySizes']),
     },
     watch: {
+        select_page: {
+            deep: true,
+            immediate: true,
+            handler(val) {
+                this.selectedPage = val
+                this.filters.selectedCategories = this.queryToArray(this.$route.query['filter[categories]'])
+                this.filterProduct()
+            }
+        },
         categories: {
             deep: true,
             handler() {
@@ -171,12 +184,14 @@ export default {
         per_page: {
             deep: true,
             handler() {
+                this.selectedPage = 1
                 this.filterProduct()
             }
         },
         by_price: {
             deep: true,
             handler() {
+                this.selectedPage = 1
                 this.filterProduct()
             }
         },
@@ -221,10 +236,6 @@ export default {
             }
         }
     },
-    created() {
-        this.filterProduct()
-        this.setPage(1)
-    },
     methods: {
         ...mapMutations(["setSearch", "setByPrice", "setPage", "setPerPage", 'setCategoryBrands', 'setCategorySizes']),
         checkSelectedCategories(categoryId) {
@@ -241,33 +252,56 @@ export default {
             }
         },
         getCategoryBrandsAndSizes() {
+            this.selectedPage = 1
             if (!this.selectedCategories.length) {
                 this.filters.selectedCategories = []
                 this.filters.selectedCategories.push(this.categories[0].parent_id)
+                this.selectedPage = null
             }
             this.$store.dispatch('getCategoryBrands', this.selectedCategories.length ? this.selectedCategories : this.filters.selectedCategories)
             this.$store.dispatch('getCategorySizes', this.selectedCategories.length ? this.selectedCategories : this.filters.selectedCategories)
             this.filterProduct()
         },
 
+        changeFilter(filterType) {
+            this.selectedPage = 1;
+            if (
+                (filterType === 'minPrice' && !this.filters.minPrice) ||
+                (filterType === 'maxPrice' && !this.filters.maxPrice) ||
+                (filterType === 'brands' && !this.filters.selectedBrands.length) ||
+                (filterType === 'sizes' && !this.filters.selectedSizes.length)
+            ) {
+                this.selectedPage = null;
+            }
+            this.filterProduct();
+        },
+
         queryToArray(val) {
             return typeof val === 'string' ? val.split(",").map(item => parseInt(item)) : val
         },
         selectColor(color) {
-            this.filterProduct()
+            this.selectedPage = 1
+            if (!this.filters.selectedColors.length) {
+                this.selectedPage = null
+            }
             if (this.filters.selectedColors.includes(color.id)) {
                 this.filters.selectedColors = this.filters.selectedColors.filter(item => item !== color.id)
             } else {
                 this.filters.selectedColors.push(color.id)
             }
+            this.filterProduct()
         },
         selectTag(tag) {
-            this.filterProduct()
+            this.selectedPage = 1
+            if (!this.filters.selectedTags.length) {
+                this.selectedPage = null
+            }
             if (this.filters.selectedTags.includes(tag.id)) {
                 this.filters.selectedTags = this.filters.selectedTags.filter(item => item !== tag.id)
             } else {
                 this.filters.selectedTags.push(tag.id)
             }
+            this.filterProduct()
         },
         filterProduct() {
             const data = {
@@ -281,7 +315,7 @@ export default {
                 'filter[min_price]': this.filters.minPrice,
                 'filter[max_price]': this.filters.maxPrice,
                 search: this.search,
-                'filter[page]': this.page,
+                'filter[page]': this.selectedPage ?  this.selectedPage : this.page,
             }
             const queryData = {...data}
             const params = new URLSearchParams(queryData).toString();

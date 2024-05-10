@@ -6,9 +6,9 @@ const am = {
         newPrice: 'Նոր գին',
         buy: 'Գնել',
         offers: 'ՕՐՎԱ ԱՌԱՋԱՐԿՆԵՐԸ',
-        bestSeller: 'ԲԵՍԹՍԵԼԵՐ',
+        bestSeller: 'ԼԱՎԱԳՈՒՅՆ ՎԱՃԱՌՔ',
         news: 'ՆՈՐՈՒՅԹՆԵՐ',
-        bestSellers: 'Լավագույն վաճառք',
+        bestSellers: 'ԲԱՐՁՐ ԳՆԱՀԱՏԱԿԱՆՈՎ',
         freeDeliveryText: 'Անվճար առաքում ՀՀ տարածքում՝ 5000 դրամ և ավել բոլոր պատվերների համար։',
         quantity: 'Ըստ քանակի',
         products_page_6: '6 հատ',
@@ -87,6 +87,7 @@ const am = {
         nothing_was_found_result_query: 'Հարցման արդյունքում ոչինչ չի գտնվել',
         there_are_still_products: 'Բաժինը դատարկ է',
         view_all: 'Դիտել բոլորը',
+        choose: 'Ընտրել',
 }
 
 export {am}

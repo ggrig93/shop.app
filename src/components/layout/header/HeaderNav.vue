@@ -7,8 +7,8 @@
                         <div v-for="item in categories" :key="item.id" class="block-title">
                             <a
                                 class="ysera-menu-item-title ysera-menu-item-title-before"
-                                @mouseenter="openCategories = item.id && sub_categories.length"
-                                :class="{ 'hovered': openCategories === item.id }"
+                                @mouseenter="change(item.id)"
+                                :class="{ 'hovered': openCategories && isOpenAfterDropdown === item.id }"
                                 :title="item.name"
 
                             >
@@ -80,6 +80,7 @@ export default {
     data() {
         return {
             sub_categories: [],
+            isOpenAfterDropdown: null,
         }
     },
     mixins: [headerMixin],
@@ -96,6 +97,10 @@ export default {
     },
     methods: {
         ...mapMutations(["setCategory"]),
+        change(id) {
+            this.openCategories = id && this.sub_categories.length
+            this.isOpenAfterDropdown = id
+        },
         selectCategory(id) {
             this.setCategory([id])
             if (id != this.$route.query['filter[categories]']) {
