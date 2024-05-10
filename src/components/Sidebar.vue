@@ -244,9 +244,9 @@ export default {
 
                 if (categoryFound) {
                     if (Array.isArray(categoryId)) {
-                        this.filters.checkedCategories = categoryId;
+                        this.selectedCategories = categoryId;
                     } else {
-                        this.filters.checkedCategories.push(categoryId);
+                        this.selectedCategories.push(categoryId);
                     }
                 }
             }
