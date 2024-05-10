@@ -393,4 +393,19 @@ export default {
   background: #000 !important;
   border-color: #000 !important;
 }
+.slider-item .title-big {
+    max-width: 100%;
+}
+.slider-item.style9 .slider-inner .slider-infor {
+    padding-right: 50px;
+}
+
+@media screen and (max-width: 1400px) {
+    .slider-item.style9 .slider-inner .slider-infor {
+        padding-bottom: 100px;
+    }
+    .item-banner.style7 .banner-content {
+        padding: 115px;
+    }
+}
 </style>

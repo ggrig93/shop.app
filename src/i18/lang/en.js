@@ -8,7 +8,7 @@ const en = {
         offers: "TODAY'S OFFERS",
         bestSeller: 'BESTSELLER',
         news: 'NEW PRODUCTS',
-        bestSellers: 'Best sale',
+        bestSellers: 'TOP RATED',
         freeDeliveryText: 'Free shipping on the territory of the Republic of Armenia for all orders of  5000 AMD or above.',
         quantity: 'By quantity',
         products_page_6: '6 pieces',
