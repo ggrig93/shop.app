@@ -87,6 +87,7 @@ const ru = {
         nothing_was_found_result_query: 'В результате запроса ничего не найдено',
         there_are_still_products: 'Раздел пуст',
         view_all: 'Посмотреть все',
+        choose: 'Выбирать',
 }
 
 export {ru}

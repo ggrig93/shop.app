@@ -87,6 +87,7 @@ const am = {
         nothing_was_found_result_query: 'Հարցման արդյունքում ոչինչ չի գտնվել',
         there_are_still_products: 'Բաժինը դատարկ է',
         view_all: 'Դիտել բոլորը',
+        choose: 'Ընտրել',
 }
 
 export {am}

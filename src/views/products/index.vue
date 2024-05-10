@@ -29,7 +29,7 @@
                                     class="chosen-select"
                                     @change="sortByPrice"
                                 >
-                                    <option selected value="">{{ $t('selectPrice') }}</option>
+                                    <option selected value="">{{ $t('choose') }}</option>
                                     <option value="asc">{{ $t('asc') }}</option>
                                     <option value="desc">{{ $t('desc') }}</option>
                                 </select>
@@ -80,6 +80,7 @@
                             class="chosen-select"
                             @change="sortByPrice"
                         >
+                            <option selected value="">{{ $t('choose') }}</option>
                             <option value="asc">{{ $t('asc') }}</option>
                             <option value="desc">{{ $t('desc') }}</option>
                         </select>

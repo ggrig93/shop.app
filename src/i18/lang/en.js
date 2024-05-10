@@ -87,5 +87,6 @@ const en = {
         nothing_was_found_result_query: 'Nothing was found as a result of the query',
         there_are_still_products: 'The section is empty',
         view_all: 'View all',
+        choose: 'Choose',
 }
 export {en}
