@@ -40,7 +40,7 @@ const routes = [
     component: () => import('@/views/products')
   },
   {
-    path: '/product/:id',
+    path: '/product/:slug',
     name: 'Product',
     component: () => import('@/views/products/_productId'),
     props: true

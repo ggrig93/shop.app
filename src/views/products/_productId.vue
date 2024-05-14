@@ -206,7 +206,7 @@ import {mapGetters} from "vuex";
 
 export default {
     name: "Product",
-    props: ['id'],
+    props: ['slug'],
     mixins: [productMixin],
     components: {Breadcrumbs, VueSlickCarousel, carousel, InnerImageZoom, ProductCart, Description, Information},
     data() {
@@ -278,7 +278,7 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch('getProduct', this.id)
+        this.$store.dispatch('getProduct', this.slug)
     },
     methods: {
         activeColor(color) {
