@@ -12,7 +12,7 @@
             </div>
             <div class="product-thumb">
                 <div class="thumb-inner">
-                    <router-link :to="{name: 'Product', params: {id : product.id}}">
+                    <router-link :to="{name: 'Product', params: {slug : product.slug}}">
                         <img :src="product.avatar" alt="img">
                     </router-link>
                     <div class="thumb-group">
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="product-info">
-                <router-link :to="{name: 'Product', params: {id : product.id}}">
+                <router-link :to="{name: 'Product', params: {slug : product.slug}}">
                     <div v-if="endDate" class="product-count-down" :style="styleObject">
                         <Countdown :end="endDate"/>
                     </div>
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <h5 class="product-name product_title">
-                            <router-link :to="{name: 'Product', params: {id : product.id}}">{{ product.title }}
+                            <router-link :to="{name: 'Product', params: {slug : product.slug}}">{{ product.title }}
                             </router-link>
                         </h5>
                         <div class="stars-rating">

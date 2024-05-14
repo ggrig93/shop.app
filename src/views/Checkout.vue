@@ -84,13 +84,13 @@
                       class="product-item-order"
                   >
                     <div class="product-thumb">
-                      <router-link :to="{name: 'Product', params: {id: product.id}}">
+                      <router-link :to="{name: 'Product', params: {slug: product.slug}}">
                         <img :src="product.avatar" alt="img">
                       </router-link>
                     </div>
                     <div class="product-order-inner">
                       <h5 class="product-name">
-                        <router-link :to="{name: 'Product', params: {id: product.id}}" class="title">{{product.title}}</router-link>
+                        <router-link :to="{name: 'Product', params: {slug: product.slug}}" class="title">{{product.title}}</router-link>
                       </h5>
                       <span class="attributes-select attributes-color">{{product.color.name}},</span>
                       <span class="attributes-select attributes-size">{{product.size.name}}</span>
