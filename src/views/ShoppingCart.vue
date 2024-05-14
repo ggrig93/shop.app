@@ -34,7 +34,7 @@
                         </a>
                       </td>
                       <td class="product-name" data-title="Product">
-                        <router-link :to="{name: 'Product', params: {id: prod.id}}" class="title">{{prod.title}}</router-link>
+                        <router-link :to="{name: 'Product', params: {slug: prod.slug}}" class="title">{{prod.title}}</router-link>
                         <span class="attributes-select attributes-color">{{prod.color.name}},</span>
                         <span class="attributes-select attributes-size">{{prod.size.name}}</span>
                       </td>

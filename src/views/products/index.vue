@@ -269,7 +269,7 @@ export default {
             }
         },
         productPage(prod) {
-            this.$router.push({name: 'Product', params: {id: prod.id}})
+            this.$router.push({name: 'Product', params: {slug: prod.slug}})
         },
     }
 }

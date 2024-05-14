@@ -304,14 +304,14 @@ export default {
     },
     mainProducts() {
       const slideItems = [
-          {id: 21, title: 'Dubai jewelry 2023 կանացի զարդերի հավաքածուներ', price: '8000', avatar: require('@/assets/images/8.webp'), link: 'https://bemine.am/product/17'},
-          {id: 22, title: 'աշնանային ձմեռային զույգ կոշիկներ', price: '10000', avatar: require('@/assets/images/10.webp'), link: 'https://bemine.am/product/19'},
+          {id: 21, title: 'Dubai jewelry 2023 կանացի զարդերի հավաքածուներ', price: '8000', avatar: require('@/assets/images/8.webp'), link: 'https://bemine.am/product/dubai-jewelry-2023-kanaci-zarderi-havaqatsvouner'},
+          {id: 22, title: 'աշնանային ձմեռային զույգ կոշիկներ', price: '10000', avatar: require('@/assets/images/10.webp'), link: 'https://bemine.am/product/ashnanayin-dzmerayin-zvouyg-kvoshikner'},
 
       ]
       const bannerItems = [
         {id: 9, title: '\n' +
-              'Կորեական նորաձևության քառակուսի ցիրկոնիայով կախազարդ վզնոց', price: '8500', avatar: require('@/assets/images/9.webp'), link:'https://bemine.am/product/18'},
-        {id: 24, title: 'Եռաշերտ կանացի կախովի ականջօղեր', price: '5500', avatar: require('@/assets/images/6.webp'), link:'https://bemine.am/product/23'},
+              'Կորեական նորաձևության քառակուսի ցիրկոնիայով կախազարդ վզնոց', price: '8500', avatar: require('@/assets/images/9.webp'), link:'https://bemine.am/product/kvoreakan-nvoradzevvouthyan-qarakvousi-cirkvoniayvov-kakhazard-vznvoc'},
+        {id: 24, title: 'Եռաշերտ կանացի կախովի ականջօղեր', price: '5500', avatar: require('@/assets/images/6.webp'), link:'https://bemine.am/product/erashert-kanaci-kakhvovi-akanjogher'},
       ]
       return {
         bannerItems: bannerItems,
@@ -320,8 +320,8 @@ export default {
     },
     bottomSlideProducts() {
       return [
-        {id: 22, title: 'աշնանային ձմեռային զույգ կոշիկներ', price: '10000', avatar: require('@/assets/images/10.webp'), link: 'https://bemine.am/product/19'},
-        {id: 15, title: 'Կանացի բնական կաշվից սպորտային կոշիկներ', price: '9000', avatar: require('@/assets/images/12.webp'), link: 'https://bemine.am/product/21'},
+        {id: 22, title: 'Quartz Wristwatch / MTP-V006D-1B2UDF', price: '8200', avatar: require('@/assets/images/watch.webp'), link: 'https://bemine.am/product/quartz-wristwatch-mtp-v006d-1b2udf'},
+        {id: 15, title: 'Կանացի բնական կաշվից սպորտային կոշիկներ', price: '9000', avatar: require('@/assets/images/12.webp'), link: 'https://bemine.am/product/kanaci-bnakan-kashvic-spvortayin-kvoshikner'},
       ]
     },
     dealDayProducts() {
@@ -401,13 +401,53 @@ export default {
 .slider-item.style9 .slider-inner .slider-infor {
     padding-right: 50px;
 }
+.slick-list {
+    margin: 0 !important;
+}
+.slider-item .title-big {
+    font-size: 26px;
+}
+.slider-item .price {
+    color: #ffffff;
+}
+.home-slider-banner .silider-wrapp {
+    height: 590px;
+}
+.home-slider {
+    height: 100%;
+}
+.home-slider div {
+    height: 100%;
+}
+.slider-item.style9 .slider-inner .slider-infor {
+    padding: 50px;
+}
+.slider-infor {
+    width: 100% !important;
+    height: auto !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+}
 
 @media screen and (max-width: 1400px) {
+    .home-slider-banner .silider-wrapp {
+        height: 490px;
+    }
     .slider-item.style9 .slider-inner .slider-infor {
         padding-bottom: 100px;
     }
     .item-banner.style7 .banner-content {
         padding: 115px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .slider-item.style9 .slider-inner .slider-infor {
+        padding: 30px;
+    }
+    .slider-infor {
+        transform: translate(-50%, -50%);
     }
 }
 </style>

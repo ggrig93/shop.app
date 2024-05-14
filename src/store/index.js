@@ -84,9 +84,9 @@ export default new Vuex.Store({
         },
     },
     actions: {
-        getProduct({state}, id) {
+        getProduct({state}, slug) {
             state.product = null
-            http.get('/product/' + id)
+            http.get('/product/by-slug/' + slug)
                 .then(res => state.product = res.data.data)
                 .catch(err => console.log(err))
         },
