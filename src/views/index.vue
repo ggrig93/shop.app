@@ -89,27 +89,6 @@
             </vue-slick-carousel>
           </div>
         </div>
-        <div
-            v-if="bottomSlideProducts && bottomSlideProducts.length"
-            class="banner-wrapp"
-        >
-          <div class="container">
-            <div class="row">
-              <div
-                  v-for="product in bottomSlideProducts"
-                  :key="product.id"
-                  class="col-lg-6 col-md-6 col-sm-6 col-xs-6 banner-wrapp-item">
-                <a :href="product.link">
-                  <banner img-class="style4" :backgroundImage="product.avatar">
-                    <div class="button btn-shop-now" :style="styleObject">
-                      {{$t('buy')}}
-                    </div>
-                  </banner>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="ysera-tabs  default rows-space-40">
           <div class="container">
             <div class="tab-head">
@@ -146,6 +125,28 @@
           </div>
 
         </div>
+        <div
+            v-if="bottomSlideProducts && bottomSlideProducts.length"
+            class="banner-wrapp"
+        >
+          <div class="container">
+            <div class="row">
+              <div
+                  v-for="product in bottomSlideProducts"
+                  :key="product.id"
+                  class="col-lg-6 col-md-6 col-sm-6 col-xs-6 banner-wrapp-item">
+                <a :href="product.link">
+                  <banner img-class="style4" :backgroundImage="product.avatar">
+                    <div class="button btn-shop-now" :style="styleObject">
+                      {{$t('buy')}}
+                    </div>
+                  </banner>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="ysera-iconbox-wrapp default" :style="{'background-color': design ? design.main_color : 'transparent'}">
           <div class="container">
             <div class="row">
@@ -405,7 +406,7 @@ export default {
     margin: 0 !important;
 }
 .slider-item .title-big {
-    font-size: 26px;
+    font-size: 18px;
 }
 .slider-item .price {
     color: #ffffff;
