@@ -151,11 +151,11 @@ export default {
         return {
             layoutMode: true,
             by_price: '',
-            per_page: 12,
+            per_page: 4,
             showFilters: false,
             showSort: false,
             width: 0,
-            select_page: 0,
+            select_page: null,
             categoryIds: [],
         }
     },
