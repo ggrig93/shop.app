@@ -155,7 +155,7 @@ export default {
             showFilters: false,
             showSort: false,
             width: 0,
-            select_page: 0,
+            select_page: null,
             categoryIds: [],
         }
     },

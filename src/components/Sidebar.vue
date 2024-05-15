@@ -168,10 +168,8 @@ export default {
     watch: {
         select_page: {
             deep: true,
-            immediate: true,
             handler(val) {
                 this.selectedPage = val
-                this.filters.selectedCategories = this.queryToArray(this.$route.query['filter[categories]'])
                 this.filterProduct()
             }
         },
@@ -236,8 +234,13 @@ export default {
             }
         }
     },
-    methods: {
+    mounted() {
+      this.filters.selectedCategories = this.queryToArray(this.$route.query['filter[categories]'])
+      this.filterProduct()
+    },
+  methods: {
         ...mapMutations(["setSearch", "setByPrice", "setPage", "setPerPage", 'setCategoryBrands', 'setCategorySizes']),
+
         checkSelectedCategories(categoryId) {
             if (this.categories.length) {
                 let categoryFound = this.categories.some(item => item.id == categoryId);
@@ -251,6 +254,7 @@ export default {
                 }
             }
         },
+
         getCategoryBrandsAndSizes() {
             this.selectedPage = 1
             if (!this.selectedCategories.length) {
@@ -279,6 +283,7 @@ export default {
         queryToArray(val) {
             return typeof val === 'string' ? val.split(",").map(item => parseInt(item)) : val
         },
+
         selectColor(color) {
             this.selectedPage = 1
             if (!this.filters.selectedColors.length) {
@@ -291,6 +296,7 @@ export default {
             }
             this.filterProduct()
         },
+
         selectTag(tag) {
             this.selectedPage = 1
             if (!this.filters.selectedTags.length) {
@@ -303,6 +309,7 @@ export default {
             }
             this.filterProduct()
         },
+
         filterProduct() {
             const data = {
                 'filter[categories]': this.selectedCategories.length ? this.selectedCategories : this.filters.selectedCategories,
