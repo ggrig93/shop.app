@@ -26,17 +26,12 @@
                           <h3 class="title-big custom-title">
                             {{product.title}}
                           </h3>
-                          <div class="price">
-                            {{ $t('newPrice') }}
-                            <span class="number-price" :style="{'color': design ? design.main_color : 'black'}">
-								{{product.price}} {{design ? design.currency_value : null }}
-                            </span>
-                          </div>
                           <a
-                              :href="product.link"
                               class="button btn-shop-the-look bgroud-style"
-                              :style="styleObject">
-                            {{$t('buy')}}
+                              :style="styleObject"
+                              @click="viewProductPage(product.categoryId)"
+                          >
+                            {{ $t('sale') }}
                           </a>
                         </div>
                       </div>
@@ -56,10 +51,10 @@
                     class="col-xs-6 col-lg-12"
                 >
                   <a
-                      :href="product.link"
                       class="button btn-lets-do-it"
-                  :style="styleObject">
-                    {{$t('buy')}}
+                      @click="viewProductPage(product.categoryId)"
+                      :style="styleObject">
+                    {{ $t('sale') }}
                   </a>
                 </banner>
               </div>
@@ -135,10 +130,10 @@
                   v-for="product in bottomSlideProducts"
                   :key="product.id"
                   class="col-lg-6 col-md-6 col-sm-6 col-xs-6 banner-wrapp-item">
-                <a :href="product.link">
+                <a @click="viewProductPage(product.categoryId)">
                   <banner img-class="style4" :backgroundImage="product.avatar">
                     <div class="button btn-shop-now" :style="styleObject">
-                      {{$t('buy')}}
+                      {{ $t('sale') }}
                     </div>
                   </banner>
                 </a>
@@ -305,14 +300,27 @@ export default {
     },
     mainProducts() {
       const slideItems = [
-          {id: 21, title: 'Dubai jewelry 2023 կանացի զարդերի հավաքածուներ', price: '8000', avatar: require('@/assets/images/8.webp'), link: 'https://bemine.am/product/dubai-jewelry-2023-kanaci-zarderi-havaqatsvouner'},
-          {id: 22, title: 'աշնանային ձմեռային զույգ կոշիկներ', price: '10000', avatar: require('@/assets/images/10.webp'), link: 'https://bemine.am/product/ashnanayin-dzmerayin-zvouyg-kvoshikner'},
+          {
+            categoryId: 9,
+            title: this.$t('assortment_watches'),
+            avatar: require('@/assets/images/watch.png'),
+          },
+          {
+            categoryId: 2,
+            title: this.$t('assortment_jewelry'),
+            avatar: require('@/assets/images/10.jpg'),
+          },
 
       ]
       const bannerItems = [
-        {id: 9, title: '\n' +
-              'Կորեական նորաձևության քառակուսի ցիրկոնիայով կախազարդ վզնոց', price: '8500', avatar: require('@/assets/images/9.webp'), link:'https://bemine.am/product/kvoreakan-nvoradzevvouthyan-qarakvousi-cirkvoniayvov-kakhazard-vznvoc'},
-        {id: 24, title: 'Եռաշերտ կանացի կախովի ականջօղեր', price: '5500', avatar: require('@/assets/images/6.webp'), link:'https://bemine.am/product/erashert-kanaci-kakhvovi-akanjogher'},
+        {
+          categoryId: 2,
+          avatar: require('@/assets/images/6.jpg')
+        },
+        {
+          categoryId: 2,
+          avatar: require('@/assets/images/9.webp')
+        },
       ]
       return {
         bannerItems: bannerItems,
@@ -321,8 +329,14 @@ export default {
     },
     bottomSlideProducts() {
       return [
-        {id: 22, title: 'Quartz Wristwatch / MTP-V006D-1B2UDF', price: '8200', avatar: require('@/assets/images/watch.webp'), link: 'https://bemine.am/product/quartz-wristwatch-mtp-v006d-1b2udf'},
-        {id: 15, title: 'Կանացի բնական կաշվից սպորտային կոշիկներ', price: '9000', avatar: require('@/assets/images/12.webp'), link: 'https://bemine.am/product/kanaci-bnakan-kashvic-spvortayin-kvoshikner'},
+        {
+            categoryId: 9,
+            avatar: require('@/assets/images/istockphoto-533714204-612x612.jpg')
+        },
+        {
+            categoryId: 13,
+            avatar: require('@/assets/images/womens_sneakers.webp')
+        },
       ]
     },
     dealDayProducts() {
@@ -343,22 +357,35 @@ export default {
     this.$store.dispatch('getDealDayProducts')
     this.$store.dispatch('getBestsellers')
   },
+  methods: {
+    viewProductPage(id) {
+      this.$router.replace({name: 'Products', query: {'filter[categories]': [id]}})
+    }
+  }
 }
 </script>
 
 <style>
+.item-banner .banner-content > .button {
+  padding: 0 20px;
+}
+.mainProducts_wrap > .banner:last-child {
+  display: none;
+}
+.slider-item .price .number-price {
+  font-size: 18px !important;
+}
 .instagram .slick-slide {
   padding: 0;
 }
 .custom-title {
   color: #FFFFFF;
-  min-height: 82px;
-  max-height: 82px;
-  padding-top: 44px;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-all;
   white-space: nowrap;
+  margin: 0 0 20px;
+  font-size: 16px !important;
 }
 .free-title {
   text-transform: uppercase!important;
@@ -390,6 +417,7 @@ export default {
 .slider-item .slider-infor .button{
   background: var(--bg-color) !important;
   border: 2px solid var(--bg-color) !important;
+  padding: 0 20px;
 }
 .item-banner .button:hover{
   color: #fff !important;
@@ -410,9 +438,13 @@ export default {
 }
 .slider-item .price {
     color: #ffffff;
+   font-size: 16px !important;
+}
+.home-slider-banner {
+  margin-bottom: 10px;
 }
 .home-slider-banner .silider-wrapp {
-    height: 590px;
+    height: 295px;
 }
 .home-slider {
     height: 100%;
@@ -421,7 +453,7 @@ export default {
     height: 100%;
 }
 .slider-item.style9 .slider-inner .slider-infor {
-    padding: 50px;
+    padding: 20px;
 }
 .slider-infor {
     width: 100% !important;
@@ -434,7 +466,7 @@ export default {
 
 @media screen and (max-width: 1400px) {
     .home-slider-banner .silider-wrapp {
-        height: 490px;
+        height: 244px;
     }
     .slider-item.style9 .slider-inner .slider-infor {
         padding-bottom: 100px;
@@ -442,6 +474,11 @@ export default {
     .item-banner.style7 .banner-content {
         padding: 115px;
     }
+}
+@media screen and (max-width: 1200px) {
+  .mainProducts_wrap > .banner:last-child {
+    display: block;
+  }
 }
 @media screen and (max-width: 768px) {
     .slider-item.style9 .slider-inner .slider-infor {

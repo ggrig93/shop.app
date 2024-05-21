@@ -67,7 +67,7 @@ const am = {
         buy_now: 'Գնել հիմա',
         continue_shopping: 'Շարունակել գնումները',
         to_order: 'Պատվիրել',
-        shopping_cart: 'Գնալ զամբյուղ',
+        shopping_cart: 'Զամբյուղ',
         cart_empty: 'Զամբյուղը դատարկ է',
         like: 'Հավանել',
         new: 'Նոր',
@@ -88,6 +88,9 @@ const am = {
         there_are_still_products: 'Բաժինը դատարկ է',
         view_all: 'Դիտել բոլորը',
         choose: 'Ընտրել',
+        assortment_watches: 'Նորավոճ ժամացույցներ',
+        assortment_jewelry: 'Նորավոճ զարդեր',
+        sale: 'Սկսել shopping',
 }
 
 export {am}

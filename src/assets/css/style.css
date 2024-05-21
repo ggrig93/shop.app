@@ -710,7 +710,7 @@ table tr:last-child td, table tr:last-child th {
 
 /*header-style-1*/
 .header .main-header {
-	padding: 30px 0;
+	padding: 15px 0;
 }
 .social-header, .header-language {
 	display: inline-block;
@@ -3651,7 +3651,7 @@ ul.list-products {
 	padding-top: 9px;
 }
 .ysera-tabs .tab-head {
-	margin-bottom: 55px;
+	margin-bottom: 30px;
 }
 .ysera-tabs .tab-link {
 	padding: 0;

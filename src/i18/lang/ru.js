@@ -67,7 +67,7 @@ const ru = {
         buy_now: 'Купить сейчас',
         continue_shopping: 'Продолжить покупки',
         to_order: 'Заказать',
-        shopping_cart: 'Перейдите к корзине покупок',
+        shopping_cart: 'Корзина',
         cart_empty: 'Корзина пуста',
         like: 'нравиться',
         new: 'Новый',
@@ -88,6 +88,9 @@ const ru = {
         there_are_still_products: 'Раздел пуст',
         view_all: 'Посмотреть все',
         choose: 'Выбирать',
+        assortment_watches: 'Стильные часы',
+        assortment_jewelry: 'Стильные украшения',
+        sale: 'Начать покупки',
 }
 
 export {ru}
