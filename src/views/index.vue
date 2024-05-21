@@ -130,7 +130,7 @@
                   v-for="product in bottomSlideProducts"
                   :key="product.id"
                   class="col-lg-6 col-md-6 col-sm-6 col-xs-6 banner-wrapp-item">
-                <a :href="product.link">
+                <a @click="viewProductPage(product.categoryId)">
                   <banner img-class="style4" :backgroundImage="product.avatar">
                     <div class="button btn-shop-now" :style="styleObject">
                       {{ $t('sale') }}
@@ -329,8 +329,14 @@ export default {
     },
     bottomSlideProducts() {
       return [
-        {id: 22, title: 'Quartz Wristwatch / MTP-V006D-1B2UDF', price: '8200', avatar: require('@/assets/images/watch.webp'), link: 'https://bemine.am/product/quartz-wristwatch-mtp-v006d-1b2udf'},
-        {id: 15, title: 'Կանացի բնական կաշվից սպորտային կոշիկներ', price: '9000', avatar: require('@/assets/images/12.webp'), link: 'https://bemine.am/product/kanaci-bnakan-kashvic-spvortayin-kvoshikner'},
+        {
+            categoryId: 9,
+            avatar: require('@/assets/images/istockphoto-533714204-612x612.jpg')
+        },
+        {
+            categoryId: 13,
+            avatar: require('@/assets/images/womens_sneakers.webp')
+        },
       ]
     },
     dealDayProducts() {
