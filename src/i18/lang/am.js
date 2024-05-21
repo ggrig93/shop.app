@@ -90,7 +90,7 @@ const am = {
         choose: 'Ընտրել',
         assortment_watches: 'Նորավոճ ժամացույցներ',
         assortment_jewelry: 'Նորավոճ զարդեր',
-        sale: 'Սկսել shopping - ը',
+        sale: 'Սկսել shopping',
 }
 
 export {am}
