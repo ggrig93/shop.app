@@ -67,7 +67,7 @@ const en = {
         buy_now: 'Buy now',
         continue_shopping: 'Continue shopping',
         to_order: 'To order',
-        shopping_cart: 'Go to the shopping cart',
+        shopping_cart: 'Shopping cart',
         cart_empty: 'The basket is empty',
         like: 'Like',
         new: 'New',
@@ -88,5 +88,8 @@ const en = {
         there_are_still_products: 'The section is empty',
         view_all: 'View all',
         choose: 'Choose',
+        assortment_watches: 'Stylish watches',
+        assortment_jewelry: 'Stylish jewelry',
+        sale: 'Start shopping',
 }
 export {en}
