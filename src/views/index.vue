@@ -104,7 +104,7 @@
                 <div class="ysera-product">
                   <ul
                       v-if="topPanel[activeTabPanel] && topPanel[activeTabPanel].length"
-                      class="row list-products auto-clear equal-container product-grid"
+                      class="row list-products auto-clear equal-container product-grid col-md-11"
                   >
                     <li
                         class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-6 style-1"

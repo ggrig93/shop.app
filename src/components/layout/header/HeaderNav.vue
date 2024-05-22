@@ -12,7 +12,7 @@
                                 :title="item.name"
 
                             >
-                                <span @mouseover="toggleSection(item.id)">{{ item.name }}</span>
+                                <span @mouseover="toggleSection(item.id)">{{ categoryName(item.name) }} </span>
                             </a>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                                         :title="sub.name"
                                         @click="selectCategory(sub.id)"
                                     >
-                                        {{ sub.name }}
+                                        {{ categoryName(sub.name) }}
                                     </a>
                                 </li>
                                 <li
@@ -47,7 +47,7 @@
                                         @click="selectCategory(sub_sub.id)"
                                         :disabled="true"
                                     >
-                                        {{ sub_sub.name }}
+                                        {{ categoryName(sub_sub.name) }}
                                     </a>
                                 </li>
                             </ul>
@@ -117,6 +117,9 @@ export default {
                     this.openCategories = true
                 }
             })
+        },
+        categoryName(names) {
+            return names[this.$i18n.locale]
         }
     }
 }
@@ -126,6 +129,7 @@ export default {
 .container-items {
     display: flex;
 }
+
 .ysera-menu-item-title {
     position: relative;
     color: #757575;
@@ -171,6 +175,7 @@ export default {
     opacity: 1;
     visibility: visible;
 }
+
 .ysera-menu-item-title:hover {
     color: var(--bg-color);
 }
