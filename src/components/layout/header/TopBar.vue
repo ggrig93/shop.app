@@ -28,10 +28,10 @@
       <select v-model="$i18n.locale" @change="changeLocale($i18n.locale)" class="language">
         <option
             v-for="(lang, i) in langs"
-            :key="`lang-${i}`"
-            :value="lang"
+            :key="i"
+            :value="lang.name"
         >
-          {{ lang }}
+          {{ lang.flug }} {{ lang.name.toLocaleUpperCase() }}
         </option>
       </select>
 <!--      <li id="gh-p-2" class="gh-eb-li gh-t-rt gh&#45;&#45;link__divider rt">-->
@@ -156,7 +156,20 @@ export default {
   mixins: [headerMixin],
   data() {
     return {
-      langs: ['en', 'ru','am']
+      langs: [
+          {
+              name: 'am',
+              flug: '🇦🇲',
+          },
+          {
+              name: 'en',
+              flug: '🇺🇸',
+          },
+          {
+              name: 'ru',
+              flug: '🇷🇺',
+          },
+      ]
     }
   },
   computed:{
