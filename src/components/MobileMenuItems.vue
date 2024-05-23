@@ -2,7 +2,7 @@
     <div>
        <div class="mobile-menu-items">
            <p class="menu-item" @click="toggleMenu">
-               <a>{{ menu.name }}</a>
+               <a>{{ categoryName(menu.name) }}</a>
                <span class="toggleIcon">
                     {{ this.isOpen ? "—" : "＋" }}
                 </span>
@@ -13,7 +13,7 @@
                    :key="item.id"
                    @click="selectCategory(item.id)"
                >
-                   {{item.name}}
+                   {{ categoryName(item.name) }}
                </a>
            </p>
        </div>
@@ -53,6 +53,9 @@ export default {
             this.setCategory([id])
             this.$router.replace({name: 'Products', query: {'filter[categories]': [id]}})
         },
+        categoryName(names) {
+            return names[this.$i18n.locale]
+        }
     },
 }
 </script>

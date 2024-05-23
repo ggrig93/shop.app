@@ -28,7 +28,7 @@
       <select v-model="$i18n.locale" @change="changeLocale($i18n.locale)" class="language">
         <option
             v-for="(lang, i) in langs"
-            :key="i"
+            :key="`lang-${i}`"
             :value="lang.name"
         >
           {{ lang.flug }} {{ lang.name.toLocaleUpperCase() }}
