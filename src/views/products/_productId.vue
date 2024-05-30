@@ -370,7 +370,7 @@ picture > img.iiz__img {
 }
 
 .size-error {
-    margin: -15px 0 0 0;
+    margin-top: 5px;
 }
 
 .thumbnails_carousel a {

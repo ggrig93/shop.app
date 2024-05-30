@@ -88,7 +88,7 @@
                 </div>
             </div>
             <div class="row products-wrapper">
-                <div class="content-area shop-grid-content no-banner col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <div class="content-area shop-grid-content no-banner col-lg-10 col-md-9 col-sm-12 col-xs-12">
                     <div v-if="products && !products.length">{{ $t('nothing_was_found_result_query') }}</div>
                     <div v-else class="site-main">
                         <ul v-if="!loading"
@@ -117,7 +117,7 @@
                         />
                     </div>
                 </div>
-                <div v-show="showFilters || !isMobile" class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <div v-show="showFilters || !isMobile" class="sidebar col-lg-2 col-md-3 col-sm-12 col-xs-12">
                     <Sidebar
                         v-if="categories && categories.length"
                         class="shop-sidebar"
@@ -324,6 +324,15 @@ export default {
     margin: auto;
 }
 
+@media screen and (max-width: 1600px) {
+    .sidebar {
+        width: 20%;
+    }
+    .left-sidebar .content-area {
+        width: 80%;
+    }
+}
+
 @media screen and (max-width: 1400px) {
     .product-container {
         width: 100%;
@@ -331,7 +340,34 @@ export default {
     }
 }
 
+@media screen and (max-width: 1200px) {
+    .sidebar {
+        width: 25%;
+    }
+    .left-sidebar .content-area {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .products-wrapper {
+        flex-direction: row-reverse;
+    }
+    .sidebar .wrapper-sidebar {
+        margin-top: 0;
+    }
+    .sidebar {
+        width: 35%;
+    }
+    .left-sidebar .content-area {
+        width: 65%;
+    }
+}
+
 @media (max-width: 768px) {
+    .left-sidebar .content-area {
+        width: 100%;
+    }
     .shop-top-control {
         background-color: unset;
         border-radius: 10px;
