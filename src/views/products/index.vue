@@ -1,6 +1,6 @@
 <template>
     <div class="main-content main-content-product left-sidebar">
-        <div class="container">
+        <div class="product-container">
             <div class="row">
                 <div class="col-lg-12 products-header">
                     <div class="products-header-actions">
@@ -97,8 +97,8 @@
                         >
                             <li class="product-item"
                                 :class="layoutMode
-                                  ? 'col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-6 style-1'
-                                  : 'col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12 style-list'"
+                                  ? 'col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1'
+                                  : 'col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1'"
                                 v-for="prod in products" :key="prod.id"
                                 @click="productPage(prod)"
                             >
@@ -318,6 +318,19 @@ export default {
 .shop-top-control.mobile {
     display: none;
 }
+
+.product-container {
+    width: 90%;
+    margin: auto;
+}
+
+@media screen and (max-width: 1400px) {
+    .product-container {
+        width: 100%;
+        padding: 0 20px;
+    }
+}
+
 @media (max-width: 768px) {
     .shop-top-control {
         background-color: unset;

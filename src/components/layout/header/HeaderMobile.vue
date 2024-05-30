@@ -34,7 +34,7 @@
                             :key="`lang-${i}`"
                             :value="lang.name"
                         >
-                            {{ lang.flug }} {{ lang.name.toLocaleUpperCase() }}
+                            {{ lang.name.toLocaleUpperCase() }}
                         </option>
                     </select>
                     <a class=" mobile-navigation  menu-toggle" @click.stop="openMobileMenu">

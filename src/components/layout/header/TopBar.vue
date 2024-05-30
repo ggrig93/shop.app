@@ -31,7 +31,7 @@
             :key="`lang-${i}`"
             :value="lang.name"
         >
-          {{ lang.flug }} {{ lang.name.toLocaleUpperCase() }}
+         {{ lang.name.toLocaleUpperCase() }}
         </option>
       </select>
 <!--      <li id="gh-p-2" class="gh-eb-li gh-t-rt gh&#45;&#45;link__divider rt">-->
