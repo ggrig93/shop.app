@@ -145,9 +145,9 @@ export default {
 .thumb-inner img {
     width: 100%;
     object-fit: cover;
-    height: 240px;
+    height: 350px;
     @media(max-width: 768px) {
-        height: 200px;
+        height: 350px;
     }
 }
 
@@ -231,4 +231,6 @@ ins {
 .thumb-group:hover a {
     color: var(--bg-color) !important;
 }
+
+
 </style>

@@ -2290,7 +2290,6 @@ ul.list-products {
 }
 .product-item:hover .product-inner {
 	z-index: 2;
-	border-color: #c09578;
 }
 .product-item .product-top {
 	overflow: hidden;
@@ -3282,7 +3281,6 @@ ul.list-products {
 }
 .details-infor .variations > div {
 	display: flex;
-	align-items: center;
 	margin-bottom: 20px;
 }
 .details-infor .variations .text-attribute {
@@ -3339,6 +3337,7 @@ ul.list-products {
 }
 
 .attribute_size .list-size a {
+	display: block;
 	padding: 5px 8px;
 	border: 1px solid #eeeeee;
 	text-align: center;

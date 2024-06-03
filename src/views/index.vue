@@ -303,19 +303,19 @@ export default {
           {
             categoryId: 9,
             title: this.$t('assortment_watches'),
-            avatar: require('@/assets/images/watch.png'),
+            avatar: require('@/assets/images/watch_2.webp'),
           },
           {
             categoryId: 2,
             title: this.$t('assortment_jewelry'),
-            avatar: require('@/assets/images/10.jpg'),
+            avatar: require('@/assets/images/10_2.webp'),
           },
 
       ]
       const bannerItems = [
         {
           categoryId: 2,
-          avatar: require('@/assets/images/6.jpg')
+          avatar: require('@/assets/images/6_2.webp')
         },
         {
           categoryId: 2,
@@ -331,7 +331,7 @@ export default {
       return [
         {
             categoryId: 9,
-            avatar: require('@/assets/images/istockphoto-533714204-612x612.jpg')
+            avatar: require('@/assets/images/istockphoto-533714204-612x612.webp')
         },
         {
             categoryId: 13,

@@ -32,9 +32,9 @@
                         <option
                             v-for="(lang, i) in langs"
                             :key="`lang-${i}`"
-                            :value="lang"
+                            :value="lang.name"
                         >
-                            {{ lang }}
+                            {{ lang.name.toLocaleUpperCase() }}
                         </option>
                     </select>
                     <a class=" mobile-navigation  menu-toggle" @click.stop="openMobileMenu">

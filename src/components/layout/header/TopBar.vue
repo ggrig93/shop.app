@@ -29,9 +29,9 @@
         <option
             v-for="(lang, i) in langs"
             :key="`lang-${i}`"
-            :value="lang"
+            :value="lang.name"
         >
-          {{ lang }}
+         {{ lang.name.toLocaleUpperCase() }}
         </option>
       </select>
 <!--      <li id="gh-p-2" class="gh-eb-li gh-t-rt gh&#45;&#45;link__divider rt">-->
@@ -156,7 +156,20 @@ export default {
   mixins: [headerMixin],
   data() {
     return {
-      langs: ['en', 'ru','am']
+      langs: [
+          {
+              name: 'am',
+              flug: '🇦🇲',
+          },
+          {
+              name: 'en',
+              flug: '🇺🇸',
+          },
+          {
+              name: 'ru',
+              flug: '🇷🇺',
+          },
+      ]
     }
   },
   computed:{

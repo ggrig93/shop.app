@@ -7,7 +7,7 @@
                     <li v-for="cat in categories" :key="cat.id">
                         <Checkbox
                             id="category"
-                            :label="cat.name"
+                            :label="categoryName(cat.name)"
                             :input-value="cat.id"
                             v-model="selectedCategories"
                             @change.native="getCategoryBrandsAndSizes"
@@ -235,10 +235,10 @@ export default {
         }
     },
     mounted() {
-      this.filters.selectedCategories = this.queryToArray(this.$route.query['filter[categories]'])
-      this.filterProduct()
+        this.filters.selectedCategories = this.queryToArray(this.$route.query['filter[categories]'])
+        this.filterProduct()
     },
-  methods: {
+    methods: {
         ...mapMutations(["setSearch", "setByPrice", "setPage", "setPerPage", 'setCategoryBrands', 'setCategorySizes']),
 
         checkSelectedCategories(categoryId) {
@@ -322,13 +322,17 @@ export default {
                 'filter[min_price]': this.filters.minPrice,
                 'filter[max_price]': this.filters.maxPrice,
                 search: this.search,
-                'filter[page]': this.selectedPage ?  this.selectedPage : this.page,
+                'filter[page]': this.selectedPage ? this.selectedPage : this.page,
             }
             const queryData = {...data}
             const params = new URLSearchParams(queryData).toString();
             window.history.replaceState(null, null, '?' + params);
             this.$store.dispatch('getFilteredProducts', data)
         },
+
+        categoryName(names) {
+            return names[this.$i18n.locale]
+        }
     }
 }
 </script>
