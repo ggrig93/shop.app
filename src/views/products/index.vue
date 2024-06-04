@@ -97,8 +97,8 @@
                         >
                             <li class="product-item"
                                 :class="layoutMode
-                                  ? 'col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1'
-                                  : 'col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1'"
+                                  ? 'col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-6 style-1'
+                                  : 'col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-6 style-1'"
                                 v-for="prod in products" :key="prod.id"
                                 @click="productPage(prod)"
                             >
