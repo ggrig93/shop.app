@@ -146,8 +146,11 @@ export default {
     width: 100%;
     object-fit: cover;
     height: 350px;
-    @media(max-width: 768px) {
-        height: 350px;
+    @media(max-width: 992px) {
+        height: 280px;
+    }
+    @media(max-width: 575px) {
+        height: 220px;
     }
 }
 
