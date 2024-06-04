@@ -269,8 +269,14 @@ export default {
             }
         },
         productPage(prod) {
-            this.$router.push({name: 'Product', params: {slug: prod.slug}})
-        },
+            if (this.$router.currentRoute.params.slug !== prod.slug) {
+                this.$router.push({ name: 'Product', params: { slug: prod.slug } }).catch(err => {
+                    if (err.name !== 'NavigationDuplicated') {
+                        throw err;
+                    }
+                });
+            }
+        }
     }
 }
 </script>
