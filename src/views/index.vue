@@ -386,10 +386,10 @@ export default {
 </script>
 
 <style>
-.product-item {
-    margin: 0 -3px;
+.ysera-product .product-item {
+    margin: 0 -10px;
 }
-.product-item .slick-slide  {
+.ysera-product .product-item .slick-slide  {
     padding: 0 5px;
 }
 .item-banner .banner-content > .button {
