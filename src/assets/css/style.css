@@ -2366,7 +2366,7 @@ ul.list-products {
 }
 .product-item .product-info {
 	position: relative;
-	padding: 8px;
+	padding: 5px;
 }
 .product-item .product-name {
 	font-size: 15px;
@@ -2615,6 +2615,13 @@ ul.list-products {
 	font-weight: 500;
 	line-height: 100%;
 	margin-bottom: 8px;
+}
+
+.product-item .price > div {
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+	letter-spacing: 0;
 }
 
 .product-item .price .new-price {
