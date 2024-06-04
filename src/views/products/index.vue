@@ -320,7 +320,7 @@ export default {
 }
 
 .product-container {
-    width: 70%;
+    width: 73%;
     margin: auto;
 }
 
