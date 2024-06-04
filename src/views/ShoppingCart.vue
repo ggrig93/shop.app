@@ -6,7 +6,7 @@
         <div class="row">
           <div class="main-content-cart main-content col-sm-12">
             <h3 class="custom_blog_title">
-                {{ $t('cart_empty') }}
+                {{ $t('shopping_cart') }}
             </h3>
             <div class="page-main-content">
               <div class="shoppingcart-content">
