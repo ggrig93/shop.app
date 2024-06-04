@@ -13,7 +13,7 @@
             <div class="product-thumb">
                 <div class="thumb-inner">
                     <router-link :to="{name: 'Product', params: {slug : product.slug}}">
-                        <img :src="product.avatar" alt="img">
+                        <img :src="product.gallery[0].images[0].image" alt="img">
                     </router-link>
                     <div class="thumb-group">
                         <div class="yith-wcwl-add-to-wishlist">
