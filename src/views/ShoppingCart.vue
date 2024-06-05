@@ -13,8 +13,8 @@
 
                         <div class="page-main-content">
                             <div class="shoppingcart-content">
-                                <form action="shoppingcart.html" class="cart-form">
-                                    <table v-if="shopProducts.length" class="shop_table">
+                                <form v-if="shopProducts.length" action="shoppingcart.html" class="cart-form">
+                                    <table class="shop_table">
                                         <thead>
                                         <tr>
                                             <th class="product-remove"></th>
