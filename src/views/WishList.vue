@@ -10,7 +10,7 @@
         <div class="ysera-product wishlist-products">
           <ul v-if="products && products.length" class="row list-products auto-clear equal-container product-grid">
             <li
-                class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1"
+                class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-6 style-1"
                 v-for="(product, idx) in products"
                 :key="idx"
             >
@@ -60,6 +60,9 @@ export default {
 }
 .wishlist-products {
   min-height: 350px;
+    .list-products {
+        margin: 0;
+    }
 }
 .empty-wishlist {
   margin-top: 20px;
