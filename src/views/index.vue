@@ -27,7 +27,7 @@
                                                         {{ product.title }}
                                                     </h3>
                                                     <a
-                                                        class="button btn-shop-the-look bgroud-style"
+                                                        class="button btn-shop-the-look bgroud-style pointer"
                                                         :style="styleObject"
                                                         @click="viewProductPage(product.categoryId)"
                                                     >
@@ -51,7 +51,7 @@
                                     class="col-xs-6 col-lg-12"
                                 >
                                     <a
-                                        class="button btn-lets-do-it"
+                                        class="button btn-lets-do-it pointer"
                                         @click="viewProductPage(product.categoryId)"
                                         :style="styleObject">
                                         {{ $t('sale') }}
@@ -135,7 +135,7 @@
                                 class="col-lg-6 col-md-6 col-sm-6 col-xs-6 banner-wrapp-item">
                                 <a @click="viewProductPage(product.categoryId)">
                                     <banner img-class="style4" :backgroundImage="product.avatar">
-                                        <div class="button btn-shop-now" :style="styleObject">
+                                        <div class="button btn-shop-now pointer" :style="styleObject">
                                             {{ $t('sale') }}
                                         </div>
                                     </banner>
