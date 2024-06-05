@@ -386,7 +386,7 @@ export default {
 </script>
 
 <style>
-.ysera-product .product-item {
+.tab-panel .ysera-product .product-item {
     margin: 0 -10px;
 }
 .ysera-product .product-item .slick-slide  {
