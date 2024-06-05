@@ -5,12 +5,12 @@
                 <Breadcrumbs/>
                 <div class="row">
                     <div class="main-content-cart main-content col-sm-12">
-                        <div v-if="!shopProducts.length" class="control-cart" :style="styleObject">
-                            <button class="button btn-continue-shopping" @click="$router.push({name: 'Products'})">
-                                {{ $t('continue_shopping') }}
-                            </button>
-                        </div>
-
+                        <h3
+                            v-if="!shopProducts.length"
+                            class="custom_blog_title"
+                        >
+                            {{ $t('cart_empty') }}
+                        </h3>
                         <div class="page-main-content">
                             <div class="shoppingcart-content">
                                 <form v-if="shopProducts.length" action="shoppingcart.html" class="cart-form">
