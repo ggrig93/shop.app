@@ -45,19 +45,36 @@
                 </div>
             </div>
             <div class="header-searchform-box">
-                <form class="header-searchform" @submit.prevent="searchHandler">
-                    <div class="searchform-wrap">
-                        <input v-model="search" type="text" class="search-input" :placeholder="$t('search')"
-                               :style="{'border-color': settings ? settings.main_color : 'white'}"
-                               style="border: 1px solid">
-                        <button type="submit" class="submit button"
+                <div class="header-searchform form-search-mobile">
+                    <div class="form-content">
+                        <div class="inner">
+                            <div>
+                                <input
+                                    type="text"
+                                    v-model="query"
+                                    @input="filterBrands"
+                                    placeholder="Search..."
+                                />
+                                <ul v-click-outside="hide"
+                                    class="search-content"
+                                    v-if="filteredBrand.length"
+                                >
+                                    <li
+                                        v-for="(brand, index) in filteredBrand"
+                                        :key="index"
+                                        @click="selectBrand(brand)"
+                                    >
+                                        {{ brand.name }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button @click="brandPage" class="btn-search" type="submit"
                                 :style="{'background-color': settings ? settings.main_color : 'white'}">
-              <span class="icon">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </span>
+                            <i class="fa fa-search" aria-hidden="true"></i>
                         </button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -66,7 +83,7 @@
 <script>
 
 import headerMixin from "@/mixins/header.mixin";
-import {mapGetters, mapMutations} from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 import TopBar from "@/components/layout/header/TopBar";
 
 export default {
@@ -75,10 +92,13 @@ export default {
     data() {
         return {
             search: "",
+            query: '',
+            selectedBrand: null,
+            filteredBrand: [],
         }
     },
     computed: {
-        ...mapGetters(["settings"]),
+        ...mapGetters(["settings", 'brands']),
     },
     watch: {
         '$route.query': {
@@ -94,16 +114,77 @@ export default {
     },
     methods: {
         ...mapMutations(["setSearch"]),
+        ...mapActions(["getBrands"]),
         searchHandler() {
             if (this.search !== '') {
                 this.setSearch(this.search)
                 this.$router.replace({name: 'Products', query: {search: this.search}})
             }
         },
+        filterBrands() {
+            const queryLower = this.query.toLowerCase();
+            this.filteredBrand = this.brands.filter((brand) =>
+                brand.name.toLowerCase().includes(queryLower)
+            );
+        },
+        selectBrand(brand) {
+            this.query = brand.name;
+            this.selectedBrand = brand;
+            this.filteredBrand = [];
+        },
+
+        brandPage() {
+            if (this.selectedBrand) {
+                if (this.$router.currentRoute.params.id !== this.selectedBrand.id) {
+                    this.$router.push({name: 'Brand', params: {id: this.selectedBrand.id}});
+                    this.query = []
+                    this.selectedBrand = null
+                }
+            }
+        },
+        hide() {
+            this.filteredBrand = []
+        }
     },
 }
 </script>
 <style>
+.form-search-mobile {
+    padding: 0;
+}
+.form-search-mobile input {
+    width: 100%;
+}
+
+.form-search-mobile .form-content {
+    display: flex;
+}
+.form-search-mobile .form-content .inner {
+    width: 100%;
+    position: relative;
+}
+
+ul.search-content {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 99999;
+    background: #ffffff;
+}
+
+.search-content li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.search-content li:hover {
+    background-color: #f0f0f0;
+}
 @media screen and (max-width: 768px) {
     .language {
         padding: 0;

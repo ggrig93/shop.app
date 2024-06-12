@@ -89,7 +89,7 @@
             </div>
             <div class="row products-wrapper">
                 <div class="content-area shop-grid-content no-banner col-lg-10 col-md-9 col-sm-12 col-xs-12">
-                    <div v-if="products && !products.length">{{ $t('nothing_was_found_result_query') }}</div>
+                    <div v-if="!products">{{ $t('nothing_was_found_result_query') }}</div>
                     <div v-else class="site-main">
                         <ul v-if="!loading"
                             class="row list-products auto-clear equal-container"
@@ -332,6 +332,12 @@ export default {
     }
     .left-sidebar .content-area {
         width: 80%;
+    }
+}
+@media screen and (max-width: 1650px) {
+    .product-container {
+        width: 95%;
+        padding: 0 20px;
     }
 }
 

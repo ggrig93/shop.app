@@ -20,6 +20,7 @@ export default new Vuex.Store({
         categorySizes: [],
         subCategories: [],
         shopProducts: [],
+        brandCategory: [],
         wishList: [],
         cartTotalPrice: 0,
         otherFilters: {
@@ -44,6 +45,8 @@ export default new Vuex.Store({
         categoryBrands: state => state.categoryBrands,
         categorySizes: state => state.categorySizes,
         subCategories: state => state.subCategories,
+        brands: state => state.brands,
+        brandCategory: state => state.brandCategory,
     },
     mutations: {
         setShopProducts(state, value) {
@@ -81,6 +84,12 @@ export default new Vuex.Store({
         },
         setSubCategories(state, value) {
             state.subCategories = value
+        },
+        setBrands(state, value) {
+            state.brands = value
+        },
+        setBrandCategory(state, value) {
+            state.brandCategory = value
         },
     },
     actions: {
@@ -207,6 +216,11 @@ export default new Vuex.Store({
         getSubCategories({state}, id) {
             http.get('/category/' + id +'/subcategories')
                 .then(res => state.subCategories = res.data.data)
+                .catch(err => console.log(err))
+        },
+        getBrandCategory({state}, id) {
+            http.get('/brand/' + id +'/category')
+                .then(res => state.brandCategory = res.data.data)
                 .catch(err => console.log(err))
         },
     },
