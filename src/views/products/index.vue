@@ -322,7 +322,7 @@ export default {
 }
 
 .product-container {
-    width: 68%;
+    width: 70%;
     margin: auto;
 }
 
