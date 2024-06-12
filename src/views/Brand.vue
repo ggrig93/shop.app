@@ -77,7 +77,7 @@ export default {
         selectCategory(id) {
             this.setCategory([id])
             if (id !== this.$route.query['filter[categories]']) {
-                this.$router.replace({name: 'Products', query: {'filter[categories]': [id] }})
+                this.$router.replace({name: 'Products', query: {'filter[categories]': [id], 'filter[brands]': [this.$route.params.id] }})
             }
         },
 
