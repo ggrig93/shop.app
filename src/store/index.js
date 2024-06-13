@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         product: null,
+        brandId: null,
         products: null,
         colors: null,
         brands: null,
@@ -47,10 +48,14 @@ export default new Vuex.Store({
         subCategories: state => state.subCategories,
         brands: state => state.brands,
         brandCategory: state => state.brandCategory,
+        brandId: state => state.brandId,
     },
     mutations: {
         setShopProducts(state, value) {
             state.shopProducts = value
+        },
+        setBrandId(state, value) {
+            state.brandId = value
         },
         setOpenMiniCartFromProduct(state, value) {
             state.openMiniCartFromProduct = value
@@ -218,8 +223,8 @@ export default new Vuex.Store({
                 .then(res => state.subCategories = res.data.data)
                 .catch(err => console.log(err))
         },
-        getBrandCategory({state}, id) {
-            http.get('/brand/' + id +'/category')
+        getBrandCategory({state}, slug) {
+            http.get('/brand/' + slug +'/category')
                 .then(res => state.brandCategory = res.data.data)
                 .catch(err => console.log(err))
         },

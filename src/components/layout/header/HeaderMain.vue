@@ -39,7 +39,7 @@
                                         type="text"
                                         v-model="query"
                                         @input="filterBrands"
-                                        placeholder="Search..."
+                                        :placeholder="$t('search')"
                                     />
                                     <ul v-click-outside="hide"
                                         class="search-content"
@@ -265,7 +265,7 @@ export default {
         this.getBrands()
     },
     methods: {
-        ...mapMutations(["setSearch"]),
+        ...mapMutations(["setSearch","setBrandId"]),
         ...mapActions(["getBrands"]),
         searchHandler() {
             this.setSearch(this.search)
@@ -295,8 +295,9 @@ export default {
 
         brandPage() {
             if (this.selectedBrand) {
-                if (this.$router.currentRoute.params.id !== this.selectedBrand.id) {
-                    this.$router.push({name: 'Brand', params: {id: this.selectedBrand.id}});
+                if (this.$router.currentRoute.params.slug !== this.selectedBrand.slug) {
+                    this.setBrandId(this.selectedBrand.id)
+                    this.$router.push({name: 'Brand', params: {slug: this.selectedBrand.slug}});
                     this.query = []
                     this.selectedBrand = null
                 }
