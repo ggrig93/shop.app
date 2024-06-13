@@ -65,10 +65,10 @@ export default {
         return {}
     },
     computed: {
-        ...mapGetters({brandCategory: "brandCategory"}),
+        ...mapGetters({brandCategory: "brandCategory", brandId: "brandId"}),
     },
     created() {
-        this.getBrandCategory(this.$route.params.id)
+        this.getBrandCategory(this.$route.params.slug)
     },
     methods: {
         ...mapMutations(["setCategory"]),
@@ -77,7 +77,7 @@ export default {
         selectCategory(id) {
             this.setCategory([id])
             if (id !== this.$route.query['filter[categories]']) {
-                this.$router.replace({name: 'Products', query: {'filter[categories]': [id], 'filter[brands]': [this.$route.params.id] }})
+                this.$router.replace({name: 'Products', query: {'filter[categories]': [id], 'filter[brands]': [this.brandId] }})
             }
         },
 
