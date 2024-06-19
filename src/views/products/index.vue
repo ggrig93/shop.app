@@ -166,7 +166,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["settings", 'subCategories', 'productSections']),
+        ...mapGetters(["settings", 'subCategories']),
         isMobile() {
             return this.width <= 768 && this.width > 0
         },
@@ -279,7 +279,6 @@ export default {
     },
     methods: {
         ...mapMutations(["setByPrice", "setPage", "setCategory", "setPerPage", 'setSubCategories']),
-        ...mapActions(["getProductSections"]),
 
         addResizeListener() {
             if (window) {
