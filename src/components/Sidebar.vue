@@ -1,20 +1,41 @@
 <template>
     <div class="wrapper-sidebar">
         <div class="widget woof_Widget sidebar-filters_wrap">
-            <div class="widget widget-categories sidebar-filter" v-if="categories.length">
-                <h3 class="widgettitle">{{ $t('selectType') }}</h3>
-                <ul class="list-categories">
-                    <li v-for="cat in categories" :key="cat.id">
+            <div v-if="searchQuery">
+                <div class="widget widget-categories sidebar-filter" v-if="categories.length">
+                    <h3 class="widgettitle">{{ $t('selectType') }}</h3>
+                    <div
+                        v-for="item in categories"
+                        :key="item.id" style="margin-bottom: 10px"
+                    >
                         <Checkbox
+                            v-if="item.parent_id"
                             id="category"
-                            :label="categoryName(cat.name)"
-                            :input-value="cat.id"
-                            v-model="selectedCategories"
+                            :label="categoryName(item.name)"
+                            :input-value="item.id"
+                            v-model="selectedSearchCategories"
                             @change.native="getCategoryBrandsAndSizes"
                             class="checkbox-color"
                         />
-                    </li>
-                </ul>
+                    </div>
+                </div>
+            </div>
+            <div v-else>
+                <div class="widget widget-categories sidebar-filter" v-if="categories.length">
+                    <h3 class="widgettitle">{{ $t('selectType') }}</h3>
+                    <ul class="list-categories">
+                        <li v-for="cat in categories" :key="cat.id">
+                            <Checkbox
+                                id="category"
+                                :label="categoryName(cat.name)"
+                                :input-value="cat.id"
+                                v-model="selectedCategories"
+                                @change.native="getCategoryBrandsAndSizes"
+                                class="checkbox-color"
+                            />
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="widget widget_filter_price sidebar-filter" v-if="price">
                 <h4 class="widgettitle">
@@ -94,7 +115,7 @@
                         class="tag-cloud-link pointer"
                         v-for="tag in tags"
                         :key="tag.id"
-                        :class="{active: filters.selectedTags.includes(tag.id) }"
+                        :class="{active: filters.selectedTags.includes(tag.id)}"
                         @click="selectTag(tag)"
                     >
                         <a class="pointer">{{ tag.name }}</a>
@@ -159,18 +180,26 @@ export default {
                 maxPrice: "",
             },
             selectedCategories: [],
+            selectedSearchCategories: [],
             selectedPage: null,
         }
     },
     computed: {
-        ...mapGetters(["settings", "search", "page", "category", "otherFilters", "categoryBrands", 'categorySizes']),
+        ...mapGetters(["settings", "page", "category", "otherFilters"]),
+        searchQuery() {
+            return this.$route.query.search || '';
+        }
     },
     watch: {
         select_page: {
             deep: true,
             handler(val) {
                 this.selectedPage = val
-                this.filterProduct()
+                if (this.searchQuery) {
+                    this.filterSearchProduct()
+                } else {
+                    this.filterProduct()
+                }
             }
         },
         categories: {
@@ -183,14 +212,22 @@ export default {
             deep: true,
             handler() {
                 this.selectedPage = 1
-                this.filterProduct()
+                if (this.searchQuery) {
+                    this.filterSearchProduct()
+                } else {
+                    this.filterProduct()
+                }
             }
         },
         by_price: {
             deep: true,
             handler() {
                 this.selectedPage = 1
-                this.filterProduct()
+                if (this.searchQuery) {
+                    this.filterSearchProduct()
+                } else {
+                    this.filterProduct()
+                }
             }
         },
         '$route.query': {
@@ -213,9 +250,6 @@ export default {
                 if (val['filter[tags]']) {
                     this.filters.selectedTags = this.queryToArray(val['filter[tags]'])
                 }
-                if (val.search) {
-                    this.setSearch(val.search.trim())
-                }
                 if (val['filter[by_price]']) {
                     this.setByPrice(val['filter[by_price]'])
                 }
@@ -234,12 +268,19 @@ export default {
             }
         }
     },
+    created() {
+        this.$emit('renderSidebar')
+    },
     mounted() {
         this.filters.selectedCategories = this.queryToArray(this.$route.query['filter[categories]'])
-        this.filterProduct()
+        if (this.searchQuery) {
+            this.filterSearchProduct()
+        } else {
+            this.filterProduct()
+        }
     },
     methods: {
-        ...mapMutations(["setSearch", "setByPrice", "setPage", "setPerPage", 'setCategoryBrands', 'setCategorySizes']),
+        ...mapMutations(["setByPrice", "setPage", "setPerPage"]),
 
         checkSelectedCategories(categoryId) {
             if (this.categories.length) {
@@ -262,9 +303,12 @@ export default {
                 this.filters.selectedCategories.push(this.categories[0].parent_id)
                 this.selectedPage = null
             }
-            this.$store.dispatch('getCategoryBrands', this.selectedCategories.length ? this.selectedCategories : this.filters.selectedCategories)
-            this.$store.dispatch('getCategorySizes', this.selectedCategories.length ? this.selectedCategories : this.filters.selectedCategories)
-            this.filterProduct()
+            if (this.searchQuery) {
+                this.filterSearchProduct()
+            } else {
+                this.filterProduct()
+            }
+            this.$emit('renderSidebar')
         },
 
         changeFilter(filterType) {
@@ -277,7 +321,13 @@ export default {
             ) {
                 this.selectedPage = null;
             }
-            this.filterProduct();
+
+            if (this.searchQuery) {
+                this.filterSearchProduct()
+            } else {
+                this.filterProduct()
+            }
+
         },
 
         queryToArray(val) {
@@ -294,7 +344,11 @@ export default {
             } else {
                 this.filters.selectedColors.push(color.id)
             }
-            this.filterProduct()
+            if (this.searchQuery) {
+                this.filterSearchProduct()
+            } else {
+                this.filterProduct()
+            }
         },
 
         selectTag(tag) {
@@ -307,7 +361,31 @@ export default {
             } else {
                 this.filters.selectedTags.push(tag.id)
             }
-            this.filterProduct()
+            if (this.searchQuery) {
+                this.filterSearchProduct()
+            } else {
+                this.filterProduct()
+            }
+        },
+
+        filterSearchProduct() {
+            const data = {
+                'filter[categories]': this.selectedSearchCategories,
+                'filter[brands]': this.filters.selectedBrands,
+                'filter[colors]': this.filters.selectedColors,
+                'filter[sizes]': this.filters.selectedSizes,
+                'filter[tags]': this.filters.selectedTags,
+                'filter[by_price]': this.by_price,
+                'filter[per_page]': this.per_page,
+                'filter[min_price]': this.filters.minPrice,
+                'filter[max_price]': this.filters.maxPrice,
+                search: this.$route.query.search,
+                'filter[page]': this.selectedPage ? this.selectedPage : this.page,
+            }
+            const queryData = {...data}
+            const params = new URLSearchParams(queryData).toString();
+            window.history.replaceState(null, null, '?' + params);
+            this.$store.dispatch('getFilteredProducts', data)
         },
 
         filterProduct() {
@@ -321,7 +399,7 @@ export default {
                 'filter[per_page]': this.per_page,
                 'filter[min_price]': this.filters.minPrice,
                 'filter[max_price]': this.filters.maxPrice,
-                search: this.search,
+                search: this.$route.query.search,
                 'filter[page]': this.selectedPage ? this.selectedPage : this.page,
             }
             const queryData = {...data}
@@ -332,7 +410,7 @@ export default {
 
         categoryName(names) {
             return names[this.$i18n.locale]
-        }
+        },
     }
 }
 </script>

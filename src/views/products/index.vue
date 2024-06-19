@@ -89,7 +89,7 @@
             </div>
             <div class="row products-wrapper">
                 <div class="content-area shop-grid-content no-banner col-lg-10 col-md-9 col-sm-12 col-xs-12">
-                    <div v-if="!products">{{ $t('nothing_was_found_result_query') }}</div>
+                    <div v-if="products && !products.length">{{ $t('nothing_was_found_result_query') }}</div>
                     <div v-else class="site-main">
                         <ul v-if="!loading"
                             class="row list-products auto-clear equal-container"
@@ -130,6 +130,7 @@
                         :per_page="per_page"
                         :by_price="by_price"
                         :select_page="select_page"
+                        @renderSidebar="renderSidebar"
                     />
                 </div>
             </div>
@@ -142,7 +143,7 @@ import Sidebar from "@/components/Sidebar";
 import Pagination from "@/components/Pagination";
 import ProductCart from "@/components/products/ProductCart";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import {mapGetters, mapMutations} from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 
 export default {
     name: "GridLeftSidebar",
@@ -157,10 +158,15 @@ export default {
             width: 0,
             select_page: null,
             categoryIds: [],
+            productBrands: [],
+            productSizes: [],
+            productColors: [],
+            productTags: [],
+            productSections: [],
         }
     },
     computed: {
-        ...mapGetters(["settings", 'categoryBrands', 'categorySizes', 'subCategories']),
+        ...mapGetters(["settings", 'subCategories', 'productSections']),
         isMobile() {
             return this.width <= 768 && this.width > 0
         },
@@ -168,29 +174,65 @@ export default {
             return this.$store.state.products?.meta
         },
         products() {
-            return this.$store.state.products?.data
+            if (!this.$store.state.products || !this.$store.state.products.data) {
+                return null;
+            }
+            this.$store.state.products.data.forEach(product => {
+                if (!this.productBrands.some(brand => brand.id === product.brand.id)) {
+                    this.productBrands.push(product.brand);
+                }
+                product.gallery.forEach(gallery => {
+                    if (!this.productColors.some(color => color.id === gallery.color.id)) {
+                        this.productColors.push(gallery.color);
+                    }
+
+                    gallery.sizes.forEach(size => {
+                        if (!this.productSizes.some(item => item.id === size.id)) {
+                            this.productSizes.push(size);
+                        }
+                    });
+                });
+                product.tags.forEach(tag => {
+                    if (!this.productTags.some(item => item.id === tag.id)) {
+                        this.productTags.push(tag);
+                    }
+                });
+                product.sections.forEach(section => {
+                    if (!this.productSections.some(item => item.id === section.id)) {
+                        this.productSections.push(section);
+                    }
+                });
+            });
+
+
+            return this.$store.state.products.data;
         },
         color() {
-            return this.$store.state.colors
+            return this.productColors
         },
         brands() {
-            return this.$store.state.categoryBrands
+            return this.productBrands
         },
         categories() {
+            if (this.searchQuery) {
+                return this.productSections
+            }
             return this.$store.state.subCategories
         },
         sizes() {
-            return this.$store.state.categorySizes
+            return this.productSizes
         },
         tags() {
-            return this.$store.state.tags
+            return this.productTags
         },
         loading() {
             return this.$store.state.loading
         },
-        /* todo */
         price() {
             return {min: 10, max: 100}
+        },
+        searchQuery() {
+            return this.$route.query.search || '';
         }
     },
     watch: {
@@ -214,14 +256,15 @@ export default {
         },
     },
     async created() {
-        await this.$store.dispatch('getColors')
-        await this.$store.dispatch('getTags')
-        await this.$store.dispatch('getCategoryBrands', this.categoryIds)
-        await this.$store.dispatch('getCategorySizes', this.categoryIds)
-        await this.$store.dispatch('getSubCategories', this.categoryIds)
+        const searchParam = this.searchQuery;
+        if (searchParam) {
+            this.searchProducts();
+
+        } else {
+            await this.$store.dispatch('getSubCategories', this.categoryIds);
+        }
     },
     beforeDestroy() {
-        this.setSearch('')
         this.setByPrice('')
         this.setCategory([])
         this.setPage(1)
@@ -229,12 +272,15 @@ export default {
     },
     mounted() {
         this.addResizeListener()
+        this.renderSidebar()
     },
     destroyed() {
         window.removeEventListener('resize', this.onResizeEvent)
     },
     methods: {
-        ...mapMutations(["setByPrice", "setSearch", "setPage", "setCategory", "setPerPage", "setCategoryBrands", 'setCategorySizes', 'setSubCategories']),
+        ...mapMutations(["setByPrice", "setPage", "setCategory", "setPerPage", 'setSubCategories']),
+        ...mapActions(["getProductSections"]),
+
         addResizeListener() {
             if (window) {
                 window.addEventListener('resize', this.onResizeEvent)
@@ -272,6 +318,18 @@ export default {
             if (this.$router.currentRoute.params.slug !== prod.slug) {
                 this.$router.push({ name: 'Product', params: { slug: prod.slug } });
             }
+        },
+        searchProducts() {
+            const data = {
+                search: this.$route.query.search,
+            }
+            this.$store.dispatch('getFilteredProducts', data)
+        },
+        renderSidebar() {
+            this.productBrands = []
+            this.productSizes = []
+            this.productColors = []
+            this.productTags = []
         }
     }
 }
