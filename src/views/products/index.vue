@@ -143,7 +143,7 @@ import Sidebar from "@/components/Sidebar";
 import Pagination from "@/components/Pagination";
 import ProductCart from "@/components/products/ProductCart";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import {mapActions, mapGetters, mapMutations} from "vuex";
+import {mapGetters, mapMutations} from "vuex";
 
 export default {
     name: "GridLeftSidebar",
