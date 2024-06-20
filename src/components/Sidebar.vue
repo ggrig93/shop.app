@@ -5,18 +5,70 @@
                 <div class="widget widget-categories sidebar-filter" v-if="categories.length">
                     <h3 class="widgettitle">{{ $t('selectType') }}</h3>
                     <div
+                        class="search-category-content"
                         v-for="item in categories"
-                        :key="item.id" style="margin-bottom: 10px"
+                        :key="item.id"
                     >
-                        <Checkbox
-                            v-if="item.parent_id"
-                            id="category"
-                            :label="categoryName(item.name)"
-                            :input-value="item.id"
-                            v-model="selectedSearchCategories"
-                            @change.native="getCategoryBrandsAndSizes"
-                            class="checkbox-color"
-                        />
+                        <div v-if="item.parent">
+                            <ParentSection
+                                :item="item.parent"
+                                @showSub="showSub"
+                            />
+                        </div>
+                        <Transition>
+                            <div
+                                class="middle-category"
+                                v-if="item.parent"
+                                v-show="showParentCategory === item.parent.id"
+                            >
+                                <Checkbox
+                                    id="category"
+                                    :label="categoryName(item.name)"
+                                    :input-value="item.id"
+                                    v-model="selectedSearchCategories"
+                                    @change.native="getCategoryBrandsAndSizes"
+                                    class="checkbox-color"
+                                />
+                                <div @click="showMiddleCategory = (showMiddleCategory === item.id) ? null : item.id">
+                                    <div class="show-subCats" v-if="showMiddleCategory === item.id">
+                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                    </div>
+                                    <div v-else>
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="parent not-parent-content" v-else>
+                                {{ categoryName(item.name) }}
+                                <div @click="showMiddleCategory = (showMiddleCategory === item.id) ? null : item.id">
+                                    <div class="show-subCats" v-if="showMiddleCategory === item.id">
+                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                    </div>
+                                    <div v-else>
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </Transition>
+                        <Transition>
+                            <div class="sections" v-if="item.sections.length">
+                                <div
+                                    v-for="section in item.sections"
+                                    :key="section.id"
+                                >
+                                    <Checkbox
+                                        v-show="showMiddleCategory === item.id"
+                                        id="category"
+                                        :label="categoryName(section.name)"
+                                        :input-value="section.id"
+                                        v-model="selectedSearchCategories"
+                                        @change.native="getCategoryBrandsAndSizes"
+                                        class="checkbox-color"
+                                    />
+                                </div>
+                            </div>
+                        </Transition>
                     </div>
                 </div>
             </div>
@@ -129,10 +181,11 @@
 <script>
 import Checkbox from "@/components/custom-input/Checkbox";
 import {mapGetters, mapMutations} from "vuex";
+import ParentSection from "@/components/ParentSection.vue";
 
 export default {
     name: "Sidebar",
-    components: {Checkbox},
+    components: {ParentSection, Checkbox},
     props: {
         categories: {
             type: Array,
@@ -182,6 +235,8 @@ export default {
             selectedCategories: [],
             selectedSearchCategories: [],
             selectedPage: null,
+            showMiddleCategory: false,
+            showParentCategory: false,
         }
     },
     computed: {
@@ -269,7 +324,11 @@ export default {
         }
     },
     created() {
-        this.$emit('renderSidebar')
+        this.$emit('updateTags')
+        this.$emit('updateColors')
+        this.$emit('updateSizes')
+        this.$emit('updateBrands')
+        this.$emit('updateSections')
     },
     mounted() {
         this.filters.selectedCategories = this.queryToArray(this.$route.query['filter[categories]'])
@@ -282,6 +341,9 @@ export default {
     methods: {
         ...mapMutations(["setByPrice", "setPage", "setPerPage"]),
 
+        showSub(val) {
+            this.showParentCategory = (this.showParentCategory === val) ? null : val
+        },
         checkSelectedCategories(categoryId) {
             if (this.categories.length) {
                 let categoryFound = this.categories.some(item => item.id == categoryId);
@@ -308,7 +370,7 @@ export default {
             } else {
                 this.filterProduct()
             }
-            this.$emit('renderSidebar')
+            this.$emit('updateSections')
         },
 
         changeFilter(filterType) {
@@ -320,6 +382,14 @@ export default {
                 (filterType === 'sizes' && !this.filters.selectedSizes.length)
             ) {
                 this.selectedPage = null;
+            }
+
+
+            if (filterType === 'brands') {
+                this.$emit('updateBrands')
+            }
+            if (filterType === 'sizes') {
+                this.$emit('updateSizes')
             }
 
             if (this.searchQuery) {
@@ -349,6 +419,7 @@ export default {
             } else {
                 this.filterProduct()
             }
+            this.$emit('updateColors')
         },
 
         selectTag(tag) {
@@ -366,6 +437,8 @@ export default {
             } else {
                 this.filterProduct()
             }
+
+            this.$emit('updateTags')
         },
 
         filterSearchProduct() {
@@ -416,6 +489,39 @@ export default {
 </script>
 
 <style lang="scss">
+
+.search-category-content {
+    padding: 5px;
+    border-radius: 5px;
+
+    .parent {
+        font-weight: bold
+    }
+
+    .parent-not-null {
+        margin-bottom: 10px
+    }
+
+    .parent-not-parent {
+        font-weight: bold;
+        margin-bottom: 10px
+    }
+
+    .middle-category {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
+
+    .not-parent-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+}
+
 
 .widget_filter_price {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

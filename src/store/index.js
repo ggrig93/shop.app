@@ -26,6 +26,7 @@ export default new Vuex.Store({
         searchProducts: [],
         productColors: [],
         productTags: [],
+        productSections: [],
         cartTotalPrice: 0,
         otherFilters: {
             search: '',
@@ -111,6 +112,9 @@ export default new Vuex.Store({
         },
         setProductTags(state, value) {
             state.productTags = value
+        },
+        setProductSections(state, value) {
+            state.productSections = value
         },
     },
     actions: {
@@ -259,6 +263,12 @@ export default new Vuex.Store({
         getSearchProducts({state}, search) {
             http.get('/product/search?search=' + search)
                 .then(res => state.searchProducts = res.data)
+                .catch(err => console.log(err))
+        },
+        getProductSections({state}, ids) {
+            let url = ids.length ? '?ids=' + ids : ''
+            http.get('/product/sections' + url)
+                .then(res => state.productSections = res.data.data)
                 .catch(err => console.log(err))
         },
     },

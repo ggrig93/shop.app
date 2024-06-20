@@ -130,7 +130,11 @@
                         :per_page="per_page"
                         :by_price="by_price"
                         :select_page="select_page"
-                        @renderSidebar="renderSidebar"
+                        @updateTags="updateTags"
+                        @updateColors="updateColors"
+                        @updateSizes="updateSizes"
+                        @updateBrands="updateBrands"
+                        @updateSections="updateSections"
                     />
                 </div>
             </div>
@@ -162,11 +166,11 @@ export default {
             productSizes: [],
             productColors: [],
             productTags: [],
-            productSections: [],
+            productSectionIds: [],
         }
     },
     computed: {
-        ...mapGetters(["settings", 'subCategories']),
+        ...mapGetters(["settings", 'subCategories', 'productSections']),
         isMobile() {
             return this.width <= 768 && this.width > 0
         },
@@ -177,33 +181,7 @@ export default {
             if (!this.$store.state.products || !this.$store.state.products.data) {
                 return null;
             }
-            this.$store.state.products.data.forEach(product => {
-                if (!this.productBrands.some(brand => brand.id === product.brand.id)) {
-                    this.productBrands.push(product.brand);
-                }
-                product.gallery.forEach(gallery => {
-                    if (!this.productColors.some(color => color.id === gallery.color.id)) {
-                        this.productColors.push(gallery.color);
-                    }
-
-                    gallery.sizes.forEach(size => {
-                        if (!this.productSizes.some(item => item.id === size.id)) {
-                            this.productSizes.push(size);
-                        }
-                    });
-                });
-                product.tags.forEach(tag => {
-                    if (!this.productTags.some(item => item.id === tag.id)) {
-                        this.productTags.push(tag);
-                    }
-                });
-                product.sections.forEach(section => {
-                    if (!this.productSections.some(item => item.id === section.id)) {
-                        this.productSections.push(section);
-                    }
-                });
-            });
-
+           this.productsData(this.$store.state.products.data)
 
             return this.$store.state.products.data;
         },
@@ -214,8 +192,11 @@ export default {
             return this.productBrands
         },
         categories() {
-            if (this.searchQuery) {
-                return this.productSections
+            const searchParam = this.searchQuery;
+            if (searchParam) {
+                if (this.productSections.length) {
+                    return this.productSections
+                }
             }
             return this.$store.state.subCategories
         },
@@ -258,8 +239,7 @@ export default {
     async created() {
         const searchParam = this.searchQuery;
         if (searchParam) {
-            this.searchProducts();
-
+            await this.searchProducts();
         } else {
             await this.$store.dispatch('getSubCategories', this.categoryIds);
         }
@@ -270,15 +250,45 @@ export default {
         this.setPage(1)
         this.setPerPage('')
     },
-    mounted() {
+    async mounted() {
         this.addResizeListener()
-        this.renderSidebar()
     },
     destroyed() {
         window.removeEventListener('resize', this.onResizeEvent)
     },
     methods: {
         ...mapMutations(["setByPrice", "setPage", "setCategory", "setPerPage", 'setSubCategories']),
+
+        productsData(products) {
+            products.forEach(product => {
+                if (!this.productBrands.some(brand => brand.id === product.brand.id)) {
+                    this.productBrands.push(product.brand);
+                }
+                product.gallery.forEach(gallery => {
+                    if (!this.productColors.some(color => color.id === gallery.color.id)) {
+                        this.productColors.push(gallery.color);
+                    }
+
+                    gallery.sizes.forEach(size => {
+                        if (!this.productSizes.some(item => item.id === size.id)) {
+                            this.productSizes.push(size);
+                        }
+                    });
+                });
+                product.tags.forEach(tag => {
+                    if (!this.productTags.some(item => item.id === tag.id)) {
+                        this.productTags.push(tag);
+                    }
+                });
+                product.sections.forEach(section => {
+                    if (!this.productSectionIds.includes(section.id)) {
+                        this.productSectionIds.push(section.id);
+                    }
+                })
+            });
+
+            this.$store.dispatch('getProductSections', this.productSectionIds)
+        },
 
         addResizeListener() {
             if (window) {
@@ -324,12 +334,32 @@ export default {
             }
             this.$store.dispatch('getFilteredProducts', data)
         },
-        renderSidebar() {
+        updateTags() {
+            this.productBrands = []
+            this.productSizes = []
+            this.productColors = []
+        },
+        updateColors() {
+            this.productBrands = []
+            this.productSizes = []
+            this.productTags = []
+        },
+        updateSizes() {
+            this.productBrands = []
+            this.productColors = []
+            this.productTags = []
+        },
+        updateBrands() {
+            this.productSizes = []
+            this.productColors = []
+            this.productTags = []
+        },
+        updateSections() {
             this.productBrands = []
             this.productSizes = []
             this.productColors = []
             this.productTags = []
-        }
+        },
     }
 }
 </script>
