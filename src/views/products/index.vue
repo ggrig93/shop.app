@@ -89,7 +89,7 @@
             </div>
             <div class="row products-wrapper">
                 <div class="content-area shop-grid-content no-banner col-lg-10 col-md-9 col-sm-12 col-xs-12">
-                    <div v-if="!products">{{ $t('nothing_was_found_result_query') }}</div>
+                    <div v-if="products && !products.length">{{ $t('nothing_was_found_result_query') }}</div>
                     <div v-else class="site-main">
                         <ul v-if="!loading"
                             class="row list-products auto-clear equal-container"
@@ -130,6 +130,11 @@
                         :per_page="per_page"
                         :by_price="by_price"
                         :select_page="select_page"
+                        @updateTags="updateTags"
+                        @updateColors="updateColors"
+                        @updateSizes="updateSizes"
+                        @updateBrands="updateBrands"
+                        @updateSections="updateSections"
                     />
                 </div>
             </div>
@@ -157,10 +162,15 @@ export default {
             width: 0,
             select_page: null,
             categoryIds: [],
+            productBrands: [],
+            productSizes: [],
+            productColors: [],
+            productTags: [],
+            productSectionIds: [],
         }
     },
     computed: {
-        ...mapGetters(["settings", 'categoryBrands', 'categorySizes', 'subCategories']),
+        ...mapGetters(["settings", 'subCategories', 'productSections']),
         isMobile() {
             return this.width <= 768 && this.width > 0
         },
@@ -168,29 +178,42 @@ export default {
             return this.$store.state.products?.meta
         },
         products() {
-            return this.$store.state.products?.data
+            if (!this.$store.state.products || !this.$store.state.products.data) {
+                return null;
+            }
+           this.productsData(this.$store.state.products.data)
+
+            return this.$store.state.products.data;
         },
         color() {
-            return this.$store.state.colors
+            return this.productColors
         },
         brands() {
-            return this.$store.state.categoryBrands
+            return this.productBrands
         },
         categories() {
+            const searchParam = this.searchQuery;
+            if (searchParam) {
+                if (this.productSections.length) {
+                    return this.productSections
+                }
+            }
             return this.$store.state.subCategories
         },
         sizes() {
-            return this.$store.state.categorySizes
+            return this.productSizes
         },
         tags() {
-            return this.$store.state.tags
+            return this.productTags
         },
         loading() {
             return this.$store.state.loading
         },
-        /* todo */
         price() {
             return {min: 10, max: 100}
+        },
+        searchQuery() {
+            return this.$route.query.search || '';
         }
     },
     watch: {
@@ -214,27 +237,59 @@ export default {
         },
     },
     async created() {
-        await this.$store.dispatch('getColors')
-        await this.$store.dispatch('getTags')
-        await this.$store.dispatch('getCategoryBrands', this.categoryIds)
-        await this.$store.dispatch('getCategorySizes', this.categoryIds)
-        await this.$store.dispatch('getSubCategories', this.categoryIds)
+        const searchParam = this.searchQuery;
+        if (searchParam) {
+            await this.searchProducts();
+        } else {
+            await this.$store.dispatch('getSubCategories', this.categoryIds);
+        }
     },
     beforeDestroy() {
-        this.setSearch('')
         this.setByPrice('')
         this.setCategory([])
         this.setPage(1)
         this.setPerPage('')
     },
-    mounted() {
+    async mounted() {
         this.addResizeListener()
     },
     destroyed() {
         window.removeEventListener('resize', this.onResizeEvent)
     },
     methods: {
-        ...mapMutations(["setByPrice", "setSearch", "setPage", "setCategory", "setPerPage", "setCategoryBrands", 'setCategorySizes', 'setSubCategories']),
+        ...mapMutations(["setByPrice", "setPage", "setCategory", "setPerPage", 'setSubCategories']),
+
+        productsData(products) {
+            products.forEach(product => {
+                if (!this.productBrands.some(brand => brand.id === product.brand.id)) {
+                    this.productBrands.push(product.brand);
+                }
+                product.gallery.forEach(gallery => {
+                    if (!this.productColors.some(color => color.id === gallery.color.id)) {
+                        this.productColors.push(gallery.color);
+                    }
+
+                    gallery.sizes.forEach(size => {
+                        if (!this.productSizes.some(item => item.id === size.id)) {
+                            this.productSizes.push(size);
+                        }
+                    });
+                });
+                product.tags.forEach(tag => {
+                    if (!this.productTags.some(item => item.id === tag.id)) {
+                        this.productTags.push(tag);
+                    }
+                });
+                product.sections.forEach(section => {
+                    if (!this.productSectionIds.includes(section.id)) {
+                        this.productSectionIds.push(section.id);
+                    }
+                })
+            });
+
+            this.$store.dispatch('getProductSections', this.productSectionIds)
+        },
+
         addResizeListener() {
             if (window) {
                 window.addEventListener('resize', this.onResizeEvent)
@@ -272,7 +327,39 @@ export default {
             if (this.$router.currentRoute.params.slug !== prod.slug) {
                 this.$router.push({ name: 'Product', params: { slug: prod.slug } });
             }
-        }
+        },
+        searchProducts() {
+            const data = {
+                search: this.$route.query.search,
+            }
+            this.$store.dispatch('getFilteredProducts', data)
+        },
+        updateTags() {
+            this.productBrands = []
+            this.productSizes = []
+            this.productColors = []
+        },
+        updateColors() {
+            this.productBrands = []
+            this.productSizes = []
+            this.productTags = []
+        },
+        updateSizes() {
+            this.productBrands = []
+            this.productColors = []
+            this.productTags = []
+        },
+        updateBrands() {
+            this.productSizes = []
+            this.productColors = []
+            this.productTags = []
+        },
+        updateSections() {
+            this.productBrands = []
+            this.productSizes = []
+            this.productColors = []
+            this.productTags = []
+        },
     }
 }
 </script>

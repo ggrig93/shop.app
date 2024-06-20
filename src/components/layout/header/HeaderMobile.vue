@@ -52,24 +52,11 @@
                                 <input
                                     type="text"
                                     v-model="query"
-                                    @input="filterBrands"
-                                    placeholder="Search..."
+                                    :placeholder="$t('search')"
                                 />
-                                <ul v-click-outside="hide"
-                                    class="search-content"
-                                    v-if="filteredBrand.length"
-                                >
-                                    <li
-                                        v-for="(brand, index) in filteredBrand"
-                                        :key="index"
-                                        @click="selectBrand(brand)"
-                                    >
-                                        {{ brand.name }}
-                                    </li>
-                                </ul>
                             </div>
                         </div>
-                        <button @click="brandPage" class="btn-search" type="submit"
+                        <button @click="productSearch" class="btn-search" type="submit"
                                 :style="{'background-color': settings ? settings.main_color : 'white'}">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </button>
@@ -83,68 +70,28 @@
 <script>
 
 import headerMixin from "@/mixins/header.mixin";
-import {mapActions, mapGetters, mapMutations} from "vuex";
 import TopBar from "@/components/layout/header/TopBar";
+import {mapGetters} from "vuex";
 
 export default {
     name: "HeaderMobile",
     mixins: [headerMixin, TopBar],
     data() {
         return {
-            search: "",
             query: '',
-            selectedBrand: null,
-            filteredBrand: [],
         }
     },
     computed: {
-        ...mapGetters(["settings", 'brands']),
-    },
-    watch: {
-        '$route.query': {
-            immediate: true,
-            handler(val) {
-                if (val?.search) {
-                    this.search = val.search
-                } else {
-                    this.search = ""
-                }
-            }
-        }
+        ...mapGetters(["settings"]),
     },
     methods: {
-        ...mapMutations(["setSearch"]),
-        ...mapActions(["getBrands"]),
-        searchHandler() {
-            if (this.search !== '') {
-                this.setSearch(this.search)
-                this.$router.replace({name: 'Products', query: {search: this.search}})
-            }
-        },
-        filterBrands() {
-            const queryLower = this.query.toLowerCase();
-            this.filteredBrand = this.brands.filter((brand) =>
-                brand.name.toLowerCase().includes(queryLower)
-            );
-        },
-        selectBrand(brand) {
-            this.query = brand.name;
-            this.selectedBrand = brand;
-            this.filteredBrand = [];
-        },
-
-        brandPage() {
-            if (this.selectedBrand) {
-                if (this.$router.currentRoute.params.id !== this.selectedBrand.id) {
-                    this.$router.push({name: 'Brand', params: {id: this.selectedBrand.id}});
-                    this.query = []
-                    this.selectedBrand = null
+        productSearch() {
+            if (this.query.length >= 3) {
+                if (this.$router.currentRoute.query.search !== this.query) {
+                    this.$router.replace({name: 'Products', query: {search: this.query}})
                 }
             }
         },
-        hide() {
-            this.filteredBrand = []
-        }
     },
 }
 </script>
