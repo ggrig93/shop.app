@@ -52,7 +52,7 @@
                             </div>
                         </Transition>
                         <Transition>
-                            <div class="sections" v-if="item.sections.length">
+                            <div class="sections" v-if="item.sections">
                                 <div
                                     v-for="section in item.sections"
                                     :key="section.id"
