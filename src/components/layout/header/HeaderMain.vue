@@ -38,24 +38,11 @@
                                     <input
                                         type="text"
                                         v-model="query"
-                                        @input="filterBrands"
                                         :placeholder="$t('search')"
                                     />
-                                    <ul v-click-outside="hide"
-                                        class="search-content"
-                                        v-if="filteredBrand.length"
-                                    >
-                                        <li
-                                            v-for="(brand, index) in filteredBrand"
-                                            :key="index"
-                                            @click="selectBrand(brand)"
-                                        >
-                                            {{ brand.name }}
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
-                            <button @click="brandPage" class="btn-search" type="submit"
+                            <button @click="search" class="btn-search" type="submit"
                                     :style="{'background-color': settings ? settings.main_color : 'white'}">
                                 <span class="icon-search"></span>
                             </button>
@@ -186,7 +173,7 @@ import DeletePopup from "@/components/DeletePopup.vue";
 import headerMixin from "@/mixins/header.mixin";
 import productMixin from "@/mixins/product.mixin";
 import ClickOutside from 'vue-click-outside'
-import {mapActions, mapGetters, mapMutations} from "vuex";
+import {mapGetters} from "vuex";
 
 
 export default {
@@ -197,7 +184,6 @@ export default {
         return {
             tab: 'login',
             selectedCategory: 1,
-            search: "",
             showDeletePopup: false,
             fixedCartPopup: false,
             query: '',
@@ -206,7 +192,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["settings", 'brands']),
+        ...mapGetters(["settings"]),
         styleObject: function () {
             return {
                 '--bg-color': this.settings ? this.settings.main_color : 'white',
@@ -250,29 +236,8 @@ export default {
             this.fixedCartPopup = val && window.scrollY > 180
             console.log(val, window.scrollY)
         },
-        '$route.query': {
-            immediate: true,
-            handler(val) {
-                if (val?.search) {
-                    this.search = val.search
-                } else {
-                    this.search = ""
-                }
-            }
-        }
-    },
-    mounted() {
-        this.getBrands()
     },
     methods: {
-        ...mapMutations(["setSearch","setBrandId"]),
-        ...mapActions(["getBrands"]),
-        searchHandler() {
-            this.setSearch(this.search)
-            if (this.search !== '') {
-                this.$router.replace({name: 'Products', query: {search: this.search}})
-            }
-        },
         closeModal() {
             this.showDeletePopup = false
         },
@@ -280,35 +245,14 @@ export default {
             this.removeCartItem(this.showDeletePopup)
             this.closeModal()
         },
-
-        filterBrands() {
-            const queryLower = this.query.toLowerCase();
-            this.filteredBrand = this.brands.filter((brand) =>
-                brand.name.toLowerCase().includes(queryLower)
-            );
-        },
-        selectBrand(brand) {
-            this.query = brand.name;
-            this.selectedBrand = brand;
-            this.filteredBrand = [];
-        },
-
-        brandPage() {
-            if (this.selectedBrand) {
-                if (this.$router.currentRoute.params.slug !== this.selectedBrand.slug) {
-                    this.setBrandId(this.selectedBrand.id)
-                    this.$router.push({name: 'Brand', params: {slug: this.selectedBrand.slug}});
-                    this.query = []
-                    this.selectedBrand = null
+        search() {
+            if (this.query.length >= 3) {
+                if (this.$router.currentRoute.query.search !== this.query) {
+                    this.$router.replace({name: 'Products', query: {search: this.query}})
                 }
             }
         },
-        hide() {
-            this.filteredBrand = []
-        }
     },
-
-
 }
 </script>
 

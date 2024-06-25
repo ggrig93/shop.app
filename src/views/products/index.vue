@@ -99,7 +99,7 @@
                                 :class="layoutMode
                                   ? 'col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-6 style-1'
                                   : 'col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-6 style-1'"
-                                v-for="prod in products" :key="prod.id"
+                                v-for="prod in products.data" :key="prod.id"
                                 @click="productPage(prod)"
                             >
                                 <ProductCart
@@ -130,6 +130,7 @@
                         :per_page="per_page"
                         :by_price="by_price"
                         :select_page="select_page"
+                        :selectedSearchedSubCategories="selectedSubCategories"
                     />
                 </div>
             </div>
@@ -157,6 +158,7 @@ export default {
             width: 0,
             select_page: null,
             categoryIds: [],
+            selectedSubCategories: [],
         }
     },
     computed: {
@@ -168,7 +170,7 @@ export default {
             return this.$store.state.products?.meta
         },
         products() {
-            return this.$store.state.products?.data
+            return this.$store.state.products;
         },
         color() {
             return this.$store.state.colors
@@ -177,6 +179,9 @@ export default {
             return this.$store.state.categoryBrands
         },
         categories() {
+            if (this.searchQuery) {
+                return this.$store.state.categories
+            }
             return this.$store.state.subCategories
         },
         sizes() {
@@ -188,12 +193,30 @@ export default {
         loading() {
             return this.$store.state.loading
         },
-        /* todo */
         price() {
             return {min: 10, max: 100}
+        },
+        searchQuery() {
+            return this.$route.query.search || '';
         }
     },
     watch: {
+        products: {
+            handler(val) {
+                if (val && val.sections.length) {
+                    this.selectedSubCategories = val.sections
+                } else if (val && !val.sections.length) {
+                    this.$store.dispatch('getCategoryBrands', [])
+                    this.$store.dispatch('getCategorySizes', [])
+                }
+            }
+        },
+        selectedSubCategories: {
+            handler(val) {
+                this.$store.dispatch('getCategoryBrands', val)
+                this.$store.dispatch('getCategorySizes', val)
+            }
+        },
         '$route.query': {
             immediate: true,
             deep: true,
@@ -214,11 +237,15 @@ export default {
         },
     },
     async created() {
+        if (this.searchQuery) {
+            await this.$store.dispatch('getCategories')
+        } else {
+            await this.$store.dispatch('getSubCategories', this.categoryIds)
+            await this.$store.dispatch('getCategoryBrands', this.categoryIds)
+            await this.$store.dispatch('getCategorySizes', this.categoryIds)
+        }
         await this.$store.dispatch('getColors')
         await this.$store.dispatch('getTags')
-        await this.$store.dispatch('getCategoryBrands', this.categoryIds)
-        await this.$store.dispatch('getCategorySizes', this.categoryIds)
-        await this.$store.dispatch('getSubCategories', this.categoryIds)
     },
     beforeDestroy() {
         this.setSearch('')
