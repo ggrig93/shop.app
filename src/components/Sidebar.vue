@@ -307,7 +307,7 @@ export default {
     },
     mounted() {
         if (this.searchQuery) {
-            this.filterSearchProduct()
+            this.filterSearchProduct(false)
         } else {
             this.filters.selectedCategories = this.queryToArray(this.$route.query['filter[categories]'])
             this.filterProduct()
@@ -402,9 +402,9 @@ export default {
             }
         },
 
-        filterSearchProduct() {
+        filterSearchProduct(val) {
             const data = {
-                'filter[searchType]': true,
+                'filter[searchType]': val,
                 'filter[categories]': this.selectedSearchCategories,
                 'filter[brands]': this.filters.selectedBrands,
                 'filter[colors]': this.filters.selectedColors,
@@ -454,7 +454,7 @@ export default {
                 this.selectedSearchCategories.splice(index,1)
             }
 
-            this.filterSearchProduct()
+            this.filterSearchProduct(true)
         }
     }
 }
