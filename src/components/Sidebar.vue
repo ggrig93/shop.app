@@ -16,9 +16,9 @@
                                <span class="parent-category">{{ categoryName(category.name) }}</span>
                                <div
                                    v-if="category.sub_sections.length"
-                                   @click="showCategories = (showCategories === category.id) ? null : category.id"
+                                   @click="toggleCategory(category.id)"
                                >
-                                   <div class="show-subCats" v-if="showCategories === category.id">
+                                   <div class="show-subCats" v-if="isCategoryOpen(category.id)">
                                        <i class="fa fa-minus" aria-hidden="true"></i>
                                    </div>
                                    <div v-else>
@@ -28,7 +28,7 @@
                            </div>
                             <transition>
                                 <div
-                                    v-show="showCategories === category.id"
+                                    v-show="isCategoryOpen(category.id)"
                                     v-if="category.sub_sections.length"
                                 >
                                     <SubSections
@@ -210,6 +210,7 @@ export default {
             selectedPage: null,
             showCategories: null,
             selectedSearchCategories: [],
+            openCategoryIds: [],
         }
     },
     computed: {
@@ -284,9 +285,6 @@ export default {
                 if (val['filter[tags]']) {
                     this.filters.selectedTags = this.queryToArray(val['filter[tags]'])
                 }
-                if (val.search) {
-                    this.setSearch(val.search.trim())
-                }
                 if (val['filter[by_price]']) {
                     this.setByPrice(val['filter[by_price]'])
                 }
@@ -307,14 +305,14 @@ export default {
     },
     mounted() {
         if (this.searchQuery) {
-            this.filterSearchProduct(false)
+            this.filterSearchProduct('search')
         } else {
             this.filters.selectedCategories = this.queryToArray(this.$route.query['filter[categories]'])
             this.filterProduct()
         }
     },
     methods: {
-        ...mapMutations(["setSearch", "setByPrice", "setPage", "setPerPage", 'setCategoryBrands', 'setCategorySizes']),
+        ...mapMutations(["setByPrice", "setPage", "setPerPage", 'setCategoryBrands', 'setCategorySizes']),
 
         checkSelectedCategories(categoryId) {
             if (this.categories.length) {
@@ -402,9 +400,8 @@ export default {
             }
         },
 
-        filterSearchProduct(val) {
+        filterSearchProduct(type) {
             const data = {
-                'filter[searchType]': val,
                 'filter[categories]': this.selectedSearchCategories,
                 'filter[brands]': this.filters.selectedBrands,
                 'filter[colors]': this.filters.selectedColors,
@@ -417,6 +414,10 @@ export default {
                 search: this.$route.query.search,
                 'filter[page]': this.selectedPage ? this.selectedPage : this.page,
             }
+            if (type) {
+                data['filter[searchType]'] = type;
+            }
+
             const queryData = {...data}
             const params = new URLSearchParams(queryData).toString();
             window.history.replaceState(null, null, '?' + params);
@@ -453,9 +454,20 @@ export default {
                 const index = this.selectedSearchCategories.indexOf(value);
                 this.selectedSearchCategories.splice(index,1)
             }
+            this.filterSearchProduct()
+        },
 
-            this.filterSearchProduct(true)
-        }
+        toggleCategory(id) {
+            const index = this.openCategoryIds.indexOf(id);
+            if (index > -1) {
+                this.openCategoryIds.splice(index, 1);
+            } else {
+                this.openCategoryIds.push(id);
+            }
+        },
+        isCategoryOpen(id) {
+            return this.openCategoryIds.includes(id);
+        },
     }
 }
 </script>
@@ -497,13 +509,14 @@ export default {
     }
 }
 .category-content-wrapper {
+    width: 100%;
     border: 1px solid #F1F1F1;
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 20px;
     .category-wrapper {
         margin-bottom: 10px;
-        border-bottom: 1px solid #F1F1F1;
+        border-bottom: 3px solid #F1F1F1;
         padding-bottom: 10px;
         .category-content {
             .first-section {
@@ -519,9 +532,38 @@ export default {
     }
     .children {
         margin-bottom: 10px;
-        border-bottom: 1px solid #F1F1F1;
+        border-bottom: 3px solid #F1F1F1;
         padding-bottom: 10px;
+        margin-top: 10px;
     }
+}
+.sidebar {
+    padding: 0 5px;
+}
+.sidebar-filters_wrap {
+    padding: 20px 0 !important;
+    > div {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+.list-categories {
+    max-height: 170px;
+    min-height: auto;
+    overflow-y: auto;
+}
+
+.list-brand {
+    max-height: 170px;
+    min-height: auto;
+    overflow-y: auto;
+}
+
+.list-color {
+    max-height: 170px;
+    min-height: auto;
+    overflow-y: auto;
 }
 
 </style>

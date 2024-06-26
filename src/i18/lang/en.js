@@ -91,5 +91,7 @@ const en = {
         assortment_watches: 'Stylish watches',
         assortment_jewelry: 'Stylish jewelry',
         sale: 'Start shopping',
+        are_you_sure: 'Are you sure',
+
 }
 export {en}

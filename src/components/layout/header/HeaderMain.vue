@@ -39,7 +39,21 @@
                                         type="text"
                                         v-model="query"
                                         :placeholder="$t('search')"
+                                        @input="filterBrands"
                                     />
+                                    <ul v-click-outside="hide"
+                                        class="search-content"
+                                        v-if="filteredBrandAndCategory.length"
+                                        v-show="isShowAutocomplete"
+                                    >
+                                        <li
+                                            v-for="(item, index) in filteredBrandAndCategory"
+                                            :key="index"
+                                            @click="selectBrandCategory(item)"
+                                        >
+                                            {{ item }}
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <button @click="search" class="btn-search" type="submit"
@@ -187,9 +201,20 @@ export default {
             showDeletePopup: false,
             fixedCartPopup: false,
             query: '',
-            selectedBrand: null,
-            filteredBrand: [],
+            categoriesBrands: [],
+            filteredBrandAndCategory: [],
+            isShowAutocomplete: false,
         }
+    },
+    props: {
+        allCategories: {
+            type: Array,
+            default: () => []
+        },
+        brands: {
+            type: Array,
+            default: () => []
+        },
     },
     computed: {
         ...mapGetters(["settings"]),
@@ -236,6 +261,38 @@ export default {
             this.fixedCartPopup = val && window.scrollY > 180
             console.log(val, window.scrollY)
         },
+        '$route.query': {
+            handler(val) {
+                if (val.search) {
+                    this.query = val.search
+                } else {
+                    this.query = null
+                }
+            }
+        },
+
+        allCategories: {
+            handler(val) {
+                if (val && val.length) {
+                    const categorySet = new Set(this.categoriesBrands);
+                    val.forEach(category => {
+                        categorySet.add(category.name[this.$i18n.locale]);
+                    });
+                    this.categoriesBrands = Array.from(categorySet);
+                }
+            }
+        },
+        brands: {
+            handler(val) {
+                if (val && val.length) {
+                    const brandSet = new Set(this.categoriesBrands);
+                    val.forEach(brand => {
+                        brandSet.add(brand.name);
+                    });
+                    this.categoriesBrands = Array.from(brandSet);
+                }
+            }
+        }
     },
     methods: {
         closeModal() {
@@ -246,11 +303,28 @@ export default {
             this.closeModal()
         },
         search() {
-            if (this.query.length >= 3) {
+            if (this.query && this.query.length >= 3) {
                 if (this.$router.currentRoute.query.search !== this.query) {
                     this.$router.replace({name: 'Products', query: {search: this.query}})
                 }
             }
+        },
+        hide() {
+            this.isShowAutocomplete = false
+        },
+        filterBrands() {
+            const queryLower = this.query.toLowerCase();
+            this.filteredBrandAndCategory = this.categoriesBrands.filter((item) =>
+                item.toLowerCase().includes(queryLower)
+            );
+
+            if (this.filteredBrandAndCategory) {
+                this.isShowAutocomplete = true
+            }
+        },
+        selectBrandCategory(value) {
+            this.query = value;
+            this.isShowAutocomplete = false;
         },
     },
 }

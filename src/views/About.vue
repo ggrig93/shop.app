@@ -24,7 +24,7 @@
                             {{$t('unique_text1')}} <br/>
                             {{$t('unique_text2')}}
                           </div>
-                          <router-link to="/products" class="ysera-button button" :style="styleObject">{{ $t('buy') }}</router-link>
+<!--                          <router-link to="/products" class="ysera-button button" :style="styleObject">{{ $t('buy') }}</router-link>-->
                         </div>
                       </div>
                     </div>

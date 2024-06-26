@@ -23,9 +23,9 @@ export default new Vuex.Store({
         shopProducts: [],
         brandCategory: [],
         wishList: [],
+        allCategories: [],
         cartTotalPrice: 0,
         otherFilters: {
-            search: '',
             by_price: '',
             page: 1,
             category: [],
@@ -49,10 +49,14 @@ export default new Vuex.Store({
         brands: state => state.brands,
         brandCategory: state => state.brandCategory,
         brandId: state => state.brandId,
+        allCategories: state => state.allCategories,
     },
     mutations: {
         setShopProducts(state, value) {
             state.shopProducts = value
+        },
+        setAllCategories(state, value) {
+            state.allCategories = value
         },
         setBrandId(state, value) {
             state.brandId = value
@@ -62,9 +66,6 @@ export default new Vuex.Store({
         },
         setWishList(state, value) {
             state.wishList = value
-        },
-        setSearch(state, value) {
-            state.otherFilters.search = value
         },
         setByPrice(state, value) {
             state.otherFilters.by_price = value
@@ -169,6 +170,12 @@ export default new Vuex.Store({
         getCategories({state}) {
             http.get('/section')
                 .then(res => state.categories = res.data.data)
+                .catch(err => console.log(err))
+        },
+
+        getAllCategories({state}) {
+            http.get('/section/all')
+                .then(res => state.allCategories = res.data.data)
                 .catch(err => console.log(err))
         },
         getSizes({state}) {

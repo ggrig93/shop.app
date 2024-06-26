@@ -50,11 +50,15 @@ export default {
         },
         addToCart(product) {
             const shopProducts =
-              JSON.parse(localStorage.getItem("shopProducts")) ?
-                JSON.parse(localStorage.getItem("shopProducts")) : [];
-            shopProducts.unshift(product)
-            localStorage.setItem('shopProducts', JSON.stringify(shopProducts))
-            this.$store.commit("setShopProducts", JSON.parse(localStorage.getItem("shopProducts")))
+                JSON.parse(localStorage.getItem("shopProducts")) ?
+                    JSON.parse(localStorage.getItem("shopProducts")) : [];
+
+            const productExists = shopProducts.some(item => item.id === product.id);
+            if (!productExists) {
+                shopProducts.unshift(product);
+                localStorage.setItem('shopProducts', JSON.stringify(shopProducts));
+                this.$store.commit("setShopProducts", shopProducts);
+            }
         },
         addToWishList(product) {
             const wishList =

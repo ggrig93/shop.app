@@ -91,6 +91,8 @@ const am = {
         assortment_watches: 'Նորավոճ ժամացույցներ',
         assortment_jewelry: 'Նորավոճ զարդեր',
         sale: 'Սկսել shopping',
+        are_you_sure: 'Համոզվա՞ծ եք',
+
 }
 
 export {am}

@@ -17,10 +17,9 @@
                         />
                     </span>
                     <div
-                        v-if="section.sub_sections.length"
-                        @click="showCategories = (showCategories === section.id) ? null : section.id"
+                        v-if="section.sub_sections.length" @click="toggleCategory(section.id)"
                     >
-                        <div class="show-subCats" v-if="showCategories === section.id">
+                        <div class="show-subCats" v-if="isCategoryOpen(section.id)">
                             <i class="fa fa-minus" aria-hidden="true"></i>
                         </div>
                         <div v-else>
@@ -31,7 +30,7 @@
                 <transition>
                     <div
                         class="children"
-                        v-show="showCategories === section.id"
+                        v-show="isCategoryOpen(section.id)"
                         v-if="section.sub_sections.length"
                     >
                         <SubSections
@@ -64,7 +63,7 @@ export default {
     },
     data() {
         return {
-            showCategories: null,
+            openCategoryIds: [],
         }
     },
 
@@ -79,7 +78,18 @@ export default {
 
         passSelectedBoxes(value) {
             this.$emit('updated', value)
-        }
+        },
+        toggleCategory(id) {
+            const index = this.openCategoryIds.indexOf(id);
+            if (index > -1) {
+                this.openCategoryIds.splice(index, 1); // Close category
+            } else {
+                this.openCategoryIds.push(id); // Open category
+            }
+        },
+        isCategoryOpen(id) {
+            return this.openCategoryIds.includes(id);
+        },
     }
 }
 </script>

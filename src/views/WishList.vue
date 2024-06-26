@@ -19,7 +19,6 @@
           </ul>
           <div v-else class="empty-wishlist" :style="styleObject">
              <div class="empty-wishlist_text">{{ $t('there_are_still_products') }}</div>
-            <router-link to="/products" class="button view-all">{{ $t('view_all') }}</router-link>
           </div>
         </div>
       </div>

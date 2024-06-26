@@ -52,24 +52,25 @@
                                 <input
                                     type="text"
                                     v-model="query"
+                                    :placeholder="$t('search')"
                                     @input="filterBrands"
-                                    placeholder="Search..."
                                 />
                                 <ul v-click-outside="hide"
                                     class="search-content"
-                                    v-if="filteredBrand.length"
+                                    v-if="filteredBrandAndCategory.length"
+                                    v-show="isShowAutocomplete"
                                 >
                                     <li
-                                        v-for="(brand, index) in filteredBrand"
+                                        v-for="(item, index) in filteredBrandAndCategory"
                                         :key="index"
-                                        @click="selectBrand(brand)"
+                                        @click="selectBrandCategory(item)"
                                     >
-                                        {{ brand.name }}
+                                        {{ item }}
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <button @click="brandPage" class="btn-search" type="submit"
+                        <button @click="search" class="btn-search" type="submit"
                                 :style="{'background-color': settings ? settings.main_color : 'white'}">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </button>
@@ -83,7 +84,7 @@
 <script>
 
 import headerMixin from "@/mixins/header.mixin";
-import {mapActions, mapGetters, mapMutations} from "vuex";
+import {mapGetters} from "vuex";
 import TopBar from "@/components/layout/header/TopBar";
 
 export default {
@@ -91,60 +92,83 @@ export default {
     mixins: [headerMixin, TopBar],
     data() {
         return {
-            search: "",
             query: '',
-            selectedBrand: null,
-            filteredBrand: [],
+            categoriesBrands: [],
+            filteredBrandAndCategory: [],
+            isShowAutocomplete: false,
         }
     },
     computed: {
-        ...mapGetters(["settings", 'brands']),
+        ...mapGetters(["settings"]),
+    },
+    props: {
+        allCategories: {
+            type: Array,
+            default: () => []
+        },
+        brands: {
+            type: Array,
+            default: () => []
+        },
     },
     watch: {
         '$route.query': {
-            immediate: true,
             handler(val) {
-                if (val?.search) {
-                    this.search = val.search
+                if (val.search) {
+                    this.query = val.search
                 } else {
-                    this.search = ""
+                    this.query = null
+                }
+            }
+        },
+        allCategories: {
+            handler(val) {
+                if (val && val.length) {
+                    const categorySet = new Set(this.categoriesBrands);
+                    val.forEach(category => {
+                        categorySet.add(category.name[this.$i18n.locale]);
+                    });
+                    this.categoriesBrands = Array.from(categorySet);
+                }
+            }
+        },
+        brands: {
+            handler(val) {
+                if (val && val.length) {
+                    const brandSet = new Set(this.categoriesBrands);
+                    val.forEach(brand => {
+                        brandSet.add(brand.name);
+                    });
+                    this.categoriesBrands = Array.from(brandSet);
                 }
             }
         }
     },
     methods: {
-        ...mapMutations(["setSearch"]),
-        ...mapActions(["getBrands"]),
-        searchHandler() {
-            if (this.search !== '') {
-                this.setSearch(this.search)
-                this.$router.replace({name: 'Products', query: {search: this.search}})
-            }
-        },
-        filterBrands() {
-            const queryLower = this.query.toLowerCase();
-            this.filteredBrand = this.brands.filter((brand) =>
-                brand.name.toLowerCase().includes(queryLower)
-            );
-        },
-        selectBrand(brand) {
-            this.query = brand.name;
-            this.selectedBrand = brand;
-            this.filteredBrand = [];
-        },
-
-        brandPage() {
-            if (this.selectedBrand) {
-                if (this.$router.currentRoute.params.id !== this.selectedBrand.id) {
-                    this.$router.push({name: 'Brand', params: {id: this.selectedBrand.id}});
-                    this.query = []
-                    this.selectedBrand = null
+        search() {
+            if (this.query && this.query.length >= 3) {
+                if (this.$router.currentRoute.query.search !== this.query) {
+                    this.$router.replace({name: 'Products', query: {search: this.query}})
                 }
             }
         },
         hide() {
-            this.filteredBrand = []
-        }
+            this.isShowAutocomplete = false
+        },
+        filterBrands() {
+            const queryLower = this.query.toLowerCase();
+            this.filteredBrandAndCategory = this.categoriesBrands.filter((item) =>
+                item.toLowerCase().includes(queryLower)
+            );
+
+            if (this.filteredBrandAndCategory) {
+                this.isShowAutocomplete = true
+            }
+        },
+        selectBrandCategory(value) {
+            this.query = value;
+            this.isShowAutocomplete = false;
+        },
     },
 }
 </script>

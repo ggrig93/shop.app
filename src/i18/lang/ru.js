@@ -91,6 +91,7 @@ const ru = {
         assortment_watches: 'Стильные часы',
         assortment_jewelry: 'Стильные украшения',
         sale: 'Начать покупки',
+        are_you_sure: 'Вы уверены',
 }
 
 export {ru}

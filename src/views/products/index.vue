@@ -89,7 +89,7 @@
             </div>
             <div class="row products-wrapper">
                 <div class="content-area shop-grid-content no-banner col-lg-10 col-md-9 col-sm-12 col-xs-12">
-                    <div v-if="!products">{{ $t('nothing_was_found_result_query') }}</div>
+                    <div v-if="!checkProducts">{{ $t('nothing_was_found_result_query') }}</div>
                     <div v-else class="site-main">
                         <ul v-if="!loading"
                             class="row list-products auto-clear equal-container"
@@ -159,6 +159,7 @@ export default {
             select_page: null,
             categoryIds: [],
             selectedSubCategories: [],
+            checkProducts: false,
         }
     },
     computed: {
@@ -170,7 +171,7 @@ export default {
             return this.$store.state.products?.meta
         },
         products() {
-            return this.$store.state.products;
+            return this.$store.state.products ?? null;
         },
         color() {
             return this.$store.state.colors
@@ -203,9 +204,12 @@ export default {
     watch: {
         products: {
             handler(val) {
-                if (val && val.sections.length) {
+                if (val && val.data && val.data.length) {
+                    this.checkProducts = true
+                }
+                if (val && val.sections && val.sections.length) {
                     this.selectedSubCategories = val.sections
-                } else if (val && !val.sections.length) {
+                } else if (val && val.sections && !val.sections.length) {
                     this.$store.dispatch('getCategoryBrands', [])
                     this.$store.dispatch('getCategorySizes', [])
                 }
@@ -248,7 +252,6 @@ export default {
         await this.$store.dispatch('getTags')
     },
     beforeDestroy() {
-        this.setSearch('')
         this.setByPrice('')
         this.setCategory([])
         this.setPage(1)
@@ -261,7 +264,7 @@ export default {
         window.removeEventListener('resize', this.onResizeEvent)
     },
     methods: {
-        ...mapMutations(["setByPrice", "setSearch", "setPage", "setCategory", "setPerPage", "setCategoryBrands", 'setCategorySizes', 'setSubCategories']),
+        ...mapMutations(["setByPrice", "setPage", "setCategory", "setPerPage", "setCategoryBrands", 'setCategorySizes', 'setSubCategories']),
         addResizeListener() {
             if (window) {
                 window.addEventListener('resize', this.onResizeEvent)
@@ -387,6 +390,7 @@ export default {
 @media screen and (max-width: 992px) {
     .products-wrapper {
         flex-direction: row-reverse;
+
     }
     .sidebar .wrapper-sidebar {
         margin-top: 0;
@@ -400,6 +404,12 @@ export default {
 }
 
 @media (max-width: 768px) {
+    .products-wrapper {
+        flex-direction: column-reverse;
+    }
+    .sidebar {
+        width: 100%;
+    }
     .left-sidebar .content-area {
         width: 100%;
     }
