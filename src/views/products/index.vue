@@ -171,7 +171,7 @@ export default {
             return this.$store.state.products?.meta
         },
         products() {
-            return this.$store.state.products ?? null;
+            return this.$store.state.products ?? [];
         },
         color() {
             return this.$store.state.colors
@@ -206,6 +206,8 @@ export default {
             handler(val) {
                 if (val && val.data && val.data.length) {
                     this.checkProducts = true
+                } else {
+                    this.checkProducts = false
                 }
                 if (val && val.sections && val.sections.length) {
                     this.selectedSubCategories = val.sections
