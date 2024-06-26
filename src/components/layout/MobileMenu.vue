@@ -1,11 +1,13 @@
 <template>
-    <transition-group name="slide">
+    <transition-group
+        name="slide"
+        v-click-outside="closeMenu"
+    >
         <div
             v-if="open"
             key="slide"
             class="ysera-menu-clone-wrap open"
             style="overflow: hidden"
-            v-click-outside="closeMenu"
         >
             <div class="ysera-menu-panels-actions-wrap">
                 <a v-if="historyMenu.length" class="ysera-menu-prev-panel" href="javascript:void(0)"
