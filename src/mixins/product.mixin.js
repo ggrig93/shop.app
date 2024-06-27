@@ -18,7 +18,6 @@ export default {
         },
         img: {
             get() {
-                // console.log(this.product, "product")
                 return this.activeImg ? this.activeImg : this.product?.gallery[0].images[0].image
             },
             set(val) {
@@ -40,7 +39,9 @@ export default {
         },
         setActiveColor(block) {
             this.activeBlock = block
-            this.activeImg = this.product.gallery.find(el => el.block === block).images[0].image
+            if (block) {
+                this.activeImg = this.product.gallery.find(el => el.block === block).images[0].image
+            }
         },
         removeCartItem(idx) {
             const products = JSON.parse(localStorage.getItem("shopProducts"))

@@ -541,7 +541,6 @@ export default {
     padding: 0 5px;
 }
 .sidebar-filters_wrap {
-    padding: 20px 0 !important;
     > div {
         width: 100%;
         margin-bottom: 20px;

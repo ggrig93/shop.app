@@ -316,6 +316,7 @@ export default {
     justify-content: space-between;
     align-items: center;
 }
+
 .products-header {
     position: relative;
 }
@@ -349,6 +350,7 @@ export default {
     padding: 5px;
     margin-right: 10px;
 }
+
 .shop-top-control.mobile {
     display: none;
 }
@@ -366,6 +368,7 @@ export default {
         width: 80%;
     }
 }
+
 @media screen and (max-width: 1650px) {
     .product-container {
         width: 95%;
