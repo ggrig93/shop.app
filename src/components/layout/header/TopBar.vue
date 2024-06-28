@@ -34,20 +34,6 @@
          {{ lang.name.toLocaleUpperCase() }}
         </option>
       </select>
-
-        <div class="aselect" :data-value="value" :data-list="langs">
-            <div class="selector box" @click="toggle()">
-                <div class="label box">
-                    <span class="box">{{ value }}</span>
-                </div>
-                <div class="arrow box" :class="{ expanded : visible }"></div>
-                <div :class="{ hidden : !visible, visible }">
-                    <ul>
-                        <li :class="{ current : item === value }" v-for="item in langs" :key="item" @click="select(item)">{{ item.name }}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
 <!--      <li id="gh-p-2" class="gh-eb-li gh-t-rt gh&#45;&#45;link__divider rt">-->
 <!--        <a href="https://www.ebay.com/sl/sell" _sp="m570.l1528" data-sp="m570.l1528" class="gh-p">-->
 
@@ -201,19 +187,6 @@ export default {
     changeLocale(locale){
       localStorage.lang = locale
     },
-      toggle() {
-          this.visible = !this.visible;
-      },
-      select(option) {
-          this.value = option;
-      },
-      handleClick(e){
-          console.log(e)
-          const classname = e.target.className;
-          if(this.visible && !classname.includes("box")){
-              this.visible = false;
-          }
-      },
   }
 }
 </script>
@@ -262,69 +235,6 @@ option{
     list-style: none;
 
   }
-}
-
-
-
-.aselect {
-    width: 280px;
-    margin: 20px auto;
-    .selector {
-        border: 1px solid gainsboro;
-        background: #F8F8F8;
-        position: relative;
-        z-index: 1;
-        .arrow {
-            position: absolute;
-            right: 10px;
-            top: 40%;
-            width: 0;
-            height: 0;
-            border-left: 7px solid transparent;
-            border-right: 7px solid transparent;
-            border-top: 10px solid #888;
-            transform: rotateZ(0deg) translateY(0px);
-            transition-duration: 0.3s;
-            transition-timing-function: cubic-bezier(.59,1.39,.37,1.01);
-        }
-        .expanded {
-            transform: rotateZ(180deg) translateY(2px);
-        }
-        .label {
-            display: block;
-            padding: 12px;
-            font-size: 16px;
-            color: #888;
-        }
-    }
-    ul {
-        width: 100%;
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        font-size: 16px;
-        border: 1px solid gainsboro;
-        position: absolute;
-        z-index: 1;
-        background: #fff;
-    }
-    li {
-        padding: 12px;
-        color: #666;
-        &:hover {
-            color: white;
-            background: seagreen;
-        }
-    }
-    .current {
-        background: #eaeaea;
-    }
-    .hidden {
-        visibility: hidden;
-    }
-    .visible {
-        visibility: visible;
-    }
 }
 </style>
 
