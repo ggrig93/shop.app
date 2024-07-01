@@ -259,7 +259,6 @@ export default {
         },
         openMiniCartFromProduct(val) {
             this.fixedCartPopup = val && window.scrollY > 180
-            console.log(val, window.scrollY)
         },
         '$route.query': {
             handler(val) {
