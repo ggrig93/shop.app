@@ -160,6 +160,7 @@ export default {
             categoryIds: [],
             selectedSubCategories: [],
             checkProducts: false,
+            productSections: [],
         }
     },
     computed: {
@@ -209,11 +210,19 @@ export default {
                 } else {
                     this.checkProducts = false
                 }
+
                 if (val && val.sections && val.sections.length) {
                     this.selectedSubCategories = val.sections
                 } else if (val && val.sections && !val.sections.length) {
-                    this.$store.dispatch('getCategoryBrands', [])
-                    this.$store.dispatch('getCategorySizes', [])
+                    val.data.forEach(product => {
+                        if (product.sections.length) {
+                            product.sections.forEach(section => {
+                                if (!this.selectedSubCategories.includes(section.id)) {
+                                    this.selectedSubCategories.push(section.id);
+                                }
+                            });
+                        }
+                    });
                 }
             }
         },

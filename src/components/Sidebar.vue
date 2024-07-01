@@ -239,8 +239,12 @@ export default {
         },
         categories: {
             deep: true,
-            handler() {
+            handler(val) {
                 this.checkSelectedCategories(this.$route.query['filter[categories]'])
+
+                val.map(item => {
+                    this.toggleCategory(item.id)
+                })
             }
         },
         per_page: {
@@ -302,6 +306,7 @@ export default {
                 }
             }
         },
+
     },
     mounted() {
         if (this.searchQuery) {
@@ -516,7 +521,6 @@ export default {
     margin-bottom: 20px;
     .category-wrapper {
         margin-bottom: 10px;
-        border-bottom: 3px solid #F1F1F1;
         padding-bottom: 10px;
         .category-content {
             .first-section {

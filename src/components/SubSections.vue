@@ -61,6 +61,16 @@ export default {
             default: () => []
         },
     },
+    watch: {
+        sections: {
+            handler(val) {
+                val.map(item => {
+                    this.toggleCategory(item.id)
+                })
+
+            }
+        }
+    },
     data() {
         return {
             openCategoryIds: [],
@@ -82,9 +92,9 @@ export default {
         toggleCategory(id) {
             const index = this.openCategoryIds.indexOf(id);
             if (index > -1) {
-                this.openCategoryIds.splice(index, 1); // Close category
+                this.openCategoryIds.splice(index, 1);
             } else {
-                this.openCategoryIds.push(id); // Open category
+                this.openCategoryIds.push(id);
             }
         },
         isCategoryOpen(id) {
