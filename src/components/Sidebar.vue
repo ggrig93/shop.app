@@ -230,11 +230,7 @@ export default {
             deep: true,
             handler(val) {
                 this.selectedPage = val
-                if (this.searchQuery) {
-                    this.filterSearchProduct()
-                } else {
-                    this.filterProduct()
-                }
+                this.filterProduct()
             }
         },
         categories: {
@@ -251,22 +247,14 @@ export default {
             deep: true,
             handler() {
                 this.selectedPage = 1
-                if (this.searchQuery) {
-                    this.filterSearchProduct()
-                } else {
-                    this.filterProduct()
-                }
+                this.filterProduct()
             }
         },
         by_price: {
             deep: true,
             handler() {
                 this.selectedPage = 1
-                if (this.searchQuery) {
-                    this.filterSearchProduct()
-                } else {
-                    this.filterProduct()
-                }
+                this.filterProduct()
             }
         },
         '$route.query': {
@@ -288,6 +276,9 @@ export default {
                 }
                 if (val['filter[tags]']) {
                     this.filters.selectedTags = this.queryToArray(val['filter[tags]'])
+                }
+                if (val.search) {
+                    this.setSearch(val.search.trim())
                 }
                 if (val['filter[by_price]']) {
                     this.setByPrice(val['filter[by_price]'])

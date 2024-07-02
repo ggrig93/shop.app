@@ -53,7 +53,6 @@
                                     type="text"
                                     v-model="query"
                                     :placeholder="$t('search')"
-                                    @input="filterBrands"
                                 />
                                 <ul v-click-outside="hide"
                                     class="search-content"
@@ -92,6 +91,7 @@ export default {
     mixins: [headerMixin, TopBar],
     data() {
         return {
+            search: "",
             query: '',
             categoriesBrands: [],
             filteredBrandAndCategory: [],
