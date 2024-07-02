@@ -18,7 +18,6 @@ export default {
         },
         img: {
             get() {
-                // console.log(this.product, "product")
                 return this.activeImg ? this.activeImg : this.product?.gallery[0].images[0].image
             },
             set(val) {
@@ -40,7 +39,9 @@ export default {
         },
         setActiveColor(block) {
             this.activeBlock = block
-            this.activeImg = this.product.gallery.find(el => el.block === block).images[0].image
+            if (block) {
+                this.activeImg = this.product.gallery.find(el => el.block === block).images[0].image
+            }
         },
         removeCartItem(idx) {
             const products = JSON.parse(localStorage.getItem("shopProducts"))
@@ -50,11 +51,15 @@ export default {
         },
         addToCart(product) {
             const shopProducts =
-              JSON.parse(localStorage.getItem("shopProducts")) ?
-                JSON.parse(localStorage.getItem("shopProducts")) : [];
-            shopProducts.unshift(product)
-            localStorage.setItem('shopProducts', JSON.stringify(shopProducts))
-            this.$store.commit("setShopProducts", JSON.parse(localStorage.getItem("shopProducts")))
+                JSON.parse(localStorage.getItem("shopProducts")) ?
+                    JSON.parse(localStorage.getItem("shopProducts")) : [];
+
+            const productExists = shopProducts.some(item => item.id === product.id);
+            if (!productExists) {
+                shopProducts.unshift(product);
+                localStorage.setItem('shopProducts', JSON.stringify(shopProducts));
+                this.$store.commit("setShopProducts", shopProducts);
+            }
         },
         addToWishList(product) {
             const wishList =

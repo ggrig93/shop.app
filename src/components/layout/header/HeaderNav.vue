@@ -54,18 +54,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!--        <div class="header-nav">-->
-                <!--          <div class="container-wapper">-->
-                <!--            <ul class="ysera-clone-mobile-menu ysera-nav main-menu " id="menu-main-menu">-->
-                <!--              <li :class="['menu-item', item.children.length ? 'menu-item-has-children' : '']" v-for="item in nav" :key="item.id">-->
-                <!--                <template>-->
-                <!--                  <router-link :to="{name: item.view}" class="ysera-menu-item-title" :style="styleObject" :title="item.name">{{item.name}}</router-link>-->
-                <!--                </template>-->
-                <!--              </li>-->
-                <!--            </ul>-->
-                <!--          </div>-->
-                <!--        </div>-->
             </div>
         </div>
     </div>

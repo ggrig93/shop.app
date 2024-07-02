@@ -17,19 +17,15 @@ export default new Vuex.Store({
         dealDayProducts: null,
         popularProducts: null,
         categories: null,
-        productBrands: [],
+        categoryBrands: [],
         categorySizes: [],
         subCategories: [],
         shopProducts: [],
         brandCategory: [],
         wishList: [],
-        searchProducts: [],
-        productColors: [],
-        productTags: [],
-        productSections: [],
+        allCategories: [],
         cartTotalPrice: 0,
         otherFilters: {
-            search: '',
             by_price: '',
             page: 1,
             category: [],
@@ -39,7 +35,6 @@ export default new Vuex.Store({
         openMiniCartFromProduct: false
     },
     getters: {
-        search: state => state.otherFilters.search,
         by_price: state => state.otherFilters.by_price,
         page: state => state.otherFilters.page,
         category: state => state.otherFilters.category,
@@ -47,20 +42,20 @@ export default new Vuex.Store({
         otherFilters: state => state.otherFilters,
         wishList: state => state.wishList,
         settings: state => state.settings,
-        productBrands: state => state.productBrands,
+        categoryBrands: state => state.categoryBrands,
         categorySizes: state => state.categorySizes,
         subCategories: state => state.subCategories,
         brands: state => state.brands,
         brandCategory: state => state.brandCategory,
         brandId: state => state.brandId,
-        searchProducts: state => state.searchProducts,
-        productColors: state => state.productColors,
-        productTags: state => state.productTags,
-        productSections: state => state.productSections,
+        allCategories: state => state.allCategories,
     },
     mutations: {
         setShopProducts(state, value) {
             state.shopProducts = value
+        },
+        setAllCategories(state, value) {
+            state.allCategories = value
         },
         setBrandId(state, value) {
             state.brandId = value
@@ -70,9 +65,6 @@ export default new Vuex.Store({
         },
         setWishList(state, value) {
             state.wishList = value
-        },
-        setSearch(state, value) {
-            state.otherFilters.search = value
         },
         setByPrice(state, value) {
             state.otherFilters.by_price = value
@@ -89,8 +81,8 @@ export default new Vuex.Store({
         setLoading(state, value) {
             state.loading = value
         },
-        setProductBrands(state, value) {
-            state.productBrands = value
+        setCategoryBrands(state, value) {
+            state.categoryBrands = value
         },
         setCategorySizes(state, value) {
           state.categorySizes = value
@@ -103,18 +95,6 @@ export default new Vuex.Store({
         },
         setBrandCategory(state, value) {
             state.brandCategory = value
-        },
-        setSearchProducts(state, value) {
-            state.searchProducts = value
-        },
-        setProductColors(state, value) {
-            state.productColors = value
-        },
-        setProductTags(state, value) {
-            state.productTags = value
-        },
-        setProductSections(state, value) {
-            state.productSections = value
         },
     },
     actions: {
@@ -191,6 +171,12 @@ export default new Vuex.Store({
                 .then(res => state.categories = res.data.data)
                 .catch(err => console.log(err))
         },
+
+        getAllCategories({state}) {
+            http.get('/section/all')
+                .then(res => state.allCategories = res.data.data)
+                .catch(err => console.log(err))
+        },
         getSizes({state}) {
             http.get('/size')
                 .then(res => state.sizes = res.data.data)
@@ -225,29 +211,17 @@ export default new Vuex.Store({
                 .catch(err => console.log(err))
         },
 
-        getProductBrands({state}, ids) {
+        getCategoryBrands({state}, ids) {
             let url = ids.length ? '?ids=' + ids : ''
-            http.get('/product/brands' + url)
-                .then(res => state.productBrands = res.data.data)
+            http.get('/category/brands' + url)
+                .then(res => state.categoryBrands = res.data.data)
                 .catch(err => console.log(err))
         },
 
-        getProductSizes({state}, ids) {
+        getCategorySizes({state}, ids) {
             let url = ids.length ? '?ids=' + ids : ''
-            http.get('/product/sizes' + url)
+            http.get('/category/sizes' + url)
                 .then(res => state.categorySizes = res.data.data)
-                .catch(err => console.log(err))
-        },
-        getProductColors({state}, ids) {
-            let url = ids.length ? '?ids=' + ids : ''
-            http.get('/product/colors' + url)
-                .then(res => state.productColors = res.data.data)
-                .catch(err => console.log(err))
-        },
-        getProductTags({state}, ids) {
-            let url = ids.length ? '?ids=' + ids : ''
-            http.get('/product/tags' + url)
-                .then(res => state.productTags = res.data.data)
                 .catch(err => console.log(err))
         },
         getSubCategories({state}, id) {
@@ -258,17 +232,6 @@ export default new Vuex.Store({
         getBrandCategory({state}, slug) {
             http.get('/brand/' + slug +'/category')
                 .then(res => state.brandCategory = res.data.data)
-                .catch(err => console.log(err))
-        },
-        getSearchProducts({state}, search) {
-            http.get('/product/search?search=' + search)
-                .then(res => state.searchProducts = res.data)
-                .catch(err => console.log(err))
-        },
-        getProductSections({state}, ids) {
-            let url = ids.length ? '?ids=' + ids : ''
-            http.get('/product/sections' + url)
-                .then(res => state.productSections = res.data.data)
                 .catch(err => console.log(err))
         },
     },

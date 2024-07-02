@@ -150,7 +150,6 @@
 import headerMixin from "@/mixins/header.mixin";
 import {mapGetters} from "vuex";
 
-
 export default {
   name: "TopBar",
   mixins: [headerMixin],
@@ -169,16 +168,25 @@ export default {
               name: 'ru',
               flug: '🇷🇺',
           },
-      ]
+      ],
+        value: 'Select a Fruit',
+        list: ["Orange","Apple","Kiwi", "Lemon", "Pineapple"],
+        visible: false
     }
   },
   computed:{
     ...mapGetters(["settings"]),
   },
+    created () {
+        window.addEventListener('click', this.handleClick);
+    },
+    destroyed () {
+        window.removeEventListener('click', this.handleClick);
+    },
   methods:{
     changeLocale(locale){
       localStorage.lang = locale
-    }
+    },
   }
 }
 </script>

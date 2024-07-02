@@ -89,7 +89,7 @@
             </div>
             <div class="row products-wrapper">
                 <div class="content-area shop-grid-content no-banner col-lg-10 col-md-9 col-sm-12 col-xs-12">
-                    <div v-if="products && !products.length">{{ $t('nothing_was_found_result_query') }}</div>
+                    <div v-if="!checkProducts">{{ $t('nothing_was_found_result_query') }}</div>
                     <div v-else class="site-main">
                         <ul v-if="!loading"
                             class="row list-products auto-clear equal-container"
@@ -99,7 +99,7 @@
                                 :class="layoutMode
                                   ? 'col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-6 style-1'
                                   : 'col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-6 style-1'"
-                                v-for="prod in products" :key="prod.id"
+                                v-for="prod in products.data" :key="prod.id"
                                 @click="productPage(prod)"
                             >
                                 <ProductCart
@@ -130,11 +130,7 @@
                         :per_page="per_page"
                         :by_price="by_price"
                         :select_page="select_page"
-                        @updateTags="updateTags"
-                        @updateColors="updateColors"
-                        @updateSizes="updateSizes"
-                        @updateBrands="updateBrands"
-                        @updateSections="updateSections"
+                        :selectedSearchedSubCategories="selectedSubCategories"
                     />
                 </div>
             </div>
@@ -162,15 +158,13 @@ export default {
             width: 0,
             select_page: null,
             categoryIds: [],
-            productBrands: [],
-            productSizes: [],
-            productColors: [],
-            productTags: [],
-            productSectionIds: [],
+            selectedSubCategories: [],
+            checkProducts: false,
+            productSections: [],
         }
     },
     computed: {
-        ...mapGetters(["settings", 'subCategories', 'productSections']),
+        ...mapGetters(["settings", 'categoryBrands', 'categorySizes', 'subCategories']),
         isMobile() {
             return this.width <= 768 && this.width > 0
         },
@@ -178,33 +172,25 @@ export default {
             return this.$store.state.products?.meta
         },
         products() {
-            if (!this.$store.state.products || !this.$store.state.products.data) {
-                return null;
-            }
-           this.productsData(this.$store.state.products.data)
-
-            return this.$store.state.products.data;
+            return this.$store.state.products ?? [];
         },
         color() {
-            return this.productColors
+            return this.$store.state.colors
         },
         brands() {
-            return this.productBrands
+            return this.$store.state.categoryBrands
         },
         categories() {
-            const searchParam = this.searchQuery;
-            if (searchParam) {
-                if (this.productSections.length) {
-                    return this.productSections
-                }
+            if (this.searchQuery) {
+                return this.$store.state.categories
             }
             return this.$store.state.subCategories
         },
         sizes() {
-            return this.productSizes
+            return this.$store.state.categorySizes
         },
         tags() {
-            return this.productTags
+            return this.$store.state.tags
         },
         loading() {
             return this.$store.state.loading
@@ -217,6 +203,35 @@ export default {
         }
     },
     watch: {
+        products: {
+            handler(val) {
+                if (val && val.data && val.data.length) {
+                    this.checkProducts = true
+                } else {
+                    this.checkProducts = false
+                }
+
+                if (val && val.sections && val.sections.length) {
+                    this.selectedSubCategories = val.sections
+                } else if (val && val.sections && !val.sections.length) {
+                    val.data.forEach(product => {
+                        if (product.sections.length) {
+                            product.sections.forEach(section => {
+                                if (!this.selectedSubCategories.includes(section.id)) {
+                                    this.selectedSubCategories.push(section.id);
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        },
+        selectedSubCategories: {
+            handler(val) {
+                this.$store.dispatch('getCategoryBrands', val)
+                this.$store.dispatch('getCategorySizes', val)
+            }
+        },
         '$route.query': {
             immediate: true,
             deep: true,
@@ -237,12 +252,15 @@ export default {
         },
     },
     async created() {
-        const searchParam = this.searchQuery;
-        if (searchParam) {
-            await this.searchProducts();
+        if (this.searchQuery) {
+            await this.$store.dispatch('getCategories')
         } else {
-            await this.$store.dispatch('getSubCategories', this.categoryIds);
+            await this.$store.dispatch('getSubCategories', this.categoryIds)
+            await this.$store.dispatch('getCategoryBrands', this.categoryIds)
+            await this.$store.dispatch('getCategorySizes', this.categoryIds)
         }
+        await this.$store.dispatch('getColors')
+        await this.$store.dispatch('getTags')
     },
     beforeDestroy() {
         this.setByPrice('')
@@ -250,46 +268,14 @@ export default {
         this.setPage(1)
         this.setPerPage('')
     },
-    async mounted() {
+    mounted() {
         this.addResizeListener()
     },
     destroyed() {
         window.removeEventListener('resize', this.onResizeEvent)
     },
     methods: {
-        ...mapMutations(["setByPrice", "setPage", "setCategory", "setPerPage", 'setSubCategories']),
-
-        productsData(products) {
-            products.forEach(product => {
-                if (!this.productBrands.some(brand => brand.id === product.brand.id)) {
-                    this.productBrands.push(product.brand);
-                }
-                product.gallery.forEach(gallery => {
-                    if (!this.productColors.some(color => color.id === gallery.color.id)) {
-                        this.productColors.push(gallery.color);
-                    }
-
-                    gallery.sizes.forEach(size => {
-                        if (!this.productSizes.some(item => item.id === size.id)) {
-                            this.productSizes.push(size);
-                        }
-                    });
-                });
-                product.tags.forEach(tag => {
-                    if (!this.productTags.some(item => item.id === tag.id)) {
-                        this.productTags.push(tag);
-                    }
-                });
-                product.sections.forEach(section => {
-                    if (!this.productSectionIds.includes(section.id)) {
-                        this.productSectionIds.push(section.id);
-                    }
-                })
-            });
-
-            this.$store.dispatch('getProductSections', this.productSectionIds)
-        },
-
+        ...mapMutations(["setByPrice", "setPage", "setCategory", "setPerPage", "setCategoryBrands", 'setCategorySizes', 'setSubCategories']),
         addResizeListener() {
             if (window) {
                 window.addEventListener('resize', this.onResizeEvent)
@@ -327,39 +313,7 @@ export default {
             if (this.$router.currentRoute.params.slug !== prod.slug) {
                 this.$router.push({ name: 'Product', params: { slug: prod.slug } });
             }
-        },
-        searchProducts() {
-            const data = {
-                search: this.$route.query.search,
-            }
-            this.$store.dispatch('getFilteredProducts', data)
-        },
-        updateTags() {
-            this.productBrands = []
-            this.productSizes = []
-            this.productColors = []
-        },
-        updateColors() {
-            this.productBrands = []
-            this.productSizes = []
-            this.productTags = []
-        },
-        updateSizes() {
-            this.productBrands = []
-            this.productColors = []
-            this.productTags = []
-        },
-        updateBrands() {
-            this.productSizes = []
-            this.productColors = []
-            this.productTags = []
-        },
-        updateSections() {
-            this.productBrands = []
-            this.productSizes = []
-            this.productColors = []
-            this.productTags = []
-        },
+        }
     }
 }
 </script>
@@ -371,6 +325,7 @@ export default {
     justify-content: space-between;
     align-items: center;
 }
+
 .products-header {
     position: relative;
 }
@@ -404,6 +359,7 @@ export default {
     padding: 5px;
     margin-right: 10px;
 }
+
 .shop-top-control.mobile {
     display: none;
 }
@@ -421,6 +377,7 @@ export default {
         width: 80%;
     }
 }
+
 @media screen and (max-width: 1650px) {
     .product-container {
         width: 95%;
@@ -447,6 +404,7 @@ export default {
 @media screen and (max-width: 992px) {
     .products-wrapper {
         flex-direction: row-reverse;
+
     }
     .sidebar .wrapper-sidebar {
         margin-top: 0;
@@ -460,6 +418,12 @@ export default {
 }
 
 @media (max-width: 768px) {
+    .products-wrapper {
+        flex-direction: column-reverse;
+    }
+    .sidebar {
+        width: 100%;
+    }
     .left-sidebar .content-area {
         width: 100%;
     }

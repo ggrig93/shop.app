@@ -1,75 +1,45 @@
 <template>
     <div class="wrapper-sidebar">
         <div class="widget woof_Widget sidebar-filters_wrap">
-            <div v-if="searchQuery">
-                <div class="widget widget-categories sidebar-filter" v-if="categories.length">
-                    <h3 class="widgettitle">{{ $t('selectType') }}</h3>
-                    <div
-                        class="search-category-content"
-                        v-for="item in categories"
-                        :key="item.id"
-                    >
-                        <div v-if="item.parent">
-                            <ParentSection
-                                :item="item.parent"
-                                @showSub="showSub"
-                            />
-                        </div>
-                        <Transition>
-                            <div
-                                class="middle-category"
-                                v-if="item.parent"
-                                v-show="showParentCategory === item.parent.id"
-                            >
-                                <Checkbox
-                                    id="category"
-                                    :label="categoryName(item.name)"
-                                    :input-value="item.id"
-                                    v-model="selectedSearchCategories"
-                                    @change.native="getCategoryBrandsAndSizes"
-                                    class="checkbox-color"
-                                />
-                                <div @click="showMiddleCategory = (showMiddleCategory === item.id) ? null : item.id">
-                                    <div class="show-subCats" v-if="showMiddleCategory === item.id">
-                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                    </div>
-                                    <div v-else>
-                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="parent not-parent-content" v-else>
-                                {{ categoryName(item.name) }}
-                                <div @click="showMiddleCategory = (showMiddleCategory === item.id) ? null : item.id">
-                                    <div class="show-subCats" v-if="showMiddleCategory === item.id">
-                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                    </div>
-                                    <div v-else>
-                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </Transition>
-                        <Transition>
-                            <div class="sections" v-if="item.sections">
+            <div
+                v-if="searchQuery"
+                class="category-content-wrapper"
+            >
+                <div
+                    v-for="category in categories"
+                    :key="category.id"
+                    class="category-wrapper"
+                >
+                    <ul v-if="!category.parent_id">
+                        <li class="category-content">
+                           <div class="first-section">
+                               <span class="parent-category">{{ categoryName(category.name) }}</span>
+                               <div
+                                   v-if="category.sub_sections.length"
+                                   @click="toggleCategory(category.id)"
+                               >
+                                   <div class="show-subCats" v-if="isCategoryOpen(category.id)">
+                                       <i class="fa fa-minus" aria-hidden="true"></i>
+                                   </div>
+                                   <div v-else>
+                                       <i class="fa fa-plus" aria-hidden="true"></i>
+                                   </div>
+                               </div>
+                           </div>
+                            <transition>
                                 <div
-                                    v-for="section in item.sections"
-                                    :key="section.id"
+                                    v-show="isCategoryOpen(category.id)"
+                                    v-if="category.sub_sections.length"
                                 >
-                                    <Checkbox
-                                        v-show="showMiddleCategory === item.id"
-                                        id="category"
-                                        :label="categoryName(section.name)"
-                                        :input-value="section.id"
-                                        v-model="selectedSearchCategories"
-                                        @change.native="getCategoryBrandsAndSizes"
-                                        class="checkbox-color"
+                                    <SubSections
+                                        :selectedSubCategories="selectedSearchedSubCategories"
+                                        :sections="category.sub_sections"
+                                        @updated="updateSelectedBoxes"
                                     />
                                 </div>
-                            </div>
-                        </Transition>
-                    </div>
+                            </transition>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div v-else>
@@ -159,7 +129,6 @@
             </div>
             <div class="widget widget-tags sidebar-filter" v-if="tags && tags.length">
                 <h3 class="widgettitle">
-                    <!--          Popular Tags-->
                     {{ $t('mostViewed') }}
                 </h3>
                 <ul class="tagcloud">
@@ -167,7 +136,7 @@
                         class="tag-cloud-link pointer"
                         v-for="tag in tags"
                         :key="tag.id"
-                        :class="{active: filters.selectedTags.includes(tag.id)}"
+                        :class="{active: filters.selectedTags.includes(tag.id) }"
                         @click="selectTag(tag)"
                     >
                         <a class="pointer">{{ tag.name }}</a>
@@ -181,11 +150,11 @@
 <script>
 import Checkbox from "@/components/custom-input/Checkbox";
 import {mapGetters, mapMutations} from "vuex";
-import ParentSection from "@/components/ParentSection.vue";
+import SubSections from "@/components/SubSections.vue";
 
 export default {
     name: "Sidebar",
-    components: {ParentSection, Checkbox},
+    components: {SubSections, Checkbox},
     props: {
         categories: {
             type: Array,
@@ -219,6 +188,10 @@ export default {
         },
         select_page: {
             default: () => null
+        },
+        selectedSearchedSubCategories: {
+            type: Array,
+            default: () => null
         }
     },
     data() {
@@ -233,19 +206,26 @@ export default {
                 maxPrice: "",
             },
             selectedCategories: [],
-            selectedSearchCategories: [],
+            selectedSubCategories: [],
             selectedPage: null,
-            showMiddleCategory: false,
-            showParentCategory: false,
+            showCategories: null,
+            selectedSearchCategories: [],
+            openCategoryIds: [],
         }
     },
     computed: {
-        ...mapGetters(["settings", "page", "category", "otherFilters"]),
+        ...mapGetters(["settings", "page", "category", "otherFilters", "categoryBrands", 'categorySizes']),
+
         searchQuery() {
             return this.$route.query.search || '';
         }
     },
     watch: {
+        selectedSearchedSubCategories: {
+            handler(val) {
+                this.selectedSearchCategories = val
+            }
+        },
         select_page: {
             deep: true,
             handler(val) {
@@ -259,8 +239,12 @@ export default {
         },
         categories: {
             deep: true,
-            handler() {
+            handler(val) {
                 this.checkSelectedCategories(this.$route.query['filter[categories]'])
+
+                val.map(item => {
+                    this.toggleCategory(item.id)
+                })
             }
         },
         per_page: {
@@ -321,29 +305,20 @@ export default {
                     this.filters.maxPrice = this.queryToArray(val['filter[max_price]'])
                 }
             }
-        }
-    },
-    created() {
-        this.$emit('updateTags')
-        this.$emit('updateColors')
-        this.$emit('updateSizes')
-        this.$emit('updateBrands')
-        this.$emit('updateSections')
+        },
+
     },
     mounted() {
-        this.filters.selectedCategories = this.queryToArray(this.$route.query['filter[categories]'])
         if (this.searchQuery) {
-            this.filterSearchProduct()
+            this.filterSearchProduct('search')
         } else {
+            this.filters.selectedCategories = this.queryToArray(this.$route.query['filter[categories]'])
             this.filterProduct()
         }
     },
     methods: {
-        ...mapMutations(["setByPrice", "setPage", "setPerPage"]),
+        ...mapMutations(["setByPrice", "setPage", "setPerPage", 'setCategoryBrands', 'setCategorySizes']),
 
-        showSub(val) {
-            this.showParentCategory = (this.showParentCategory === val) ? null : val
-        },
         checkSelectedCategories(categoryId) {
             if (this.categories.length) {
                 let categoryFound = this.categories.some(item => item.id == categoryId);
@@ -365,12 +340,14 @@ export default {
                 this.filters.selectedCategories.push(this.categories[0].parent_id)
                 this.selectedPage = null
             }
+            this.$store.dispatch('getCategoryBrands', this.selectedCategories.length ? this.selectedCategories : this.filters.selectedCategories)
+            this.$store.dispatch('getCategorySizes', this.selectedCategories.length ? this.selectedCategories : this.filters.selectedCategories)
+
             if (this.searchQuery) {
                 this.filterSearchProduct()
             } else {
                 this.filterProduct()
             }
-            this.$emit('updateSections')
         },
 
         changeFilter(filterType) {
@@ -383,21 +360,11 @@ export default {
             ) {
                 this.selectedPage = null;
             }
-
-
-            if (filterType === 'brands') {
-                this.$emit('updateBrands')
-            }
-            if (filterType === 'sizes') {
-                this.$emit('updateSizes')
-            }
-
             if (this.searchQuery) {
                 this.filterSearchProduct()
             } else {
                 this.filterProduct()
             }
-
         },
 
         queryToArray(val) {
@@ -419,7 +386,6 @@ export default {
             } else {
                 this.filterProduct()
             }
-            this.$emit('updateColors')
         },
 
         selectTag(tag) {
@@ -437,11 +403,9 @@ export default {
             } else {
                 this.filterProduct()
             }
-
-            this.$emit('updateTags')
         },
 
-        filterSearchProduct() {
+        filterSearchProduct(type) {
             const data = {
                 'filter[categories]': this.selectedSearchCategories,
                 'filter[brands]': this.filters.selectedBrands,
@@ -455,6 +419,10 @@ export default {
                 search: this.$route.query.search,
                 'filter[page]': this.selectedPage ? this.selectedPage : this.page,
             }
+            if (type) {
+                data['filter[searchType]'] = type;
+            }
+
             const queryData = {...data}
             const params = new URLSearchParams(queryData).toString();
             window.history.replaceState(null, null, '?' + params);
@@ -472,7 +440,6 @@ export default {
                 'filter[per_page]': this.per_page,
                 'filter[min_price]': this.filters.minPrice,
                 'filter[max_price]': this.filters.maxPrice,
-                search: this.$route.query.search,
                 'filter[page]': this.selectedPage ? this.selectedPage : this.page,
             }
             const queryData = {...data}
@@ -484,44 +451,33 @@ export default {
         categoryName(names) {
             return names[this.$i18n.locale]
         },
+
+        updateSelectedBoxes(value) {
+            if(!this.selectedSearchCategories.includes(value)){
+                this.selectedSearchCategories.push(value)
+            }else{
+                const index = this.selectedSearchCategories.indexOf(value);
+                this.selectedSearchCategories.splice(index,1)
+            }
+            this.filterSearchProduct()
+        },
+
+        toggleCategory(id) {
+            const index = this.openCategoryIds.indexOf(id);
+            if (index > -1) {
+                this.openCategoryIds.splice(index, 1);
+            } else {
+                this.openCategoryIds.push(id);
+            }
+        },
+        isCategoryOpen(id) {
+            return this.openCategoryIds.includes(id);
+        },
     }
 }
 </script>
 
 <style lang="scss">
-
-.search-category-content {
-    padding: 5px;
-    border-radius: 5px;
-
-    .parent {
-        font-weight: bold
-    }
-
-    .parent-not-null {
-        margin-bottom: 10px
-    }
-
-    .parent-not-parent {
-        font-weight: bold;
-        margin-bottom: 10px
-    }
-
-    .middle-category {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 5px;
-    }
-
-    .not-parent-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-}
-
 
 .widget_filter_price {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -557,4 +513,60 @@ export default {
         }
     }
 }
+.category-content-wrapper {
+    width: 100%;
+    border: 1px solid #F1F1F1;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    .category-wrapper {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        .category-content {
+            .first-section {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .parent-category {
+                    font-weight: bold;
+                }
+            }
+
+        }
+    }
+    .children {
+        margin-bottom: 10px;
+        border-bottom: 3px solid #F1F1F1;
+        padding-bottom: 10px;
+        margin-top: 10px;
+    }
+}
+.sidebar {
+    padding: 0 5px;
+}
+.sidebar-filters_wrap {
+    > div {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+.list-categories {
+    max-height: 170px;
+    min-height: auto;
+    overflow-y: auto;
+}
+
+.list-brand {
+    max-height: 170px;
+    min-height: auto;
+    overflow-y: auto;
+}
+
+.list-color {
+    max-height: 170px;
+    min-height: auto;
+    overflow-y: auto;
+}
+
 </style>

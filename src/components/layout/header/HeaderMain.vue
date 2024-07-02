@@ -39,10 +39,24 @@
                                         type="text"
                                         v-model="query"
                                         :placeholder="$t('search')"
+                                        @input="filterBrands"
                                     />
+                                    <ul v-click-outside="hide"
+                                        class="search-content"
+                                        v-if="filteredBrandAndCategory.length"
+                                        v-show="isShowAutocomplete"
+                                    >
+                                        <li
+                                            v-for="(item, index) in filteredBrandAndCategory"
+                                            :key="index"
+                                            @click="selectBrandCategory(item)"
+                                        >
+                                            {{ item }}
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <button @click="productSearch" class="btn-search" type="submit"
+                            <button @click="search" class="btn-search" type="submit"
                                     :style="{'background-color': settings ? settings.main_color : 'white'}">
                                 <span class="icon-search"></span>
                             </button>
@@ -172,12 +186,13 @@
 import DeletePopup from "@/components/DeletePopup.vue";
 import headerMixin from "@/mixins/header.mixin";
 import productMixin from "@/mixins/product.mixin";
+import ClickOutside from 'vue-click-outside'
 import {mapGetters} from "vuex";
 
 
 export default {
     name: "HeaderMain",
-    mixins: [headerMixin, productMixin],
+    mixins: [headerMixin, productMixin, ClickOutside],
     components: {DeletePopup},
     data() {
         return {
@@ -186,7 +201,20 @@ export default {
             showDeletePopup: false,
             fixedCartPopup: false,
             query: '',
+            categoriesBrands: [],
+            filteredBrandAndCategory: [],
+            isShowAutocomplete: false,
         }
+    },
+    props: {
+        allCategories: {
+            type: Array,
+            default: () => []
+        },
+        brands: {
+            type: Array,
+            default: () => []
+        },
     },
     computed: {
         ...mapGetters(["settings"]),
@@ -232,6 +260,38 @@ export default {
         openMiniCartFromProduct(val) {
             this.fixedCartPopup = val && window.scrollY > 180
         },
+        '$route.query': {
+            handler(val) {
+                if (val.search) {
+                    this.query = val.search
+                } else {
+                    this.query = null
+                }
+            }
+        },
+
+        allCategories: {
+            handler(val) {
+                if (val && val.length) {
+                    const categorySet = new Set(this.categoriesBrands);
+                    val.forEach(category => {
+                        categorySet.add(category.name[this.$i18n.locale]);
+                    });
+                    this.categoriesBrands = Array.from(categorySet);
+                }
+            }
+        },
+        brands: {
+            handler(val) {
+                if (val && val.length) {
+                    const brandSet = new Set(this.categoriesBrands);
+                    val.forEach(brand => {
+                        brandSet.add(brand.name);
+                    });
+                    this.categoriesBrands = Array.from(brandSet);
+                }
+            }
+        }
     },
     methods: {
         closeModal() {
@@ -241,15 +301,33 @@ export default {
             this.removeCartItem(this.showDeletePopup)
             this.closeModal()
         },
-
-        productSearch() {
-            if (this.query.length >= 3) {
+        search() {
+            if (this.query && this.query.length >= 3) {
                 if (this.$router.currentRoute.query.search !== this.query) {
                     this.$router.replace({name: 'Products', query: {search: this.query}})
                 }
             }
         },
+        hide() {
+            this.isShowAutocomplete = false
+        },
+        filterBrands() {
+            const queryLower = this.query.toLowerCase();
+            this.filteredBrandAndCategory = this.categoriesBrands.filter((item) =>
+                item.toLowerCase().includes(queryLower)
+            );
+
+            if (this.filteredBrandAndCategory) {
+                this.isShowAutocomplete = true
+            }
+        },
+        selectBrandCategory(value) {
+            this.query = value;
+            this.isShowAutocomplete = false;
+        },
     },
+
+
 }
 </script>
 

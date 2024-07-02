@@ -2,7 +2,7 @@
   <div class="popup-wrapper">
     <div class="popup">
       <div class="popup-header">
-        <h2>Համոզվա՞ծ եք</h2>
+        <h2>{{ $t('are_you_sure') }}</h2>
         <div class="glyph popup-close" @click="closeModal">
           <div class="glyph-icon flaticon-close"></div>
         </div>
