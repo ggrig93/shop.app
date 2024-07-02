@@ -347,9 +347,13 @@ export default {
 }
 
 picture > img.iiz__img {
-    height: 533px !important;
-    width: 533px !important;
-    object-fit: cover;
+    height: 530px !important;
+    width: 100% !important;
+    object-fit: contain;
+}
+
+.iiz {
+    width: 100%;
 }
 
 .list-item a {
@@ -419,5 +423,23 @@ a:hover {
         margin-bottom: 20px;
     }
 }
+@media screen and (max-width: 1200px) {
+    picture > img.iiz__img {
+        height: 415px !important;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    picture > img.iiz__img {
+        height: 303px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    picture > img.iiz__img {
+        height: 100% !important;
+    }
+}
+
 </style>
 
