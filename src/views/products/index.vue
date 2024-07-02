@@ -195,9 +195,11 @@ export default {
         loading() {
             return this.$store.state.loading
         },
-        /* todo */
         price() {
             return {min: 10, max: 100}
+        },
+        searchQuery() {
+            return this.$route.query.search || '';
         }
     },
     watch: {
@@ -261,7 +263,6 @@ export default {
         await this.$store.dispatch('getTags')
     },
     beforeDestroy() {
-        this.setSearch('')
         this.setByPrice('')
         this.setCategory([])
         this.setPage(1)

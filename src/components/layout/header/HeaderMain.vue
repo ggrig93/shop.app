@@ -39,6 +39,7 @@
                                         type="text"
                                         v-model="query"
                                         :placeholder="$t('search')"
+                                        @input="filterBrands"
                                     />
                                     <ul v-click-outside="hide"
                                         class="search-content"
@@ -197,7 +198,6 @@ export default {
         return {
             tab: 'login',
             selectedCategory: 1,
-            search: "",
             showDeletePopup: false,
             fixedCartPopup: false,
             query: '',
@@ -217,7 +217,7 @@ export default {
         },
     },
     computed: {
-        ...mapGetters(["settings", 'brands']),
+        ...mapGetters(["settings"]),
         styleObject: function () {
             return {
                 '--bg-color': this.settings ? this.settings.main_color : 'white',
@@ -294,14 +294,6 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(["setSearch","setBrandId"]),
-        ...mapActions(["getBrands"]),
-        searchHandler() {
-            this.setSearch(this.search)
-            if (this.search !== '') {
-                this.$router.replace({name: 'Products', query: {search: this.search}})
-            }
-        },
         closeModal() {
             this.showDeletePopup = false
         },

@@ -35,7 +35,6 @@ export default new Vuex.Store({
         openMiniCartFromProduct: false
     },
     getters: {
-        search: state => state.otherFilters.search,
         by_price: state => state.otherFilters.by_price,
         page: state => state.otherFilters.page,
         category: state => state.otherFilters.category,

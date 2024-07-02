@@ -214,7 +214,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["settings", "search", "page", "category", "otherFilters", "categoryBrands", 'categorySizes']),
+        ...mapGetters(["settings", "page", "category", "otherFilters", "categoryBrands", 'categorySizes']),
 
         searchQuery() {
             return this.$route.query.search || '';
@@ -230,7 +230,11 @@ export default {
             deep: true,
             handler(val) {
                 this.selectedPage = val
-                this.filterProduct()
+                if (this.searchQuery) {
+                    this.filterSearchProduct()
+                } else {
+                    this.filterProduct()
+                }
             }
         },
         categories: {
@@ -247,14 +251,22 @@ export default {
             deep: true,
             handler() {
                 this.selectedPage = 1
-                this.filterProduct()
+                if (this.searchQuery) {
+                    this.filterSearchProduct()
+                } else {
+                    this.filterProduct()
+                }
             }
         },
         by_price: {
             deep: true,
             handler() {
                 this.selectedPage = 1
-                this.filterProduct()
+                if (this.searchQuery) {
+                    this.filterSearchProduct()
+                } else {
+                    this.filterProduct()
+                }
             }
         },
         '$route.query': {
@@ -276,9 +288,6 @@ export default {
                 }
                 if (val['filter[tags]']) {
                     this.filters.selectedTags = this.queryToArray(val['filter[tags]'])
-                }
-                if (val.search) {
-                    this.setSearch(val.search.trim())
                 }
                 if (val['filter[by_price]']) {
                     this.setByPrice(val['filter[by_price]'])
