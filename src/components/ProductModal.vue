@@ -81,27 +81,11 @@
                                            :class="{active: size && size.id === item.id}"
                                            @click="size = item"
                                         >{{ item.name }}</a>
+                                        <p v-if="showSizeError" class="error-message size-error">{{ $t('choose_size') }}</p>
                                     </div>
-                                    <p v-if="showSizeError" class="error-message size-error">{{ $t('choose_size') }}</p>
                                 </div>
                             </div>
                             <div class="group-button">
-                                <div class="yith-wcwl-add-to-wishlist wishlist-notify-wrap">
-                                    <div v-if="addedWishList" class="success-notify wishlist-success-notify">
-                                        <div class="bubble"
-                                             :style="{'background': design ? design.main_color : 'white'}">
-                                            {{ addedWishList === 'added' ? $t('added') : $t('deleted') }}
-                                        </div>
-                                        <div class="triangle"
-                                             :style="{'background': design ? design.main_color : 'white'}"></div>
-                                    </div>
-                                    <div class="yith-wcwl-add-button" :style="styleObject">
-                                        <a
-                                            :class="{ 'active-heart': hasInWishlist(product.id) }"
-                                            @click.stop="addToWishList(product)"
-                                        ></a>
-                                    </div>
-                                </div>
                                 <div class="quantity-add-to-cart">
                                     <div class="quantity">
                                         <div class="control">
@@ -118,6 +102,22 @@
                                             :style="{'background': design ? design.main_color : 'white'}">
                                         {{ $t('add_to_cart') }}
                                     </button>
+                                    <div class="yith-wcwl-add-to-wishlist wishlist-notify-wrap">
+                                        <div v-if="addedWishList" class="success-notify wishlist-success-notify">
+                                            <div class="bubble"
+                                                 :style="{'background': design ? design.main_color : 'white'}">
+                                                {{ addedWishList === 'added' ? $t('added') : $t('deleted') }}
+                                            </div>
+                                            <div class="triangle"
+                                                 :style="{'background': design ? design.main_color : 'white'}"></div>
+                                        </div>
+                                        <div class="yith-wcwl-add-button" :style="styleObject">
+                                            <a
+                                                :class="{ 'active-heart': hasInWishlist(product.id) }"
+                                                @click.stop="addToWishList(product)"
+                                            ></a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <p v-if="count < 1" class="error-message">{{ $t('select_quantity') }}</p>
                             </div>
@@ -313,6 +313,45 @@ a:hover {
     background: var(--bg-color) !important;
     color: white !important;
 }
+
+.list-size {
+    &.list-item {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.quantity-add-to-cart {
+    display: flex;
+    align-items: center;
+    .yith-wcwl-add-to-wishlist {
+        margin-bottom: 0 !important;
+        margin-right: 5px;
+        margin-left: 10px;
+        a {
+            &::before {
+                font-size: 23px !important;
+            }
+        }
+    }
+}
+
+.wishlist-success-notify {
+    left: -50px !important;
+    top: -50px !important;
+    .triangle {
+        left: 53px !important;
+        bottom: -9px !important;
+    }
+}
+
+.error-message {
+    &.size-error {
+        margin-top: 10px !important;
+        width: 100% !important;
+    }
+}
+
 
 @media (max-width: 768px) {
     .kt-popup-quickview {

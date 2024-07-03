@@ -7,20 +7,6 @@
                         <Breadcrumbs/>
                         <div class="shop-top-control desctop">
                             <form class="select-item select-form">
-                                <div class="title">{{ $t('quantity') }}</div>
-                                <select
-                                    v-model="per_page"
-                                    title="sort"
-                                    data-placeholder="Products/Page"
-                                    class="chosen-select"
-                                    @change="sortPerPage"
-                                >
-                                    <option value="6">{{ $t('products_page_6') }}</option>
-                                    <option value="9">{{ $t('products_page_9') }}</option>
-                                    <option value="12">{{ $t('products_page_12') }}</option>
-                                </select>
-                            </form>
-                            <form class="select-item select-form">
                                 <div class="title price-title">{{ $t('price') }}</div>
                                 <select
                                     v-model="by_price"
@@ -58,20 +44,6 @@
                 </div>
                 <div v-show="showSort" class="shop-top-control mobile">
                     <form class="select-item select-form">
-                        <div class="title">{{ $t('quantity') }}</div>
-                        <select
-                            v-model="per_page"
-                            title="sort"
-                            data-placeholder="Products/Page"
-                            class="chosen-select"
-                            @change="sortPerPage"
-                        >
-                            <option value="6">{{ $t('products_page_6') }}</option>
-                            <option value="9">{{ $t('products_page_9') }}</option>
-                            <option value="12">{{ $t('products_page_12') }}</option>
-                        </select>
-                    </form>
-                    <form class="select-item select-form">
                         <div class="title price-title">{{ $t('price') }}</div>
                         <select
                             v-model="by_price"
@@ -89,8 +61,8 @@
             </div>
             <div class="row products-wrapper">
                 <div class="content-area shop-grid-content no-banner col-lg-10 col-md-9 col-sm-12 col-xs-12">
-                    <div v-if="!checkProducts">{{ $t('nothing_was_found_result_query') }}</div>
-                    <div v-else class="site-main">
+                    <div class="site-main">
+                        <div v-if="!checkProducts && !loading">{{ $t('nothing_was_found_result_query') }}</div>
                         <ul v-if="!loading"
                             class="row list-products auto-clear equal-container"
                             :class="layoutMode ? 'product-grid' : 'product-list'"
@@ -117,6 +89,7 @@
                         />
                     </div>
                 </div>
+
                 <div v-show="showFilters || !isMobile" class="sidebar col-lg-2 col-md-3 col-sm-12 col-xs-12">
                     <Sidebar
                         v-if="categories && categories.length"
@@ -152,7 +125,7 @@ export default {
         return {
             layoutMode: true,
             by_price: '',
-            per_page: 12,
+            per_page: 16,
             showFilters: false,
             showSort: false,
             width: 0,
