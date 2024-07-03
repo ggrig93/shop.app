@@ -89,8 +89,8 @@
             </div>
             <div class="row products-wrapper">
                 <div class="content-area shop-grid-content no-banner col-lg-10 col-md-9 col-sm-12 col-xs-12">
-                    <div v-if="!checkProducts">{{ $t('nothing_was_found_result_query') }}</div>
-                    <div v-else class="site-main">
+                    <div class="site-main">
+                        <div v-if="!checkProducts && !loading">{{ $t('nothing_was_found_result_query') }}</div>
                         <ul v-if="!loading"
                             class="row list-products auto-clear equal-container"
                             :class="layoutMode ? 'product-grid' : 'product-list'"
@@ -117,6 +117,7 @@
                         />
                     </div>
                 </div>
+
                 <div v-show="showFilters || !isMobile" class="sidebar col-lg-2 col-md-3 col-sm-12 col-xs-12">
                     <Sidebar
                         v-if="categories && categories.length"

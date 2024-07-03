@@ -91,26 +91,11 @@
                                                :class="{active: size && size.id === item.id}"
                                                @click="size = item"
                                             >{{ item.name }}</a>
-                                            <p v-if="showSizeError" class="error-message size-error">Ընտրեք չափսը</p>
+                                            <p v-if="showSizeError" class="error-message size-error">{{ $t('choose_size') }}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="group-button" style="position: relative">
-                                    <div class="yith-wcwl-add-to-wishlist wishlist-notify-wrap">
-                                        <div v-if="addedWishList" class="success-notify wishlist-success-notify">
-                                            <div class="bubble">
-                                                {{ addedWishList === 'added' ? 'Ավելացվել է' : 'Ջնջվել է' }}
-                                            </div>
-                                            <div class="triangle"></div>
-                                        </div>
-                                        <div class="yith-wcwl-add-button">
-                                            <a
-                                                :class="{ 'active-heart': hasInWishlist(product.id) }"
-                                                @click="addToWishList(product)"
-                                                style="cursor: pointer"
-                                            ></a>
-                                        </div>
-                                    </div>
                                     <div v-if="showSuccessNotify" class="success-notify">
                                         <div class="bubble">{{ $t('product_cart') }}</div>
                                         <div class="triangle"></div>
@@ -137,6 +122,21 @@
                                                 :style="{'background-color': design ? design.main_color : null}">
                                             {{ $t('add_to_cart') }}
                                         </button>
+                                        <div class="yith-wcwl-add-to-wishlist wishlist-notify-wrap">
+                                            <div v-if="addedWishList" class="success-notify wishlist-success-notify">
+                                                <div class="bubble">
+                                                    {{ addedWishList === 'added' ? $t('added') : $t('deleted') }}
+                                                </div>
+                                                <div class="triangle"></div>
+                                            </div>
+                                            <div class="yith-wcwl-add-button">
+                                                <a
+                                                    :class="{ 'active-heart': hasInWishlist(product.id) }"
+                                                    @click="addToWishList(product)"
+                                                    style="cursor: pointer"
+                                                ></a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <p v-if="count < 1" class="error-message">{{ $t('select_quantity') }}</p>
                                 </div>
