@@ -7,20 +7,6 @@
                         <Breadcrumbs/>
                         <div class="shop-top-control desctop">
                             <form class="select-item select-form">
-                                <div class="title">{{ $t('quantity') }}</div>
-                                <select
-                                    v-model="per_page"
-                                    title="sort"
-                                    data-placeholder="Products/Page"
-                                    class="chosen-select"
-                                    @change="sortPerPage"
-                                >
-                                    <option value="6">{{ $t('products_page_6') }}</option>
-                                    <option value="9">{{ $t('products_page_9') }}</option>
-                                    <option value="12">{{ $t('products_page_12') }}</option>
-                                </select>
-                            </form>
-                            <form class="select-item select-form">
                                 <div class="title price-title">{{ $t('price') }}</div>
                                 <select
                                     v-model="by_price"
@@ -57,20 +43,6 @@
                     </div>
                 </div>
                 <div v-show="showSort" class="shop-top-control mobile">
-                    <form class="select-item select-form">
-                        <div class="title">{{ $t('quantity') }}</div>
-                        <select
-                            v-model="per_page"
-                            title="sort"
-                            data-placeholder="Products/Page"
-                            class="chosen-select"
-                            @change="sortPerPage"
-                        >
-                            <option value="6">{{ $t('products_page_6') }}</option>
-                            <option value="9">{{ $t('products_page_9') }}</option>
-                            <option value="12">{{ $t('products_page_12') }}</option>
-                        </select>
-                    </form>
                     <form class="select-item select-form">
                         <div class="title price-title">{{ $t('price') }}</div>
                         <select
@@ -153,7 +125,7 @@ export default {
         return {
             layoutMode: true,
             by_price: '',
-            per_page: 12,
+            per_page: 16,
             showFilters: false,
             showSort: false,
             width: 0,
