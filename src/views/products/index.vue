@@ -415,7 +415,7 @@ export default {
 
 @media (max-width: 600px) {
     .shop-top-control .select-form .price-title {
-        margin-right: 44px;
+        margin-right: 15px;
     }
 }
 
