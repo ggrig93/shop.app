@@ -261,10 +261,11 @@ export default {
 }
 
 .slider-product img {
-    height: 350px !important;
-    width: 350px !important;
+    height: 450px !important;
+    width: 100% !important;
     object-fit: cover;
 }
+
 
 .list-item a {
     cursor: pointer;
