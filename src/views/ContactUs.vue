@@ -7,10 +7,9 @@
                 </div>
             </div>
             <div class="row">
-                <h2>Contact Information We're here to help!</h2>
-                <p> Call us: 1.888.676.2660, 6am - 6pm PST, Mon-Fri</p>
-                <p>Live Chat Help: Ask your question right now to a member of the 6pm Customer Loyalty Team. Go ahead - start a conversation now!</p>
-                <p>Email us: cs@6pm.com (When sending us an email, please do so from the email address on your 6pm account or it may result in a delay of assistance.)</p>
+                <h2>{{ $t('ContactInformation') }}</h2>
+                <p> {{ $t('callUs') }}: +374-94-88-07-04</p>
+                <p>{{ $t('emailUs') }}: salebemine@gmail.com </p>
             </div>
         </div>
     </div>
@@ -39,7 +38,8 @@ export default {
 
 <style lang="scss" scoped>
     .main-content-contact-us {
-        padding-bottom: 220px;
+        height: 100vh;
+        padding: 0;
         p {
             margin-top: 20px;
             font-weight: bold;

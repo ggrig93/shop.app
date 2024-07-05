@@ -92,6 +92,10 @@ const am = {
         assortment_jewelry: 'Նորավոճ զարդեր',
         sale: 'Սկսել shopping',
         are_you_sure: 'Համոզվա՞ծ եք',
+        contactUs: 'Կապվեք մեզ հետ',
+        ContactInformation: 'Կոնտակտային տվյալներ Մենք այստեղ ենք օգնելու համար:',
+        callUs: 'Զանգիր մեզ',
+        emailUs: 'Ուղարկել մեզ էլ',
 
 }
 

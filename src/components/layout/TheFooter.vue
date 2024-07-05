@@ -14,6 +14,9 @@
                                         <li>
                                             <a href="/about">{{ $t('about') }}</a>
                                         </li>
+                                        <li>
+                                            <a href="/contact-us">{{ $t('contactUs') }}</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="ysera-socials">

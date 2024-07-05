@@ -202,7 +202,7 @@ export default {
     width: 27px;
     height: 27px;
     margin-right: 10px;
-    border-radius: 50%;
+    border-radius: 30%;
     border: 1px solid #000000;
 }
 </style>

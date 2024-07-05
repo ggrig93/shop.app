@@ -92,6 +92,10 @@ const ru = {
         assortment_jewelry: 'Стильные украшения',
         sale: 'Начать покупки',
         are_you_sure: 'Вы уверены',
+        contactUs: 'Связаться с нами',
+        ContactInformation: 'Контактная информация Мы здесь, чтобы помочь!',
+        callUs: 'Позвоните нам',
+        emailUs: 'Свяжитесь с нами по электронной почте',
 }
 
 export {ru}
