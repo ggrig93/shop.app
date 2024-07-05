@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .main-content-contact-us {
         height: 100vh;
         padding: 0;
@@ -44,5 +44,10 @@ export default {
             margin-top: 20px;
             font-weight: bold;
         }
+    }
+    #app {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
 </style>
