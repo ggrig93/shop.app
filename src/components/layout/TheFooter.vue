@@ -9,13 +9,13 @@
                                 <div class="site-info">
                                     <ul>
                                         <li>
-                                            <a href="/">{{ $t('mainPage') }}</a>
+                                            <router-link :to="{name: 'Home'}">{{ $t('mainPage') }}</router-link>
                                         </li>
                                         <li>
-                                            <a href="/about">{{ $t('about') }}</a>
+                                            <router-link :to="{name: 'About'}">{{ $t('about') }}</router-link>
                                         </li>
                                         <li>
-                                            <a href="/contact-us">{{ $t('contactUs') }}</a>
+                                            <router-link :to="{name: 'Contact'}">{{ $t('contactUs') }}</router-link>
                                         </li>
                                     </ul>
                                 </div>
