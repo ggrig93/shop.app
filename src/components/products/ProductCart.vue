@@ -148,9 +148,11 @@ export default {
     height: 350px;
     @media(max-width: 992px) {
         height: 280px;
+        object-position: top;
     }
     @media(max-width: 575px) {
         height: 220px;
+        object-position: top;
     }
 }
 

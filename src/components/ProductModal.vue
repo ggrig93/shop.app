@@ -9,7 +9,7 @@
                             <div class="slider-product slider-for slick-initialized slick-slider">
                                 <div aria-live="polite" class="slick-list draggable">
                                     <div class="slick-track" role="listbox">
-                                        <div class="details-item slick-slide slick-current slick-active"
+                                        <div class="details-item slick-slide slick-current slick-active product-modal-active"
                                              :style="styleObject">
                                             <img :src="img" alt="img">
                                         </div>
@@ -47,13 +47,10 @@
                                 :style="{'color': design ? design.main_color : 'white'}">{{ product.available_type === 'is_available' ? $t('is_available') : $t('not_available') }}</a>
                             </div>
                             <div class="price"><span>{{ product.price }} {{ $t('currency') }}</span></div>
-                            <div class="product-details-description">
-                                <ul v-if="product.details.additional">
-                                    <li
-                                        v-for="(item, i) in product.details.additional"
-                                        :key="i"
-                                    >
-                                        {{ item }}
+                            <div v-for="(item, i) in product.details.information" :key="i" class="product-details-description">
+                                <ul v-if="item.key !== null">
+                                    <li>
+                                        {{ item.key }}: {{ item.value }}
                                     </li>
                                 </ul>
                             </div>
@@ -352,7 +349,18 @@ a:hover {
         width: 100% !important;
     }
 }
+.product-modal-active {
+    width: 100%;
+}
 
+@media screen and (max-width: 1400px) {
+    .slider-product img {
+        height: 350px !important;
+        width: 100% !important;
+        object-position: top;
+        object-fit: contain;
+    }
+}
 
 @media (max-width: 768px) {
     .kt-popup-quickview {
@@ -372,6 +380,19 @@ a:hover {
     .kt-popup-quickview .mfp-close {
         right: 0 !important;
     }
+    .slider-product img {
+        height: 450px !important;
+        width: 100% !important;
+        object-fit: cover;
+    }
 
+}
+
+@media screen and (max-width: 500px) {
+    .slider-product img {
+        height: 340px !important;
+        width: 100% !important;
+        object-fit: cover;
+    }
 }
 </style>

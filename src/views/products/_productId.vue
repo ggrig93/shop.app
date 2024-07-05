@@ -1,5 +1,5 @@
 <template>
-    <div :style="styleObject" class="main-content main-content-details single no-sidebar">
+    <div v-if="product" :style="styleObject" class="main-content main-content-details single no-sidebar">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -63,7 +63,7 @@
                                 <div v-for="(item, i) in product.details.information" :key="i" class="product-details-description">
                                     <ul v-if="item.key !== null">
                                         <li>
-                                          {{ item.key }}: {{ item.value }}
+                                            {{ item.key }}: {{ item.value }}
                                         </li>
                                     </ul>
                                 </div>
@@ -191,6 +191,8 @@
             </div>
         </div>
     </div>
+    <div v-else class="loader"
+         :style="{'border-top': design ? '10px solid ' + design.main_color : '10px solid white'}"></div>
 </template>
 
 <script>
