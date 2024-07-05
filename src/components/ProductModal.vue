@@ -47,13 +47,10 @@
                                 :style="{'color': design ? design.main_color : 'white'}">{{ product.available_type === 'is_available' ? $t('is_available') : $t('not_available') }}</a>
                             </div>
                             <div class="price"><span>{{ product.price }} {{ $t('currency') }}</span></div>
-                            <div class="product-details-description">
-                                <ul v-if="product.details.additional">
-                                    <li
-                                        v-for="(item, i) in product.details.additional"
-                                        :key="i"
-                                    >
-                                        {{ item }}
+                            <div v-for="(item, i) in product.details.information" :key="i" class="product-details-description">
+                                <ul v-if="item.key !== null">
+                                    <li>
+                                        {{ item.key }}: {{ item.value }}
                                     </li>
                                 </ul>
                             </div>
