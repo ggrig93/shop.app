@@ -92,6 +92,10 @@ const en = {
         assortment_jewelry: 'Stylish jewelry',
         sale: 'Start shopping',
         are_you_sure: 'Are you sure',
+        contactUs: 'Contact us',
+        ContactInformation: 'Contact Information We\'re here to help!',
+        callUs: 'Call us',
+        emailUs: 'Email us',
 
 }
 export {en}
