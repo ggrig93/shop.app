@@ -54,6 +54,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.empty-wishlist_text {
+    text-align: start !important;
+    margin-left: 15px !important;
+    font-size: 20px;
+    letter-spacing: 0;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
 .view-all{
   background:var(--bg-color);
 }

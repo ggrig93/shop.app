@@ -40,10 +40,15 @@
                                                 <router-link :to="{name: 'Product', params: {slug: prod.slug}}"
                                                              class="title">{{ prod.title }}
                                                 </router-link>
-                                                <span
-                                                    class="attributes-select attributes-color">{{ prod.color.name }},</span>
-                                                <span
-                                                    class="attributes-select attributes-size">{{ prod.size.name }}</span>
+                                                <div class="size-color-content">
+                                                    <span
+                                                        class="attributes-select attributes-color"
+                                                        :style="`background-color:${ prod.color.code}`"></span>
+                                                    <span
+                                                        class="attributes-select attributes-size">{{
+                                                            prod.size.name
+                                                        }}</span>
+                                                </div>
                                             </td>
                                             <td class="product-quantity" data-title="Quantity">
                                                 <div class="quantity">
@@ -60,7 +65,7 @@
                                             <td class="product-price" data-title="Price">
 													<span class="woocommerce-Price-amount amount">
 														{{ prod.price }}
-                            <span class="woocommerce-Price-currencySymbol">
+                                                        <span class="woocommerce-Price-currencySymbol">
 															{{ settings ? settings.currency_value : null }}
 														</span>
 													</span>
@@ -187,5 +192,17 @@ export default {
 
 .cart-form .product-remove:hover a:before {
     color: var(--bg-color) !important;
+}
+.size-color-content {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.attributes-color {
+    width: 27px;
+    height: 27px;
+    margin-right: 10px;
+    border-radius: 50%;
+    border: 1px solid #000000;
 }
 </style>

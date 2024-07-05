@@ -95,7 +95,9 @@
                                                 </router-link>
                                             </h5>
                                             <span
-                                                class="attributes-select attributes-color">{{ product.color.name }},</span>
+                                                class="attributes-select attributes-color">{{
+                                                    product.color.name
+                                                }},</span>
                                             <span
                                                 class="attributes-select attributes-size">{{ product.size.name }}</span>
                                             <div class="price">
@@ -122,19 +124,22 @@
                     </div>
                 </div>
                 <div v-if="showSuccess" class="end-checkout-wrapp">
-                    <div class="end-checkout checkout-form">
-                        <div class="icon">
-                            <span class="flaticon-checked"></span>
+                    <div class="end-checkout checkout-form" :style="`color: ${design.main_color}`">
+                        <div class="icon" :style="`border-color: ${design.main_color}`">
+                            <span class="flaticon-checked" :style="`color: ${design.main_color}`"></span>
                         </div>
-                        <h3 class="title-checkend">
+                        <h3 class="title-checkend" :style="`color: ${design.main_color}`">
                             {{ $t('congratulations_registered') }}
                         </h3>
-                        <div class="sub-title">
+                        <div class="sub-title" :style="`color: ${design.main_color}`">
                             {{ $t('will_contact_you_within_a_very_short_period_of_time') }}
                         </div>
-                        <router-link to="/products" class="button btn-return">{{
-                                $t('go_back_to_the_list')
-                            }}
+                        <router-link
+                            to="/"
+                            class="button btn-return checkout-btn"
+                            :style="`background-color: ${design.main_color}; border-color:${design.main_color}`"
+                        >
+                            {{ $t('go_back_to_the_list') }}
                         </router-link>
                     </div>
                 </div>
@@ -212,9 +217,9 @@ export default {
         this.$store.dispatch('getShopProducts')
     },
     methods: {
-        // verifyHandler(token) {
-        //   this.form.token = token;
-        // },
+        verifyHandler(token) {
+          this.form.token = token;
+        },
         orderHandler() {
             for (let key in this.form) {
                 this.errors[key] = !this.form[key];
@@ -266,6 +271,12 @@ export default {
 
 .button-payment:hover {
     background: var(--bg-color) !important;
+}
+
+.checkout-btn:hover {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #000000 !important;
 }
 
 .row-wrap {

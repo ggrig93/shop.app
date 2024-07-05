@@ -45,7 +45,7 @@
             <div v-else>
                 <div class="widget widget-categories sidebar-filter" v-if="categories.length">
                     <h3 class="widgettitle">{{ $t('selectType') }}</h3>
-                    <ul class="list-categories">
+                    <ul class="list-categories scroll-content">
                         <li v-for="cat in categories" :key="cat.id">
                             <Checkbox
                                 id="category"
@@ -84,7 +84,7 @@
             </div>
             <div class="widget widget-brand sidebar-filter" v-if="brands.length">
                 <h3 class="widgettitle">{{ $t('selectBrand') }}</h3>
-                <ul class="list-brand">
+                <ul class="list-brand scroll-content">
                     <li v-for="brand in brands" :key="brand.id">
                         <Checkbox
                             id="brand"
@@ -98,7 +98,7 @@
             </div>
             <div class="widget widget_filter_size sidebar-filter" v-if="sizes.length">
                 <h4 class="widgettitle">{{ $t('selectSize') }}</h4>
-                <ul class="list-brand">
+                <ul class="list-brand scroll-content">
                     <li v-for="size in sizes" :key="size.id">
                         <Checkbox
                             id="size"
@@ -114,7 +114,7 @@
                 <h4 class="widgettitle">
                     {{ $t('selectColor') }}
                 </h4>
-                <div class="list-color">
+                <div class="list-color scroll-content">
                     <a v-for="color in colors"
                        :key="color.id"
                        :style="{backgroundColor: color.code}"
@@ -131,7 +131,7 @@
                 <h3 class="widgettitle">
                     {{ $t('mostViewed') }}
                 </h3>
-                <ul class="tagcloud">
+                <ul class="tagcloud scroll-content">
                     <li
                         class="tag-cloud-link pointer"
                         v-for="tag in tags"
@@ -479,6 +479,24 @@ export default {
 
 <style lang="scss">
 
+.scroll-content::-webkit-scrollbar-track
+{
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.scroll-content::-webkit-scrollbar
+{
+    width: 7px;
+    background-color: #ffffff;
+}
+
+.scroll-content::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    background-color: #7F7F7F;
+}
+
 .widget_filter_price {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -564,6 +582,12 @@ export default {
 }
 
 .list-color {
+    max-height: 170px;
+    min-height: auto;
+    overflow-y: auto;
+}
+
+.tagcloud {
     max-height: 170px;
     min-height: auto;
     overflow-y: auto;

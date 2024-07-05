@@ -2002,7 +2002,6 @@ table tr:last-child td, table tr:last-child th {
 	padding-right: 0;
 }
 .widget-tags .tagcloud {
-	overflow: hidden;
 	margin: 0;
 	width: 100%;
 }
@@ -2089,9 +2088,9 @@ table tr:last-child td, table tr:last-child th {
 	margin-right: 10px;
 	position: relative;
 	text-align: center;
-	width: 26px;
+	width: 27px;
 	line-height: 23px;
-	border-radius: 0;
+	border-radius: 30%;
 }
 .widget-color .list-color .color1 {
 	border: 1px solid #eeeeee;
@@ -3284,7 +3283,7 @@ ul.list-products {
 	margin-bottom: 15px;
 }
 .details-infor .product-details-description ul {
-	list-style-type: disclosure-closed;
+	list-style-type: disc;
 }
 .details-infor .variations > div {
 	display: flex;
@@ -3308,11 +3307,11 @@ ul.list-products {
 	margin-right: 10px;
 	position: relative;
 	text-align: center;
-	width: 26px;
+	width: 27px;
 	line-height: 27px;
 	float: left;
-	border-radius: 0;
 	border: 1px solid #2b2b2b;
+	border-radius: 30%;
 }
 .attribute_color .list-color a:last-child {
 	margin-right: 0;
